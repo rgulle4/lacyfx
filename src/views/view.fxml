@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -56,7 +57,13 @@
           </Tab>
           <Tab fx:id="techPerfTab" text="Tech Perf">
             <content>
-              <AnchorPane />
+              <AnchorPane>
+                     <children>
+                        <Pagination layoutX="402.0" layoutY="34.0" prefHeight="332.0" prefWidth="284.0" />
+                        <TextField layoutX="94.0" layoutY="26.0" prefHeight="25.0" prefWidth="244.0" text="strength:&gt;=2400;poisson:==3.1" />
+                        <Label layoutX="33.0" layoutY="31.0" text="Filter(s)" />
+                        <ListView layoutX="39.0" layoutY="86.0" prefHeight="262.0" prefWidth="252.0" />
+                     </children></AnchorPane>
             </content>
           </Tab>
             <Tab fx:id="transpEconTab" text="Transp/Econ">
