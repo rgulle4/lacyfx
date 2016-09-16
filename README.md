@@ -2,10 +2,17 @@
 
 TODO: Make this README better.
 
-This is a work-in-progress tool that helps users find the perfect material. The
-decision-making process includes performance characteristics (with
-the help of AASHTOWare ME Design) in addition to environmental
-characteristics and sustainability factors.
+This is a work-in-progress pavement design tool. The decision-making
+process includes performance characteristics (with the help of
+AASHTOWare ME Design) in addition to environmental characteristics
+and sustainability factors.
+
+# Installing and running
+
+For now, it's best to open this as a project in IntelliJ IDEA. Then
+runn `App.main()`.
+
+# Background
 
 ## Problem
 
