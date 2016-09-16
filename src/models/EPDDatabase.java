@@ -41,6 +41,8 @@ public class EPDDatabase {
 
     // TODO: figure out if these sql ResultSets play nice with some JavaFX components. If not, then we'll have to go full ORM.
 
+    // TODO: beware of SQL injection (again, overengineering?)
+
     /**
      * Returns an sql ResultSet, filtered.
      * @param filterClause Example: 'GWP >= 10' has the effect of 'SELECT * FROM EPD WHERE GWP >= 10'.
@@ -59,6 +61,11 @@ public class EPDDatabase {
         return r;
     }
 
+    /**
+     * Return the entire EPD table.
+     * @return A ResultSet of the entire EPD table.
+     * @throws SQLException
+     */
     public ResultSet getResults() throws SQLException {
         return getResultsFilteredBy("");
     }
