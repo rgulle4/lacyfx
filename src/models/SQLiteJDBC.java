@@ -1,7 +1,7 @@
 package models;
 
 import java.sql.*;
-import net.efabrika.util.DBTablePrinter; // https://github.com/htorun/dbtableprinter
+import libs.net.efabrika.util.DBTablePrinter; // https://github.com/htorun/dbtableprinter
 
 public class SQLiteJDBC {
     public static void main(String[] args) throws SQLException {
