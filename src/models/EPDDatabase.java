@@ -76,7 +76,7 @@ public class EPDDatabase {
      * Rough tester
      */
     public static void main(String[] args) throws SQLException {
-        ResultSet r = new EPDDatabase().getResults();
+        ResultSet r = new EPDDatabase().getResultsFilteredBy("CS > '7000'");
         DBTablePrinter.printResultSet(r);
     }
 
