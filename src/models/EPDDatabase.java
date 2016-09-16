@@ -23,9 +23,11 @@ public class EPDDatabase {
 
     public EPDDatabase(String dbFileName) {
         if (dbFileName.isEmpty())
-            dbFileName = DEFAULT_DB_FILE_NAME;
+            this.dbFileName = DEFAULT_DB_FILE_NAME;
+        else
+            this.dbFileName = dbFileName;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:" + dbFileName);
+            conn = DriverManager.getConnection("jdbc:sqlite:" + this.dbFileName);
         } catch (SQLException e) {
             e.printStackTrace();
         }
