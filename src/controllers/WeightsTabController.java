@@ -8,14 +8,23 @@ import javafx.scene.control.TextField;
  * Controller for the weights tab.
  */
 public class WeightsTabController {
+
+    /* -- Fields -------------------------------------------------------- */
+
     private int SLEEP_LENGTH = 2;
 
-    @FXML
-    private TextField envSum;
+    @FXML private TextField envSum;
     @FXML private TextField gwpWeightTxt;
-    @FXML private TextField odpWeightTxt;
     @FXML private TextField apWeightTxt;
+    @FXML private TextField opWeightTxt;
+    @FXML private TextField odpWeightTxt;
     @FXML private TextField pocpWeightTxt;
+
+    @FXML public TextField envEconSum;
+    @FXML public TextField envWeightTxt;
+    @FXML public TextField econWeightTxt;
+
+    /* -- Listeners ----------------------------------------------------- */
 
     public void envWeightsListener(Event actionEvent) throws InterruptedException {
         changeEnvSum();
@@ -24,12 +33,27 @@ public class WeightsTabController {
     private void changeEnvSum() throws InterruptedException {
         Thread.sleep(SLEEP_LENGTH);
         double sum = txtToDouble(gwpWeightTxt)
-              + txtToDouble(odpWeightTxt)
               + txtToDouble(apWeightTxt)
+              + txtToDouble(opWeightTxt)
+              + txtToDouble(odpWeightTxt)
               + txtToDouble(pocpWeightTxt);
         Thread.sleep(SLEEP_LENGTH);
         envSum.setText(String.valueOf(sum));
     }
+
+    public void envEconWeightsListener(Event event) throws InterruptedException {
+        changeEnvEconSum();
+    }
+
+    private void changeEnvEconSum() throws InterruptedException {
+        Thread.sleep(SLEEP_LENGTH);
+        double sum = txtToDouble(envWeightTxt)
+              + txtToDouble(econWeightTxt);
+        Thread.sleep(SLEEP_LENGTH);
+        envEconSum.setText(String.valueOf(sum));
+    }
+
+    /* -- Methods to parse values --------------------------------------- */
 
     private double txtToDouble(TextField textField) {
         String str = textField.getText();
@@ -48,4 +72,5 @@ public class WeightsTabController {
     private boolean isNotNumeric(String str) {
         return !(isNumeric(str));
     }
+
 }
