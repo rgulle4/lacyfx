@@ -40,48 +40,7 @@
           </Tab>
           <Tab fx:id="weightsTab" text="Weights">
             <content>
-              <AnchorPane>
-                     <children>
-                        <TextField fx:id="econWeightTxt" layoutX="130.0" layoutY="27.0" prefHeight="25.0" prefWidth="69.0" />
-                        <Label layoutX="27.0" layoutY="32.0" prefHeight="15.0" prefWidth="96.0" text="Economic" />
-                        <GridPane layoutX="346.0" layoutY="87.0" style="-fx-border-color: darkgray;">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-
-                          </rowConstraints>
-                           <children>
-                              <Label prefHeight="15.0" prefWidth="96.0" text="GWP" />
-                              <TextField fx:id="gwpWeightTxt" onKeyReleased="#envWeightsListener" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="1" >
-                                  <tooltip><Tooltip text="Global Warming Potential"/></tooltip>
-                              </TextField>
-                              <Label prefHeight="15.0" prefWidth="96.0" text="ODP" GridPane.rowIndex="1" />
-                              <TextField fx:id="odpWeightTxt" onKeyReleased="#envWeightsListener" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label prefHeight="15.0" prefWidth="96.0" text="AP" GridPane.rowIndex="2" />
-                              <TextField fx:id="apWeightTxt" onKeyReleased="#envWeightsListener" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Label prefHeight="15.0" prefWidth="96.0" text="POCP" GridPane.rowIndex="3" />
-                              <TextField fx:id="pocpWeightTxt" onKeyReleased="#envWeightsListener" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <TextField fx:id="envSum" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <Label prefHeight="15.0" prefWidth="96.0" text="Env Sum" GridPane.rowIndex="5">
-                                 <font>
-                                    <Font name="System Bold Italic" size="13.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </GridPane>
-                          <Label layoutX="23.0" layoutY="66.0" prefWidth="96.0" text="Environmental" />
-                          <TextField fx:id="envWeightTxt" layoutX="123.0" layoutY="61.0" prefHeight="25.0" prefWidth="69.0" />
-                     </children></AnchorPane>
+                <fx:include fx:id="weightsTabPage" source="weightsTab.fxml"/>
             </content>
           </Tab>
             <Tab fx:id="transpEconTab" text="Transp/Econ">
