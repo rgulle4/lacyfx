@@ -35,56 +35,66 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                   <children>
+
                       <Label prefHeight="15.0" prefWidth="96.0" text="GWP" />
                       <TextField fx:id="gwpWeightTxt" onKeyReleased="#envWeightsListener" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="1">
                           <tooltip>
                               <Tooltip text="Global Warming Potential" />
                           </tooltip>
                       </TextField>
-                      <Label prefHeight="15.0" prefWidth="96.0" text="ODP" GridPane.rowIndex="3" />
-                      <TextField fx:id="odpWeightTxt" onKeyReleased="#envWeightsListener" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                          <tooltip>
-                              <Tooltip text="Ozone Depletion Potential" />
-                          </tooltip>
-                      </TextField>
+
                       <Label prefHeight="15.0" prefWidth="96.0" text="AP" GridPane.rowIndex="1" />
                       <TextField fx:id="apWeightTxt" onKeyReleased="#envWeightsListener" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                           <tooltip>
                               <Tooltip text="Acidification Potential" />
                           </tooltip>
                       </TextField>
+
+                      <Label text="OP" GridPane.rowIndex="2" />
+                      <TextField fx:id="opWeightTxt" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                          <tooltip>
+                              <Tooltip text="Eutrophication Potential" />
+                          </tooltip>
+                      </TextField>
+
+
+                      <Label prefHeight="15.0" prefWidth="96.0" text="ODP" GridPane.rowIndex="3" />
+                      <TextField fx:id="odpWeightTxt" onKeyReleased="#envWeightsListener" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                          <tooltip>
+                              <Tooltip text="Ozone Depletion Potential" />
+                          </tooltip>
+                      </TextField>
+
                       <Label prefHeight="15.0" prefWidth="96.0" text="POCP" GridPane.rowIndex="4" />
                       <TextField fx:id="pocpWeightTxt" onKeyReleased="#envWeightsListener" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                           <tooltip>
                               <Tooltip text="Photochemical ozone creation." />
                           </tooltip>
                       </TextField>
-                      <TextField fx:id="envSum" editable="false" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                          <tooltip>
-                              <Tooltip text="Sum of the above must equal 100" />
-                          </tooltip>
-                      </TextField>
+
                       <Label prefHeight="15.0" prefWidth="96.0" text="Env Sum" GridPane.rowIndex="6">
                           <font>
                               <Font name="System Bold Italic" size="13.0" />
                           </font>
                       </Label>
-                  <Label text="OP" GridPane.rowIndex="2" />
-                  <TextField fx:id="opWeightTxt" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                      <tooltip>
-                          <Tooltip text="Eutrophication Potential" />
-                      </tooltip>
-                  </TextField>
-                    <Label prefWidth="96.0" text="Environmental" GridPane.columnIndex="3" />
-                    <TextField fx:id="envWeightTxt" onKeyReleased="#envEconWeightsListener" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="4" />
-                    <Label prefHeight="15.0" prefWidth="96.0" text="Economic" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                    <TextField fx:id="econWeightTxt" onKeyReleased="#envEconWeightsListener" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <Label text="Sum" GridPane.columnIndex="3" GridPane.rowIndex="3">
-                     <font>
-                        <Font name="System Bold Italic" size="13.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="envEconSum" editable="false" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                      <TextField fx:id="envSum" editable="false" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                          <tooltip>
+                              <Tooltip text="Sum of the above must equal 100" />
+                          </tooltip>
+                      </TextField>
+
+
+                      <Label prefWidth="96.0" text="Environmental" GridPane.columnIndex="3" />
+                      <TextField fx:id="envWeightTxt" onKeyReleased="#envEconWeightsListener" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="4" />
+
+                      <Label prefHeight="15.0" prefWidth="96.0" text="Economic" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                      <TextField fx:id="econWeightTxt" onKeyReleased="#envEconWeightsListener" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+
+                      <Label text="Sum" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                          <font><Font name="System Bold Italic" size="13.0" /></font>
+                      </Label>
+                      <TextField fx:id="envEconSum" editable="false" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+
                   </children>
               </GridPane>
          </children>
