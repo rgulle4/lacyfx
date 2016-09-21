@@ -12,72 +12,52 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<AnchorPane fx:id="mainAnchorPane" fx:controller="controllers.Controller" prefHeight="440.0" prefWidth="700" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <tabs>
-            <Tab fx:id="importTab" text="Import">
-               <content>
-                  <AnchorPane>
-                     <children>
-                        <TextField layoutX="82.0" layoutY="83.0" prefHeight="25.0" prefWidth="244.0" />
-                        <Button layoutX="334.0" layoutY="83.0" mnemonicParsing="false" text="Browse" />
-                        <Label layoutX="83.0" layoutY="58.0" text="Choose File..." />
-                     </children></AnchorPane>
-               </content>
-            </Tab>
-          <Tab fx:id="techPerfTab" text="Tech Perf">
-            <content>
-              <AnchorPane>
-                     <children>
-                        <Pagination layoutX="402.0" layoutY="70.0" prefHeight="296.0" prefWidth="284.0" />
-                        <TextField layoutX="94.0" layoutY="26.0" prefHeight="25.0" prefWidth="244.0" text="strength:&gt;=2400;poisson:==3.1" />
-                        <Label layoutX="33.0" layoutY="31.0" text="Filter(s)" />
-                        <ListView layoutX="39.0" layoutY="86.0" prefHeight="262.0" prefWidth="252.0" />
-                        <Label layoutX="433.0" layoutY="44.0" text="PCR for xyz:" />
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-          <Tab fx:id="weightsTab" text="Weights">
-            <content>
-                <fx:include fx:id="weightsTabPage" source="weightsTab.fxml"/>
-            </content>
-          </Tab>
-            <Tab fx:id="transpEconTab" text="Transp/Econ">
-               <content>
-                  <AnchorPane>
-                     <children>
-                        <Label layoutX="52.0" layoutY="52.0" text="VKT" />
-                        <TextField layoutX="97.0" layoutY="47.0" prefHeight="25.0" prefWidth="65.0" />
-                        <TextField layoutX="98.0" layoutY="82.0" prefHeight="25.0" prefWidth="65.0" />
-                        <Label layoutX="52.0" layoutY="87.0" text="IC" />
-                     </children></AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="envImpactScoreTab" text="Env Impact Score">
-               <content>
-                  <AnchorPane>
-                     <children>
-                        <Label layoutX="75.0" layoutY="92.0" text="GWP: 21" />
-                        <Label layoutX="75.0" layoutY="116.0" text="ODP: 34" />
-                        <Label layoutX="77.0" layoutY="140.0" text="AP: 9000:" />
-                     </children></AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="summaryExportTab" text="Summary/Export">
-               <content>
-                  <AnchorPane>
-                     <children>
-                        <Label layoutX="53.0" layoutY="45.0" text="Overall Score: 99">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Button layoutX="350.0" layoutY="43.0" mnemonicParsing="false" text="Export to AASHTOWare ME Design" />
-                     </children></AnchorPane>
-               </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-   </children>
+<AnchorPane fx:id="mainAnchorPane" fx:controller="controllers.Controller"
+            prefHeight="440.0" prefWidth="700"
+            xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE"
+                 AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                 AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <tabs>
+                <Tab fx:id="importTab" text="Import">
+                    <content>
+                        <fx:include fx:id="importTabPage"
+                                    source="importTab.fxml"/>
+                    </content>
+                </Tab>
+                <Tab fx:id="techPerfTab" text="Tech Perf">
+                    <content>
+                        <fx:include fx:id="techPerfTabPage"
+                                    source="techPerfTab.fxml"/>
+                    </content>
+                </Tab>
+                <Tab fx:id="weightsTab" text="Weights">
+                    <content>
+                        <fx:include fx:id="weightsTabPage"
+                                    source="weightsTab.fxml"/>
+                    </content>
+                </Tab>
+                <Tab fx:id="transpEconTab" text="Transp/Econ">
+                    <content>
+                        <fx:include fx:id="transpEconTabPage"
+                                    source="transpEconTab.fxml"/>
+                    </content>
+                </Tab>
+                <Tab fx:id="envImpactScoreTab" text="Env Impact Score">
+                    <content>
+                        <fx:include fx:id="envImpactScoreTabPage"
+                                    source="envImpactScoreTab.fxml"/>
+                    </content>
+                </Tab>
+                <Tab fx:id="summaryExportTab" text="Summary/Export">
+                    <content>
+                        <fx:include fx:id="summaryExportTabPage"
+                                    source="summaryExportTab.fxml"/>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
 </AnchorPane>
