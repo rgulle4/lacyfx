@@ -23,38 +23,32 @@
             <tabs>
                 <Tab fx:id="importTab" text="Import">
                     <content>
-                        <fx:include fx:id="importTabPage"
-                                    source="importTab.fxml"/>
+                        <fx:include source="importTab.fxml"/>
                     </content>
                 </Tab>
-                <Tab fx:id="techPerfTab" text="Tech Perf">
+                <Tab fx:id="techPerfTab" text="Layer Information">
                     <content>
-                        <fx:include fx:id="techPerfTabPage"
-                                    source="techPerfTab.fxml"/>
+                        <fx:include source="techPerfTab.fxml"/>
                     </content>
                 </Tab>
                 <Tab fx:id="weightsTab" text="Weights">
                     <content>
-                        <fx:include fx:id="weightsTabPage"
-                                    source="weightsTab.fxml"/>
+                        <fx:include source="weightsTab.fxml"/>
                     </content>
                 </Tab>
                 <Tab fx:id="transpEconTab" text="Transp/Econ">
                     <content>
-                        <fx:include fx:id="transpEconTabPage"
-                                    source="transpEconTab.fxml"/>
+                        <fx:include source="transpEconTab.fxml"/>
                     </content>
                 </Tab>
                 <Tab fx:id="envImpactScoreTab" text="Env Impact Score">
                     <content>
-                        <fx:include fx:id="envImpactScoreTabPage"
-                                    source="envImpactScoreTab.fxml"/>
+                        <fx:include source="envImpactScoreTab.fxml"/>
                     </content>
                 </Tab>
                 <Tab fx:id="summaryExportTab" text="Summary/Export">
                     <content>
-                        <fx:include fx:id="summaryExportTabPage"
-                                    source="summaryExportTab.fxml"/>
+                        <fx:include source="summaryExportTab.fxml"/>
                     </content>
                 </Tab>
             </tabs>
