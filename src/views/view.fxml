@@ -26,9 +26,9 @@
                         <fx:include source="importTab.fxml"/>
                     </content>
                 </Tab>
-                <Tab fx:id="techPerfTab" text="Layer Information">
+                <Tab fx:id="layerInformation" text="Layer Information">
                     <content>
-                        <fx:include source="techPerfTab.fxml"/>
+                        <fx:include source="layerInformationTab.fxml"/>
                     </content>
                 </Tab>
                 <Tab fx:id="weightsTab" text="Weights">
