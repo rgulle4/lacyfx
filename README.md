@@ -14,6 +14,8 @@ and sustainability factors.
 - [sqlite-jdbc-3.8.11.2.jar](https://bitbucket.org/xerial/sqlite-jdbc/downloads/sqlite-jdbc-3.8.11.2.jar)
 - Get these files from Neveen:`rt.db` and `test.db`
 
+## Running the program
+
 For now, it's best to open this as a project in IntelliJ IDEA. Then
 runn `App.main()`.
 
