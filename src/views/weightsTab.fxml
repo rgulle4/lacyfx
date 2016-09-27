@@ -16,89 +16,45 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WeightsTabController">
     <children>
-      <HBox>
-         <children>
-              <GridPane style="-fx-border-color: darkgray;">
-                  <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                  <children>
-
-                      <Label prefHeight="15.0" prefWidth="96.0" text="GWP" />
-                      <TextField fx:id="gwpWeightTxt" onKeyReleased="#envWeightsListener" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="1">
-                          <tooltip>
-                              <Tooltip text="Global Warming Potential" />
-                          </tooltip>
-                      </TextField>
-
-                      <Label prefHeight="15.0" prefWidth="96.0" text="AP" GridPane.rowIndex="1" />
-                      <TextField fx:id="apWeightTxt" onKeyReleased="#envWeightsListener" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                          <tooltip>
-                              <Tooltip text="Acidification Potential" />
-                          </tooltip>
-                      </TextField>
-
-                      <Label text="OP" GridPane.rowIndex="2" />
-                      <TextField fx:id="opWeightTxt" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                          <tooltip>
-                              <Tooltip text="Eutrophication Potential" />
-                          </tooltip>
-                      </TextField>
-
-
-                      <Label prefHeight="15.0" prefWidth="96.0" text="ODP" GridPane.rowIndex="3" />
-                      <TextField fx:id="odpWeightTxt" onKeyReleased="#envWeightsListener" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                          <tooltip>
-                              <Tooltip text="Ozone Depletion Potential" />
-                          </tooltip>
-                      </TextField>
-
-                      <Label prefHeight="15.0" prefWidth="96.0" text="POCP" GridPane.rowIndex="4" />
-                      <TextField fx:id="pocpWeightTxt" onKeyReleased="#envWeightsListener" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                          <tooltip>
-                              <Tooltip text="Photochemical ozone creation." />
-                          </tooltip>
-                      </TextField>
-
-                      <Label prefHeight="15.0" prefWidth="96.0" text="Env Sum" GridPane.rowIndex="6">
-                          <font>
-                              <Font name="System Bold Italic" size="13.0" />
-                          </font>
-                      </Label>
-                      <TextField fx:id="envSum" editable="false" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                          <tooltip>
-                              <Tooltip text="Sum of the above must equal 100" />
-                          </tooltip>
-                      </TextField>
-
-
-                      <Label prefWidth="96.0" text="Environmental" GridPane.columnIndex="3" />
-                      <TextField fx:id="envWeightTxt" onKeyReleased="#envEconWeightsListener" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="4" />
-
-                      <Label prefHeight="15.0" prefWidth="96.0" text="Economic" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                      <TextField fx:id="econWeightTxt" onKeyReleased="#envEconWeightsListener" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-
-                      <Label text="Sum" GridPane.columnIndex="3" GridPane.rowIndex="3">
-                          <font><Font name="System Bold Italic" size="13.0" /></font>
-                      </Label>
-                      <TextField fx:id="envEconSum" editable="false" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-
-                  </children>
-              </GridPane>
-         </children>
-      </HBox>
+        <SplitPane dividerPositions="0.17839195979899497" layoutX="206.0" layoutY="46.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                    <children>
+                        <Label layoutX="14.0" layoutY="38.0" text="Environmental Perfomance (%):" />
+                        <Label layoutX="248.0" layoutY="38.0" text="Economic Performance:" />
+                        <TextField layoutX="200.0" layoutY="34.0" prefHeight="23.0" prefWidth="35.0" />
+                        <TextField layoutX="391.0" layoutY="34.0" prefHeight="23.0" prefWidth="35.0" />
+                        <Label layoutX="14.0" layoutY="10.0" text="Performance Weights">
+                            <font>
+                                <Font size="14.0" />
+                            </font></Label>
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                    <children>
+                        <Label layoutX="73.0" layoutY="25.0" text="GWP:" />
+                        <Label layoutX="83.0" layoutY="49.0" text="AP:" />
+                        <Label layoutX="84.0" layoutY="74.0" text="EP:" />
+                        <TextField layoutX="103.0" layoutY="21.0" prefWidth="50.0" />
+                        <TextField layoutX="103.0" layoutY="45.0" prefWidth="50.0" />
+                        <TextField layoutX="103.0" layoutY="70.0" prefWidth="50.0" />
+                        <Label layoutX="72.0" layoutY="98.0" text="ODP:" />
+                        <TextField layoutX="103.0" layoutY="94.0" prefWidth="50.0" />
+                        <Label layoutX="66.0" layoutY="122.0" text="POCP:" />
+                        <TextField layoutX="103.0" layoutY="118.0" prefWidth="50.0" />
+                        <Label layoutX="200.0" layoutY="26.0" text="Hazard:" />
+                        <Label layoutX="200.0" layoutY="50.0" text="Non-Harzard:" />
+                        <Label layoutX="200.0" layoutY="75.0" text="Water Consumption:" />
+                        <TextField layoutX="445.0" layoutY="23.0" prefWidth="50.0" />
+                        <TextField layoutX="445.0" layoutY="47.0" prefWidth="50.0" />
+                        <TextField layoutX="445.0" layoutY="72.0" prefWidth="50.0" />
+                        <Label layoutX="200.0" layoutY="99.0" text="Primary Energy Comsumption:" />
+                        <TextField layoutX="445.0" layoutY="96.0" prefWidth="50.0" />
+                        <Label layoutX="200.0" layoutY="123.0" text="Renewable Energy Consumption:" />
+                        <TextField layoutX="445.0" layoutY="120.0" prefWidth="50.0" />
+                        <Button layoutX="443.0" layoutY="256.0" mnemonicParsing="false" text="Next" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
     </children></AnchorPane>
