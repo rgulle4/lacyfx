@@ -25,10 +25,11 @@
         <Label layoutX="58.0" layoutY="190.0" text="Choose File... (5th Design)" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="190.0" />
         <ButtonBar layoutX="414.0" layoutY="350.0" prefHeight="40.0" prefWidth="200.0">
             <buttons>
-                <Button mnemonicParsing="false" text="Check" />
+                <Button mnemonicParsing="false" onAction="#checkbutton" text="Check" />
                 <Button mnemonicParsing="false" text="Next" />
                 <Button mnemonicParsing="false" text="Close" />
             </buttons>
         </ButtonBar>
+      <Label fx:id="label1" layoutX="399.0" layoutY="34.0" />
     </children>
 </AnchorPane>
