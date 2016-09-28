@@ -17,7 +17,7 @@ and sustainability factors.
 ## Running the program
 
 For now, it's best to open this as a project in IntelliJ IDEA. Then
-runn `App.main()`.
+runn `cm.App.main()`.
 
 # Background
 
