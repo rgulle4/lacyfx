@@ -35,7 +35,12 @@ public class ImportTabController {
         File file = new File(file1.getText());
         if (file != null){
             Object[] obj = SearchWord.searchword(file);
-            label1.setText(obj[3].toString());
+
+            if (obj[4].toString() =="0")
+                label1.setText("Pass");
+            else {
+                label1.setText("Failed");
+            }
         }
     }
 }
