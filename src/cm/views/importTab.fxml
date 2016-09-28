@@ -8,7 +8,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.controllers.ImportTabController">
     <children>
-        <TextField layoutX="82.0" layoutY="83.0" prefHeight="25.0" prefWidth="244.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="30.0" />
+        <TextField fx:id="file1" layoutX="82.0" layoutY="83.0" prefHeight="25.0" prefWidth="244.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="30.0" />
         <Button layoutX="334.0" layoutY="83.0" mnemonicParsing="false" onAction="#addfile" text="Browse" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="30.0" />
         <Label layoutX="83.0" layoutY="58.0" text="Choose File... (1st Design)" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0" />
         <TextField layoutX="92.0" layoutY="93.0" prefHeight="25.0" prefWidth="244.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="75.0" />

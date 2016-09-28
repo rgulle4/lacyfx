@@ -19,10 +19,11 @@ public class App extends Application {
         primaryStage.show();
     }
     private static Stage Stage;
-    public static void showfile(){
+    public static File showfile(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Load designed file");
         File file = fileChooser.showOpenDialog(Stage);
+        return file;
 
     }
 
