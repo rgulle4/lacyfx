@@ -35,7 +35,7 @@
                         <Label text="Company Name:" GridPane.rowIndex="2" />
                         <Label text="Mix number:" GridPane.rowIndex="3" />
                         <TextField GridPane.columnIndex="1" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="TF_CS" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Button mnemonicParsing="false" onAction="#searchbutton" text="Search" GridPane.columnIndex="2" />
