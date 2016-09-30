@@ -1,6 +1,9 @@
 package cm;
 
+import cm.models.AlternativeMat;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,6 +17,23 @@ import java.io.IOException;
 
 public class App extends Application {
     private static Stage primaryStage;
+    private ObservableList<AlternativeMat> MaterialData = FXCollections.observableArrayList();
+    /**
+     * Constructor
+     */
+    public App(){
+        //Add some sample data
+        MaterialData.add(new AlternativeMat("4500","IBM"));
+        MaterialData.add(new AlternativeMat("4500","IBM"));
+        MaterialData.add(new AlternativeMat("4500","IBM"));
+    }
+    /**
+     * Returns the data as an observable list of Persons.
+     * @return
+     */
+    public ObservableList<AlternativeMat> getMaterialData() {
+        return MaterialData;
+    }
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("views/view.fxml"));

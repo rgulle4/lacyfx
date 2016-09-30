@@ -1,5 +1,7 @@
 package cm.controllers;
 
+import cm.App;
+import cm.models.AlternativeMat;
 import cm.models.AlternativeMaterial;
 import cm.models.EPDDatabase;
 import javafx.fxml.FXML;
@@ -21,15 +23,38 @@ public class LoadMaterialController {
     @FXML
     private TextField TF_CS;
     @FXML
-    private TableView<AlternativeMaterial> MaterialTable;
+    private TableView<AlternativeMat> MaterialTable;
     @FXML
-    private TableColumn<AlternativeMaterial, String> CS_Column;
+    private TableColumn<AlternativeMat, String> CS_Column;
     @FXML
-    private TableColumn<AlternativeMaterial, String> CM_Name_Column;
-    @FXML
-    private TableColumn<AlternativeMaterial, String> MIXNum_Column;
-    @FXML
-    private TableColumn<AlternativeMaterial, String> Location_Column;
+    private TableColumn<AlternativeMat, String> CM_Name_Column;
+    // Reference to the main application.
+    private App mainApp;
+    // Constructor is called before the initialized method
+    public LoadMaterialController(){
+    }
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
+     */
+//    @FXML
+//    private void initialize(){
+//        // Initialize the AlternativeMat table with the two columns.
+//        CS_Column.setCellValueFactory(cellData-> cellData.getValue().CSProperty());
+//        CM_Name_Column.setCellValueFactory(cellData-> cellData.getValue().CM_nameProperty());
+//    }
+    /**
+     * Is called by the main application to give a reference back to itself.
+     *
+     * @param mainApp
+     */
+    public void setMainApp(App mainApp) {
+        this.mainApp = mainApp;
+
+        // Add observable list data to the table
+        MaterialTable.setItems(mainApp.getMaterialData());
+    }
+
 
 
     @FXML
