@@ -3,6 +3,8 @@ package cm.models;
 import libs.net.efabrika.util.DBTablePrinter;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * EPDs are "Environmental Product Declarations", and this class represents a database full of them.
@@ -50,7 +52,9 @@ public class EPDDatabase {
      * @param filterClause Example: 'GWP >= 10' has the effect of 'SELECT * FROM EPD WHERE GWP >= 10'.
      * @return
      */
-    public ResultSet getResultsFilteredBy(String filterClause) throws SQLException {
+    public List<AlternativeMaterial> getResultsFilteredBy(String filterClause) throws SQLException {
+        List<AlternativeMaterial> result = new ArrayList<AlternativeMaterial>();
+
         String str;
         StringBuilder sb = new StringBuilder(DEFAULT_SQL_QUERY);
         if (filterClause.isEmpty()) {
@@ -60,7 +64,25 @@ public class EPDDatabase {
         }
         s = conn.createStatement();
         r = s.executeQuery(str);
-        return r;
+
+        AlternativeMaterial g =null;
+        while(r.next()){
+            g = new AlternativeMaterial();
+            g.setID(r.getString("ID"));
+            g.setCS(r.getString("CS"));
+            g.setGWP(r.getFloat("GWP"));
+            g.setAP(r.getFloat("AP"));
+            g.setEP(r.getFloat("EP"));
+            g.setODP(r.getFloat("ODP"));
+            g.setPOCP(r.getFloat("POCP"));
+            g.setZIP(r.getFloat("ZIP"));
+            g.setMIXNUMBER(r.getString("MIXNUMBER"));
+            g.setNAME(r.getString("NAME"));
+            g.setLOCATION(r.getString("LOCATION"));
+
+            result.add(g);
+        }
+        return result;
     }
 
     /**
@@ -68,16 +90,16 @@ public class EPDDatabase {
      * @return A ResultSet of the entire EPD table.
      * @throws SQLException
      */
-    public ResultSet getResults() throws SQLException {
+    public List<AlternativeMaterial> getResults() throws SQLException {
         return getResultsFilteredBy("");
     }
 
     /**
      * Rough tester
      */
-    public static void main(String[] args) throws SQLException {
-        ResultSet r = new EPDDatabase().getResultsFilteredBy("CS >= '7000'");
-        DBTablePrinter.printResultSet(r);
-    }
+//    public static void main(String[] args) throws SQLException {
+//        ResultSet r = new EPDDatabase().getResultsFilteredBy("CS >= '7000'");
+//        DBTablePrinter.printResultSet(r);
+//    }
 
 }
