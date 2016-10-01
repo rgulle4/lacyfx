@@ -52,8 +52,8 @@
                     <columns>
                       <TableColumn fx:id="CS_Column" prefWidth="60.0" text="CS" />
                       <TableColumn fx:id="CM_Name_Column" prefWidth="91.0" text="Name" />
-                        <TableColumn prefWidth="75.0" text="Location" />
-                        <TableColumn prefWidth="48.0" text="MIX#" />
+                        <TableColumn fx:id="Location_Column" prefWidth="75.0" text="Location" />
+                        <TableColumn fx:id="MixNum_Column" prefWidth="48.0" text="MIX#" />
                         <TableColumn prefWidth="71.0" text="GWP" />
                         <TableColumn prefWidth="69.0" text="ODP" />
                         <TableColumn prefWidth="69.0" text="AP" />

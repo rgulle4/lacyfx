@@ -31,29 +31,50 @@ public class LoadMaterialController {
     private TableColumn<AlternativeMat, String> CS_Column;
     @FXML
     private TableColumn<AlternativeMat, String> CM_Name_Column;
+    @FXML
+    private TableColumn<AlternativeMat, String> Location_Column;
+    @FXML
+    private TableColumn<AlternativeMat, String> MixNum_Column;
     // Reference to the main application.
     private App mainApp;
 
     final ObservableList<AlternativeMat> MaterialData = FXCollections.observableArrayList(
-            new AlternativeMat("4500","IBM"),
-            new AlternativeMat("4600","APPLE"),
-            new AlternativeMat("4700","GOOGLE")
+            new AlternativeMat("4500","IBM","Baton Rouge","Mix01"),
+            new AlternativeMat("4600","IBM","Baton Rouge","Mix02"),
+            new AlternativeMat("4600","IBM","Baton Rouge","Mix02"),
+            new AlternativeMat("4600","IBM","Baton Rouge","Mix02"),
+            new AlternativeMat("4600","IBM","Baton Rouge","Mix02"),
+            new AlternativeMat("4600","IBM","Baton Rouge","Mix02"),
+            new AlternativeMat("4600","IBM","Baton Rouge","Mix02"),
+            new AlternativeMat("4600","IBM","Baton Rouge","Mix02"),
+            new AlternativeMat("4500","IBM","Baton Rouge","Mix01"),
+            new AlternativeMat("4600","IBM","Baton Rouge","Mix02"),
+            new AlternativeMat("4600","IBM","Baton Rouge","Mix02"),
+            new AlternativeMat("4600","IBM","Baton Rouge","Mix02"),
+            new AlternativeMat("4600","IBM","Baton Rouge","Mix02"),
+            new AlternativeMat("4600","IBM","Baton Rouge","Mix02"),
+            new AlternativeMat("4600","IBM","Baton Rouge","Mix02"),
+            new AlternativeMat("4600","IBM","Baton Rouge","Mix02")
     );
 
     // Constructor is called before the initialized method
     public LoadMaterialController(){
     }
 
-
-    public void initialize(){
-        CS_Column.setCellValueFactory(new PropertyValueFactory<AlternativeMat, String>("CS"));
-        CM_Name_Column.setCellValueFactory(new PropertyValueFactory<AlternativeMat, String>("CM_name"));
-        MaterialTable.setItems(MaterialData);
-    }
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
      */
+    public void initialize() throws SQLException {
+        CS_Column.setCellValueFactory(new PropertyValueFactory<AlternativeMat, String>("CS"));
+        CM_Name_Column.setCellValueFactory(new PropertyValueFactory<AlternativeMat, String>("CM_name"));
+        Location_Column.setCellValueFactory(new PropertyValueFactory<AlternativeMat, String>("Location"));
+        MixNum_Column.setCellValueFactory(new PropertyValueFactory<AlternativeMat, String>("MixNum"));
+
+    }
+
+    private ObservableList<AlternativeMat> data;
+
     @FXML
     private void searchbutton() throws SQLException {
         StringBuilder CS_field = new StringBuilder("CS >= ");
@@ -65,6 +86,17 @@ public class LoadMaterialController {
             System.out.println(result.get(i).getID()+
                     ":"+result.get(i).getCS()+" "+result.get(i).getNAME());
         }
+        data = FXCollections.observableArrayList();
+
+        for (int i = 0; i < result.size(); i++){
+            AlternativeMat cm = new AlternativeMat();
+            cm.setCS(result.get(i).getCS());
+            cm.setCM_name(result.get(i).getNAME());
+            cm.setLocation(result.get(i).getLOCATION());
+            cm.setMixNum(result.get(i).getMIXNUMBER());
+            data.add(cm);
+        }
+        MaterialTable.setItems(data);
     }
 
 

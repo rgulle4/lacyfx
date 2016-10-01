@@ -9,13 +9,15 @@ import javafx.beans.property.StringProperty;
 public class AlternativeMat {
     private final StringProperty CS;
     private final StringProperty CM_name;
+    private final StringProperty Location;
+    private final StringProperty MixNum;
 
     /**
      * Default constructor.
      */
 
     public AlternativeMat(){
-        this(null,null);
+        this(null,null,null,null);
     }
     /**
      * Constructor with some initial data.
@@ -23,9 +25,11 @@ public class AlternativeMat {
      * @param CS
      * @param CM_name
      */
-    public AlternativeMat(String CS,String CM_name){
+    public AlternativeMat(String CS,String CM_name,String Location,String MixNum){
         this.CS = new SimpleStringProperty(CS);
         this.CM_name = new SimpleStringProperty(CM_name);
+        this.Location = new SimpleStringProperty(Location);
+        this.MixNum = new SimpleStringProperty(MixNum);
     }
 
     public String getCS() {
@@ -49,5 +53,28 @@ public class AlternativeMat {
 
     public StringProperty CM_nameProperty() {
         return CM_name;
+    }
+    public String getLocation() {
+        return Location.get();
+    }
+
+    public StringProperty locationProperty() {
+        return Location;
+    }
+
+    public void setLocation(String location) {
+        this.Location.set(location);
+    }
+
+    public String getMixNum() {
+        return MixNum.get();
+    }
+
+    public StringProperty mixNumProperty() {
+        return MixNum;
+    }
+
+    public void setMixNum(String mixNum) {
+        this.MixNum.set(mixNum);
     }
 }
