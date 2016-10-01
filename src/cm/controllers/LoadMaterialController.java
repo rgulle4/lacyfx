@@ -4,14 +4,17 @@ import cm.App;
 import cm.models.AlternativeMat;
 import cm.models.AlternativeMaterial;
 import cm.models.EPDDatabase;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import libs.net.efabrika.util.DBTablePrinter;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -30,33 +33,27 @@ public class LoadMaterialController {
     private TableColumn<AlternativeMat, String> CM_Name_Column;
     // Reference to the main application.
     private App mainApp;
+
+    final ObservableList<AlternativeMat> MaterialData = FXCollections.observableArrayList(
+            new AlternativeMat("4500","IBM"),
+            new AlternativeMat("4600","APPLE"),
+            new AlternativeMat("4700","GOOGLE")
+    );
+
     // Constructor is called before the initialized method
     public LoadMaterialController(){
+    }
+
+
+    public void initialize(){
+        CS_Column.setCellValueFactory(new PropertyValueFactory<AlternativeMat, String>("CS"));
+        CM_Name_Column.setCellValueFactory(new PropertyValueFactory<AlternativeMat, String>("CM_name"));
+        MaterialTable.setItems(MaterialData);
     }
     /**
      * Initializes the controller class. This method is automatically called
      * after the fxml file has been loaded.
      */
-//    @FXML
-//    private void initialize(){
-//        // Initialize the AlternativeMat table with the two columns.
-//        CS_Column.setCellValueFactory(cellData-> cellData.getValue().CSProperty());
-//        CM_Name_Column.setCellValueFactory(cellData-> cellData.getValue().CM_nameProperty());
-//    }
-    /**
-     * Is called by the main application to give a reference back to itself.
-     *
-     * @param mainApp
-     */
-    public void setMainApp(App mainApp) {
-        this.mainApp = mainApp;
-
-        // Add observable list data to the table
-        MaterialTable.setItems(mainApp.getMaterialData());
-    }
-
-
-
     @FXML
     private void searchbutton() throws SQLException {
         StringBuilder CS_field = new StringBuilder("CS >= ");
@@ -67,7 +64,13 @@ public class LoadMaterialController {
         for (int i = 0; i < result.size(); i++){
             System.out.println(result.get(i).getID()+
                     ":"+result.get(i).getCS()+" "+result.get(i).getNAME());
-
         }
     }
+
+
+
+
+
+
+
 }
