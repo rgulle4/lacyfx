@@ -52,8 +52,8 @@ public class EPDDatabase {
      * @param filterClause Example: 'GWP >= 10' has the effect of 'SELECT * FROM EPD WHERE GWP >= 10'.
      * @return
      */
-    public List<AlternativeMaterial> getResultsFilteredBy(String filterClause) throws SQLException {
-        List<AlternativeMaterial> result = new ArrayList<AlternativeMaterial>();
+    public List<AlternativeMat> getResultsFilteredBy(String filterClause) throws SQLException {
+        List<AlternativeMat> result = new ArrayList<AlternativeMat>();
 
         String str;
         StringBuilder sb = new StringBuilder(DEFAULT_SQL_QUERY);
@@ -65,20 +65,20 @@ public class EPDDatabase {
         s = conn.createStatement();
         r = s.executeQuery(str);
 
-        AlternativeMaterial g =null;
+        AlternativeMat g =null;
         while(r.next()){
-            g = new AlternativeMaterial();
-            g.setID(r.getString("ID"));
+            g = new AlternativeMat();
+
             g.setCS(r.getString("CS"));
-            g.setGWP(r.getFloat("GWP"));
-            g.setAP(r.getFloat("AP"));
-            g.setEP(r.getFloat("EP"));
-            g.setODP(r.getFloat("ODP"));
-            g.setPOCP(r.getFloat("POCP"));
-            g.setZIP(r.getFloat("ZIP"));
-            g.setMIXNUMBER(r.getString("MIXNUMBER"));
-            g.setNAME(r.getString("NAME"));
-            g.setLOCATION(r.getString("LOCATION"));
+            g.setCM_name(r.getString("NAME"));
+            g.setLocation(r.getString("LOCATION"));
+            g.setMixNum(r.getString("MIXNUMBER"));
+            g.setZipCode(r.getString("ZIP"));
+            g.setGWP(r.getDouble("GWP"));
+            g.setODP(r.getDouble("ODP"));
+            g.setAP(r.getDouble("AP"));
+            g.setEP(r.getDouble("EP"));
+            g.setPOCP(r.getDouble("POCP"));
 
             result.add(g);
         }
@@ -90,7 +90,7 @@ public class EPDDatabase {
      * @return A ResultSet of the entire EPD table.
      * @throws SQLException
      */
-    public List<AlternativeMaterial> getResults() throws SQLException {
+    public List<AlternativeMat> getResults() throws SQLException {
         return getResultsFilteredBy("");
     }
 
