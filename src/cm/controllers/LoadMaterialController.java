@@ -2,7 +2,6 @@ package cm.controllers;
 
 import cm.App;
 import cm.models.AlternativeMat;
-import cm.models.AlternativeMaterial;
 import cm.models.EPDDatabase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,11 +11,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import libs.net.efabrika.util.DBTablePrinter;
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
