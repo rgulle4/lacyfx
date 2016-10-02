@@ -41,20 +41,20 @@
                                                                             </font>
                                                                         </Label>
                                                                         <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
+                                                                        <TextField fx:id="TF_EM" layoutX="188.0" layoutY="67.0" />
+                                                                        <ChoiceBox fx:id="CB_EM" layoutX="359.0" layoutY="67.0" prefWidth="80.0" />
                                                                         <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
                                                                         <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
+                                                                        <TextField fx:id="TF_CS" layoutX="188.0" layoutY="93.0" />
+                                                                        <ChoiceBox fx:id="CB_CS" layoutX="359.0" layoutY="93.0" prefWidth="80.0" />
                                                                         <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
                                                                         <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
+                                                                        <TextField fx:id="TF_UW" layoutX="188.0" layoutY="119.0" />
+                                                                        <ChoiceBox fx:id="CB_UW" layoutX="359.0" layoutY="119.0" prefWidth="80.0" />
                                                                         <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
                                                                         <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
+                                                                        <TextField fx:id="TF_T" layoutX="188.0" layoutY="145.0" />
+                                                                        <ChoiceBox fx:id="CB_T" layoutX="359.0" layoutY="145.0" prefWidth="80.0" />
                                                                         <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
                                                                         <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
                                                                         <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" onAction="#LoadMatBtn" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />

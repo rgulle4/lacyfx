@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.media.*?>
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <!-- This tab is where the user enters the weights of each category for the final score -->
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.controllers.WeightsTabController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.controllers.WeightsTabController">
     <children>
         <SplitPane dividerPositions="0.17839195979899497" layoutX="206.0" layoutY="46.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -42,17 +37,21 @@
                         <TextField layoutX="103.0" layoutY="94.0" prefWidth="50.0" />
                         <Label layoutX="66.0" layoutY="122.0" text="POCP:" />
                         <TextField layoutX="103.0" layoutY="118.0" prefWidth="50.0" />
-                        <Label layoutX="200.0" layoutY="26.0" text="Hazard:" />
-                        <Label layoutX="200.0" layoutY="50.0" text="Non-Harzard:" />
-                        <Label layoutX="200.0" layoutY="75.0" text="Water Consumption:" />
-                        <TextField layoutX="445.0" layoutY="23.0" prefWidth="50.0" />
-                        <TextField layoutX="445.0" layoutY="47.0" prefWidth="50.0" />
-                        <TextField layoutX="445.0" layoutY="72.0" prefWidth="50.0" />
-                        <Label layoutX="200.0" layoutY="99.0" text="Primary Energy Comsumption:" />
-                        <TextField layoutX="445.0" layoutY="96.0" prefWidth="50.0" />
-                        <Label layoutX="200.0" layoutY="123.0" text="Renewable Energy Consumption:" />
-                        <TextField layoutX="445.0" layoutY="120.0" prefWidth="50.0" />
+                        <Label layoutX="200.0" layoutY="26.0" text="Concrete Hazard Waste:" />
+                        <Label layoutX="200.0" layoutY="50.0" text="Concrete Non-Harzard Waste:" />
+                        <Label layoutX="200.0" layoutY="75.0" text="Total Water Consumption:" />
+                        <TextField layoutX="501.0" layoutY="23.0" prefWidth="50.0" />
+                        <TextField layoutX="501.0" layoutY="47.0" prefWidth="50.0" />
+                        <TextField layoutX="501.0" layoutY="72.0" prefWidth="50.0" />
+                        <Label layoutX="200.0" layoutY="99.0" text="Renewable Primary Energy Use" />
+                        <TextField layoutX="501.0" layoutY="96.0" prefWidth="50.0" />
+                        <Label layoutX="200.0" layoutY="123.0" text="Depletion of Non-renewable Energy Resources:" />
+                        <TextField layoutX="501.0" layoutY="120.0" prefWidth="50.0" />
                         <Button layoutX="443.0" layoutY="256.0" mnemonicParsing="false" text="Next" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
+                  <Label layoutX="200.0" layoutY="147.0" text="Renewable Material Resources Use:" />
+                  <TextField layoutX="501.0" layoutY="144.0" prefWidth="50.0" />
+                  <Label layoutX="200.0" layoutY="171.0" text="Depletion of Non-renewable Material Resources:" />
+                  <TextField layoutX="501.0" layoutY="168.0" prefWidth="50.0" />
                     </children>
                 </AnchorPane>
             </items>
