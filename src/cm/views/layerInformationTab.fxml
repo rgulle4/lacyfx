@@ -35,20 +35,12 @@
                                                             <content>
                                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                                     <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 1 Flexible : Default asphalt concrete">
+                                                                        <Label layoutX="45.0" layoutY="95.0" text="Material Property:">
                                                                             <font>
                                                                                 <Font size="14.0" />
                                                                             </font>
                                                                         </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField fx:id="TF_EM" layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox fx:id="CB_EM" layoutX="359.0" layoutY="67.0" prefWidth="80.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField fx:id="TF_CS" layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox fx:id="CB_CS" layoutX="359.0" layoutY="93.0" prefWidth="80.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
+                                                                        <Label layoutX="45.0" layoutY="123.0" text="Volumn Unit " />
                                                                         <TextField fx:id="TF_UW" layoutX="188.0" layoutY="119.0" />
                                                                         <ChoiceBox fx:id="CB_UW" layoutX="359.0" layoutY="119.0" prefWidth="80.0" />
                                                                         <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
@@ -58,6 +50,8 @@
                                                                         <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
                                                                         <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
                                                                         <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" onAction="#LoadMatBtn" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
+                                                      <TextField fx:id="TF_EM1" layoutX="188.0" layoutY="95.0" />
+                                                      <Button layoutX="357.0" layoutY="93.0" mnemonicParsing="false" text="Save" />
                                                                     </children>
                                                                 </AnchorPane>
                                                             </content>

@@ -79,6 +79,14 @@ public class EPDDatabase {
             g.setAP(r.getDouble("AP"));
             g.setEP(r.getDouble("EP"));
             g.setPOCP(r.getDouble("POCP"));
+            g.setUnit(r.getString("UNITS"));
+            g.setCHW(r.getDouble("CHW"));
+            g.setCNHW(r.getDouble("CNHW"));
+            g.setTWC(r.getDouble("TW"));
+            g.setRPEU(r.getDouble("RE"));
+            g.setDNER(r.getDouble("NRE"));
+            g.setRMRU(r.getDouble("RM"));
+            g.setDNMR(r.getDouble("NRM"));
 
             result.add(g);
         }

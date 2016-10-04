@@ -1,33 +1,92 @@
 package cm.controllers;
 
+import cm.EnpCal;
+import cm.EnvAnalysis_cal;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import cm.models.weights;
 
 /**
  * Controller for the weights tab.
  */
 public class WeightsTabController {
 
-    @FXML private TextField W_EnP;
-    @FXML private TextField W_EcP;
-    @FXML private TextField W_GWP;
-    @FXML private TextField W_ODP;
-    @FXML private TextField W_AP;
-    @FXML private TextField W_EP;
-    @FXML private TextField W_POCP;
-    @FXML private TextField W_CHW;
-    @FXML private TextField W_CNHW;
-    @FXML private TextField W_TWC;
-    @FXML private TextField W_RPEU;
-    @FXML private TextField W_DNER;
-    @FXML private TextField W_RMRU;
-    @FXML private TextField W_DNMR;
-
     @FXML
-    public void nextButton(){
+    public TextField T_EnP;
+    @FXML
+    public TextField T_EcP;
+    @FXML
+    public TextField T_GWP;
+    @FXML public TextField T_ODP;
+    @FXML public TextField T_AP;
+    @FXML public TextField T_EP;
+    @FXML public TextField T_POCP;
+    @FXML public TextField T_CHW;
+    @FXML public TextField T_CNHW;
+    @FXML public TextField T_TWC;
+    @FXML public TextField T_RPEU;
+    @FXML public TextField T_DNER;
+    @FXML public TextField T_RMRU;
+    @FXML public TextField T_DNMR;
+
+    // initialization
+    @FXML
+    private void init(){
+        T_EnP.setText("50.0");
+        T_EcP.setText("50.0");
+        T_GWP.setText("1/14");
+        T_ODP.setText("1/14");
+        T_AP.setText("1/14");
+        T_EP.setText("1/14");
+        T_POCP.setText("1/14");
+        T_CHW.setText("1/14");
+        T_CNHW.setText("1/14");
+        T_TWC.setText("1/14");
+        T_RPEU.setText("1/14");
+        T_DNER.setText("1/14");
+        T_RMRU.setText("1/14");
+        T_DNMR.setText("1/14");
 
     }
 
+    @FXML
+    public void nextButton(){
+        double w_enp = Double.parseDouble(T_EnP.getText());
+        double w_ecp = Double.parseDouble(T_EcP.getText());
+        double w_gwp = Double.parseDouble(T_GWP.getText());
+        double w_odp = Double.parseDouble(T_ODP.getText());
+        double w_ap = Double.parseDouble(T_AP.getText());
+        double w_ep = Double.parseDouble(T_EP.getText());
+        double w_pocp = Double.parseDouble(T_POCP.getText());
+        double w_chw = Double.parseDouble(T_CHW.getText());
+        double w_cnhw = Double.parseDouble(T_CNHW.getText());
+        double w_twc = Double.parseDouble(T_TWC.getText());
+        double w_rpeu = Double.parseDouble(T_RPEU.getText());
+        double w_dner = Double.parseDouble(T_DNER.getText());
+        double w_rmru = Double.parseDouble(T_RMRU.getText());
+        double w_dnmr = Double.parseDouble(T_DNMR.getText());
+        // TO DO
+        // A warning to information everyTextfield should be valued and there is a default value for everyTextfield
+        //weights W = new weights(w_enp,w_ecp,w_gwp,w_odp,w_ap,w_ep,w_pocp,w_chw,w_cnhw,w_twc,w_ap,w_dner,w_rmru,w_dnmr);
+
+        /*
+        Set and store Weights
+         */
+        EnvAnalysis_cal.setEnp(w_enp);
+        EnvAnalysis_cal.setEcp(w_ecp);
+        EnvAnalysis_cal.setGwp(w_gwp);
+        EnvAnalysis_cal.setOdp(w_odp);
+        EnvAnalysis_cal.setAp(w_ap);
+        EnvAnalysis_cal.setEp(w_ep);
+        EnvAnalysis_cal.setPocp(w_pocp);
+        EnvAnalysis_cal.setChw(w_chw);
+        EnvAnalysis_cal.setCnhw(w_cnhw);
+        EnvAnalysis_cal.setTwc(w_twc);
+        EnvAnalysis_cal.setRpeu(w_ap);
+        EnvAnalysis_cal.setDner(w_dner);
+        EnvAnalysis_cal.setRmru(w_rmru);
+        EnvAnalysis_cal.setDner(w_dner);
+    }
 
 }

@@ -18,17 +18,25 @@ public class AlternativeMat {
     private final DoubleProperty GWP;
     private final DoubleProperty ODP;
     private final DoubleProperty AP;
-
-
     private final DoubleProperty EP;
     private final DoubleProperty POCP;
+    private final DoubleProperty CHW;
+    private final DoubleProperty CNHW;
+    private final DoubleProperty TWC;
+    private final DoubleProperty RPEU;
+    private final DoubleProperty DNER;
+    private final DoubleProperty RMRU;
+    private final DoubleProperty DNMR;
+
+
+    private final StringProperty Unit;
 
     /**
      * Default constructor.
      */
 
     public AlternativeMat(){
-        this(null, null, null, null, null, 0.0, 0.0, 0.0, 0.0, 0.0);
+        this(null, null, null, null, null, null,0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,0.0);
     }
     /**
      * Constructor with some initial data.
@@ -37,7 +45,10 @@ public class AlternativeMat {
      * @param CM_name
      * and other factors
      */
-    public AlternativeMat(String CS, String CM_name, String Location, String MixNum, String ZipCode, Double GWP, Double ODP, Double AP, Double EP, Double POCP){
+    public AlternativeMat(String CS, String CM_name, String Location, String MixNum,
+                           String ZipCode, String Unit, Double GWP, Double ODP, Double AP,
+                           Double EP, Double POCP,Double CHW,Double CNHW, Double TWC,
+                           Double RPEU, Double DNER, Double RMRU, Double DNMR ){
         this.CS = new SimpleStringProperty(CS);
         this.CM_name = new SimpleStringProperty(CM_name);
         this.Location = new SimpleStringProperty(Location);
@@ -48,6 +59,14 @@ public class AlternativeMat {
         this.AP = new SimpleDoubleProperty(AP);
         this.EP = new SimpleDoubleProperty(EP);
         this.POCP = new SimpleDoubleProperty(POCP);
+        this.Unit = new SimpleStringProperty(Unit);
+        this.CHW = new SimpleDoubleProperty(CHW);
+        this.CNHW = new SimpleDoubleProperty(CNHW);
+        this.TWC = new SimpleDoubleProperty(TWC);
+        this.RPEU = new SimpleDoubleProperty(RPEU);
+        this.DNER = new SimpleDoubleProperty(DNER);
+        this.RMRU = new SimpleDoubleProperty(RMRU);
+        this.DNMR = new SimpleDoubleProperty(DNMR);
     }
 
     public String getCS() {
@@ -171,4 +190,99 @@ public class AlternativeMat {
         this.POCP.set(POCP);
     }
 
+    public String getUnit() {
+        return Unit.get();
+    }
+
+    public StringProperty unitProperty() {
+        return Unit;
+    }
+
+    public void setUnit(String unit) {
+        this.Unit.set(unit);
+    }
+
+    public double getCHW() {
+        return CHW.get();
+    }
+
+    public DoubleProperty CHWProperty() {
+        return CHW;
+    }
+
+    public void setCHW(double CHW) {
+        this.CHW.set(CHW);
+    }
+
+    public double getCNHW() {
+        return CNHW.get();
+    }
+
+    public DoubleProperty CNHWProperty() {
+        return CNHW;
+    }
+
+    public void setCNHW(double CNHW) {
+        this.CNHW.set(CNHW);
+    }
+
+    public double getTWC() {
+        return TWC.get();
+    }
+
+    public DoubleProperty TWCProperty() {
+        return TWC;
+    }
+
+    public void setTWC(double TWC) {
+        this.TWC.set(TWC);
+    }
+
+    public double getRPEU() {
+        return RPEU.get();
+    }
+
+    public DoubleProperty RPEUProperty() {
+        return RPEU;
+    }
+
+    public void setRPEU(double RPEU) {
+        this.RPEU.set(RPEU);
+    }
+
+    public double getDNER() {
+        return DNER.get();
+    }
+
+    public DoubleProperty DNERProperty() {
+        return DNER;
+    }
+
+    public void setDNER(double DNER) {
+        this.DNER.set(DNER);
+    }
+
+    public double getRMRU() {
+        return RMRU.get();
+    }
+
+    public DoubleProperty RMRUProperty() {
+        return RMRU;
+    }
+
+    public void setRMRU(double RMRU) {
+        this.RMRU.set(RMRU);
+    }
+
+    public double getDNMR() {
+        return DNMR.get();
+    }
+
+    public DoubleProperty DNMRProperty() {
+        return DNMR;
+    }
+
+    public void setDNMR(double DNMR) {
+        this.DNMR.set(DNMR);
+    }
 }

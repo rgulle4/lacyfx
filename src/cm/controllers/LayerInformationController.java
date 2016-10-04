@@ -43,11 +43,6 @@ public class LayerInformationController {
 
     @FXML
     private void initialize(){
-        CB_EM.setValue("psi");
-        CB_EM.setItems(EMUnit);
-
-        CB_CS.setValue("psi");
-        CB_CS.setItems(CSUnit);
 
         CB_UW.setValue("meter^3");
         CB_UW.setItems(UWUnit);
@@ -55,16 +50,23 @@ public class LayerInformationController {
         CB_T.setValue("meter");
         CB_T.setItems(TUnit);
 
-        TF_EM.setText("");
-        TF_CS.setText("");
         TF_UW.setText("");
-        TF_T.setText("");
+        TF_T.setText("10.0");
     }
 
     @FXML
     private void LoadMatBtn() throws IOException {
-        EnvAnalysis_cal EC = new EnvAnalysis_cal(Double.parseDouble(TF_T.getText()));
-        System.out.println(EC.getTotalV());
+
+        if (CB_T.getValue() == "meter"){
+            EnvAnalysis_cal.setThickness(Double.parseDouble(TF_T.getText()));
+            EnvAnalysis_cal.setTotV(EnvAnalysis_cal.getThickness());
+            System.out.println(EnvAnalysis_cal.getTotV());
+        }
+        if (CB_T.getValue() == "inch"){
+            EnvAnalysis_cal.setThickness(Double.parseDouble(TF_T.getText())*0.0254);     // 1 inch = 0.0254 inch
+            EnvAnalysis_cal.setTotV(EnvAnalysis_cal.getThickness());
+            System.out.println(EnvAnalysis_cal.getTotV());
+        }
         main.showLoadMaterial();
     }
 }

@@ -1,8 +1,10 @@
 package cm.controllers;
 
 import cm.App;
+import cm.EnvAnalysis_cal;
 import cm.models.AlternativeMat;
 import cm.models.EPDDatabase;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -105,12 +107,26 @@ public class LoadMaterialController {
             cm.setAP(result.get(i).getAP());
             cm.setEP(result.get(i).getEP());
             cm.setPOCP(result.get(i).getPOCP());
+            cm.setUnit(result.get(i).getUnit());
             data.add(cm);
         }
         MaterialTable.setItems(data);
     }
 
-    ObservableList<AlternativeMat> AlterMaterials = FXCollections.observableArrayList();;
+    ObservableList<AlternativeMat> AlterMaterials = FXCollections.observableArrayList();
+
+    //update conversion factor
+    public void updatecvf(){
+        for (int i = 0; i < AlterMaterials.size(); i++){
+            if (AlterMaterials.get(i).getUnit().equals("m3")){
+                EnvAnalysis_cal.setConFc(EnvAnalysis_cal.getTotV());
+            }
+            if (AlterMaterials.get(i).getUnit().equals("y3")){
+                EnvAnalysis_cal.setConFc(EnvAnalysis_cal.getTotV()*1.30795);        //1 m^3 = 1 yd^3
+            }
+        }
+
+    }
     @FXML
     public void selectButton(){
 
@@ -139,12 +155,22 @@ public class LoadMaterialController {
     }
 
     public void nextButton() {
+        updatecvf();        //update conversion factor
         //test the consistency of data
         for (int i = 0; i < AlterMaterials.size(); i++) {
-            System.out.println(AlterMaterials.get(i).getCS() +
-                    ":" + AlterMaterials.get(i).getMixNum() + " " + AlterMaterials.get(i).getCM_name());
+            EnvAnalysis_cal.setGwp(AlterMaterials.get(i).getGWP());
+            EnvAnalysis_cal.setOdp(AlterMaterials.get(i).getODP());
+            EnvAnalysis_cal.setAp(AlterMaterials.get(i).getAP());
+            EnvAnalysis_cal.setEp(AlterMaterials.get(i).getEP());
+            EnvAnalysis_cal.setPocp(AlterMaterials.get(i).getPOCP());
+            EnvAnalysis_cal.setChw(AlterMaterials.get(i).getCHW());
+            EnvAnalysis_cal.setGwp(AlterMaterials.get(i).getCNHW());
+            EnvAnalysis_cal.setGwp(AlterMaterials.get(i).getTWC());
+            EnvAnalysis_cal.setGwp(AlterMaterials.get(i).getRPEU());
+            EnvAnalysis_cal.setGwp(AlterMaterials.get(i).getDNER());
+            EnvAnalysis_cal.setGwp(AlterMaterials.get(i).getRMRU());
+            EnvAnalysis_cal.setGwp(AlterMaterials.get(i).getDNMR());
         }
-
     }
 
 
