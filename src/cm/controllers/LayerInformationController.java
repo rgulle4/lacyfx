@@ -16,6 +16,7 @@ import cm.EnvAnalysis_cal;
  */
 public class LayerInformationController {
 
+    ObservableList<String> MaterialType = FXCollections.observableArrayList("Concrete","Flexible");       //Material type of a layer
     ObservableList<String> UWUnit = FXCollections.observableArrayList("feet^3","meter^3");
     ObservableList<String> TUnit = FXCollections.observableArrayList("inch","meter");
 
