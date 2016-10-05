@@ -50,7 +50,7 @@
                                                                         <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
                                                                         <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
                                                                         <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" onAction="#LoadMatBtn" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                      <TextField fx:id="TF_EM1" layoutX="188.0" layoutY="95.0" />
+                                                      <TextField layoutX="188.0" layoutY="95.0" />
                                                       <Button layoutX="357.0" layoutY="93.0" mnemonicParsing="false" text="Save" />
                                                                     </children>
                                                                 </AnchorPane>

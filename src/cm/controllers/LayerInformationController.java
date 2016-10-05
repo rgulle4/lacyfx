@@ -16,24 +16,15 @@ import cm.EnvAnalysis_cal;
  */
 public class LayerInformationController {
 
-    ObservableList<String> EMUnit = FXCollections.observableArrayList("psi");
-    ObservableList<String> CSUnit = FXCollections.observableArrayList("psi");
     ObservableList<String> UWUnit = FXCollections.observableArrayList("feet^3","meter^3");
     ObservableList<String> TUnit = FXCollections.observableArrayList("inch","meter");
 
-    @FXML
-    public ChoiceBox CB_EM;
-    @FXML
-    public ChoiceBox CB_CS;
+
     @FXML
     public ChoiceBox CB_UW;
     @FXML
     public ChoiceBox CB_T;
 
-    @FXML
-    public TextField TF_EM;
-    @FXML
-    public TextField TF_CS;
     @FXML
     public TextField TF_UW;
     @FXML

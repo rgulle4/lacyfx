@@ -108,6 +108,13 @@ public class LoadMaterialController {
             cm.setEP(result.get(i).getEP());
             cm.setPOCP(result.get(i).getPOCP());
             cm.setUnit(result.get(i).getUnit());
+            cm.setDNER(result.get(i).getDNER());
+            cm.setRPEU(result.get(i).getRPEU());
+            cm.setDNMR(result.get(i).getDNMR());
+            cm.setRMRU(result.get(i).getRMRU());
+            cm.setTWC(result.get(i).getTWC());
+            cm.setCHW(result.get(i).getCHW());
+            cm.setCNHW(result.get(i).getCNHW());
             data.add(cm);
         }
         MaterialTable.setItems(data);
@@ -164,12 +171,16 @@ public class LoadMaterialController {
             EnvAnalysis_cal.setEp(AlterMaterials.get(i).getEP());
             EnvAnalysis_cal.setPocp(AlterMaterials.get(i).getPOCP());
             EnvAnalysis_cal.setChw(AlterMaterials.get(i).getCHW());
-            EnvAnalysis_cal.setGwp(AlterMaterials.get(i).getCNHW());
-            EnvAnalysis_cal.setGwp(AlterMaterials.get(i).getTWC());
-            EnvAnalysis_cal.setGwp(AlterMaterials.get(i).getRPEU());
-            EnvAnalysis_cal.setGwp(AlterMaterials.get(i).getDNER());
-            EnvAnalysis_cal.setGwp(AlterMaterials.get(i).getRMRU());
-            EnvAnalysis_cal.setGwp(AlterMaterials.get(i).getDNMR());
+            EnvAnalysis_cal.setCnhw(AlterMaterials.get(i).getCNHW());
+            EnvAnalysis_cal.setTwc(AlterMaterials.get(i).getTWC());
+            EnvAnalysis_cal.setRpeu(AlterMaterials.get(i).getRPEU());
+            EnvAnalysis_cal.setDner(AlterMaterials.get(i).getDNER());
+            EnvAnalysis_cal.setRmru(AlterMaterials.get(i).getRMRU());
+            EnvAnalysis_cal.setDnmr(AlterMaterials.get(i).getDNMR());
+
+            System.out.println(EnvAnalysis_cal.getGwp()+" " +EnvAnalysis_cal.getOdp()+" "+EnvAnalysis_cal.getAp()+" " +EnvAnalysis_cal.getEp()+ " "+
+                                EnvAnalysis_cal.getPocp()+" " +EnvAnalysis_cal.getTwc()+" "+EnvAnalysis_cal.getChw()+" " +EnvAnalysis_cal.getCnhw()+ " "+
+                                EnvAnalysis_cal.getDner()+ " "+EnvAnalysis_cal.getRpeu()+" "+EnvAnalysis_cal.getRmru()+ " "+ EnvAnalysis_cal.getDnmr());
         }
     }
 

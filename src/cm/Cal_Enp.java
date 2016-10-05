@@ -7,6 +7,7 @@ import static cm.EnvAnalysis_cal.*;
  */
 public class Cal_Enp {
     double W_ENP = EnvAnalysis_cal.getwEnp();
+    double ConvF = EnvAnalysis_cal.getConFc();
 
     double W_GWP = EnvAnalysis_cal.getwGwp();
     double W_ODP = EnvAnalysis_cal.getwOdp();
@@ -19,22 +20,22 @@ public class Cal_Enp {
     double GWP_EDP = EnvAnalysis_cal.getGwp();
     double ODP_EDP = EnvAnalysis_cal.getOdp();
     double AP_EDP = EnvAnalysis_cal.getAp();
-    double EP_EDP = EnvAnalysis_cal.getSub_EP();
+    double EP_EDP = EnvAnalysis_cal.getEp();
     double POCP_EDP = EnvAnalysis_cal.getPocp();
     double TWC_EDP = EnvAnalysis_cal.getTwc();
     double DNER_EDP = EnvAnalysis_cal.getDner();
 
-    double GWP_TSP = EnvAnalysis_cal.getGwp();
-    double ODP_TSP = EnvAnalysis_cal.getOdp();
-    double AP_TSP = EnvAnalysis_cal.getAp();
-    double EP_TSP = EnvAnalysis_cal.getSub_EP();
-    double POCP_TSP = EnvAnalysis_cal.getPocp();
-    double TWC_TSP = EnvAnalysis_cal.getTwc();
-    double DNER_TSP = EnvAnalysis_cal.getDner();
+    double GWP_TSP = EnvAnalysis_cal.getSub_GWP()*EnvAnalysis_cal.getFCF()*EnvAnalysis_cal.getDistance()*2;
+    double ODP_TSP = EnvAnalysis_cal.getSub_ODP()*EnvAnalysis_cal.getFCF()*EnvAnalysis_cal.getDistance()*2;
+    double AP_TSP = EnvAnalysis_cal.getSub_AP()*EnvAnalysis_cal.getFCF()*EnvAnalysis_cal.getDistance()*2;
+    double EP_TSP = EnvAnalysis_cal.getSub_EP()*EnvAnalysis_cal.getFCF()*EnvAnalysis_cal.getDistance()*2;
+    double POCP_TSP = EnvAnalysis_cal.getSub_POCP()*EnvAnalysis_cal.getFCF()*EnvAnalysis_cal.getDistance()*2;
+    double TWC_TSP = EnvAnalysis_cal.getSub_TW()*EnvAnalysis_cal.getFCF()*EnvAnalysis_cal.getDistance()*2;
+    double DNER_TSP = EnvAnalysis_cal.getSub_DNER()*EnvAnalysis_cal.getFCF()*EnvAnalysis_cal.getDistance()*2;
 
 
 
-    double Es= W_ENP*((W_GWP*(GWP_EDP+GWP_TSP)/Norm_GWP
+    double Es= ConvF*W_ENP*((W_GWP*(GWP_EDP+GWP_TSP)/Norm_GWP
                         +W_ODP*(ODP_EDP+ODP_TSP)/Norm_ODP
                         +W_AP*(AP_EDP+AP_TSP)/Norm_AP
                         +W_EP*(EP_EDP+EP_TSP)/Norm_EP

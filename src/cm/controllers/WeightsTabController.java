@@ -12,12 +12,9 @@ import cm.models.weights;
  */
 public class WeightsTabController {
 
-    @FXML
-    public TextField T_EnP;
-    @FXML
-    public TextField T_EcP;
-    @FXML
-    public TextField T_GWP;
+    @FXML public TextField T_EnP;
+    @FXML public TextField T_EcP;
+    @FXML public TextField T_GWP;
     @FXML public TextField T_ODP;
     @FXML public TextField T_AP;
     @FXML public TextField T_EP;
@@ -32,21 +29,21 @@ public class WeightsTabController {
 
     // initialization
     @FXML
-    private void init(){
+    private void initialize(){
         T_EnP.setText("50.0");
         T_EcP.setText("50.0");
-        T_GWP.setText("1/14");
-        T_ODP.setText("1/14");
-        T_AP.setText("1/14");
-        T_EP.setText("1/14");
-        T_POCP.setText("1/14");
-        T_CHW.setText("1/14");
-        T_CNHW.setText("1/14");
-        T_TWC.setText("1/14");
-        T_RPEU.setText("1/14");
-        T_DNER.setText("1/14");
-        T_RMRU.setText("1/14");
-        T_DNMR.setText("1/14");
+        T_GWP.setText("15.0");
+        T_ODP.setText("10.0");
+        T_AP.setText("10.0");
+        T_EP.setText("10.0");
+        T_POCP.setText("10.0");
+        T_CHW.setText("10.0");
+        T_CNHW.setText("10.0");
+        T_TWC.setText("10.0");
+        T_RPEU.setText("10.0");
+        T_DNER.setText("10.0");
+        T_RMRU.setText("10.0");
+        T_DNMR.setText("10.0");
 
     }
 
@@ -73,20 +70,20 @@ public class WeightsTabController {
         /*
         Set and store Weights
          */
-        EnvAnalysis_cal.setEnp(w_enp);
-        EnvAnalysis_cal.setEcp(w_ecp);
-        EnvAnalysis_cal.setGwp(w_gwp);
-        EnvAnalysis_cal.setOdp(w_odp);
-        EnvAnalysis_cal.setAp(w_ap);
-        EnvAnalysis_cal.setEp(w_ep);
-        EnvAnalysis_cal.setPocp(w_pocp);
-        EnvAnalysis_cal.setChw(w_chw);
-        EnvAnalysis_cal.setCnhw(w_cnhw);
-        EnvAnalysis_cal.setTwc(w_twc);
-        EnvAnalysis_cal.setRpeu(w_ap);
-        EnvAnalysis_cal.setDner(w_dner);
-        EnvAnalysis_cal.setRmru(w_rmru);
-        EnvAnalysis_cal.setDner(w_dner);
+        EnvAnalysis_cal.setwEnp(w_enp);
+        EnvAnalysis_cal.setwEcp(w_ecp);
+        EnvAnalysis_cal.setwGwp(w_gwp);
+        EnvAnalysis_cal.setwOdp(w_odp);
+        EnvAnalysis_cal.setwAp(w_ap);
+        EnvAnalysis_cal.setwEp(w_ep);
+        EnvAnalysis_cal.setwPocp(w_pocp);
+        EnvAnalysis_cal.setwChw(w_chw);
+        EnvAnalysis_cal.setwCnhw(w_cnhw);
+        EnvAnalysis_cal.setwTwc(w_twc);
+        EnvAnalysis_cal.setwRpeu(w_rpeu);
+        EnvAnalysis_cal.setwDner(w_dner);
+        EnvAnalysis_cal.setwRmru(w_rmru);
+        EnvAnalysis_cal.setwDnmr(w_dnmr);
     }
 
 }

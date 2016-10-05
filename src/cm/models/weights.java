@@ -6,20 +6,20 @@ import javafx.beans.property.DoubleProperty;
  * Created by Administrator on 2016/10/2.
  */
 public class weights {
-    double W_EnP;
-    double W_EcP;
-    double W_GWP;
-    double W_ODP;
-    double W_AP;
-    double W_EP;
-    double W_POCP;
-    double W_CHW;
-    double W_CNHW;
-    double W_TWC;
-    double W_RPEO;
-    double W_DNER;
-    double W_RMRU;
-    double W_DNMR;
+    private double W_EnP;
+    private double W_EcP;
+    private double W_GWP;
+    private double W_ODP;
+    private double W_AP;
+    private double W_EP;
+    private double W_POCP;
+    private double W_CHW;
+    private double W_CNHW;
+    private double W_TWC;
+    private double W_RPEO;
+    private double W_DNER;
+    private double W_RMRU;
+    private double W_DNMR;
 
     // initialize
     public weights(double W_enp, double W_ecp, double W_gwp, double W_odp,
