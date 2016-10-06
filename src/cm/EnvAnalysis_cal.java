@@ -28,7 +28,7 @@ public class EnvAnalysis_cal {
     static double Rmru;
     static double Dnmr;
 
-    //weights
+    //Weights
     static double wEnp;
     static double wEcp;
     static double wGwp;

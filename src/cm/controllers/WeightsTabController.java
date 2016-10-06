@@ -1,14 +1,11 @@
 package cm.controllers;
 
-import cm.EnpCal;
 import cm.EnvAnalysis_cal;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import cm.models.weights;
 
 /**
- * Controller for the weights tab.
+ * Controller for the Weights tab.
  */
 public class WeightsTabController {
 
@@ -65,7 +62,7 @@ public class WeightsTabController {
         double w_dnmr = Double.parseDouble(T_DNMR.getText());
         // TO DO
         // A warning to information everyTextfield should be valued and there is a default value for everyTextfield
-        //weights W = new weights(w_enp,w_ecp,w_gwp,w_odp,w_ap,w_ep,w_pocp,w_chw,w_cnhw,w_twc,w_ap,w_dner,w_rmru,w_dnmr);
+        //Weights W = new Weights(w_enp,w_ecp,w_gwp,w_odp,w_ap,w_ep,w_pocp,w_chw,w_cnhw,w_twc,w_ap,w_dner,w_rmru,w_dnmr);
 
         /*
         Set and store Weights
