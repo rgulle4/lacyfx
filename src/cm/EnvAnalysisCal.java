@@ -4,7 +4,7 @@ package cm;
 /**
  * Created by Administrator on 2016/10/1.
  */
-public class EnvAnalysis_cal {
+public class EnvAnalysisCal {
     static double length = 1609.34;        //1 mile = 1609.34 meter
     static double width = 12*0.3048;       //1 ft = 0.3048 meter
     static double thickness;
@@ -214,7 +214,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setWidth(double width) {
-        EnvAnalysis_cal.width = width;
+        EnvAnalysisCal.width = width;
     }
 
     public static double getwEnp() {
@@ -222,7 +222,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setwEnp(double wEnp) {
-        EnvAnalysis_cal.wEnp = wEnp;
+        EnvAnalysisCal.wEnp = wEnp;
     }
 
     public static double getwEcp() {
@@ -230,7 +230,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setwEcp(double wEcp) {
-        EnvAnalysis_cal.wEcp = wEcp;
+        EnvAnalysisCal.wEcp = wEcp;
     }
 
     public static double getwGwp() {
@@ -238,7 +238,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setwGwp(double wGwp) {
-        EnvAnalysis_cal.wGwp = wGwp;
+        EnvAnalysisCal.wGwp = wGwp;
     }
 
     public static double getwOdp() {
@@ -246,7 +246,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setwOdp(double wOdp) {
-        EnvAnalysis_cal.wOdp = wOdp;
+        EnvAnalysisCal.wOdp = wOdp;
     }
 
     public static double getwAp() {
@@ -254,7 +254,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setwAp(double wAp) {
-        EnvAnalysis_cal.wAp = wAp;
+        EnvAnalysisCal.wAp = wAp;
     }
 
     public static double getwEp() {
@@ -262,7 +262,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setwEp(double wEp) {
-        EnvAnalysis_cal.wEp = wEp;
+        EnvAnalysisCal.wEp = wEp;
     }
 
     public static double getwPocp() {
@@ -270,7 +270,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setwPocp(double wPocp) {
-        EnvAnalysis_cal.wPocp = wPocp;
+        EnvAnalysisCal.wPocp = wPocp;
     }
 
     public static double getwChw() {
@@ -278,7 +278,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setwChw(double wChw) {
-        EnvAnalysis_cal.wChw = wChw;
+        EnvAnalysisCal.wChw = wChw;
     }
 
     public static double getwCnhw() {
@@ -286,7 +286,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setwCnhw(double wCnhw) {
-        EnvAnalysis_cal.wCnhw = wCnhw;
+        EnvAnalysisCal.wCnhw = wCnhw;
     }
 
     public static double getwTwc() {
@@ -294,7 +294,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setwTwc(double wTwc) {
-        EnvAnalysis_cal.wTwc = wTwc;
+        EnvAnalysisCal.wTwc = wTwc;
     }
 
     public static double getwRpeu() {
@@ -302,7 +302,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setwRpeu(double wRpeu) {
-        EnvAnalysis_cal.wRpeu = wRpeu;
+        EnvAnalysisCal.wRpeu = wRpeu;
     }
 
     public static double getwDner() {
@@ -310,7 +310,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setwDner(double wDner) {
-        EnvAnalysis_cal.wDner = wDner;
+        EnvAnalysisCal.wDner = wDner;
     }
 
     public static double getwRmru() {
@@ -318,7 +318,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setwRmru(double wRmru) {
-        EnvAnalysis_cal.wRmru = wRmru;
+        EnvAnalysisCal.wRmru = wRmru;
     }
 
     public static double getwDnmr() {
@@ -326,7 +326,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setwDnmr(double wDnmr) {
-        EnvAnalysis_cal.wDnmr = wDnmr;
+        EnvAnalysisCal.wDnmr = wDnmr;
     }
 
     public static double getDistance() {
@@ -334,7 +334,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setDistance(double distance) {
-        EnvAnalysis_cal.distance = distance;
+        EnvAnalysisCal.distance = distance;
     }
 
     public static double getFCF() {
@@ -342,7 +342,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setFCF(double FCF) {
-        EnvAnalysis_cal.FCF = FCF;
+        EnvAnalysisCal.FCF = FCF;
     }
 
     public static double getSub_GWP() {
@@ -350,7 +350,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setSub_GWP(double sub_GWP) {
-        EnvAnalysis_cal.sub_GWP = sub_GWP;
+        EnvAnalysisCal.sub_GWP = sub_GWP;
     }
 
     public static double getSub_ODP() {
@@ -358,7 +358,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setSub_ODP(double sub_ODP) {
-        EnvAnalysis_cal.sub_ODP = sub_ODP;
+        EnvAnalysisCal.sub_ODP = sub_ODP;
     }
 
     public static double getSub_AP() {
@@ -366,7 +366,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setSub_AP(double sub_AP) {
-        EnvAnalysis_cal.sub_AP = sub_AP;
+        EnvAnalysisCal.sub_AP = sub_AP;
     }
 
     public static double getSub_EP() {
@@ -374,7 +374,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setSub_EP(double sub_EP) {
-        EnvAnalysis_cal.sub_EP = sub_EP;
+        EnvAnalysisCal.sub_EP = sub_EP;
     }
 
     public static double getSub_POCP() {
@@ -382,7 +382,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setSub_POCP(double sub_POCP) {
-        EnvAnalysis_cal.sub_POCP = sub_POCP;
+        EnvAnalysisCal.sub_POCP = sub_POCP;
     }
 
     public static double getSub_TW() {
@@ -390,7 +390,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setSub_TW(double sub_TW) {
-        EnvAnalysis_cal.sub_TW = sub_TW;
+        EnvAnalysisCal.sub_TW = sub_TW;
     }
 
     public static double getSub_DNER() {
@@ -398,7 +398,7 @@ public class EnvAnalysis_cal {
     }
 
     public static void setSub_DNER(double sub_DNER) {
-        EnvAnalysis_cal.sub_DNER = sub_DNER;
+        EnvAnalysisCal.sub_DNER = sub_DNER;
     }
 
     public static double getEnp_Score() {
