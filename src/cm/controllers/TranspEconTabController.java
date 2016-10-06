@@ -16,13 +16,11 @@ import javafx.scene.control.TextField;
 public class TranspEconTabController {
     ObservableList<String> VehicleList = FXCollections.observableArrayList("Light-Duty Trucks","Medium-Duty Trucks","Heavy-Duty Trucks");
     ObservableList<String> FuelList = FXCollections.observableArrayList("Gasoline","Diesel");
-    ObservableList<String> DistanceList = FXCollections.observableArrayList("<25 miles","<50 miles","<100 miles",">100 miles");
+
     @FXML
     private ChoiceBox vehicletype;
     @FXML
     private ChoiceBox fueltype;
-    @FXML
-    private ChoiceBox distanceChoice;
     @FXML
     private TextField distance;
     @FXML
@@ -35,9 +33,6 @@ public class TranspEconTabController {
 
         fueltype.setValue("Gasoline");
         fueltype.setItems(FuelList);
-
-        distanceChoice.setValue("<25 miles");
-        distanceChoice.setItems(DistanceList);
 
     }
 

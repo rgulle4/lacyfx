@@ -8,10 +8,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.SQLException;
@@ -22,6 +19,9 @@ import java.util.List;
  */
 public class LoadMaterialController {
 
+    ObservableList<String> DistanceList = FXCollections.observableArrayList("<25 miles","<50 miles","<100 miles",">100 miles");
+    @FXML
+    private ChoiceBox distanceChoice;
     // To DO: select alternative materials from database for calculating and comparing
     @FXML
     private TextField TF_CS;
@@ -62,6 +62,11 @@ public class LoadMaterialController {
      * after the fxml file has been loaded.
      */
     public void initialize() throws SQLException {
+        //set item for distance choiceBox
+
+        distanceChoice.setValue("<25 miles");
+        distanceChoice.setItems(DistanceList);
+
         //Alternative materials
         CS_Column.setCellValueFactory(new PropertyValueFactory<AlternativeMat, String>("CS"));
         CM_Name_Column.setCellValueFactory(new PropertyValueFactory<AlternativeMat, String>("CM_name"));
