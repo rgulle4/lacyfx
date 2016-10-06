@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 
 import javax.swing.*;
 import java.io.File;
+import cm.controllers.Controller;
 
 
 /**
@@ -27,6 +28,10 @@ public class ImportTabController {
     public void initialize(){
 
         Dtype.setItems(DesignType);
-
+        TotLayernum.setText("3");
+    }
+    public void nextButton(){
+        Controller controller = new Controller();
+        controller.importTab_next();
     }
 }
