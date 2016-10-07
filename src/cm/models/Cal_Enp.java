@@ -1,5 +1,7 @@
 package cm.models;
 
+import cm.controllers.EnvironmentalReportController;
+
 /**
  * Created by Administrator on 2016/10/3.
  */
@@ -31,18 +33,47 @@ public class Cal_Enp {
     double TWC_TSP = EnvAnalysis_cal.getSub_TW()*EnvAnalysis_cal.getFCF()*EnvAnalysis_cal.getDistance()*2;
     double DNER_TSP = EnvAnalysis_cal.getSub_DNER()*EnvAnalysis_cal.getFCF()*EnvAnalysis_cal.getDistance()*2;
 
+    //distribute each factor's contribution from EPD
+    double GWP_EDP_Ctb=ConvF*W_ENP*W_GWP*GWP_EDP/ EnvAnalysis_cal.Norm_GWP;
+    double ODP_EDP_Ctb=ConvF*W_ENP*W_ODP*ODP_EDP/ EnvAnalysis_cal.Norm_ODP;
+    double AP_EDP_Ctb=ConvF*W_ENP*W_AP*AP_EDP/ EnvAnalysis_cal.Norm_AP;
+    double EP_EDP_Ctb=ConvF*W_ENP*W_EP*EP_EDP/ EnvAnalysis_cal.Norm_EP;
+    double POCP_EDP_Ctb=ConvF*W_ENP*W_POCP*POCP_EDP/ EnvAnalysis_cal.Norm_POCP;
+    double TotalWater_EDP_Ctb=ConvF*W_ENP*W_TWC*TWC_EDP/ EnvAnalysis_cal.Norm_TW;
+    double NonRenewableEnergy_EDP_Ctb=ConvF*W_ENP*W_DNER*DNER_EDP/ EnvAnalysis_cal.Norm_DNER;
 
+    //distribute each factor's contribution from Transportation
+    double GWP_Transportation_Ctb=W_ENP*W_GWP*GWP_TSP/ EnvAnalysis_cal.Norm_GWP;
+    double ODP_Transportation_Ctb=W_ENP*W_ODP*ODP_TSP/ EnvAnalysis_cal.Norm_ODP;
+    double AP_Transportation_Ctb=W_ENP*W_AP*AP_TSP/ EnvAnalysis_cal.Norm_AP;
+    double EP_Transportation_Ctb=W_ENP*W_EP*EP_TSP/ EnvAnalysis_cal.Norm_EP;
+    double POCP_Transportation_Ctb=W_ENP*W_POCP*POCP_TSP/ EnvAnalysis_cal.Norm_POCP;
+    double TotalWater_Transportation_Ctb=W_ENP*W_TWC*TWC_TSP/ EnvAnalysis_cal.Norm_TW;
+    double NonRenewableEnergy_Transportation_Ctb=W_ENP*W_DNER*DNER_TSP/ EnvAnalysis_cal.Norm_DNER;
 
-    double Es= ConvF*W_ENP*((W_GWP*(GWP_EDP+GWP_TSP)/ EnvAnalysis_cal.Norm_GWP
-                        +W_ODP*(ODP_EDP+ODP_TSP)/ EnvAnalysis_cal.Norm_ODP
-                        +W_AP*(AP_EDP+AP_TSP)/ EnvAnalysis_cal.Norm_AP
-                        +W_EP*(EP_EDP+EP_TSP)/ EnvAnalysis_cal.Norm_EP
-                        +W_POCP*(POCP_EDP+POCP_TSP)/ EnvAnalysis_cal.Norm_POCP
-                        +W_TWC*(TWC_EDP+TWC_TSP)/ EnvAnalysis_cal.Norm_TW
-                        +W_DNER*(DNER_EDP+DNER_TSP)/ EnvAnalysis_cal.Norm_DNER)
-                        );
+    double Es= GWP_EDP_Ctb+ODP_EDP_Ctb+AP_EDP_Ctb+EP_EDP_Ctb+POCP_EDP_Ctb+TotalWater_EDP_Ctb+NonRenewableEnergy_EDP_Ctb
+            +GWP_Transportation_Ctb+ODP_Transportation_Ctb+AP_Transportation_Ctb+EP_Transportation_Ctb+POCP_Transportation_Ctb
+            +TotalWater_Transportation_Ctb+NonRenewableEnergy_Transportation_Ctb;
 
     public void cal(){
+        // save contributed values
+        EnvAnalysis_cal.setGWP_EDP_Ctb(GWP_EDP_Ctb);
+        EnvAnalysis_cal.setODP_EDP_Ctb(ODP_EDP_Ctb);
+        EnvAnalysis_cal.setAP_EDP_Ctb(AP_EDP_Ctb);
+        EnvAnalysis_cal.setEP_EDP_Ctb(EP_EDP_Ctb);
+        EnvAnalysis_cal.setPOCP_EDP_Ctb(POCP_EDP_Ctb);
+        EnvAnalysis_cal.setTotalWater_EDP_Ctb(TotalWater_EDP_Ctb);
+        EnvAnalysis_cal.setNonRenewableEnergy_EDP_Ctb(NonRenewableEnergy_EDP_Ctb);
+
+        EnvAnalysis_cal.setGWP_Transportation_Ctb(GWP_Transportation_Ctb);
+        EnvAnalysis_cal.setODP_Transportation_Ctb(ODP_Transportation_Ctb);
+        EnvAnalysis_cal.setAP_Transportation_Ctb(AP_Transportation_Ctb);
+        EnvAnalysis_cal.setEP_Transportation_Ctb(EP_Transportation_Ctb);
+        EnvAnalysis_cal.setPOCP_Transportation_Ctb(POCP_Transportation_Ctb);
+        EnvAnalysis_cal.setTotalWater_Transportation_Ctb(TotalWater_Transportation_Ctb);
+        EnvAnalysis_cal.setNonRenewableEnergy_Transportation_Ctb(NonRenewableEnergy_Transportation_Ctb);
+
+        //save calculated Environmental Performance Score
         EnvAnalysis_cal.setEnp_Score(Es);
     }
 }

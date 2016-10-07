@@ -65,6 +65,23 @@ public class EnvAnalysis_cal {
     static double Norm_TW =17000;       //MJ surplus
     static double Norm_DNER =1934.34543;//Meter^3
 
+    //Environmental Contribution from EPD
+    static double GWP_EDP_Ctb;
+    static double ODP_EDP_Ctb;
+    static double AP_EDP_Ctb;
+    static double EP_EDP_Ctb;
+    static double POCP_EDP_Ctb;
+    static double TotalWater_EDP_Ctb;
+    static double NonRenewableEnergy_EDP_Ctb;
+    //Environmental Contribution from transportation
+    static double GWP_Transportation_Ctb;
+    static double ODP_Transportation_Ctb;
+    static double AP_Transportation_Ctb;
+    static double EP_Transportation_Ctb;
+    static double POCP_Transportation_Ctb;
+    static double TotalWater_Transportation_Ctb;
+    static double NonRenewableEnergy_Transportation_Ctb;
+
     //EnP Score
     static double Enp_Score;
 
@@ -407,5 +424,117 @@ public class EnvAnalysis_cal {
 
     public static void setEnp_Score(double enp_Score) {
         Enp_Score = enp_Score;
+    }
+
+    public static double getGWP_EDP_Ctb() {
+        return GWP_EDP_Ctb;
+    }
+
+    public static void setGWP_EDP_Ctb(double GWP_EDP_Ctb) {
+        EnvAnalysis_cal.GWP_EDP_Ctb = GWP_EDP_Ctb;
+    }
+
+    public static double getODP_EDP_Ctb() {
+        return ODP_EDP_Ctb;
+    }
+
+    public static void setODP_EDP_Ctb(double ODP_EDP_Ctb) {
+        EnvAnalysis_cal.ODP_EDP_Ctb = ODP_EDP_Ctb;
+    }
+
+    public static double getAP_EDP_Ctb() {
+        return AP_EDP_Ctb;
+    }
+
+    public static void setAP_EDP_Ctb(double AP_EDP_Ctb) {
+        EnvAnalysis_cal.AP_EDP_Ctb = AP_EDP_Ctb;
+    }
+
+    public static double getEP_EDP_Ctb() {
+        return EP_EDP_Ctb;
+    }
+
+    public static void setEP_EDP_Ctb(double EP_EDP_Ctb) {
+        EnvAnalysis_cal.EP_EDP_Ctb = EP_EDP_Ctb;
+    }
+
+    public static double getPOCP_EDP_Ctb() {
+        return POCP_EDP_Ctb;
+    }
+
+    public static void setPOCP_EDP_Ctb(double POCP_EDP_Ctb) {
+        EnvAnalysis_cal.POCP_EDP_Ctb = POCP_EDP_Ctb;
+    }
+
+    public static double getTotalWater_EDP_Ctb() {
+        return TotalWater_EDP_Ctb;
+    }
+
+    public static void setTotalWater_EDP_Ctb(double totalWater_EDP_Ctb) {
+        TotalWater_EDP_Ctb = totalWater_EDP_Ctb;
+    }
+
+    public static double getNonRenewableEnergy_EDP_Ctb() {
+        return NonRenewableEnergy_EDP_Ctb;
+    }
+
+    public static void setNonRenewableEnergy_EDP_Ctb(double nonRenewableEnergy_EDP_Ctb) {
+        NonRenewableEnergy_EDP_Ctb = nonRenewableEnergy_EDP_Ctb;
+    }
+
+    public static double getGWP_Transportation_Ctb() {
+        return GWP_Transportation_Ctb;
+    }
+
+    public static void setGWP_Transportation_Ctb(double GWP_Transportation_Ctb) {
+        EnvAnalysis_cal.GWP_Transportation_Ctb = GWP_Transportation_Ctb;
+    }
+
+    public static double getODP_Transportation_Ctb() {
+        return ODP_Transportation_Ctb;
+    }
+
+    public static void setODP_Transportation_Ctb(double ODP_Transportation_Ctb) {
+        EnvAnalysis_cal.ODP_Transportation_Ctb = ODP_Transportation_Ctb;
+    }
+
+    public static double getAP_Transportation_Ctb() {
+        return AP_Transportation_Ctb;
+    }
+
+    public static void setAP_Transportation_Ctb(double AP_Transportation_Ctb) {
+        EnvAnalysis_cal.AP_Transportation_Ctb = AP_Transportation_Ctb;
+    }
+
+    public static double getEP_Transportation_Ctb() {
+        return EP_Transportation_Ctb;
+    }
+
+    public static void setEP_Transportation_Ctb(double EP_Transportation_Ctb) {
+        EnvAnalysis_cal.EP_Transportation_Ctb = EP_Transportation_Ctb;
+    }
+
+    public static double getPOCP_Transportation_Ctb() {
+        return POCP_Transportation_Ctb;
+    }
+
+    public static void setPOCP_Transportation_Ctb(double POCP_Transportation_Ctb) {
+        EnvAnalysis_cal.POCP_Transportation_Ctb = POCP_Transportation_Ctb;
+    }
+
+    public static double getTotalWater_Transportation_Ctb() {
+        return TotalWater_Transportation_Ctb;
+    }
+
+    public static void setTotalWater_Transportation_Ctb(double totalWater_Transportation_Ctb) {
+        TotalWater_Transportation_Ctb = totalWater_Transportation_Ctb;
+    }
+
+    public static double getNonRenewableEnergy_Transportation_Ctb() {
+        return NonRenewableEnergy_Transportation_Ctb;
+    }
+
+    public static void setNonRenewableEnergy_Transportation_Ctb(double nonRenewableEnergy_Transportation_Ctb) {
+        NonRenewableEnergy_Transportation_Ctb = nonRenewableEnergy_Transportation_Ctb;
     }
 }
