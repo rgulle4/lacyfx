@@ -1,7 +1,7 @@
 package cm.controllers;
 
 import cm.App;
-import cm.EnvAnalysis_cal;
+import cm.models.EnvAnalysis_cal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,7 +9,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import cm.EnvAnalysis_cal;
 
 /**
  * Created by royg59 on 9/21/16.

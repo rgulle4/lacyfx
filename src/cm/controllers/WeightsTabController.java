@@ -1,11 +1,8 @@
 package cm.controllers;
 
-import cm.EnpCal;
-import cm.EnvAnalysis_cal;
-import javafx.event.Event;
+import cm.models.EnvAnalysis_cal;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import cm.models.weights;
 
 /**
  * Controller for the weights tab.
@@ -84,6 +81,8 @@ public class WeightsTabController {
         EnvAnalysis_cal.setwDner(w_dner);
         EnvAnalysis_cal.setwRmru(w_rmru);
         EnvAnalysis_cal.setwDnmr(w_dnmr);
+
+        System.out.println("Set up weights in the static method EnvAnalysis_Calc");
     }
 
 }

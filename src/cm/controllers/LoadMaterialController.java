@@ -1,10 +1,9 @@
 package cm.controllers;
 
 import cm.App;
-import cm.EnvAnalysis_cal;
+import cm.models.EnvAnalysis_cal;
 import cm.models.AlternativeMat;
 import cm.models.EPDDatabase;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

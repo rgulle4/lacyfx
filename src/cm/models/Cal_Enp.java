@@ -1,6 +1,4 @@
-package cm;
-
-import static cm.EnvAnalysis_cal.*;
+package cm.models;
 
 /**
  * Created by Administrator on 2016/10/3.
@@ -35,13 +33,13 @@ public class Cal_Enp {
 
 
 
-    double Es= ConvF*W_ENP*((W_GWP*(GWP_EDP+GWP_TSP)/Norm_GWP
-                        +W_ODP*(ODP_EDP+ODP_TSP)/Norm_ODP
-                        +W_AP*(AP_EDP+AP_TSP)/Norm_AP
-                        +W_EP*(EP_EDP+EP_TSP)/Norm_EP
-                        +W_POCP*(POCP_EDP+POCP_TSP)/Norm_POCP
-                        +W_TWC*(TWC_EDP+TWC_TSP)/Norm_TW
-                        +W_DNER*(DNER_EDP+DNER_TSP)/Norm_DNER)
+    double Es= ConvF*W_ENP*((W_GWP*(GWP_EDP+GWP_TSP)/ EnvAnalysis_cal.Norm_GWP
+                        +W_ODP*(ODP_EDP+ODP_TSP)/ EnvAnalysis_cal.Norm_ODP
+                        +W_AP*(AP_EDP+AP_TSP)/ EnvAnalysis_cal.Norm_AP
+                        +W_EP*(EP_EDP+EP_TSP)/ EnvAnalysis_cal.Norm_EP
+                        +W_POCP*(POCP_EDP+POCP_TSP)/ EnvAnalysis_cal.Norm_POCP
+                        +W_TWC*(TWC_EDP+TWC_TSP)/ EnvAnalysis_cal.Norm_TW
+                        +W_DNER*(DNER_EDP+DNER_TSP)/ EnvAnalysis_cal.Norm_DNER)
                         );
 
     public void cal(){

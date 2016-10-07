@@ -28,13 +28,6 @@ public class App extends Application {
         primaryStage.show();
     }
 
-    public static File showfile(){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Load designed file");
-        File file = fileChooser.showOpenDialog(primaryStage);
-        return file;
-    }
-
     public static void showLoadMaterial() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(App.class.getResource("views/loadMaterial_window.fxml"));
@@ -46,6 +39,21 @@ public class App extends Application {
         addDialogStage.initOwner(primaryStage);
 
         Scene scene = new Scene(addNewMaterial);
+        addDialogStage.setScene(scene);
+        addDialogStage.showAndWait();
+    }
+
+    public static void showEnvironmentalScoreReport() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(App.class.getResource("views/EnvironmentalScoreReport.fxml"));
+        AnchorPane showReport = loader.load();
+
+        Stage addDialogStage = new Stage();
+        addDialogStage.setTitle("Environmental Performance");
+        addDialogStage.initModality(Modality.WINDOW_MODAL);
+        addDialogStage.initOwner(primaryStage);
+
+        Scene scene = new Scene(showReport);
         addDialogStage.setScene(scene);
         addDialogStage.showAndWait();
     }
