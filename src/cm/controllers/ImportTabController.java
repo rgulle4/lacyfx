@@ -3,25 +3,39 @@ package cm.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Callback;
 
 
 /**
  * Created by royg59 on 9/21/16.
  */
 public class ImportTabController {
-    ObservableList<String> DesignType = FXCollections.observableArrayList("Concrete","Flexible","Composite");       //Design type of pavement
+    ObservableList<String> DesignType = FXCollections.observableArrayList("New pavement","Overlay");       //Design type of pavement
+    ObservableList<String> PavementType_newPavement = FXCollections.observableArrayList("Flexible pavement","Joint Reinforced concrete pavement"); //Pavement type
+    ObservableList<String> PavementType_overlay = FXCollections.observableArrayList("AC over AC","AC over JRCP"); //Pavement type
 
     @FXML
-    private ComboBox Dtype;
+    private ComboBox Designtype;
     @FXML
-    private TextField TotLayernum;
+    private ComboBox Pavementtype;
+    @FXML
+    private TextField LayerNum;
+
 
     public void initialize(){
 
-        Dtype.setItems(DesignType);
-        TotLayernum.setText("3");
+        Designtype.setItems(DesignType);
+
+        LayerNum.setText("3");
+    }
+    public void SelectDesignType(){
+        if (Designtype.getSelectionModel().isSelected(0))
+            Pavementtype.setItems(PavementType_newPavement);
+        if (Designtype.getSelectionModel().isSelected(1))
+            Pavementtype.setItems(PavementType_overlay);
     }
     public void nextButton(){
 //        Controller controller = new Controller();
