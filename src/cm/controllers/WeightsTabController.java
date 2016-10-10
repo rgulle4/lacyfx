@@ -88,7 +88,7 @@ public class WeightsTabController {
         double w_twc = Double.parseDouble(totWaterConsumptionWeightTextField.getText());
         double w_peu = Double.parseDouble(PrimaryEnergyUseWeightTextField.getText());
         double w_mru = Double.parseDouble(MaterialResourceUseWeightTextField.getText());
-        
+
         double sum = w_gwp+ w_odp + w_ap+ w_ep+ w_pocp+ w_cw+ w_twc+ w_peu+ w_mru;
         SumWeightsTextField.setText(Double.toString(sum));
     }
@@ -96,17 +96,17 @@ public class WeightsTabController {
     @FXML
     public void nextButton(){
 
-        double w_enp = Double.parseDouble(envPerWeightTextField.getText());
-        double w_ecp = Double.parseDouble(encPerWeightTextField.getText());
-        double w_gwp = Double.parseDouble(gwpWeightTextField.getText());
-        double w_odp = Double.parseDouble(odpWeightTextField.getText());
-        double w_ap = Double.parseDouble(apWeightTextField.getText());
-        double w_ep = Double.parseDouble(epWeightTextField.getText());
-        double w_pocp = Double.parseDouble(pocpWeightTextField.getText());
-        double w_cw = Double.parseDouble(concreteWasteWeightTextField.getText());
-        double w_twc = Double.parseDouble(totWaterConsumptionWeightTextField.getText());
-        double w_peu = Double.parseDouble(PrimaryEnergyUseWeightTextField.getText());
-        double w_mru = Double.parseDouble(MaterialResourceUseWeightTextField.getText());
+        double w_enp = Double.parseDouble(envPerWeightTextField.getText())/100.0;
+        double w_ecp = Double.parseDouble(encPerWeightTextField.getText())/100.0;
+        double w_gwp = Double.parseDouble(gwpWeightTextField.getText())/100.0;
+        double w_odp = Double.parseDouble(odpWeightTextField.getText())/100.0;
+        double w_ap = Double.parseDouble(apWeightTextField.getText())/100.0;
+        double w_ep = Double.parseDouble(epWeightTextField.getText())/100.0;
+        double w_pocp = Double.parseDouble(pocpWeightTextField.getText())/100.0;
+        double w_cw = Double.parseDouble(concreteWasteWeightTextField.getText())/100.0;
+        double w_twc = Double.parseDouble(totWaterConsumptionWeightTextField.getText())/100.0;
+        double w_peu = Double.parseDouble(PrimaryEnergyUseWeightTextField.getText())/100.0;
+        double w_mru = Double.parseDouble(MaterialResourceUseWeightTextField.getText())/100.0;
         // TO DO
         // A warning to information everyTextfield should be valued and there is a default value for everyTextfield
         //weights W = new weights(w_enp,w_ecp,w_gwp,w_odp,w_ap,w_ep,w_pocp,w_cw,w_cnhw,w_twc,w_ap,w_dner,w_mru,w_dnmr);

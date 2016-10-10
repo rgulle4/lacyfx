@@ -33,7 +33,7 @@ public class LayerInformationController {
     private void initialize(){
 
         comboLayerType.setItems(LayerType);
-        ChoiceBox_ThicknessUnit.setValue("meter");
+        ChoiceBox_ThicknessUnit.setValue("inch");
         ChoiceBox_ThicknessUnit.setItems(ThicknessUnit);
 
         TextField_Thickness.setText("10.0");
