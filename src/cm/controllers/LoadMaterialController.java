@@ -1,7 +1,7 @@
 package cm.controllers;
 
 import cm.App;
-import cm.models.EnvAnalysis_cal;
+import cm.models.EnvAnalysisCalc;
 import cm.models.AlternativeMat;
 import cm.models.EPDDatabase;
 import javafx.collections.FXCollections;
@@ -130,10 +130,10 @@ public class LoadMaterialController {
     public void updatecvf(){
         for (int i = 0; i < AlterMaterials.size(); i++){
             if (AlterMaterials.get(i).getUnit().equals("m3")){
-                EnvAnalysis_cal.setConFc(EnvAnalysis_cal.getTotV());
+                EnvAnalysisCalc.setConFc(EnvAnalysisCalc.getTotV());
             }
             if (AlterMaterials.get(i).getUnit().equals("y3")){
-                EnvAnalysis_cal.setConFc(EnvAnalysis_cal.getTotV()*1.30795);        //1 m^3 = 1 yd^3
+                EnvAnalysisCalc.setConFc(EnvAnalysisCalc.getTotV()*1.30795);        //1 m^3 = 1 yd^3
             }
         }
 
@@ -169,22 +169,22 @@ public class LoadMaterialController {
         updatecvf();        //update conversion factor
         //test the consistency of data
         for (int i = 0; i < AlterMaterials.size(); i++) {
-            EnvAnalysis_cal.setGwp(AlterMaterials.get(i).getGWP());
-            EnvAnalysis_cal.setOdp(AlterMaterials.get(i).getODP());
-            EnvAnalysis_cal.setAp(AlterMaterials.get(i).getAP());
-            EnvAnalysis_cal.setEp(AlterMaterials.get(i).getEP());
-            EnvAnalysis_cal.setPocp(AlterMaterials.get(i).getPOCP());
-            EnvAnalysis_cal.setChw(AlterMaterials.get(i).getCHW());
-            EnvAnalysis_cal.setCnhw(AlterMaterials.get(i).getCNHW());
-            EnvAnalysis_cal.setTwc(AlterMaterials.get(i).getTWC());
-            EnvAnalysis_cal.setRpeu(AlterMaterials.get(i).getRPEU());
-            EnvAnalysis_cal.setDner(AlterMaterials.get(i).getDNER());
-            EnvAnalysis_cal.setRmru(AlterMaterials.get(i).getRMRU());
-            EnvAnalysis_cal.setDnmr(AlterMaterials.get(i).getDNMR());
+            EnvAnalysisCalc.setGwp(AlterMaterials.get(i).getGWP());
+            EnvAnalysisCalc.setOdp(AlterMaterials.get(i).getODP());
+            EnvAnalysisCalc.setAp(AlterMaterials.get(i).getAP());
+            EnvAnalysisCalc.setEp(AlterMaterials.get(i).getEP());
+            EnvAnalysisCalc.setPocp(AlterMaterials.get(i).getPOCP());
+            EnvAnalysisCalc.setChw(AlterMaterials.get(i).getCHW());
+            EnvAnalysisCalc.setCnhw(AlterMaterials.get(i).getCNHW());
+            EnvAnalysisCalc.setTwc(AlterMaterials.get(i).getTWC());
+            EnvAnalysisCalc.setRpeu(AlterMaterials.get(i).getRPEU());
+            EnvAnalysisCalc.setDner(AlterMaterials.get(i).getDNER());
+            EnvAnalysisCalc.setRmru(AlterMaterials.get(i).getRMRU());
+            EnvAnalysisCalc.setDnmr(AlterMaterials.get(i).getDNMR());
 
-            System.out.println(EnvAnalysis_cal.getGwp()+" " +EnvAnalysis_cal.getOdp()+" "+EnvAnalysis_cal.getAp()+" " +EnvAnalysis_cal.getEp()+ " "+
-                                EnvAnalysis_cal.getPocp()+" " +EnvAnalysis_cal.getTwc()+" "+EnvAnalysis_cal.getChw()+" " +EnvAnalysis_cal.getCnhw()+ " "+
-                                EnvAnalysis_cal.getDner()+ " "+EnvAnalysis_cal.getRpeu()+" "+EnvAnalysis_cal.getRmru()+ " "+ EnvAnalysis_cal.getDnmr());
+            System.out.println(EnvAnalysisCalc.getGwp()+" " + EnvAnalysisCalc.getOdp()+" "+ EnvAnalysisCalc.getAp()+" " + EnvAnalysisCalc.getEp()+ " "+
+                                EnvAnalysisCalc.getPocp()+" " + EnvAnalysisCalc.getTwc()+" "+ EnvAnalysisCalc.getChw()+" " + EnvAnalysisCalc.getCnhw()+ " "+
+                                EnvAnalysisCalc.getDner()+ " "+ EnvAnalysisCalc.getRpeu()+" "+ EnvAnalysisCalc.getRmru()+ " "+ EnvAnalysisCalc.getDnmr());
         }
     }
 

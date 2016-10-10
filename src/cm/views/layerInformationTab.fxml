@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
@@ -35,1057 +35,203 @@
                                                             <content>
                                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                                     <children>
-                                                                        <Label layoutX="45.0" layoutY="95.0" text="Material Property:">
+                                                                        <Label layoutX="45.0" layoutY="95.0" text="Layer type:">
                                                                             <font>
                                                                                 <Font size="14.0" />
                                                                             </font>
                                                                         </Label>
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Volumn Unit " />
-                                                                        <TextField fx:id="TF_UW" layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox fx:id="CB_UW" layoutX="359.0" layoutY="119.0" prefWidth="80.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
                                                                         <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField fx:id="TF_T" layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox fx:id="CB_T" layoutX="359.0" layoutY="145.0" prefWidth="80.0" />
+                                                                        <TextField fx:id="TextField_Thickness" layoutX="188.0" layoutY="145.0" />
+                                                                        <ChoiceBox fx:id="ChoiceBox_ThicknessUnit" layoutX="359.0" layoutY="145.0" prefWidth="80.0" />
                                                                         <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
                                                                         <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" onAction="#LoadMatBtn" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                      <TextField layoutX="188.0" layoutY="95.0" />
-                                                      <Button layoutX="357.0" layoutY="93.0" mnemonicParsing="false" text="Save" />
+                                                      <ComboBox fx:id="comboLayerType" layoutX="188.0" layoutY="93.0" prefHeight="23.0" prefWidth="251.0" />
                                                                     </children>
                                                                 </AnchorPane>
                                                             </content>
                                                         </Tab>
-                                                        <Tab text="Layer 2">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 2 Subgrade : A-1-a Subgrade">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 3">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 3 Subgrade : A-2-5 Subgrade">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 4">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 4 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 5">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 5 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 6">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 6 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 7">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 7 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 8">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 8 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
+                                          <Tab text="Layer 2">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label layoutX="45.0" layoutY="95.0" text="Layer type:">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
+                                                      <TextField fx:id="TF_T1" layoutX="188.0" layoutY="145.0" />
+                                                      <ChoiceBox fx:id="CB_T1" layoutX="359.0" layoutY="145.0" prefWidth="80.0" />
+                                                      <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
+                                                      <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" onAction="#LoadMatBtn" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
+                                                      <ComboBox layoutX="188.0" layoutY="93.0" prefHeight="23.0" prefWidth="251.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                          <Tab text="Layer 3">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label layoutX="45.0" layoutY="95.0" text="Layer type:">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
+                                                      <TextField fx:id="TF_T11" layoutX="188.0" layoutY="145.0" />
+                                                      <ChoiceBox fx:id="CB_T11" layoutX="359.0" layoutY="145.0" prefWidth="80.0" />
+                                                      <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
+                                                      <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" onAction="#LoadMatBtn" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
+                                                      <ComboBox layoutX="188.0" layoutY="93.0" prefHeight="23.0" prefWidth="251.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
                                                     </tabs>
                                                 </TabPane>
                                             </children>
                                         </AnchorPane>
                                     </content>
                                 </Tab>
-                                <Tab text="2nd Design">
-                                    <content>
-                                        <AnchorPane accessibleText="ddd" prefHeight="200.0" prefWidth="200.0">
-                                            <children>
-                                                <TabPane layoutX="69.0" layoutY="106.0" prefHeight="328.0" prefWidth="698.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                    <tabs>
-                                                        <Tab text="Layer 1">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 1 Flexible : Default asphalt concrete">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 2">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 2 Subgrade : A-1-a Subgrade">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 3">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 3 Subgrade : A-2-5 Subgrade">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 4">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 4 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 5">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 5 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 6">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 6 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 7">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 7 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 8">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 8 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                    </tabs>
-                                                </TabPane>
-                                            </children>
-                                        </AnchorPane>
-                                    </content>
-                                </Tab>
-                                <Tab text="3rd Design">
-                                    <content>
-                                        <AnchorPane accessibleText="ddd" prefHeight="200.0" prefWidth="200.0">
-                                            <children>
-                                                <TabPane layoutX="69.0" layoutY="106.0" prefHeight="328.0" prefWidth="698.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                    <tabs>
-                                                        <Tab text="Layer 1">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 1 Flexible : Default asphalt concrete">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 2">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 2 Subgrade : A-1-a Subgrade">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 3">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 3 Subgrade : A-2-5 Subgrade">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 4">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 4 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 5">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 5 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 6">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 6 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 7">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 7 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 8">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 8 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                    </tabs>
-                                                </TabPane>
-                                            </children>
-                                        </AnchorPane>
-                                    </content>
-                                </Tab>
-                                <Tab text="4th Design">
-                                    <content>
-                                        <AnchorPane accessibleText="ddd" prefHeight="200.0" prefWidth="200.0">
-                                            <children>
-                                                <TabPane layoutX="69.0" layoutY="106.0" prefHeight="328.0" prefWidth="698.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                    <tabs>
-                                                        <Tab text="Layer 1">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 1 Flexible : Default asphalt concrete">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 2">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 2 Subgrade : A-1-a Subgrade">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 3">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 3 Subgrade : A-2-5 Subgrade">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 4">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 4 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 5">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 5 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 6">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 6 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 7">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 7 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                        <Tab text="Layer 8">
-                                                            <content>
-                                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                                                    <children>
-                                                                        <Label layoutX="45.0" layoutY="35.0" text="Layer 8 TBD">
-                                                                            <font>
-                                                                                <Font size="14.0" />
-                                                                            </font>
-                                                                        </Label>
-                                                                        <Label layoutX="45.0" layoutY="71.0" text="Elastic Modulus:" />
-                                                                        <TextField layoutX="188.0" layoutY="67.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="67.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="71.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="97.0" text="Compressive Strength:" />
-                                                                        <TextField layoutX="188.0" layoutY="93.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="93.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="97.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="123.0" text="Unit Weight:" />
-                                                                        <TextField layoutX="188.0" layoutY="119.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="119.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="123.0" text="Unit:" />
-                                                                        <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
-                                                                        <TextField layoutX="188.0" layoutY="145.0" />
-                                                                        <ChoiceBox layoutX="359.0" layoutY="145.0" prefWidth="50.0" />
-                                                                        <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
-                                                                        <Label layoutX="119.0" layoutY="238.0" text="(*Make sure the units are in same standard!!)" />
-                                                                        <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-                                                                    </children>
-                                                                </AnchorPane>
-                                                            </content>
-                                                        </Tab>
-                                                    </tabs>
-                                                </TabPane>
-                                            </children>
-                                        </AnchorPane>
-                                    </content>
-                                </Tab>
-                                <Tab text="Summary">
-                                    <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                            <children>
-                                                <SplitPane dividerPositions="0.5" layoutX="239.0" layoutY="290.0" orientation="VERTICAL" prefHeight="494.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                    <items>
-                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                                            <children>
-                                                                <Label layoutX="-112.0" layoutY="38.0" text="1st Layer: " />
-                                                                <Label layoutX="-4.0" layoutY="38.0" text="2 alternatives selected" />
-                                                                <Label layoutX="14.0" layoutY="6.0" text="1st Design: Flexible" />
-                                                                <Label layoutX="14.0" layoutY="79.0" text="2nd Layer: " />
-                                                                <Label layoutX="122.0" layoutY="79.0" text="2 alternatives selected" />
-                                                                <ButtonBar buttonMinWidth="50.0" layoutX="512.0" layoutY="174.0" prefHeight="40.0" prefWidth="213.0">
-                                                                    <buttons>
-                                                                        <Button mnemonicParsing="false" text="Reload" />
-                                                                        <Button minWidth="37.0" mnemonicParsing="false" prefHeight="23.0" text="Save" />
-                                                                    </buttons>
-                                                                </ButtonBar>
-                                                            </children></AnchorPane>
-                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-                                                    </items>
-                                                </SplitPane>
-                                            </children>
-                                        </AnchorPane>
-                                    </content>
-                                </Tab>
+                        <Tab text="2nd Design">
+                           <content>
+                              <AnchorPane accessibleText="ddd" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <TabPane layoutX="69.0" layoutY="106.0" prefHeight="328.0" prefWidth="698.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <tabs>
+                                          <Tab text="Layer 1">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label layoutX="45.0" layoutY="95.0" text="Layer type:">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
+                                                      <TextField fx:id="TF_T1" layoutX="188.0" layoutY="145.0" />
+                                                      <ChoiceBox fx:id="CB_T1" layoutX="359.0" layoutY="145.0" prefWidth="80.0" />
+                                                      <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
+                                                      <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" onAction="#LoadMatBtn" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
+                                                      <ComboBox layoutX="188.0" layoutY="93.0" prefHeight="23.0" prefWidth="251.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                          <Tab text="Layer 2">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label layoutX="45.0" layoutY="95.0" text="Layer type:">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
+                                                      <TextField fx:id="TF_T11" layoutX="188.0" layoutY="145.0" />
+                                                      <ChoiceBox fx:id="CB_T11" layoutX="359.0" layoutY="145.0" prefWidth="80.0" />
+                                                      <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
+                                                      <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" onAction="#LoadMatBtn" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
+                                                      <ComboBox layoutX="188.0" layoutY="93.0" prefHeight="23.0" prefWidth="251.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                          <Tab text="Layer 3">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label layoutX="45.0" layoutY="95.0" text="Layer type:">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
+                                                      <TextField fx:id="TF_T111" layoutX="188.0" layoutY="145.0" />
+                                                      <ChoiceBox fx:id="CB_T111" layoutX="359.0" layoutY="145.0" prefWidth="80.0" />
+                                                      <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
+                                                      <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" onAction="#LoadMatBtn" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
+                                                      <ComboBox layoutX="188.0" layoutY="93.0" prefHeight="23.0" prefWidth="251.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                       </tabs>
+                                    </TabPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="3rd Design">
+                           <content>
+                              <AnchorPane accessibleText="ddd" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <TabPane layoutX="69.0" layoutY="106.0" prefHeight="328.0" prefWidth="698.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <tabs>
+                                          <Tab text="Layer 1">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label layoutX="45.0" layoutY="95.0" text="Layer type:">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
+                                                      <TextField fx:id="TF_T11" layoutX="188.0" layoutY="145.0" />
+                                                      <ChoiceBox fx:id="CB_T11" layoutX="359.0" layoutY="145.0" prefWidth="80.0" />
+                                                      <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
+                                                      <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" onAction="#LoadMatBtn" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
+                                                      <ComboBox layoutX="188.0" layoutY="93.0" prefHeight="23.0" prefWidth="251.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                          <Tab text="Layer 2">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label layoutX="45.0" layoutY="95.0" text="Layer type:">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
+                                                      <TextField fx:id="TF_T111" layoutX="188.0" layoutY="145.0" />
+                                                      <ChoiceBox fx:id="CB_T111" layoutX="359.0" layoutY="145.0" prefWidth="80.0" />
+                                                      <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
+                                                      <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" onAction="#LoadMatBtn" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
+                                                      <ComboBox layoutX="188.0" layoutY="93.0" prefHeight="23.0" prefWidth="251.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                          <Tab text="Layer 3">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label layoutX="45.0" layoutY="95.0" text="Layer type:">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="45.0" layoutY="149.0" text="Thickness:" />
+                                                      <TextField fx:id="TF_T1111" layoutX="188.0" layoutY="145.0" />
+                                                      <ChoiceBox fx:id="CB_T1111" layoutX="359.0" layoutY="145.0" prefWidth="80.0" />
+                                                      <Label layoutX="331.0" layoutY="149.0" text="Unit:" />
+                                                      <Button layoutX="494.0" layoutY="266.0" mnemonicParsing="false" onAction="#LoadMatBtn" text="Load material" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
+                                                      <ComboBox layoutX="188.0" layoutY="93.0" prefHeight="23.0" prefWidth="251.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                       </tabs>
+                                    </TabPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
                             </tabs>
                         </TabPane>
                     </children>

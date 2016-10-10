@@ -1,11 +1,12 @@
 package cm.controllers;
 
 import cm.App;
-import cm.models.EnvAnalysis_cal;
+import cm.models.EnvAnalysisCalc;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -15,48 +16,41 @@ import java.io.IOException;
  */
 public class LayerInformationController {
 
-    ObservableList<String> MaterialType = FXCollections.observableArrayList("Concrete","Flexible");       //Material type of a layer
-    ObservableList<String> UWUnit = FXCollections.observableArrayList("feet^3","meter^3");
-    ObservableList<String> TUnit = FXCollections.observableArrayList("inch","meter");
+    ObservableList<String> LayerType = FXCollections.observableArrayList("Asphalt Concrete","Portland Cement Concrete","Aggregate");       //Material type of a layer
+    ObservableList<String> ThicknessUnit = FXCollections.observableArrayList("inch","meter");
 
 
     @FXML
-    public ChoiceBox CB_UW;
+    public ComboBox comboLayerType;
     @FXML
-    public ChoiceBox CB_T;
-
+    public ChoiceBox ChoiceBox_ThicknessUnit;
     @FXML
-    public TextField TF_UW;
-    @FXML
-    public TextField TF_T;
+    public TextField TextField_Thickness;
 
     private App main;
 
     @FXML
     private void initialize(){
 
-        CB_UW.setValue("meter^3");
-        CB_UW.setItems(UWUnit);
+        comboLayerType.setItems(LayerType);
+        ChoiceBox_ThicknessUnit.setValue("meter");
+        ChoiceBox_ThicknessUnit.setItems(ThicknessUnit);
 
-        CB_T.setValue("meter");
-        CB_T.setItems(TUnit);
-
-        TF_UW.setText("");
-        TF_T.setText("10.0");
+        TextField_Thickness.setText("10.0");
     }
 
     @FXML
     private void LoadMatBtn() throws IOException {
 
-        if (CB_T.getValue() == "meter"){
-            EnvAnalysis_cal.setThickness(Double.parseDouble(TF_T.getText()));
-            EnvAnalysis_cal.setTotV(EnvAnalysis_cal.getThickness());
-            System.out.println(EnvAnalysis_cal.getTotV());
+        if (ChoiceBox_ThicknessUnit.getValue() == "meter"){
+            EnvAnalysisCalc.setThickness(Double.parseDouble(TextField_Thickness.getText()));
+            EnvAnalysisCalc.setTotV(EnvAnalysisCalc.getThickness());
+            System.out.println(EnvAnalysisCalc.getTotV());
         }
-        if (CB_T.getValue() == "inch"){
-            EnvAnalysis_cal.setThickness(Double.parseDouble(TF_T.getText())*0.0254);     // 1 inch = 0.0254 inch
-            EnvAnalysis_cal.setTotV(EnvAnalysis_cal.getThickness());
-            System.out.println(EnvAnalysis_cal.getTotV());
+        if (ChoiceBox_ThicknessUnit.getValue() == "inch"){
+            EnvAnalysisCalc.setThickness(Double.parseDouble(TextField_Thickness.getText())*0.0254);     // 1 inch = 0.0254 inch
+            EnvAnalysisCalc.setTotV(EnvAnalysisCalc.getThickness());
+            System.out.println(EnvAnalysisCalc.getTotV());
         }
         main.showLoadMaterial();
     }

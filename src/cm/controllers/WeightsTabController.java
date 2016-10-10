@@ -1,6 +1,6 @@
 package cm.controllers;
 
-import cm.models.EnvAnalysis_cal;
+import cm.models.EnvAnalysisCalc;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
@@ -9,57 +9,57 @@ import javafx.scene.control.TextField;
  */
 public class WeightsTabController {
 
-    @FXML public TextField T_EnP;
-    @FXML public TextField T_EcP;
-    @FXML public TextField T_GWP;
-    @FXML public TextField T_ODP;
-    @FXML public TextField T_AP;
-    @FXML public TextField T_EP;
-    @FXML public TextField T_POCP;
-    @FXML public TextField T_CHW;
-    @FXML public TextField T_CNHW;
-    @FXML public TextField T_TWC;
-    @FXML public TextField T_RPEU;
-    @FXML public TextField T_DNER;
-    @FXML public TextField T_RMRU;
-    @FXML public TextField T_DNMR;
+    @FXML public TextField envPerWeightTextField;
+    @FXML public TextField encPerWeightTextField;
+    @FXML public TextField gwpWeightTextField;
+    @FXML public TextField odpWeightTextField;
+    @FXML public TextField apWeightTextField;
+    @FXML public TextField epWeightTextField;
+    @FXML public TextField pocpWeightTextField;
+    @FXML public TextField concreteHazardousWasteWeightTextField;
+    @FXML public TextField concreteNonhazardousWastteWeightTextField;
+    @FXML public TextField totWaterConsumptionWeightTextField;
+    @FXML public TextField renewablePrimaryEnergyUseWeightTextField;
+    @FXML public TextField depletionOfNonrenewableEnergyResourceWeightTextField;
+    @FXML public TextField renewableMaterialResourceUseWeightTextField;
+    @FXML public TextField depletionOfNonrenewableMaterialResourcesWeightTextField;
 
     // initialization
     @FXML
     private void initialize(){
-        T_EnP.setText("50.0");
-        T_EcP.setText("50.0");
-        T_GWP.setText("15.0");
-        T_ODP.setText("10.0");
-        T_AP.setText("10.0");
-        T_EP.setText("10.0");
-        T_POCP.setText("10.0");
-        T_CHW.setText("10.0");
-        T_CNHW.setText("10.0");
-        T_TWC.setText("10.0");
-        T_RPEU.setText("10.0");
-        T_DNER.setText("10.0");
-        T_RMRU.setText("10.0");
-        T_DNMR.setText("10.0");
+        envPerWeightTextField.setText("50.0");
+        encPerWeightTextField.setText("50.0");
+        gwpWeightTextField.setText("15.0");
+        odpWeightTextField.setText("10.0");
+        apWeightTextField.setText("10.0");
+        epWeightTextField.setText("10.0");
+        pocpWeightTextField.setText("10.0");
+        concreteHazardousWasteWeightTextField.setText("10.0");
+        concreteNonhazardousWastteWeightTextField.setText("10.0");
+        totWaterConsumptionWeightTextField.setText("10.0");
+        renewablePrimaryEnergyUseWeightTextField.setText("10.0");
+        depletionOfNonrenewableEnergyResourceWeightTextField.setText("10.0");
+        renewableMaterialResourceUseWeightTextField.setText("10.0");
+        depletionOfNonrenewableMaterialResourcesWeightTextField.setText("10.0");
 
     }
 
     @FXML
     public void nextButton(){
-        double w_enp = Double.parseDouble(T_EnP.getText());
-        double w_ecp = Double.parseDouble(T_EcP.getText());
-        double w_gwp = Double.parseDouble(T_GWP.getText());
-        double w_odp = Double.parseDouble(T_ODP.getText());
-        double w_ap = Double.parseDouble(T_AP.getText());
-        double w_ep = Double.parseDouble(T_EP.getText());
-        double w_pocp = Double.parseDouble(T_POCP.getText());
-        double w_chw = Double.parseDouble(T_CHW.getText());
-        double w_cnhw = Double.parseDouble(T_CNHW.getText());
-        double w_twc = Double.parseDouble(T_TWC.getText());
-        double w_rpeu = Double.parseDouble(T_RPEU.getText());
-        double w_dner = Double.parseDouble(T_DNER.getText());
-        double w_rmru = Double.parseDouble(T_RMRU.getText());
-        double w_dnmr = Double.parseDouble(T_DNMR.getText());
+        double w_enp = Double.parseDouble(envPerWeightTextField.getText());
+        double w_ecp = Double.parseDouble(encPerWeightTextField.getText());
+        double w_gwp = Double.parseDouble(gwpWeightTextField.getText());
+        double w_odp = Double.parseDouble(odpWeightTextField.getText());
+        double w_ap = Double.parseDouble(apWeightTextField.getText());
+        double w_ep = Double.parseDouble(epWeightTextField.getText());
+        double w_pocp = Double.parseDouble(pocpWeightTextField.getText());
+        double w_chw = Double.parseDouble(concreteHazardousWasteWeightTextField.getText());
+        double w_cnhw = Double.parseDouble(concreteNonhazardousWastteWeightTextField.getText());
+        double w_twc = Double.parseDouble(totWaterConsumptionWeightTextField.getText());
+        double w_rpeu = Double.parseDouble(renewablePrimaryEnergyUseWeightTextField.getText());
+        double w_dner = Double.parseDouble(depletionOfNonrenewableEnergyResourceWeightTextField.getText());
+        double w_rmru = Double.parseDouble(renewableMaterialResourceUseWeightTextField.getText());
+        double w_dnmr = Double.parseDouble(depletionOfNonrenewableMaterialResourcesWeightTextField.getText());
         // TO DO
         // A warning to information everyTextfield should be valued and there is a default value for everyTextfield
         //weights W = new weights(w_enp,w_ecp,w_gwp,w_odp,w_ap,w_ep,w_pocp,w_chw,w_cnhw,w_twc,w_ap,w_dner,w_rmru,w_dnmr);
@@ -67,20 +67,20 @@ public class WeightsTabController {
         /*
         Set and store Weights
          */
-        EnvAnalysis_cal.setwEnp(w_enp);
-        EnvAnalysis_cal.setwEcp(w_ecp);
-        EnvAnalysis_cal.setwGwp(w_gwp);
-        EnvAnalysis_cal.setwOdp(w_odp);
-        EnvAnalysis_cal.setwAp(w_ap);
-        EnvAnalysis_cal.setwEp(w_ep);
-        EnvAnalysis_cal.setwPocp(w_pocp);
-        EnvAnalysis_cal.setwChw(w_chw);
-        EnvAnalysis_cal.setwCnhw(w_cnhw);
-        EnvAnalysis_cal.setwTwc(w_twc);
-        EnvAnalysis_cal.setwRpeu(w_rpeu);
-        EnvAnalysis_cal.setwDner(w_dner);
-        EnvAnalysis_cal.setwRmru(w_rmru);
-        EnvAnalysis_cal.setwDnmr(w_dnmr);
+        EnvAnalysisCalc.setwEnp(w_enp);
+        EnvAnalysisCalc.setwEcp(w_ecp);
+        EnvAnalysisCalc.setwGwp(w_gwp);
+        EnvAnalysisCalc.setwOdp(w_odp);
+        EnvAnalysisCalc.setwAp(w_ap);
+        EnvAnalysisCalc.setwEp(w_ep);
+        EnvAnalysisCalc.setwPocp(w_pocp);
+        EnvAnalysisCalc.setwChw(w_chw);
+        EnvAnalysisCalc.setwCnhw(w_cnhw);
+        EnvAnalysisCalc.setwTwc(w_twc);
+        EnvAnalysisCalc.setwRpeu(w_rpeu);
+        EnvAnalysisCalc.setwDner(w_dner);
+        EnvAnalysisCalc.setwRmru(w_rmru);
+        EnvAnalysisCalc.setwDnmr(w_dnmr);
 
         System.out.println("Set up weights in the static method EnvAnalysis_Calc");
     }
