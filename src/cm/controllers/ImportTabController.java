@@ -17,19 +17,26 @@ public class ImportTabController {
     ObservableList<String> PavementType_newPavement = FXCollections.observableArrayList("Flexible pavement","Joint Reinforced concrete pavement"); //Pavement type
     ObservableList<String> PavementType_overlay = FXCollections.observableArrayList("AC over AC","AC over JRCP"); //Pavement type
 
+    ObservableList<String> layerNum = FXCollections.observableArrayList("1","2","3","4","5","6","7","8","others");       //number of layers in a design
+    ObservableList<String> designNum = FXCollections.observableArrayList("1","2","3","4","5","6","7","8","ohters");       //number of design
+
     @FXML
     private ComboBox Designtype;
     @FXML
     private ComboBox Pavementtype;
     @FXML
-    private TextField LayerNum;
+    private ComboBox LayerNum;
+    @FXML
+    private ComboBox DesignNum;
 
 
     public void initialize(){
 
         Designtype.setItems(DesignType);
+        LayerNum.setItems(layerNum);
+        DesignNum.setItems(designNum);
+       // designNum.setItems(designNum);
 
-        LayerNum.setText("3");
     }
     public void SelectDesignType(){
         if (Designtype.getSelectionModel().isSelected(0))
