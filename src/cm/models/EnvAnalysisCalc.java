@@ -82,6 +82,10 @@ public class EnvAnalysisCalc {
     static double TotalWater_Transportation_Ctb;
     static double NonRenewableEnergy_Transportation_Ctb;
 
+    // EPD Score of Environmental Performance
+    static double envPerf_EPDScore;
+    // Transportation Score of Environmental Performance
+    static double envPerf_TransportationScore;
     //EnP Score
     static double Enp_Score;
 
@@ -536,5 +540,25 @@ public class EnvAnalysisCalc {
 
     public static void setNonRenewableEnergy_Transportation_Ctb(double nonRenewableEnergy_Transportation_Ctb) {
         NonRenewableEnergy_Transportation_Ctb = nonRenewableEnergy_Transportation_Ctb;
+    }
+
+    public static double getEnvPerf_EPDScore() {
+        return envPerf_EPDScore;
+    }
+
+//    public static void setEnvPerf_EPDScore(double GWP_EDP_Ctb, double ODP_EDP_Ctb, double AP_EDP_Ctb, double EP_EDP_Ctb, double POCP_EDP_Ctb, double totalWater_EDP_Ctb, double nonRenewableEnergy_EDP_Ctb) {
+//        EnvAnalysisCalc.envPerf_EPDScore = GWP_EDP_Ctb+ ODP_EDP_Ctb+ AP_EDP_Ctb+ EP_EDP_Ctb+ POCP_EDP_Ctb+ totalWater_EDP_Ctb+ nonRenewableEnergy_EDP_Ctb;
+//    }
+
+    public void setEnvPerf_EPDScore() {
+        EnvAnalysisCalc.envPerf_EPDScore = this.GWP_EDP_Ctb+ this.ODP_EDP_Ctb+ this.AP_EDP_Ctb+ this.EP_EDP_Ctb+ this.POCP_EDP_Ctb+ this.TotalWater_EDP_Ctb+ this.NonRenewableEnergy_EDP_Ctb;
+  }
+
+    public static double getEnvPerf_TransportationScore() {
+        return envPerf_TransportationScore;
+    }
+
+    public void setEnvPerf_TransportationScore() {
+        EnvAnalysisCalc.envPerf_TransportationScore = this.GWP_Transportation_Ctb+ this.ODP_Transportation_Ctb+ this.AP_Transportation_Ctb+ this.EP_Transportation_Ctb+ this.POCP_Transportation_Ctb+ this.TotalWater_Transportation_Ctb+ this.NonRenewableEnergy_Transportation_Ctb;
     }
 }
