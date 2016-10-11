@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -24,12 +25,13 @@
             <ComboBox fx:id="Pavementtype" prefWidth="150.0" />
             <Label text="Number of layers to be analyized:" />
             <ComboBox fx:id="LayerNum" prefWidth="150.0" />
-            <Label text="Number of  design:" />
-            <ComboBox fx:id="DesignNum" prefWidth="150.0" />
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
       </VBox>
+      <Separator layoutY="6.0" prefHeight="143.0" prefWidth="614.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0" />
+      <Label layoutX="203.0" layoutY="21.0" prefHeight="15.0" prefWidth="240.0" text="Select number of  designs\n to be analyized:" />
+      <ComboBox fx:id="DesignNum" layoutX="203.0" layoutY="46.0" prefWidth="150.0" />
     </children>
 </AnchorPane>

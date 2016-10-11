@@ -70,7 +70,7 @@ public class EnvironmentalReportController {
 //        serie_TotalWater.getData().add(new XYChart.Data<>(design1, EnvAnalysisCalc.getTotalWater_EDP_Ctb()));
 //        serie_TotalWater.getData().add(new XYChart.Data<>(design2, EnvAnalysisCalc.getTotalWater_Transportation_Ctb()));
 //        serie_NonRenewableEnergy.setName("NonRenewableEnergy");
-//        serie_NonRenewableEnergy.getData().add(new XYChart.Data<>(design1, EnvAnalysisCalc.getNonRenewableEnergy_EDP_Ctb()));
+//        serie_NonRenewableEnergy.getData().add(new XYChart.Data<>(design1, EnvAnalysisCalc.getTotalPrimaryEnergyConsumption_EDP_Ctb()));
 //        serie_NonRenewableEnergy.getData().add(new XYChart.Data<>(design2, EnvAnalysisCalc.getNonRenewableEnergy_Transportation_Ctb()));
 //        sbc.getData().addAll(serie_GWP,serie_ODP,serie_AP,serie_EP,serie_POCP,serie_TotalWater,serie_NonRenewableEnergy);
 

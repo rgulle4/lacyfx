@@ -23,6 +23,7 @@ public class EnvAnalysisCalc {
     static double Chw;
     static double Cnhw;
     static double Twc;
+    static double Tpeu;
     static double Rpeu;
     static double Dner;
     static double Rmru;
@@ -62,8 +63,8 @@ public class EnvAnalysisCalc {
     static double Norm_AP =91;          //KgSO2eq
     static double Norm_EP =22;          //KgN eq
     static double Norm_POCP =1400;      //Kg O3 eq
-    static double Norm_TW =17000;       //MJ surplus
-    static double Norm_DNER =1934.34543;//Meter^3
+    static double Norm_TW =1934.34543;       //MJ surplus
+    static double Norm_TPEC =17000;//Meter^3
 
     //Environmental Contribution from EPD
     static double GWP_EDP_Ctb;
@@ -72,7 +73,7 @@ public class EnvAnalysisCalc {
     static double EP_EDP_Ctb;
     static double POCP_EDP_Ctb;
     static double TotalWater_EDP_Ctb;
-    static double NonRenewableEnergy_EDP_Ctb;
+    static double TotalPrimaryEnergyConsumption_EDP_Ctb;
     //Environmental Contribution from transportation
     static double GWP_Transportation_Ctb;
     static double ODP_Transportation_Ctb;
@@ -196,6 +197,14 @@ public class EnvAnalysisCalc {
 
     public static void setTwc(double twc) {
         Twc = twc;
+    }
+
+    public static double getTpeu() {
+        return Tpeu;
+    }
+
+    public static void setTpeu(double tpeu) {
+        Tpeu = tpeu;
     }
 
     public static double getRpeu() {
@@ -478,12 +487,12 @@ public class EnvAnalysisCalc {
         TotalWater_EDP_Ctb = totalWater_EDP_Ctb;
     }
 
-    public static double getNonRenewableEnergy_EDP_Ctb() {
-        return NonRenewableEnergy_EDP_Ctb;
+    public static double getTotalPrimaryEnergyConsumption_EDP_Ctb() {
+        return TotalPrimaryEnergyConsumption_EDP_Ctb;
     }
 
-    public static void setNonRenewableEnergy_EDP_Ctb(double nonRenewableEnergy_EDP_Ctb) {
-        NonRenewableEnergy_EDP_Ctb = nonRenewableEnergy_EDP_Ctb;
+    public static void setTotalPrimaryEnergyConsumption_EDP_Ctb(double totalPrimaryEnergyConsumption_EDP_Ctb) {
+        TotalPrimaryEnergyConsumption_EDP_Ctb = totalPrimaryEnergyConsumption_EDP_Ctb;
     }
 
     public static double getGWP_Transportation_Ctb() {
@@ -551,7 +560,7 @@ public class EnvAnalysisCalc {
 //    }
 
     public void setEnvPerf_EPDScore() {
-        EnvAnalysisCalc.envPerf_EPDScore = this.GWP_EDP_Ctb+ this.ODP_EDP_Ctb+ this.AP_EDP_Ctb+ this.EP_EDP_Ctb+ this.POCP_EDP_Ctb+ this.TotalWater_EDP_Ctb+ this.NonRenewableEnergy_EDP_Ctb;
+        EnvAnalysisCalc.envPerf_EPDScore = this.GWP_EDP_Ctb+ this.ODP_EDP_Ctb+ this.AP_EDP_Ctb+ this.EP_EDP_Ctb+ this.POCP_EDP_Ctb+ this.TotalWater_EDP_Ctb+ this.TotalPrimaryEnergyConsumption_EDP_Ctb;
   }
 
     public static double getEnvPerf_TransportationScore() {

@@ -36,7 +36,7 @@ public class LayerInformationController {
         ChoiceBox_ThicknessUnit.setValue("inch");
         ChoiceBox_ThicknessUnit.setItems(ThicknessUnit);
 
-        TextField_Thickness.setText("10.0");
+        TextField_Thickness.setText("6.0");
     }
 
     @FXML

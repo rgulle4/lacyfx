@@ -112,10 +112,11 @@ public class LoadMaterialController {
             cm.setEP(result.get(i).getEP());
             cm.setPOCP(result.get(i).getPOCP());
             cm.setUnit(result.get(i).getUnit());
-            cm.setDNER(result.get(i).getDNER());
-            cm.setRPEU(result.get(i).getRPEU());
-            cm.setDNMR(result.get(i).getDNMR());
-            cm.setRMRU(result.get(i).getRMRU());
+            cm.setTPEC(result.get(i).getTPEC());
+            cm.setNRE(result.get(i).getDNER());
+            cm.setRE(result.get(i).getRPEU());
+            cm.setNRM(result.get(i).getDNMR());
+            cm.setRM(result.get(i).getRMRU());
             cm.setTWC(result.get(i).getTWC());
             cm.setCHW(result.get(i).getCHW());
             cm.setCNHW(result.get(i).getCNHW());
@@ -178,13 +179,14 @@ public class LoadMaterialController {
             EnvAnalysisCalc.setCnhw(AlterMaterials.get(i).getCNHW());
             EnvAnalysisCalc.setTwc(AlterMaterials.get(i).getTWC());
             EnvAnalysisCalc.setRpeu(AlterMaterials.get(i).getRPEU());
-            EnvAnalysisCalc.setDner(AlterMaterials.get(i).getDNER());
+            EnvAnalysisCalc.setDner(AlterMaterials.get(i).getDNER());//wrong
             EnvAnalysisCalc.setRmru(AlterMaterials.get(i).getRMRU());
-            EnvAnalysisCalc.setDnmr(AlterMaterials.get(i).getDNMR());
+            EnvAnalysisCalc.setDnmr(AlterMaterials.get(i).getDNMR());//wrong
+            EnvAnalysisCalc.setTpeu(AlterMaterials.get(i).getTPEC());//wrong
 
             System.out.println(EnvAnalysisCalc.getGwp()+" " + EnvAnalysisCalc.getOdp()+" "+ EnvAnalysisCalc.getAp()+" " + EnvAnalysisCalc.getEp()+ " "+
                                 EnvAnalysisCalc.getPocp()+" " + EnvAnalysisCalc.getTwc()+" "+ EnvAnalysisCalc.getChw()+" " + EnvAnalysisCalc.getCnhw()+ " "+
-                                EnvAnalysisCalc.getDner()+ " "+ EnvAnalysisCalc.getRpeu()+" "+ EnvAnalysisCalc.getRmru()+ " "+ EnvAnalysisCalc.getDnmr());
+                                EnvAnalysisCalc.getDner()+ " "+ EnvAnalysisCalc.getRpeu()+" "+ EnvAnalysisCalc.getRmru()+ " "+ EnvAnalysisCalc.getDnmr()+"\nTPEC: "+EnvAnalysisCalc.getTpeu());
         }
     }
 

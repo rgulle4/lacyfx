@@ -27,6 +27,7 @@ public class AlternativeMat {
     private final DoubleProperty DNER;
     private final DoubleProperty RMRU;
     private final DoubleProperty DNMR;
+    private final DoubleProperty TPEC;
 
 
     private final StringProperty Unit;
@@ -36,7 +37,7 @@ public class AlternativeMat {
      */
 
     public AlternativeMat(){
-        this(null, null, null, null, null, null,0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,0.0);
+        this(null, null, null, null, null, null,0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,0.0,0.0);
     }
     /**
      * Constructor with some initial data.
@@ -47,7 +48,7 @@ public class AlternativeMat {
      */
     public AlternativeMat(String CS, String CM_name, String Location, String MixNum,
                            String ZipCode, String Unit, Double GWP, Double ODP, Double AP,
-                           Double EP, Double POCP,Double CHW,Double CNHW, Double TWC,
+                           Double EP, Double POCP,Double CHW,Double CNHW, Double TWC, Double TPEC,
                            Double RPEU, Double DNER, Double RMRU, Double DNMR ){
         this.CS = new SimpleStringProperty(CS);
         this.CM_name = new SimpleStringProperty(CM_name);
@@ -67,6 +68,7 @@ public class AlternativeMat {
         this.DNER = new SimpleDoubleProperty(DNER);
         this.RMRU = new SimpleDoubleProperty(RMRU);
         this.DNMR = new SimpleDoubleProperty(DNMR);
+        this.TPEC = new SimpleDoubleProperty(TPEC);
     }
 
     public String getCS() {
@@ -238,6 +240,18 @@ public class AlternativeMat {
         this.TWC.set(TWC);
     }
 
+    public double getTPEC() {
+        return TPEC.get();
+    }
+
+    public DoubleProperty TPECProperty() {
+        return TPEC;
+    }
+
+    public void setTPEC(double TPEC) {
+        this.TPEC.set(TPEC);
+    }
+
     public double getRPEU() {
         return RPEU.get();
     }
@@ -246,7 +260,7 @@ public class AlternativeMat {
         return RPEU;
     }
 
-    public void setRPEU(double RPEU) {
+    public void setRE(double RPEU) {
         this.RPEU.set(RPEU);
     }
 
@@ -258,7 +272,7 @@ public class AlternativeMat {
         return DNER;
     }
 
-    public void setDNER(double DNER) {
+    public void setNRE(double DNER) {
         this.DNER.set(DNER);
     }
 
@@ -270,7 +284,7 @@ public class AlternativeMat {
         return RMRU;
     }
 
-    public void setRMRU(double RMRU) {
+    public void setRM(double RMRU) {
         this.RMRU.set(RMRU);
     }
 
@@ -282,7 +296,7 @@ public class AlternativeMat {
         return DNMR;
     }
 
-    public void setDNMR(double DNMR) {
+    public void setNRM(double DNMR) {
         this.DNMR.set(DNMR);
     }
 }

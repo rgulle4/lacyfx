@@ -1,7 +1,5 @@
 package cm.models;
 
-import libs.net.efabrika.util.DBTablePrinter;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,10 +81,11 @@ public class EPDDatabase {
             g.setCHW(r.getDouble("CHW"));
             g.setCNHW(r.getDouble("CNHW"));
             g.setTWC(r.getDouble("TW"));
-            g.setRPEU(r.getDouble("RE"));
-            g.setDNER(r.getDouble("NRE"));
-            g.setRMRU(r.getDouble("RM"));
-            g.setDNMR(r.getDouble("NRM"));
+            g.setTPEC(r.getDouble("PEC"));
+            g.setRE(r.getDouble("RE"));
+            g.setNRE(r.getDouble("NRE"));
+            g.setRM(r.getDouble("RM"));
+            g.setNRM(r.getDouble("NRM"));
 
             result.add(g);
         }
