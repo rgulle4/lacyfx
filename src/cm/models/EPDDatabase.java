@@ -78,14 +78,14 @@ public class EPDDatabase {
             g.setEP(r.getDouble("EP"));
             g.setPOCP(r.getDouble("POCP"));
             g.setUnit(r.getString("UNITS"));
-            g.setCHW(r.getDouble("CHW"));
-            g.setCNHW(r.getDouble("CNHW"));
-            g.setTWC(r.getDouble("TW"));
-            g.setTPEC(r.getDouble("PEC"));
-            g.setRE(r.getDouble("RE"));
-            g.setNRE(r.getDouble("NRE"));
-            g.setRM(r.getDouble("RM"));
-            g.setNRM(r.getDouble("NRM"));
+            g.setConcreteHazardousWaste(r.getDouble("CHW"));
+            g.setConcreteNonHazardousWaste(r.getDouble("CNHW"));
+            g.setTotalWaterConsumption(r.getDouble("TW"));
+            g.setTotalPrimaryEnergyConsumption(r.getDouble("PEC"));
+            g.setRenewablePrimaryEnergyUse(r.getDouble("RE"));
+            g.setNonRenewableEnergyUse(r.getDouble("NRE"));
+            g.setRenewableMaterialResourcesUse(r.getDouble("RM"));
+            g.setNonRenewableMaterialResource(r.getDouble("NRM"));
 
             result.add(g);
         }

@@ -14,85 +14,52 @@ public class AlternativeMat {
     private final StringProperty Location;
     private final StringProperty MixNum;
     private final StringProperty ZipCode;
-
+    private final StringProperty Unit;
     private final DoubleProperty GWP;
     private final DoubleProperty ODP;
     private final DoubleProperty AP;
     private final DoubleProperty EP;
     private final DoubleProperty POCP;
-    private final DoubleProperty CHW;
-    private final DoubleProperty CNHW;
-    private final DoubleProperty TWC;
-    private final DoubleProperty RPEU;
-    private final DoubleProperty DNER;
-    private final DoubleProperty RMRU;
-    private final DoubleProperty DNMR;
-    private final DoubleProperty TPEC;
+    private final DoubleProperty ConcreteHazardousWaste;
+    private final DoubleProperty ConcreteNonHazardousWaste;
+    private final DoubleProperty TotalWaterConsumption;
+    private final DoubleProperty TotalPrimaryEnergyConsumption;
+    private final DoubleProperty RenewablePrimaryEnergyUse;
+    private final DoubleProperty NonRenewableEnergyUse;
+    private final DoubleProperty RenewableMaterialResourcesUse;
+    private final DoubleProperty NonRenewableMaterialResource;
 
-
-    private final StringProperty Unit;
 
     /**
      * Default constructor.
      */
 
-    public AlternativeMat(){
-        this(null, null, null, null, null, null,0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,0.0,0.0);
-    }
-    /**
-     * Constructor with some initial data.
-     *
-     * @param CS
-     * @param CM_name
-     * and other factors
-     */
-    public AlternativeMat(String CS, String CM_name, String Location, String MixNum,
-                           String ZipCode, String Unit, Double GWP, Double ODP, Double AP,
-                           Double EP, Double POCP,Double CHW,Double CNHW, Double TWC, Double TPEC,
-                           Double RPEU, Double DNER, Double RMRU, Double DNMR ){
-        this.CS = new SimpleStringProperty(CS);
-        this.CM_name = new SimpleStringProperty(CM_name);
-        this.Location = new SimpleStringProperty(Location);
-        this.MixNum = new SimpleStringProperty(MixNum);
-        this.ZipCode = new SimpleStringProperty(ZipCode);
-        this.GWP = new SimpleDoubleProperty(GWP);
-        this.ODP = new SimpleDoubleProperty(ODP);
-        this.AP = new SimpleDoubleProperty(AP);
-        this.EP = new SimpleDoubleProperty(EP);
-        this.POCP = new SimpleDoubleProperty(POCP);
-        this.Unit = new SimpleStringProperty(Unit);
-        this.CHW = new SimpleDoubleProperty(CHW);
-        this.CNHW = new SimpleDoubleProperty(CNHW);
-        this.TWC = new SimpleDoubleProperty(TWC);
-        this.RPEU = new SimpleDoubleProperty(RPEU);
-        this.DNER = new SimpleDoubleProperty(DNER);
-        this.RMRU = new SimpleDoubleProperty(RMRU);
-        this.DNMR = new SimpleDoubleProperty(DNMR);
-        this.TPEC = new SimpleDoubleProperty(TPEC);
+    public AlternativeMat() {
+        this(null, null, null, null, null, null, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
     }
 
     public String getCS() {
         return CS.get();
     }
 
-    public void setCS(String CS) {
-        this.CS.set(CS);
-    }
-
     public StringProperty CSProperty() {
         return CS;
+    }
+
+    public void setCS(String CS) {
+        this.CS.set(CS);
     }
 
     public String getCM_name() {
         return CM_name.get();
     }
 
-    public void setCM_name(String CM_name) {
-        this.CM_name.set(CM_name);
-    }
-
     public StringProperty CM_nameProperty() {
         return CM_name;
+    }
+
+    public void setCM_name(String CM_name) {
+        this.CM_name.set(CM_name);
     }
 
     public String getLocation() {
@@ -119,7 +86,6 @@ public class AlternativeMat {
         this.MixNum.set(mixNum);
     }
 
-
     public String getZipCode() {
         return ZipCode.get();
     }
@@ -130,6 +96,18 @@ public class AlternativeMat {
 
     public void setZipCode(String zipCode) {
         this.ZipCode.set(zipCode);
+    }
+
+    public String getUnit() {
+        return Unit.get();
+    }
+
+    public StringProperty unitProperty() {
+        return Unit;
+    }
+
+    public void setUnit(String unit) {
+        this.Unit.set(unit);
     }
 
     public double getGWP() {
@@ -192,111 +170,131 @@ public class AlternativeMat {
         this.POCP.set(POCP);
     }
 
-    public String getUnit() {
-        return Unit.get();
+    public double getConcreteHazardousWaste() {
+        return ConcreteHazardousWaste.get();
     }
 
-    public StringProperty unitProperty() {
-        return Unit;
+    public DoubleProperty concreteHazardousWasteProperty() {
+        return ConcreteHazardousWaste;
     }
 
-    public void setUnit(String unit) {
-        this.Unit.set(unit);
+    public void setConcreteHazardousWaste(double concreteHazardousWaste) {
+        this.ConcreteHazardousWaste.set(concreteHazardousWaste);
     }
 
-    public double getCHW() {
-        return CHW.get();
+    public double getConcreteNonHazardousWaste() {
+        return ConcreteNonHazardousWaste.get();
     }
 
-    public DoubleProperty CHWProperty() {
-        return CHW;
+    public DoubleProperty concreteNonHazardousWasteProperty() {
+        return ConcreteNonHazardousWaste;
     }
 
-    public void setCHW(double CHW) {
-        this.CHW.set(CHW);
+    public void setConcreteNonHazardousWaste(double concreteNonHazardousWaste) {
+        this.ConcreteNonHazardousWaste.set(concreteNonHazardousWaste);
     }
 
-    public double getCNHW() {
-        return CNHW.get();
+    public double getTotalWaterConsumption() {
+        return TotalWaterConsumption.get();
     }
 
-    public DoubleProperty CNHWProperty() {
-        return CNHW;
+    public DoubleProperty totalWaterConsumptionProperty() {
+        return TotalWaterConsumption;
     }
 
-    public void setCNHW(double CNHW) {
-        this.CNHW.set(CNHW);
+    public void setTotalWaterConsumption(double totalWaterConsumption) {
+        this.TotalWaterConsumption.set(totalWaterConsumption);
     }
 
-    public double getTWC() {
-        return TWC.get();
+    public double getTotalPrimaryEnergyConsumption() {
+        return TotalPrimaryEnergyConsumption.get();
     }
 
-    public DoubleProperty TWCProperty() {
-        return TWC;
+    public DoubleProperty totalPrimaryEnergyConsumptionProperty() {
+        return TotalPrimaryEnergyConsumption;
     }
 
-    public void setTWC(double TWC) {
-        this.TWC.set(TWC);
+    public void setTotalPrimaryEnergyConsumption(double totalPrimaryEnergyConsumption) {
+        this.TotalPrimaryEnergyConsumption.set(totalPrimaryEnergyConsumption);
     }
 
-    public double getTPEC() {
-        return TPEC.get();
+    public double getRenewablePrimaryEnergyUse() {
+        return RenewablePrimaryEnergyUse.get();
     }
 
-    public DoubleProperty TPECProperty() {
-        return TPEC;
+    public DoubleProperty renewablePrimaryEnergyUseProperty() {
+        return RenewablePrimaryEnergyUse;
     }
 
-    public void setTPEC(double TPEC) {
-        this.TPEC.set(TPEC);
+    public void setRenewablePrimaryEnergyUse(double renewablePrimaryEnergyUse) {
+        this.RenewablePrimaryEnergyUse.set(renewablePrimaryEnergyUse);
     }
 
-    public double getRPEU() {
-        return RPEU.get();
+    public double getNonRenewableEnergyUse() {
+        return NonRenewableEnergyUse.get();
     }
 
-    public DoubleProperty RPEUProperty() {
-        return RPEU;
+    public DoubleProperty nonRenewableEnergyUseProperty() {
+        return NonRenewableEnergyUse;
     }
 
-    public void setRE(double RPEU) {
-        this.RPEU.set(RPEU);
+    public void setNonRenewableEnergyUse(double nonRenewableEnergyUse) {
+        this.NonRenewableEnergyUse.set(nonRenewableEnergyUse);
     }
 
-    public double getDNER() {
-        return DNER.get();
+    public double getRenewableMaterialResourcesUse() {
+        return RenewableMaterialResourcesUse.get();
     }
 
-    public DoubleProperty DNERProperty() {
-        return DNER;
+    public DoubleProperty renewableMaterialResourcesUseProperty() {
+        return RenewableMaterialResourcesUse;
     }
 
-    public void setNRE(double DNER) {
-        this.DNER.set(DNER);
+    public void setRenewableMaterialResourcesUse(double renewableMaterialResourcesUse) {
+        this.RenewableMaterialResourcesUse.set(renewableMaterialResourcesUse);
     }
 
-    public double getRMRU() {
-        return RMRU.get();
+    public double getNonRenewableMaterialResource() {
+        return NonRenewableMaterialResource.get();
     }
 
-    public DoubleProperty RMRUProperty() {
-        return RMRU;
+    public DoubleProperty nonRenewableMaterialResourceProperty() {
+        return NonRenewableMaterialResource;
     }
 
-    public void setRM(double RMRU) {
-        this.RMRU.set(RMRU);
+    public void setNonRenewableMaterialResource(double nonRenewableMaterialResource) {
+        this.NonRenewableMaterialResource.set(nonRenewableMaterialResource);
     }
 
-    public double getDNMR() {
-        return DNMR.get();
-    }
-
-    public DoubleProperty DNMRProperty() {
-        return DNMR;
-    }
-
-    public void setNRM(double DNMR) {
-        this.DNMR.set(DNMR);
+    /**
+     * Constructor with some initial data.
+     *
+     * @param CS
+     * @param CM_name and other factors
+     */
+    public AlternativeMat(String CS, String CM_name, String Location, String MixNum,
+                          String ZipCode, String Unit, Double GWP, Double ODP, Double AP,
+                          Double EP, Double POCP, Double CHW, Double CNHW, Double TWC, Double TPEC,
+                          Double RPEU, Double DNER, Double RMRU, Double DNMR) {
+        this.CS = new SimpleStringProperty(CS);
+        this.CM_name = new SimpleStringProperty(CM_name);
+        this.Location = new SimpleStringProperty(Location);
+        this.MixNum = new SimpleStringProperty(MixNum);
+        this.ZipCode = new SimpleStringProperty(ZipCode);
+        this.GWP = new SimpleDoubleProperty(GWP);
+        this.ODP = new SimpleDoubleProperty(ODP);
+        this.AP = new SimpleDoubleProperty(AP);
+        this.EP = new SimpleDoubleProperty(EP);
+        this.POCP = new SimpleDoubleProperty(POCP);
+        this.Unit = new SimpleStringProperty(Unit);
+        this.ConcreteHazardousWaste = new SimpleDoubleProperty(CHW);
+        this.ConcreteNonHazardousWaste = new SimpleDoubleProperty(CNHW);
+        this.TotalWaterConsumption = new SimpleDoubleProperty(TWC);
+        this.RenewablePrimaryEnergyUse = new SimpleDoubleProperty(RPEU);
+        this.NonRenewableEnergyUse = new SimpleDoubleProperty(DNER);
+        this.RenewableMaterialResourcesUse = new SimpleDoubleProperty(RMRU);
+        this.NonRenewableMaterialResource = new SimpleDoubleProperty(DNMR);
+        this.TotalPrimaryEnergyConsumption = new SimpleDoubleProperty(TPEC);
     }
 }
+

@@ -112,14 +112,14 @@ public class LoadMaterialController {
             cm.setEP(result.get(i).getEP());
             cm.setPOCP(result.get(i).getPOCP());
             cm.setUnit(result.get(i).getUnit());
-            cm.setTPEC(result.get(i).getTPEC());
-            cm.setNRE(result.get(i).getDNER());
-            cm.setRE(result.get(i).getRPEU());
-            cm.setNRM(result.get(i).getDNMR());
-            cm.setRM(result.get(i).getRMRU());
-            cm.setTWC(result.get(i).getTWC());
-            cm.setCHW(result.get(i).getCHW());
-            cm.setCNHW(result.get(i).getCNHW());
+            cm.setTotalPrimaryEnergyConsumption(result.get(i).getTotalPrimaryEnergyConsumption());
+            cm.setNonRenewableEnergyUse(result.get(i).getNonRenewableEnergyUse());
+            cm.setRenewablePrimaryEnergyUse(result.get(i).getRenewablePrimaryEnergyUse());
+            cm.setNonRenewableMaterialResource(result.get(i).getNonRenewableMaterialResource());
+            cm.setRenewableMaterialResourcesUse(result.get(i).getRenewableMaterialResourcesUse());
+            cm.setTotalWaterConsumption(result.get(i).getTotalWaterConsumption());
+            cm.setConcreteHazardousWaste(result.get(i).getConcreteHazardousWaste());
+            cm.setConcreteNonHazardousWaste(result.get(i).getConcreteNonHazardousWaste());
             data.add(cm);
         }
         MaterialTable.setItems(data);
@@ -175,14 +175,14 @@ public class LoadMaterialController {
             EnvAnalysisCalc.setAp(AlterMaterials.get(i).getAP());
             EnvAnalysisCalc.setEp(AlterMaterials.get(i).getEP());
             EnvAnalysisCalc.setPocp(AlterMaterials.get(i).getPOCP());
-            EnvAnalysisCalc.setChw(AlterMaterials.get(i).getCHW());
-            EnvAnalysisCalc.setCnhw(AlterMaterials.get(i).getCNHW());
-            EnvAnalysisCalc.setTwc(AlterMaterials.get(i).getTWC());
-            EnvAnalysisCalc.setRpeu(AlterMaterials.get(i).getRPEU());
-            EnvAnalysisCalc.setDner(AlterMaterials.get(i).getDNER());//wrong
-            EnvAnalysisCalc.setRmru(AlterMaterials.get(i).getRMRU());
-            EnvAnalysisCalc.setDnmr(AlterMaterials.get(i).getDNMR());//wrong
-            EnvAnalysisCalc.setTpeu(AlterMaterials.get(i).getTPEC());//wrong
+            EnvAnalysisCalc.setChw(AlterMaterials.get(i).getConcreteHazardousWaste());
+            EnvAnalysisCalc.setCnhw(AlterMaterials.get(i).getConcreteNonHazardousWaste());
+            EnvAnalysisCalc.setTwc(AlterMaterials.get(i).getTotalWaterConsumption());
+            EnvAnalysisCalc.setRpeu(AlterMaterials.get(i).getRenewablePrimaryEnergyUse());
+            EnvAnalysisCalc.setDner(AlterMaterials.get(i).getNonRenewableEnergyUse());//wrong
+            EnvAnalysisCalc.setRmru(AlterMaterials.get(i).getRenewableMaterialResourcesUse());
+            EnvAnalysisCalc.setDnmr(AlterMaterials.get(i).getNonRenewableMaterialResource());//wrong
+            EnvAnalysisCalc.setTpeu(AlterMaterials.get(i).getTotalPrimaryEnergyConsumption());//wrong
 
             System.out.println(EnvAnalysisCalc.getGwp()+" " + EnvAnalysisCalc.getOdp()+" "+ EnvAnalysisCalc.getAp()+" " + EnvAnalysisCalc.getEp()+ " "+
                                 EnvAnalysisCalc.getPocp()+" " + EnvAnalysisCalc.getTwc()+" "+ EnvAnalysisCalc.getChw()+" " + EnvAnalysisCalc.getCnhw()+ " "+
