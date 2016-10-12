@@ -23,7 +23,7 @@ public class AlternativeMat {
     private final DoubleProperty ConcreteHazardousWaste;
     private final DoubleProperty ConcreteNonHazardousWaste;
     private final DoubleProperty TotalWaterConsumption;
-    private final DoubleProperty TotalPrimaryEnergyConsumption;
+    private final StringProperty TotalPrimaryEnergyConsumption;
     private final DoubleProperty RenewablePrimaryEnergyUse;
     private final DoubleProperty NonRenewableEnergyUse;
     private final DoubleProperty RenewableMaterialResourcesUse;
@@ -35,7 +35,7 @@ public class AlternativeMat {
      */
 
     public AlternativeMat() {
-        this(null, null, null, null, null, null, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        this(null, null, null, null, null, null, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, null, 0.0, 0.0, 0.0, 0.0);
     }
 
     public String getCS() {
@@ -206,15 +206,15 @@ public class AlternativeMat {
         this.TotalWaterConsumption.set(totalWaterConsumption);
     }
 
-    public double getTotalPrimaryEnergyConsumption() {
+    public String getTotalPrimaryEnergyConsumption() {
         return TotalPrimaryEnergyConsumption.get();
     }
 
-    public DoubleProperty totalPrimaryEnergyConsumptionProperty() {
+    public StringProperty totalPrimaryEnergyConsumptionProperty() {
         return TotalPrimaryEnergyConsumption;
     }
 
-    public void setTotalPrimaryEnergyConsumption(double totalPrimaryEnergyConsumption) {
+    public void setTotalPrimaryEnergyConsumption(String totalPrimaryEnergyConsumption) {
         this.TotalPrimaryEnergyConsumption.set(totalPrimaryEnergyConsumption);
     }
 
@@ -274,19 +274,19 @@ public class AlternativeMat {
      */
     public AlternativeMat(String CS, String CM_name, String Location, String MixNum,
                           String ZipCode, String Unit, Double GWP, Double ODP, Double AP,
-                          Double EP, Double POCP, Double CHW, Double CNHW, Double TWC, Double TPEC,
+                          Double EP, Double POCP, Double CHW, Double CNHW, Double TWC, String TPEC,
                           Double RPEU, Double DNER, Double RMRU, Double DNMR) {
         this.CS = new SimpleStringProperty(CS);
         this.CM_name = new SimpleStringProperty(CM_name);
         this.Location = new SimpleStringProperty(Location);
         this.MixNum = new SimpleStringProperty(MixNum);
         this.ZipCode = new SimpleStringProperty(ZipCode);
+        this.Unit = new SimpleStringProperty(Unit);
         this.GWP = new SimpleDoubleProperty(GWP);
         this.ODP = new SimpleDoubleProperty(ODP);
         this.AP = new SimpleDoubleProperty(AP);
         this.EP = new SimpleDoubleProperty(EP);
         this.POCP = new SimpleDoubleProperty(POCP);
-        this.Unit = new SimpleStringProperty(Unit);
         this.ConcreteHazardousWaste = new SimpleDoubleProperty(CHW);
         this.ConcreteNonHazardousWaste = new SimpleDoubleProperty(CNHW);
         this.TotalWaterConsumption = new SimpleDoubleProperty(TWC);
@@ -294,7 +294,7 @@ public class AlternativeMat {
         this.NonRenewableEnergyUse = new SimpleDoubleProperty(DNER);
         this.RenewableMaterialResourcesUse = new SimpleDoubleProperty(RMRU);
         this.NonRenewableMaterialResource = new SimpleDoubleProperty(DNMR);
-        this.TotalPrimaryEnergyConsumption = new SimpleDoubleProperty(TPEC);
+        this.TotalPrimaryEnergyConsumption = new SimpleStringProperty(TPEC);
     }
 }
 

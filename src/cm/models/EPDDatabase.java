@@ -81,7 +81,7 @@ public class EPDDatabase {
             g.setConcreteHazardousWaste(r.getDouble("CHW"));
             g.setConcreteNonHazardousWaste(r.getDouble("CNHW"));
             g.setTotalWaterConsumption(r.getDouble("TW"));
-            g.setTotalPrimaryEnergyConsumption(r.getDouble("PEC"));
+            g.setTotalPrimaryEnergyConsumption(r.getString("PEC"));
             g.setRenewablePrimaryEnergyUse(r.getDouble("RE"));
             g.setNonRenewableEnergyUse(r.getDouble("NRE"));
             g.setRenewableMaterialResourcesUse(r.getDouble("RM"));

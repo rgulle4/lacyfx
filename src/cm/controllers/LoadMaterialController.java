@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -166,7 +167,7 @@ public class LoadMaterialController {
         }
     }
 
-    public void nextButton() {
+    public void nextButton() throws ParseException {
         updatecvf();        //update conversion factor
         //test the consistency of data
         for (int i = 0; i < AlterMaterials.size(); i++) {

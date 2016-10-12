@@ -1,6 +1,10 @@
 package cm.models;
 
 
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
+
 /**
  * Created by Administrator on 2016/10/1.
  */
@@ -203,8 +207,10 @@ public class EnvAnalysisCalc {
         return Tpeu;
     }
 
-    public static void setTpeu(double tpeu) {
-        Tpeu = tpeu;
+    public static void setTpeu(String tpeu) throws ParseException {
+        NumberFormat format = NumberFormat.getInstance(Locale.US);
+        Number number = format.parse(tpeu);
+        Tpeu = number.doubleValue();
     }
 
     public static double getRpeu() {
