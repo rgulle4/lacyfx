@@ -52,9 +52,9 @@ public class ImportTabController {
 
         Design design = new Design();
         design.setDesign_ID("D01");
-        design.setDesign_Type(Designtype.getSelectionModel().toString());
-        design.setPavement_Type(Pavementtype.getSelectionModel().toString());
-        design.setNumberOfLayers(Integer.parseInt(LayerNum.getSelectionModel().toString()));
+        design.setDesign_Type(Designtype.getValue().toString());
+        design.setPavement_Type(Pavementtype.getValue().toString());
+        design.setNumberOfLayers(Integer.parseInt(LayerNum.getValue().toString()));
 
         designMap.put(design.getDesign_ID(),design);
     }

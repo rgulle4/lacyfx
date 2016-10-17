@@ -2,6 +2,7 @@ package cm.controllers;
 
 import cm.App;
 import cm.models.EnvAnalysisCalc;
+import cm.models.Layer;
 import cm.models.TransportationParameters;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +12,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+
+import static cm.App.layerMap;
 
 /**
  * Created by royg59 on 9/21/16.
@@ -39,33 +42,29 @@ public class LayerInformationController {
 
         TextField_Thickness.setText("6.0");
     }
-    private TransportationParameters envPerfAnalysis= new TransportationParameters();
+    private Layer layer = new Layer();
     @FXML
     private void LoadMatBtn() throws IOException {
 
         if (ChoiceBox_ThicknessUnit.getValue() == "meter"){
-//            envPerfAnalysis.setThickness(Double.parseDouble(TextField_Thickness.getText()));
-//            envPerfAnalysis.setTotV(envPerfAnalysis.getThickness());
-//            envPerfAnalysis.setConFc(envPerfAnalysis.getTotV());
-//            envPerfAnalysisMap.put("D1L1",envPerfAnalysis);
-//            System.out.println(envPerfAnalysisMap.get("D1L1").getTotV());
+            layer.setThickness(Double.parseDouble(TextField_Thickness.getText()));
+            double Volume = layer.getThickness()*layer.getLengthness()*layer.getWidth();
+            layer.setVolume(Volume);
 
-            EnvAnalysisCalc.setThickness(Double.parseDouble(TextField_Thickness.getText()));
-            EnvAnalysisCalc.setTotV(EnvAnalysisCalc.getThickness());
-            EnvAnalysisCalc.setConFc(EnvAnalysisCalc.getTotV());
-            System.out.println(EnvAnalysisCalc.getTotV());
         }
         if (ChoiceBox_ThicknessUnit.getValue() == "inch"){
-            EnvAnalysisCalc.setThickness(Double.parseDouble(TextField_Thickness.getText())*0.0254);     // 1 inch = 0.0254 inch
-            EnvAnalysisCalc.setTotV(EnvAnalysisCalc.getThickness());
-            EnvAnalysisCalc.setConFc(EnvAnalysisCalc.getTotV());
-            System.out.println(EnvAnalysisCalc.getTotV());
-//            envPerfAnalysis.setThickness(Double.parseDouble(TextField_Thickness.getText())*0.0254);
-//            envPerfAnalysis.setTotV(envPerfAnalysis.getThickness());
-//            envPerfAnalysis.setConFc(envPerfAnalysis.getTotV());
-//            envPerfAnalysisMap.put("D1L1",envPerfAnalysis);
-//            System.out.println(envPerfAnalysisMap.get("D1L1").getTotV());
+
+            layer.setThickness(Double.parseDouble(TextField_Thickness.getText())*0.0254);
+            double Volume = layer.getThickness()*layer.getLengthness()*layer.getWidth();
+            layer.setVolume(Volume);
+
         }
+        layer.setLayer_ID("D1L1");
+        layer.setLayerType(comboLayerType.getValue().toString());
+        //save data in the layerMap
+        layerMap.put(layer.getLayer_ID(),layer);
+        System.out.println("Volume:  "+layerMap.get(layer.getLayer_ID()).getVolume()+"   LayerType:  "+layerMap.get(layer.getLayer_ID()).getLayerType());
+
         main.showLoadMaterial();
     }
 }

@@ -15,6 +15,7 @@ public class Layer {
     private double EnvPerfAnalysis_TotalScore_Layer;
     private double EnvPerfAnalysis_EPDScore_Layer;
     private double EnvPerfAnalysis_TransportationScore_Layer;
+    private String LayerType;
 
     public double getLengthness() {
         return Lengthness;
@@ -86,5 +87,13 @@ public class Layer {
 
     public void setEnvPerfAnalysis_TransportationScore_Layer(double envPerfAnalysis_TransportationScore_Layer) {
         EnvPerfAnalysis_TransportationScore_Layer = envPerfAnalysis_TransportationScore_Layer;
+    }
+
+    public String getLayerType() {
+        return LayerType;
+    }
+
+    public void setLayerType(String layerType) {
+        LayerType = layerType;
     }
 }
