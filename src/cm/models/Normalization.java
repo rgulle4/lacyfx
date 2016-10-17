@@ -15,13 +15,13 @@ public class Normalization {
 
     //initialization
     public Normalization(){
-        this.Norm_GWP=1;
-        this.Norm_ODP=1;
-        this.Norm_AP =1;
-        this.Norm_EP =1;
-        this.Norm_POCP =1;
-        this.Norm_fuel =1;
-        this.Norm_water =1;
+        this.Norm_GWP=24000;
+        this.Norm_ODP=0.16;
+        this.Norm_AP =91;
+        this.Norm_EP =22;
+        this.Norm_POCP =1400;
+        this.Norm_fuel =529.9587;
+        this.Norm_water =17000;
 
     }
 

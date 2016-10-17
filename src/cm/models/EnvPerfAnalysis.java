@@ -8,13 +8,13 @@ import java.util.Locale;
 /**
  * Created by Administrator on 2016/10/1.
  */
-public class EnvAnalysisCalc {
-    static double length = 1609.34;        //1 mile = 1609.34 meter
-    static double width = 12*0.3048;       //1 ft = 0.3048 meter
-    static double thickness;
+public class EnvPerfAnalysis {
+    double length = 1609.34;        //1 mile = 1609.34 meter
+    double width = 12*0.3048;       //1 ft = 0.3048 meter
+    double thickness;
 
-    static double TotV;        //Total value
-    static double ConFac;      //Conversion factor
+    double TotV;        //Total value
+    double ConFac;      //Conversion factor
 
     //factor value
     static double Enp;
@@ -96,30 +96,30 @@ public class EnvAnalysisCalc {
 
 
 
-    public static double getThickness() {
+    public double getThickness() {
         return thickness;
     }
 
-    public static void setThickness(double tc) {
+    public void setThickness(double tc) {
         thickness = tc;
     }
 
-    public static void setTotV(double T) {
+    public void setTotV(double T) {
         TotV = length*T*width;
     }
 
-    public static double getTotV(){
+    public double getTotV(){
         return TotV;
     }
 
-    public static void setConFc(double cvf){
+    public void setConFc(double cvf){
         ConFac = cvf;
     }
 
-    public static double getConFc(){
+    public double getConFc(){
         return ConFac;
     }
-    public static double EnpScore(){
+    public double EnpScore(){
         return 2*TotV;
     }
 
@@ -245,7 +245,7 @@ public class EnvAnalysisCalc {
         Dnmr = dnmr;
     }
 
-    public static double getWidth() {
+    public double getWidth() {
         return width;
     }
 
@@ -567,7 +567,7 @@ public class EnvAnalysisCalc {
 
     public void setEnvPerf_EPDScore() {
         EnvAnalysisCalc.envPerf_EPDScore = this.GWP_EDP_Ctb+ this.ODP_EDP_Ctb+ this.AP_EDP_Ctb+ this.EP_EDP_Ctb+ this.POCP_EDP_Ctb+ this.TotalWater_EDP_Ctb+ this.TotalPrimaryEnergyConsumption_EDP_Ctb;
-  }
+    }
 
     public static double getEnvPerf_TransportationScore() {
         return envPerf_TransportationScore;

@@ -129,7 +129,7 @@ public class WeightsTabController {
         EnvAnalysisCalc.setwPocp(w_pocp);
         EnvAnalysisCalc.setwChw(w_cw);
         EnvAnalysisCalc.setwTwc(w_twc);
-        EnvAnalysisCalc.setwRpeu(w_peu);
+        EnvAnalysisCalc.setwTpec(w_peu);
         EnvAnalysisCalc.setwRmru(w_mru);
 
         System.out.println("Set up weights in the static method EnvAnalysis_Calc");

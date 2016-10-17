@@ -13,7 +13,7 @@ public class EnvPerformanceCalc {
     double W_EP = EnvAnalysisCalc.getwEp();
     double W_POCP = EnvAnalysisCalc.getwPocp();
     double W_TWC = EnvAnalysisCalc.getwTwc();
-    double W_TPEC = EnvAnalysisCalc.getwDner();
+    double W_TPEC = EnvAnalysisCalc.getwTpec();
 
     double GWP_EDP = EnvAnalysisCalc.getGwp();
     double ODP_EDP = EnvAnalysisCalc.getOdp();
@@ -29,7 +29,7 @@ public class EnvPerformanceCalc {
     double EP_TSP = EnvAnalysisCalc.getSub_EP()*  EnvAnalysisCalc.getDistance()*2;
     double POCP_TSP = EnvAnalysisCalc.getSub_POCP()* EnvAnalysisCalc.getDistance()*2;
     double TWC_TSP = EnvAnalysisCalc.getSub_TW()* EnvAnalysisCalc.getDistance()*2;
-    double PrimaryTotalEnergyConsumption_Transportation = EnvAnalysisCalc.getSub_DNER()* EnvAnalysisCalc.getDistance()*2;
+    double PrimaryTotalEnergyConsumption_Transportation = EnvAnalysisCalc.getSub_TPEC()* EnvAnalysisCalc.getDistance()*2;
 
     //distribute each factor's contribution from EPD
     double GWP_EDP_Ctb=ConvF*W_ENP*W_GWP*GWP_EDP/ EnvAnalysisCalc.Norm_GWP;
@@ -69,7 +69,7 @@ public class EnvPerformanceCalc {
         EnvAnalysisCalc.setEP_Transportation_Ctb(EP_Transportation_Ctb);
         EnvAnalysisCalc.setPOCP_Transportation_Ctb(POCP_Transportation_Ctb);
         EnvAnalysisCalc.setTotalWater_Transportation_Ctb(TotalWater_Transportation_Ctb);
-        EnvAnalysisCalc.setNonRenewableEnergy_Transportation_Ctb(PrimaryTotalEnergyConsumption_Transportation_Ctb);
+        EnvAnalysisCalc.setTotalPrimaryEnergyConsumption_Transportation_Ctb(PrimaryTotalEnergyConsumption_Transportation_Ctb);
 
         //save calculated Environmental Performance Score
         EnvAnalysisCalc.setEnp_Score(envPerfScore);

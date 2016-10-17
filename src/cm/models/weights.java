@@ -1,7 +1,5 @@
 package cm.models;
 
-import javafx.beans.property.DoubleProperty;
-
 /**
  * Created by Administrator on 2016/10/2.
  */
@@ -13,13 +11,16 @@ public class weights {
     private double W_AP;
     private double W_EP;
     private double W_POCP;
-    private double W_CHW;
-    private double W_CNHW;
-    private double W_TWC;
-    private double W_RPEO;
-    private double W_DNER;
-    private double W_RMRU;
-    private double W_DNMR;
+    private double W_ConcreteWaste;
+    private double W_ConcretHazardousWaste;
+    private double W_ConcretNonHazardousWaste;
+    private double W_TotalWaterConsumption;
+    private double W_TotalPrimaryEnergyConsumption;
+    private double W_RenewableEnergyConsumption;
+    private double W_NonRenewableEnergyConsumption;
+    private double W_MaterialResourceConsumption;
+    private double W_RenewableMaterialResourceConsumption;
+    private double W_NonRenewableMaterialResourceConsumption;
 
     // initialize
     public weights(double W_enp, double W_ecp, double W_gwp, double W_odp,
@@ -34,13 +35,13 @@ public class weights {
         this.W_AP = W_ap;
         this.W_EP = W_ep;
         this.W_POCP = W_pocp;
-        this.W_CHW = W_chw;
-        this.W_CNHW = W_cnhw;
-        this.W_TWC = W_twc;
-        this.W_RPEO = W_rpeo;
-        this. W_DNER = W_dner;
-        this. W_RMRU = W_rmru;
-        this. W_DNMR = W_dnmr;
+        this.W_ConcretHazardousWaste = W_chw;
+        this.W_ConcretNonHazardousWaste = W_cnhw;
+        this.W_TotalWaterConsumption = W_twc;
+        this.W_RenewableEnergyConsumption = W_rpeo;
+        this.W_NonRenewableEnergyConsumption = W_dner;
+        this.W_RenewableMaterialResourceConsumption = W_rmru;
+        this.W_NonRenewableMaterialResourceConsumption = W_dnmr;
 
     }
     public double getW_EnP() {
@@ -99,60 +100,83 @@ public class weights {
         W_POCP = w_POCP;
     }
 
-    public double getW_CHW() {
-        return W_CHW;
+    public double getW_ConcretHazardousWaste() {
+        return W_ConcretHazardousWaste;
     }
 
-    public void setW_CHW(double w_CHW) {
-        W_CHW = w_CHW;
+    public void setW_ConcretHazardousWaste(double w_ConcretHazardousWaste) {
+        W_ConcretHazardousWaste = w_ConcretHazardousWaste;
     }
 
-    public double getW_CNHW() {
-        return W_CNHW;
+    public double getW_ConcretNonHazardousWaste() {
+        return W_ConcretNonHazardousWaste;
     }
 
-    public void setW_CNHW(double w_CNHW) {
-        W_CNHW = w_CNHW;
+    public void setW_ConcretNonHazardousWaste(double w_ConcretNonHazardousWaste) {
+        W_ConcretNonHazardousWaste = w_ConcretNonHazardousWaste;
     }
 
-    public double getW_TWC() {
-        return W_TWC;
+    public double getW_TotalWaterConsumption() {
+        return W_TotalWaterConsumption;
     }
 
-    public void setW_TWC(double w_TWC) {
-        W_TWC = w_TWC;
+    public void setW_TotalWaterConsumption(double w_TotalWaterConsumption) {
+        W_TotalWaterConsumption = w_TotalWaterConsumption;
     }
 
-    public double getW_RPEO() {
-        return W_RPEO;
+    public double getW_RenewableEnergyConsumption() {
+        return W_RenewableEnergyConsumption;
     }
 
-    public void setW_RPEO(double w_RPEO) {
-        W_RPEO = w_RPEO;
+    public void setW_RenewableEnergyConsumption(double w_RenewableEnergyConsumption) {
+        W_RenewableEnergyConsumption = w_RenewableEnergyConsumption;
     }
 
-    public double getW_DNER() {
-        return W_DNER;
+    public double getW_NonRenewableEnergyConsumption() {
+        return W_NonRenewableEnergyConsumption;
     }
 
-    public void setW_DNER(double w_DNER) {
-        W_DNER = w_DNER;
+    public void setW_NonRenewableEnergyConsumption(double w_NonRenewableEnergyConsumption) {
+        W_NonRenewableEnergyConsumption = w_NonRenewableEnergyConsumption;
     }
 
-    public double getW_RMRU() {
-        return W_RMRU;
+    public double getW_RenewableMaterialResourceConsumption() {
+        return W_RenewableMaterialResourceConsumption;
     }
 
-    public void setW_RMRU(double w_RMRU) {
-        W_RMRU = w_RMRU;
+    public void setW_RenewableMaterialResourceConsumption(double w_RenewableMaterialResourceConsumption) {
+        W_RenewableMaterialResourceConsumption = w_RenewableMaterialResourceConsumption;
     }
 
-    public double getW_DNMR() {
-        return W_DNMR;
+    public double getW_NonRenewableMaterialResourceConsumption() {
+        return W_NonRenewableMaterialResourceConsumption;
     }
 
-    public void setW_DNMR(double w_DNMR) {
-        W_DNMR = w_DNMR;
+    public void setW_NonRenewableMaterialResourceConsumption(double w_NonRenewableMaterialResourceConsumption) {
+        W_NonRenewableMaterialResourceConsumption = w_NonRenewableMaterialResourceConsumption;
     }
 
+    public double getW_ConcreteWaste() {
+        return W_ConcreteWaste;
+    }
+
+    public void setW_ConcreteWaste(double w_ConcreteWaste) {
+        W_ConcreteWaste = w_ConcreteWaste;
+    }
+
+    public double getW_TotalPrimaryEnergyConsumption() {
+        return W_TotalPrimaryEnergyConsumption;
+    }
+
+    public void setW_TotalPrimaryEnergyConsumption(double w_TotalPrimaryEnergyConsumption) {
+        W_TotalPrimaryEnergyConsumption = w_TotalPrimaryEnergyConsumption;
+    }
+
+    public double getW_MaterialResourceConsumption() {
+        return W_MaterialResourceConsumption;
+    }
+
+    public void setW_MaterialResourceConsumption(double w_MaterialResourceConsumption) {
+        W_MaterialResourceConsumption = w_MaterialResourceConsumption;
+    }
 }

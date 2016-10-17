@@ -2,6 +2,7 @@ package cm;
 
 import cm.controllers.LoadMaterialController;
 import cm.models.AlternativeMat;
+import cm.models.EnvPerfAnalysis;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,10 +16,14 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Hashtable;
+import java.util.Map;
 
 public class App extends Application {
     private static Stage primaryStage;
     private ObservableList<AlternativeMat> MaterialData = FXCollections.observableArrayList();
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -61,4 +66,6 @@ public class App extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    //create a static hashtable to store values for EnvPerfAnalysis step by step
+    public static Map<String,EnvPerfAnalysis> envPerfAnalysisMap = new Hashtable<String,EnvPerfAnalysis>();
 }
