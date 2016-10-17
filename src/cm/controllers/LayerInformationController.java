@@ -2,7 +2,7 @@ package cm.controllers;
 
 import cm.App;
 import cm.models.EnvAnalysisCalc;
-import cm.models.EnvPerfAnalysis;
+import cm.models.TransportationParameters;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,9 +11,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import cm.App;
-
-import static cm.App.envPerfAnalysisMap;
 
 /**
  * Created by royg59 on 9/21/16.
@@ -42,7 +39,7 @@ public class LayerInformationController {
 
         TextField_Thickness.setText("6.0");
     }
-    private EnvPerfAnalysis envPerfAnalysis= new EnvPerfAnalysis();
+    private TransportationParameters envPerfAnalysis= new TransportationParameters();
     @FXML
     private void LoadMatBtn() throws IOException {
 

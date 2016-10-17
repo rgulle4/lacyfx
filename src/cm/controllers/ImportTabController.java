@@ -1,5 +1,7 @@
 package cm.controllers;
 
+import cm.App;
+import cm.models.Design;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -7,6 +9,8 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Callback;
+
+import static cm.App.designMap;
 
 
 /**
@@ -45,7 +49,13 @@ public class ImportTabController {
             Pavementtype.setItems(PavementType_overlay);
     }
     public void nextButton(){
-//        Controller controller = new Controller();
-//        controller.importTab_next();
+
+        Design design = new Design();
+        design.setDesign_ID("D01");
+        design.setDesign_Type(Designtype.getSelectionModel().toString());
+        design.setPavement_Type(Pavementtype.getSelectionModel().toString());
+        design.setNumberOfLayers(Integer.parseInt(LayerNum.getSelectionModel().toString()));
+
+        designMap.put(design.getDesign_ID(),design);
     }
 }
