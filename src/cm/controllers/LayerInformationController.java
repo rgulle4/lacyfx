@@ -27,59 +27,12 @@ public class LayerInformationController {
 
     @FXML
     //Design 1
-    public ComboBox comboLayerType_D1L1;
+    public ComboBox comboLayerType;
     @FXML
-    public ChoiceBox ChoiceBox_ThicknessUnit_D1L1;
+    public ChoiceBox ChoiceBox_ThicknessUnit;
     @FXML
-    public TextField TextField_Thickness_D1L1;
-    @FXML
-    public ComboBox comboLayerType_D1L2;
-    @FXML
-    public ChoiceBox ChoiceBox_ThicknessUnit_D1L2;
-    @FXML
-    public TextField TextField_Thickness_D1L2;
-    @FXML
-    public ComboBox comboLayerType_D1L3;
-    @FXML
-    public ChoiceBox ChoiceBox_ThicknessUnit_D1L3;
-    @FXML
-    public TextField TextField_Thickness_D1L3;
-    //Design 2
-    public ComboBox comboLayerType_D2L1;
-    @FXML
-    public ChoiceBox ChoiceBox_ThicknessUnit_D2L1;
-    @FXML
-    public TextField TextField_Thickness_D2L1;
-    @FXML
-    public ComboBox comboLayerType_D2L2;
-    @FXML
-    public ChoiceBox ChoiceBox_ThicknessUnit_D2L2;
-    @FXML
-    public TextField TextField_Thickness_D2L2;
-    @FXML
-    public ComboBox comboLayerType_D2L3;
-    @FXML
-    public ChoiceBox ChoiceBox_ThicknessUnit_D2L3;
-    @FXML
-    public TextField TextField_Thickness_D2L3;
-    //Design 3
-    public ComboBox comboLayerType_D3L1;
-    @FXML
-    public ChoiceBox ChoiceBox_ThicknessUnit_D3L1;
-    @FXML
-    public TextField TextField_Thickness_D3L1;
-    @FXML
-    public ComboBox comboLayerType_D3L2;
-    @FXML
-    public ChoiceBox ChoiceBox_ThicknessUnit_D3L2;
-    @FXML
-    public TextField TextField_Thickness_D3L2;
-    @FXML
-    public ComboBox comboLayerType_D3L3;
-    @FXML
-    public ChoiceBox ChoiceBox_ThicknessUnit_D3L3;
-    @FXML
-    public TextField TextField_Thickness_D3L3;
+    public TextField TextField_Thickness;
+
 
     private App main;
 
@@ -87,44 +40,11 @@ public class LayerInformationController {
     private void initialize(){
 
         //Design 1
-        comboLayerType_D1L1.setItems(LayerType);
-        ChoiceBox_ThicknessUnit_D1L1.setValue("inch");
-        ChoiceBox_ThicknessUnit_D1L1.setItems(ThicknessUnit);
-        TextField_Thickness_D1L1.setText("6.0");
-        comboLayerType_D1L2.setItems(LayerType);
-        ChoiceBox_ThicknessUnit_D1L2.setValue("inch");
-        ChoiceBox_ThicknessUnit_D1L2.setItems(ThicknessUnit);
-        TextField_Thickness_D1L2.setText("6.0");
-        comboLayerType_D1L3.setItems(LayerType);
-        ChoiceBox_ThicknessUnit_D1L3.setValue("inch");
-        ChoiceBox_ThicknessUnit_D1L3.setItems(ThicknessUnit);
-        TextField_Thickness_D1L3.setText("6.0");
-        //Design 2
-        comboLayerType_D2L1.setItems(LayerType);
-        ChoiceBox_ThicknessUnit_D2L1.setValue("inch");
-        ChoiceBox_ThicknessUnit_D2L1.setItems(ThicknessUnit);
-        TextField_Thickness_D2L1.setText("6.0");
-        comboLayerType_D2L2.setItems(LayerType);
-        ChoiceBox_ThicknessUnit_D2L2.setValue("inch");
-        ChoiceBox_ThicknessUnit_D2L2.setItems(ThicknessUnit);
-        TextField_Thickness_D2L2.setText("6.0");
-        comboLayerType_D2L3.setItems(LayerType);
-        ChoiceBox_ThicknessUnit_D2L3.setValue("inch");
-        ChoiceBox_ThicknessUnit_D2L3.setItems(ThicknessUnit);
-        TextField_Thickness_D2L3.setText("6.0");
-        //Design 3
-        comboLayerType_D3L1.setItems(LayerType);
-        ChoiceBox_ThicknessUnit_D3L1.setValue("inch");
-        ChoiceBox_ThicknessUnit_D3L1.setItems(ThicknessUnit);
-        TextField_Thickness_D3L1.setText("6.0");
-        comboLayerType_D3L2.setItems(LayerType);
-        ChoiceBox_ThicknessUnit_D3L2.setValue("inch");
-        ChoiceBox_ThicknessUnit_D3L2.setItems(ThicknessUnit);
-        TextField_Thickness_D3L2.setText("6.0");
-        comboLayerType_D3L3.setItems(LayerType);
-        ChoiceBox_ThicknessUnit_D3L3.setValue("inch");
-        ChoiceBox_ThicknessUnit_D3L3.setItems(ThicknessUnit);
-        TextField_Thickness_D3L3.setText("6.0");
+        comboLayerType.setItems(LayerType);
+        ChoiceBox_ThicknessUnit.setValue("inch");
+        ChoiceBox_ThicknessUnit.setItems(ThicknessUnit);
+        TextField_Thickness.setText("6.0");
+
     }
     private Design design = new Design();
     private Layer layer = new Layer();
@@ -137,21 +57,25 @@ public class LayerInformationController {
             int layerNum = designMap.get(key_design).getNumberOfLayers();
             for (int i = 0;i<=layerNum;i++){
 
-                if (ChoiceBox_ThicknessUnit_D1L1.getValue() == "meter"){
-                    layer.setThickness(Double.parseDouble(TextField_Thickness_D1L1.getText()));
+                if (ChoiceBox_ThicknessUnit.getValue() == "meter"){
+                    layer.setThickness(Double.parseDouble(TextField_Thickness.getText()));
                     double Volume = layer.getThickness()*layer.getLengthness()*layer.getWidth();
                     layer.setVolume(Volume);
 
                 }
-                if (ChoiceBox_ThicknessUnit_D1L1.getValue() == "inch"){
+                if (ChoiceBox_ThicknessUnit.getValue() == "inch"){
 
-                    layer.setThickness(Double.parseDouble(TextField_Thickness_D1L1.getText())*0.0254);
+                    layer.setThickness(Double.parseDouble(TextField_Thickness.getText())*0.0254);
                     double Volume = layer.getThickness()*layer.getLengthness()*layer.getWidth();
                     layer.setVolume(Volume);
 
                 }
-                layer.setLayer_ID("Design1Layer1");
-                layer.setLayerType(comboLayerType_D1L1.getValue().toString());
+                StringBuilder sb = new StringBuilder(designMap.get(key_design).getDesign_ID());
+                sb.append("L"+Integer.toString(i));
+                String layerID = sb.toString();
+                layer.setLayer_ID(layerID);
+
+                layer.setLayerType(this.comboLayerType.getValue().toString());
                 //save data in the layerMap
                 layerMap.put(layer.getLayer_ID(),layer);
                 System.out.println("Volume:  "+layerMap.get(layer.getLayer_ID()).getVolume()+"   LayerType:  "+layerMap.get(layer.getLayer_ID()).getLayerType());
