@@ -3,7 +3,7 @@ package cm.models;
 /**
  * Created by Administrator on 2016/10/2.
  */
-public class weights {
+public class Weights {
     private double W_EnP;
     private double W_EcP;
     private double W_GWP;
@@ -23,7 +23,7 @@ public class weights {
     private double W_NonRenewableMaterialResourceConsumption;
 
 //    // initialize
-//    public weights(double W_enp, double W_ecp, double W_gwp, double W_odp,
+//    public Weights(double W_enp, double W_ecp, double W_gwp, double W_odp,
 //                    double W_ap, double W_ep, double W_pocp, double W_chw,
 //                    double W_cnhw, double W_twc, double W_rpeo, double W_dner,
 //                    double W_rmru, double W_dnmr)

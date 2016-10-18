@@ -2,6 +2,7 @@ package cm.controllers;
 
 import cm.App;
 import cm.models.Design;
+import javafx.beans.binding.StringBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -51,11 +52,18 @@ public class ImportTabController {
     public void nextButton(){
 
         Design design = new Design();
-        design.setDesign_ID("D01");
-        design.setDesign_Type(Designtype.getValue().toString());
-        design.setPavement_Type(Pavementtype.getValue().toString());
-        design.setNumberOfLayers(Integer.parseInt(LayerNum.getValue().toString()));
+        for (int i =0;i< Integer.parseInt(DesignNum.getValue().toString());i++){
+            StringBuilder ID = new StringBuilder("Design ");
+            String designID =ID.append(Integer.toString(i)).toString();
+            design.setDesign_ID(designID);
 
-        designMap.put(design.getDesign_ID(),design);
+            design.setDesign_Type(Designtype.getValue().toString());
+            design.setPavement_Type(Pavementtype.getValue().toString());
+            design.setNumberOfLayers(Integer.parseInt(LayerNum.getValue().toString()));
+
+            designMap.put(design.getDesign_ID(),design);
+
+        }
+
     }
 }

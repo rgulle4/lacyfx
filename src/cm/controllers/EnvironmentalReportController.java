@@ -1,6 +1,6 @@
 package cm.controllers;
 
-import cm.models.EnvAnalysisCalc;
+import cm.models.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
@@ -9,6 +9,11 @@ import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
 
 import java.util.Arrays;
+import java.util.Set;
+
+import static cm.App.designMap;
+import static cm.App.layerMap;
+import static cm.App.materialMap;
 
 /**
  * Created by Administrator on 2016/10/6.
@@ -16,8 +21,6 @@ import java.util.Arrays;
 public class EnvironmentalReportController {
 //    final static String design1 = EnvAnalysisCalc.getProductId;
 
-    private static String design1 = "Design1";
-    private static String design2 = "Design2";
     @FXML
     private CategoryAxis xAxis = new CategoryAxis();
     @FXML
@@ -47,9 +50,7 @@ public class EnvironmentalReportController {
     private  XYChart.Series<String,Number> serie_envPerf_TransportationScore = new XYChart.Series<>();
 
     public  void initialize(){
-        xAxis.setLabel("Alternative");
-        xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(design1,design2)));
-        yAxis.setLabel("Score");
+
         //Environmental analysis in details
 //        serie_GWP.setName("GWP");
 //        serie_GWP.getData().add(new XYChart.Data<>(design1, EnvAnalysisCalc.getGWP_EDP_Ctb()));
@@ -74,17 +75,42 @@ public class EnvironmentalReportController {
 //        serie_NonRenewableEnergy.getData().add(new XYChart.Data<>(design2, EnvAnalysisCalc.getTotalPrimaryEnergyConsumption_Transportation_Ctb()));
 //        sbc.getData().addAll(serie_GWP,serie_ODP,serie_AP,serie_EP,serie_POCP,serie_TotalWater,serie_NonRenewableEnergy);
 
-        //Stacked Chart for EPD_score and Transportation_score of Environmental analysis
-        EnvAnalysisCalc envAnalysisCalc = new EnvAnalysisCalc();
-        envAnalysisCalc.setEnvPerf_EPDScore();
-        envAnalysisCalc.setEnvPerf_TransportationScore();
-        serie_envPerf_EPDScore.setName("envPerf_EPDScore");
-        serie_envPerf_EPDScore.getData().add(new XYChart.Data<>(design1, EnvAnalysisCalc.getEnvPerf_EPDScore()));
-        serie_envPerf_EPDScore.getData().add(new XYChart.Data<>(design2, EnvAnalysisCalc.getEnvPerf_EPDScore()));
-        serie_envPerf_TransportationScore.setName("envPerf_TransportationScore");
-        serie_envPerf_TransportationScore.getData().add(new XYChart.Data<>(design1, EnvAnalysisCalc.getEnvPerf_TransportationScore()));
-        serie_envPerf_TransportationScore.getData().add(new XYChart.Data<>(design2, EnvAnalysisCalc.getEnvPerf_TransportationScore()));
-        sbc.getData().addAll(serie_envPerf_EPDScore,serie_envPerf_TransportationScore);
+
+        Design design;
+        Layer layer;
+        Material material;
+
+        Set<String> design_keys = designMap.keySet();
+        Set<String> layer_keys = layerMap.keySet();
+        Set<String> material_keys = materialMap.keySet();
+
+        EnvPerformanceCalc envPerformanceCalc = new EnvPerformanceCalc();
+        envPerformanceCalc.EnvAnalysisCalc();
+
+        for (String key_design:design_keys){
+            design = designMap.get(key_design);
+            xAxis.setLabel("Alternative");
+            xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(design.getDesign_ID(),design.getDesign_ID())));
+            yAxis.setLabel("Score");
+
+            serie_envPerf_EPDScore.setName("envPerf_EPDScore");
+            serie_envPerf_TransportationScore.setName("envPerf_TransportationScore");
+            //Stacked Chart for EPD_score and Transportation_score of Environmental analysis
+
+            serie_envPerf_EPDScore.getData().add(new XYChart.Data<>(design.getDesign_ID(), design.getEnvPerfAnalysis_EPDScore_Design()));
+            serie_envPerf_TransportationScore.getData().add(new XYChart.Data<>(design.getDesign_ID(), design.getEnvPerfAnalysis_TransportationScore_Design()));
+            sbc.getData().addAll(serie_envPerf_EPDScore,serie_envPerf_TransportationScore);
+            for(String key_layer:layer_keys){
+
+                for (String key_material:material_keys){
+
+                }
+            }
+        }
+
+
+
+
     }
 
 

@@ -33,7 +33,7 @@ public class EnvAnalysisCalc {
     static double Rmru;
     static double Dnmr;
 
-    //weights
+    //Weights
     static double wEnp;
     static double wEcp;
     static double wGwp;

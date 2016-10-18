@@ -38,6 +38,7 @@ public class Material {
     private double EnvPerfAnalysis_EPDScore_Material;
     private double EnvPerfAnalysis_TransportationScore_Material;
 
+
     public String getMaterial_ID() {
         return Material_ID;
     }

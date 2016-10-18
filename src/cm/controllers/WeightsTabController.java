@@ -1,7 +1,6 @@
 package cm.controllers;
 
-import cm.models.EnvAnalysisCalc;
-import cm.models.weights;
+import cm.models.Weights;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,10 +8,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 import static cm.App.weightsMap;
-import static cm.models.EnvAnalysisCalc.setwEnp;
 
 /**
- * Controller for the weights tab.
+ * Controller for the Weights tab.
  */
 public class WeightsTabController {
 
@@ -48,7 +46,7 @@ public class WeightsTabController {
     }
     @FXML
     private void predefineWeight(){
-        // default predefined weights
+        // default predefined Weights
         if (predefinedweightComboBox.getSelectionModel().isSelected(0)){
             gwpWeightTextField.setText("15.0");
             odpWeightTextField.setText("10.0");
@@ -60,7 +58,7 @@ public class WeightsTabController {
             PrimaryEnergyUseWeightTextField.setText("15.0");
             MaterialResourceUseWeightTextField.setText("10.0");
         }
-        // equal predefined weights
+        // equal predefined Weights
         if (predefinedweightComboBox.getSelectionModel().isSelected(1)){
             gwpWeightTextField.setText("25.0");
             odpWeightTextField.setText("10.0");
@@ -72,7 +70,7 @@ public class WeightsTabController {
             PrimaryEnergyUseWeightTextField.setText("25.0");
             MaterialResourceUseWeightTextField.setText("0.0");
         }
-        // user_defined weights
+        // user_defined Weights
         if (predefinedweightComboBox.getSelectionModel().isSelected(2)){
             gwpWeightTextField.setText("29.0");
             odpWeightTextField.setText("2.0");
@@ -141,12 +139,12 @@ public class WeightsTabController {
         double w_mru = Double.parseDouble(MaterialResourceUseWeightTextField.getText())/100.0;
         // TO DO
         // A warning to information everyTextfield should be valued and there is a default value for everyTextfield
-        //weights W = new weights(w_enp,w_ecp,w_gwp,w_odp,w_ap,w_ep,w_pocp,w_cw,w_cnhw,w_twc,w_ap,w_dner,w_mru,w_dnmr);
+        //Weights W = new Weights(w_enp,w_ecp,w_gwp,w_odp,w_ap,w_ep,w_pocp,w_cw,w_cnhw,w_twc,w_ap,w_dner,w_mru,w_dnmr);
 
         /*
         Set and store Weights
          */
-        weights wgts = new weights();
+        Weights wgts = new Weights();
         wgts.setW_EnP(w_enp);
         wgts.setW_EcP(w_ecp);
         wgts.setW_GWP(w_gwp);
@@ -159,10 +157,12 @@ public class WeightsTabController {
         wgts.setW_TotalPrimaryEnergyConsumption(w_peu);
         wgts.setW_MaterialResourceConsumption(w_mru);
 
-        weightsMap.put("D1",wgts);
+        String predinfinedWeight = predefinedweightComboBox.getValue().toString();
+
+        weightsMap.put(predinfinedWeight,wgts);
 
 
-        System.out.println("Set up weights in the static method EnvAnalysis_Calc");
+        System.out.println("Set up Weights in the static method EnvAnalysis_Calc");
     }
 
 }
