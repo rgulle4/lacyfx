@@ -12,6 +12,7 @@ and sustainability factors.
 ## Dependencies
 
 - [sqlite-jdbc-3.8.11.2.jar](https://bitbucket.org/xerial/sqlite-jdbc/downloads/sqlite-jdbc-3.8.11.2.jar)
+- [gson-2.3.1.jar](http://central.maven.org/maven2/com/google/code/gson/gson/2.3.1/gson-2.3.1.jar)
 - Get these files from Neveen:`rt.db` and `test.db`
 
 ## Running the program
