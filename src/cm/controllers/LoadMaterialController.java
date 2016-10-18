@@ -4,6 +4,7 @@ import cm.App;
 import cm.models.EnvAnalysisCalc;
 import cm.models.AlternativeMat;
 import cm.models.EPDDatabase;
+import cm.models.Material;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,6 +14,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
+
+import static cm.App.materialMap;
 
 /**
  * Created by Administrator on 2016/9/28.
@@ -171,23 +174,42 @@ public class LoadMaterialController {
         updatecvf();        //update conversion factor
         //test the consistency of data
         for (int i = 0; i < AlterMaterials.size(); i++) {
-            EnvAnalysisCalc.setGwp(AlterMaterials.get(i).getGWP());
-            EnvAnalysisCalc.setOdp(AlterMaterials.get(i).getODP());
-            EnvAnalysisCalc.setAp(AlterMaterials.get(i).getAP());
-            EnvAnalysisCalc.setEp(AlterMaterials.get(i).getEP());
-            EnvAnalysisCalc.setPocp(AlterMaterials.get(i).getPOCP());
-            EnvAnalysisCalc.setChw(AlterMaterials.get(i).getConcreteHazardousWaste());
-            EnvAnalysisCalc.setCnhw(AlterMaterials.get(i).getConcreteNonHazardousWaste());
-            EnvAnalysisCalc.setTwc(AlterMaterials.get(i).getTotalWaterConsumption());
-            EnvAnalysisCalc.setRpeu(AlterMaterials.get(i).getRenewablePrimaryEnergyUse());
-            EnvAnalysisCalc.setDner(AlterMaterials.get(i).getNonRenewableEnergyUse());//wrong
-            EnvAnalysisCalc.setRmru(AlterMaterials.get(i).getRenewableMaterialResourcesUse());
-            EnvAnalysisCalc.setDnmr(AlterMaterials.get(i).getNonRenewableMaterialResource());//wrong
-            EnvAnalysisCalc.setTpeu(AlterMaterials.get(i).getTotalPrimaryEnergyConsumption());//wrong
+            Material material = new Material();
+            material.setGWP(AlterMaterials.get(i).getGWP());
+            material.setODP(AlterMaterials.get(i).getODP());
+            material.setAP(AlterMaterials.get(i).getAP());
+            material.setEP(AlterMaterials.get(i).getEP());
+            material.setPOCP(AlterMaterials.get(i).getPOCP());
+            material.setConcreteHazardousWaste(AlterMaterials.get(i).getConcreteHazardousWaste());
+            material.setConcreteNonHazardousWaste(AlterMaterials.get(i).getConcreteNonHazardousWaste());
+            material.setTotalWaterConsumption(AlterMaterials.get(i).getTotalWaterConsumption());
+            material.setRenewablePrimaryEnergyUse(AlterMaterials.get(i).getRenewablePrimaryEnergyUse());
+            material.setNonRenewableEnergyUse(AlterMaterials.get(i).getNonRenewableEnergyUse());
+            material.setRenewableMaterialResourcesUse(AlterMaterials.get(i).getRenewableMaterialResourcesUse());
+            material.setNonRenewableMaterialResource(AlterMaterials.get(i).getNonRenewableMaterialResource());
+            material.setTotalPrimaryEnergyConsumption(AlterMaterials.get(i).getTotalPrimaryEnergyConsumption());
+            material.setMixNum(AlterMaterials.get(i).getMixNum());
+            materialMap.put(material.getMixNum(),material);
 
-            System.out.println(EnvAnalysisCalc.getGwp()+" " + EnvAnalysisCalc.getOdp()+" "+ EnvAnalysisCalc.getAp()+" " + EnvAnalysisCalc.getEp()+ " "+
-                                EnvAnalysisCalc.getPocp()+" " + EnvAnalysisCalc.getTwc()+" "+ EnvAnalysisCalc.getChw()+" " + EnvAnalysisCalc.getCnhw()+ " "+
-                                EnvAnalysisCalc.getDner()+ " "+ EnvAnalysisCalc.getRpeu()+" "+ EnvAnalysisCalc.getRmru()+ " "+ EnvAnalysisCalc.getDnmr()+"\nTPEC: "+EnvAnalysisCalc.getTpeu());
+
+
+//            EnvAnalysisCalc.setGwp(AlterMaterials.get(i).getGWP());
+//            EnvAnalysisCalc.setOdp(AlterMaterials.get(i).getODP());
+//            EnvAnalysisCalc.setAp(AlterMaterials.get(i).getAP());
+//            EnvAnalysisCalc.setEp(AlterMaterials.get(i).getEP());
+//            EnvAnalysisCalc.setPocp(AlterMaterials.get(i).getPOCP());
+//            EnvAnalysisCalc.setChw(AlterMaterials.get(i).getConcreteHazardousWaste());
+//            EnvAnalysisCalc.setCnhw(AlterMaterials.get(i).getConcreteNonHazardousWaste());
+//            EnvAnalysisCalc.setTwc(AlterMaterials.get(i).getTotalWaterConsumption());
+//            EnvAnalysisCalc.setRpeu(AlterMaterials.get(i).getRenewablePrimaryEnergyUse());
+//            EnvAnalysisCalc.setDner(AlterMaterials.get(i).getNonRenewableEnergyUse());//wrong
+//            EnvAnalysisCalc.setRmru(AlterMaterials.get(i).getRenewableMaterialResourcesUse());
+//            EnvAnalysisCalc.setDnmr(AlterMaterials.get(i).getNonRenewableMaterialResource());//wrong
+//            EnvAnalysisCalc.setTpeu(AlterMaterials.get(i).getTotalPrimaryEnergyConsumption());//wrong
+
+//            System.out.println(EnvAnalysisCalc.getGwp()+" " + EnvAnalysisCalc.getOdp()+" "+ EnvAnalysisCalc.getAp()+" " + EnvAnalysisCalc.getEp()+ " "+
+//                                EnvAnalysisCalc.getPocp()+" " + EnvAnalysisCalc.getTwc()+" "+ EnvAnalysisCalc.getChw()+" " + EnvAnalysisCalc.getCnhw()+ " "+
+//                                EnvAnalysisCalc.getDner()+ " "+ EnvAnalysisCalc.getRpeu()+" "+ EnvAnalysisCalc.getRmru()+ " "+ EnvAnalysisCalc.getDnmr()+"\nTPEC: "+EnvAnalysisCalc.getTpeu());
         }
     }
 

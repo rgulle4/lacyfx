@@ -1,5 +1,9 @@
 package cm.models;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
+
 /**
  * A material is a component of a layer (along with a defined thickness). A
  * material will also probably correspond to a row in the EPD database.
@@ -158,8 +162,10 @@ public class Material {
         return TotalPrimaryEnergyConsumption;
     }
 
-    public void setTotalPrimaryEnergyConsumption(double totalPrimaryEnergyConsumption) {
-        TotalPrimaryEnergyConsumption = totalPrimaryEnergyConsumption;
+    public void setTotalPrimaryEnergyConsumption(String totalPrimaryEnergyConsumption)throws ParseException {
+        NumberFormat format = NumberFormat.getInstance(Locale.US);
+        Number number = format.parse(totalPrimaryEnergyConsumption);
+        TotalPrimaryEnergyConsumption = number.doubleValue();
     }
 
     public double getRenewablePrimaryEnergyUse() {
