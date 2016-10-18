@@ -66,5 +66,6 @@ public class App extends Application {
     public static Map<String,Design> designMap = new Hashtable<String,Design>();
     public static Map<String,Layer> layerMap = new Hashtable<String,Layer>();
     public static Map<String,Material> materialMap = new Hashtable<String,Material>();
+    public static Map<String,weights> weightsMap = new Hashtable<String,weights>();
 //    public static Map<String,>
 }

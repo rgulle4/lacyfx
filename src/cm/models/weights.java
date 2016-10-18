@@ -22,28 +22,28 @@ public class weights {
     private double W_RenewableMaterialResourceConsumption;
     private double W_NonRenewableMaterialResourceConsumption;
 
-    // initialize
-    public weights(double W_enp, double W_ecp, double W_gwp, double W_odp,
-                    double W_ap, double W_ep, double W_pocp, double W_chw,
-                    double W_cnhw, double W_twc, double W_rpeo, double W_dner,
-                    double W_rmru, double W_dnmr)
-    {
-        this.W_EnP = W_enp;
-        this.W_EcP = W_ecp;
-        this.W_GWP = W_gwp;
-        this.W_ODP = W_odp;
-        this.W_AP = W_ap;
-        this.W_EP = W_ep;
-        this.W_POCP = W_pocp;
-        this.W_ConcretHazardousWaste = W_chw;
-        this.W_ConcretNonHazardousWaste = W_cnhw;
-        this.W_TotalWaterConsumption = W_twc;
-        this.W_RenewableEnergyConsumption = W_rpeo;
-        this.W_NonRenewableEnergyConsumption = W_dner;
-        this.W_RenewableMaterialResourceConsumption = W_rmru;
-        this.W_NonRenewableMaterialResourceConsumption = W_dnmr;
-
-    }
+//    // initialize
+//    public weights(double W_enp, double W_ecp, double W_gwp, double W_odp,
+//                    double W_ap, double W_ep, double W_pocp, double W_chw,
+//                    double W_cnhw, double W_twc, double W_rpeo, double W_dner,
+//                    double W_rmru, double W_dnmr)
+//    {
+//        this.W_EnP = W_enp;
+//        this.W_EcP = W_ecp;
+//        this.W_GWP = W_gwp;
+//        this.W_ODP = W_odp;
+//        this.W_AP = W_ap;
+//        this.W_EP = W_ep;
+//        this.W_POCP = W_pocp;
+//        this.W_ConcretHazardousWaste = W_chw;
+//        this.W_ConcretNonHazardousWaste = W_cnhw;
+//        this.W_TotalWaterConsumption = W_twc;
+//        this.W_RenewableEnergyConsumption = W_rpeo;
+//        this.W_NonRenewableEnergyConsumption = W_dner;
+//        this.W_RenewableMaterialResourceConsumption = W_rmru;
+//        this.W_NonRenewableMaterialResourceConsumption = W_dnmr;
+//
+//    }
     public double getW_EnP() {
         return W_EnP;
     }

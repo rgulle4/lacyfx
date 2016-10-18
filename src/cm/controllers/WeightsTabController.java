@@ -1,11 +1,15 @@
 package cm.controllers;
 
 import cm.models.EnvAnalysisCalc;
+import cm.models.weights;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+
+import static cm.App.weightsMap;
+import static cm.models.EnvAnalysisCalc.setwEnp;
 
 /**
  * Controller for the weights tab.
@@ -25,7 +29,7 @@ public class WeightsTabController {
     @FXML public TextField MaterialResourceUseWeightTextField;
     @FXML public TextField SumWeightsTextField;
 
-    ObservableList<String> preDefinedWeight = FXCollections.observableArrayList("Default","Equal Weights","User_Defined");
+    ObservableList<String> preDefinedWeight = FXCollections.observableArrayList("Default","test1","BEES Stakeholder Pane","EPA Science Advisory Board-based","User_Defined");
     @FXML public ComboBox predefinedweightComboBox;
 
     // initialization
@@ -70,6 +74,28 @@ public class WeightsTabController {
         }
         // user_defined weights
         if (predefinedweightComboBox.getSelectionModel().isSelected(2)){
+            gwpWeightTextField.setText("29.0");
+            odpWeightTextField.setText("2.0");
+            apWeightTextField.setText("3.0");
+            epWeightTextField.setText("6.0");
+            pocpWeightTextField.setText("4.0");
+            concreteWasteWeightTextField.setText("7.0");
+            totWaterConsumptionWeightTextField.setText("8.0");
+            PrimaryEnergyUseWeightTextField.setText("10.0");
+            MaterialResourceUseWeightTextField.setText("0.0");
+        }
+        if (predefinedweightComboBox.getSelectionModel().isSelected(3)){
+            gwpWeightTextField.setText("16.0");
+            odpWeightTextField.setText("5.0");
+            apWeightTextField.setText("5.0");
+            epWeightTextField.setText("5.0");
+            pocpWeightTextField.setText("6.0");
+            concreteWasteWeightTextField.setText("11.0");
+            totWaterConsumptionWeightTextField.setText("3.0");
+            PrimaryEnergyUseWeightTextField.setText("5.0");
+            MaterialResourceUseWeightTextField.setText("0.0");
+        }
+        if (predefinedweightComboBox.getSelectionModel().isSelected(4)){
             gwpWeightTextField.setText("0.0");
             odpWeightTextField.setText("0.0");
             apWeightTextField.setText("0.0");
@@ -120,17 +146,21 @@ public class WeightsTabController {
         /*
         Set and store Weights
          */
-        EnvAnalysisCalc.setwEnp(w_enp);
-        EnvAnalysisCalc.setwEcp(w_ecp);
-        EnvAnalysisCalc.setwGwp(w_gwp);
-        EnvAnalysisCalc.setwOdp(w_odp);
-        EnvAnalysisCalc.setwAp(w_ap);
-        EnvAnalysisCalc.setwEp(w_ep);
-        EnvAnalysisCalc.setwPocp(w_pocp);
-        EnvAnalysisCalc.setwChw(w_cw);
-        EnvAnalysisCalc.setwTwc(w_twc);
-        EnvAnalysisCalc.setwTpec(w_peu);
-        EnvAnalysisCalc.setwRmru(w_mru);
+        weights wgts = new weights();
+        wgts.setW_EnP(w_enp);
+        wgts.setW_EcP(w_ecp);
+        wgts.setW_GWP(w_gwp);
+        wgts.setW_ODP(w_odp);
+        wgts.setW_AP(w_ap);
+        wgts.setW_EP(w_ep);
+        wgts.setW_POCP(w_pocp);
+        wgts.setW_ConcreteWaste(w_cw);
+        wgts.setW_TotalWaterConsumption(w_twc);
+        wgts.setW_TotalPrimaryEnergyConsumption(w_peu);
+        wgts.setW_MaterialResourceConsumption(w_mru);
+
+        weightsMap.put("D1",wgts);
+
 
         System.out.println("Set up weights in the static method EnvAnalysis_Calc");
     }
