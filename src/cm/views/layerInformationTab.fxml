@@ -25,13 +25,13 @@
                     <children>
                         <TabPane prefHeight="317.0" prefWidth="698.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <tabs>
-                                <Tab fx:id="Tab_D1" onSelectionChanged="#initialize" text="1st Design">
+                                <Tab fx:id="DesginTab" onSelectionChanged="#initialize" text="Design1">
                                     <content>
                                         <AnchorPane accessibleText="ddd" prefHeight="200.0" prefWidth="200.0">
                                             <children>
                                                 <TabPane layoutX="69.0" layoutY="106.0" prefHeight="328.0" prefWidth="698.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                     <tabs>
-                                                        <Tab fx:id="Tab_layer1" onSelectionChanged="#initialize" text="Layer 1">
+                                                        <Tab fx:id="LayerTab" onSelectionChanged="#initialize" text="Layer1">
                                                             <content>
                                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                                     <children>
@@ -50,7 +50,7 @@
                                                                 </AnchorPane>
                                                             </content>
                                                         </Tab>
-                                          <Tab fx:id="Tab_layer2" onSelectionChanged="#initialize" text="Layer 2">
+                                          <Tab fx:id="LayerTab" onSelectionChanged="#initialize" text="Layer2">
                                              <content>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                    <children>
@@ -75,13 +75,13 @@
                                         </AnchorPane>
                                     </content>
                                 </Tab>
-                        <Tab fx:id="Tab_D2" onSelectionChanged="#initialize" text="2 nd Design">
+                        <Tab fx:id="DesginTab" onSelectionChanged="#initialize" text="Design2">
                            <content>
                               <AnchorPane accessibleText="ddd" prefHeight="200.0" prefWidth="200.0">
                                  <children>
                                     <TabPane layoutX="69.0" layoutY="106.0" prefHeight="328.0" prefWidth="698.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <tabs>
-                                          <Tab fx:id="Tab_layer1" onSelectionChanged="#initialize" text="Layer 1">
+                                          <Tab fx:id="LayerTab" onSelectionChanged="#initialize" text="Layer1">
                                              <content>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                    <children>
@@ -100,7 +100,7 @@
                                                 </AnchorPane>
                                              </content>
                                           </Tab>
-                                          <Tab onSelectionChanged="#initialize" text="Layer 2">
+                                          <Tab fx:id="LayerTab" onSelectionChanged="#initialize" text="Layer2">
                                              <content>
                                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                                    <children>

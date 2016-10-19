@@ -52,8 +52,8 @@ public class ImportTabController {
     public void nextButton(){
 
         Design design = new Design();
-        for (int i =0;i< Integer.parseInt(DesignNum.getValue().toString());i++){
-            StringBuilder ID = new StringBuilder("Design ");
+        for (int i =1;i<= Integer.parseInt(DesignNum.getValue().toString());i++){
+            StringBuilder ID = new StringBuilder("Design");
             String designID =ID.append(Integer.toString(i)).toString();
             design.setDesign_ID(designID);
 

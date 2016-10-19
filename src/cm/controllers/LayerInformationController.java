@@ -6,9 +6,7 @@ import cm.models.Layer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.util.Set;
@@ -26,15 +24,20 @@ public class LayerInformationController {
 
 
     @FXML
-    //Design 1
+    //All the items in a layerInformation tab
     public ComboBox comboLayerType;
     @FXML
     public ChoiceBox ChoiceBox_ThicknessUnit;
     @FXML
     public TextField TextField_Thickness;
-
+    @FXML
+    public Tab DesginTab;
+    @FXML
+    public Tab LayerTab;
 
     private App main;
+
+    private StringBuilder sb;
 
     @FXML
     private void initialize(){
@@ -46,44 +49,33 @@ public class LayerInformationController {
         TextField_Thickness.setText("6.0");
 
     }
-    private Design design = new Design();
+
     private Layer layer = new Layer();
     @FXML
     private void LoadMatBtn() throws IOException {
 
 
-        Set<String> design_keys = designMap.keySet();
-        for (String key_design: design_keys){
-            int layerNum = designMap.get(key_design).getNumberOfLayers();
-            for (int i = 0;i<=layerNum;i++){
-
-                if (ChoiceBox_ThicknessUnit.getValue() == "meter"){
-                    layer.setThickness(Double.parseDouble(TextField_Thickness.getText()));
-                    double Volume = layer.getThickness()*layer.getLengthness()*layer.getWidth();
-                    layer.setVolume(Volume);
-
-                }
-                if (ChoiceBox_ThicknessUnit.getValue() == "inch"){
-
-                    layer.setThickness(Double.parseDouble(TextField_Thickness.getText())*0.0254);
-                    double Volume = layer.getThickness()*layer.getLengthness()*layer.getWidth();
-                    layer.setVolume(Volume);
-
-                }
-                StringBuilder sb = new StringBuilder(designMap.get(key_design).getDesign_ID());
-                sb.append("L"+Integer.toString(i));
-                String layerID = sb.toString();
-                layer.setLayer_ID(layerID);
-
-                layer.setLayerType(this.comboLayerType.getValue().toString());
-                //save data in the layerMap
-                layerMap.put(layer.getLayer_ID(),layer);
-                System.out.println("Volume:  "+layerMap.get(layer.getLayer_ID()).getVolume()+"   LayerType:  "+layerMap.get(layer.getLayer_ID()).getLayerType());
-            }
+        if (ChoiceBox_ThicknessUnit.getValue() == "meter") {
+            layer.setThickness(Double.parseDouble(TextField_Thickness.getText()));
+            double Volume = layer.getThickness() * layer.getLengthness() * layer.getWidth();
+            layer.setVolume(Volume);
 
         }
+        if (ChoiceBox_ThicknessUnit.getValue() == "inch") {
 
+            layer.setThickness(Double.parseDouble(TextField_Thickness.getText()) * 0.0254);
+            double Volume = layer.getThickness() * layer.getLengthness() * layer.getWidth();
+            layer.setVolume(Volume);
 
+        }
+//                sb.append("L"+Integer.toString(i));
+//                String layerID = sb.toString();
+//                layer.setLayer_ID(layerID);
+//
+//                layer.setLayerType(this.comboLayerType.getValue().toString());
+//                //save data in the layerMap
+//                layerMap.put(layer.getLayer_ID(),layer);
+//                System.out.println("Volume:  "+layerMap.get(layer.getLayer_ID()).getVolume()+"   LayerType:  "+layerMap.get(layer.getLayer_ID()).getLayerType());
 
 
         main.showLoadMaterial();

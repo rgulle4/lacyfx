@@ -189,7 +189,7 @@ public class LoadMaterialController {
             material.setNonRenewableMaterialResource(AlterMaterials.get(i).getNonRenewableMaterialResource());
             material.setTotalPrimaryEnergyConsumption(AlterMaterials.get(i).getTotalPrimaryEnergyConsumption());
             material.setMixNum(AlterMaterials.get(i).getMixNum());
-            materialMap.put(material.getMaterial_ID(),material);
+//            materialMap.put(material.getMaterial_ID(),material);
 
         }
     }
