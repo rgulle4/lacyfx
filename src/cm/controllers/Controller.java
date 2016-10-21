@@ -32,5 +32,6 @@ public class Controller {
     public static void main(String[] args) {
         foo();
         Model.foo();
+        // both of those work
     }
 }
