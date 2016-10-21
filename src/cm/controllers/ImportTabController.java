@@ -153,7 +153,7 @@ public class ImportTabController {
             PavementType[i].setItems(PavementType_overlay);
         }
     }
-    public void nextButton(){
+    public void SaveButton(){
 
         Design design = new Design();
         for (int i =1;i<= Integer.parseInt(DesignNum.getValue().toString());i++){

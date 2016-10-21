@@ -31,9 +31,9 @@ public class LayerInformationController {
     @FXML
     public TextField TextField_Thickness;
     @FXML
-    public Tab DesginTab;
+    public Tab DesginTab1;
     @FXML
-    public Tab LayerTab;
+    public Tab LayerTab1;
 
     private App main;
 
@@ -46,7 +46,7 @@ public class LayerInformationController {
         comboLayerType.setItems(LayerType);
         ChoiceBox_ThicknessUnit.setValue("inch");
         ChoiceBox_ThicknessUnit.setItems(ThicknessUnit);
-        TextField_Thickness.setText("6.0");
+        TextField_Thickness.setText("10.0");
 
     }
 
