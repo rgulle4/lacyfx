@@ -21,12 +21,17 @@ public class Layer {
     private double volume;
     private String volumeUnit;
 
+    // Layer type... TODO: should we enumerate this?
+    //   - Asphalt Concrete
+    //   - Portland Cement Concrete
+    //   - Aggregate
+    private String layerType;
+
     /* == "Old" Stuff =================================================== */
 
     private double EnvPerfAnalysis_TotalScore_Layer;
     private double EnvPerfAnalysis_EPDScore_Layer;
     private double EnvPerfAnalysis_TransportationScore_Layer;
-    private String LayerType;
 
     //distributed contribution in details
     private double GWP_EDP_Ctb;
@@ -118,11 +123,11 @@ public class Layer {
     }
 
     public String getLayerType() {
-        return LayerType;
+        return layerType;
     }
 
     public void setLayerType(String layerType) {
-        LayerType = layerType;
+        this.layerType = layerType;
     }
 
     public double getGWP_EDP_Ctb() {
