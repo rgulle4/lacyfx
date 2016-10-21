@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<!-- This tab is where the user enters the Weights of each category for the final score -->
+<!-- This tab is where the user enters the weights of each category for the final score -->
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.controllers.WeightsTabController">
     <children>
