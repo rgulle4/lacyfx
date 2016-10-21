@@ -57,25 +57,25 @@ public class LayerInformationController {
 
         if (ChoiceBox_ThicknessUnit.getValue() == "meter") {
             layer.setThickness(Double.parseDouble(TextField_Thickness.getText()));
-            double Volume = layer.getThickness() * layer.getLengthness() * layer.getWidth();
+            double Volume = layer.getThickness() * layer.getLength() * layer.getWidth();
             layer.setVolume(Volume);
 
         }
         if (ChoiceBox_ThicknessUnit.getValue() == "inch") {
 
             layer.setThickness(Double.parseDouble(TextField_Thickness.getText()) * 0.0254);
-            double Volume = layer.getThickness() * layer.getLengthness() * layer.getWidth();
+            double Volume = layer.getThickness() * layer.getLength() * layer.getWidth();
             layer.setVolume(Volume);
 
         }
 //                sb.append("L"+Integer.toString(i));
 //                String layerID = sb.toString();
-//                layer.setLayer_ID(layerID);
+//                layer.setLayerId(layerID);
 //
 //                layer.setLayerType(this.comboLayerType.getValue().toString());
 //                //save data in the layerMap
-//                layerMap.put(layer.getLayer_ID(),layer);
-//                System.out.println("Volume:  "+layerMap.get(layer.getLayer_ID()).getVolume()+"   LayerType:  "+layerMap.get(layer.getLayer_ID()).getLayerType());
+//                layerMap.put(layer.getLayerId(),layer);
+//                System.out.println("Volume:  "+layerMap.get(layer.getLayerId()).getVolume()+"   LayerType:  "+layerMap.get(layer.getLayerId()).getLayerType());
 
 
         main.showLoadMaterial();

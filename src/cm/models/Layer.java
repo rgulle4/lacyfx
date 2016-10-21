@@ -10,16 +10,19 @@ public class Layer {
     // A layer has one material
     private Material material;
 
+    // A layerId is probably "layer1", "layer2", etc.
+    private String layerId;
+
+    // Dimensions... the user specifies thickness and thicknessUnit.
+    private double length = 1609.34;        //1 mile = 1609.34 meter
+    private double width = 12*0.3048;       //1 ft = 0.3048 meter;
+    private double thickness;
+    private String thicknessUnit;
+    private double volume;
+    private String volumeUnit;
 
     /* == "Old" Stuff =================================================== */
 
-    private String Layer_ID;
-    private double Lengthness= 1609.34;        //1 mile = 1609.34 meter
-    private double Width = 12*0.3048;       //1 ft = 0.3048 meter;
-    private double Thickness;
-    private String ThicknessUnit;
-    private double Volume;
-    private String VolumneUnit;
     private double EnvPerfAnalysis_TotalScore_Layer;
     private double EnvPerfAnalysis_EPDScore_Layer;
     private double EnvPerfAnalysis_TransportationScore_Layer;
@@ -42,52 +45,52 @@ public class Layer {
     private double TW_Transportation_Ctb;      // Total Water Consumption
     private double TPEC_Transportation_Ctb;    // Total Primary Energy Consumption
 
-    public double getLengthness() {
-        return Lengthness;
+    public double getLength() {
+        return length;
     }
 
     public double getWidth() {
-        return Width;
+        return width;
     }
 
-    public String getLayer_ID() {
-        return Layer_ID;
+    public String getLayerId() {
+        return layerId;
     }
 
-    public void setLayer_ID(String layer_ID) {
-        Layer_ID = layer_ID;
+    public void setLayerId(String layerId) {
+        this.layerId = layerId;
     }
 
     public double getThickness() {
-        return Thickness;
+        return thickness;
     }
 
     public void setThickness(double thickness) {
-        Thickness = thickness;
+        this.thickness = thickness;
     }
 
     public String getThicknessUnit() {
-        return ThicknessUnit;
+        return thicknessUnit;
     }
 
     public void setThicknessUnit(String thicknessUnit) {
-        ThicknessUnit = thicknessUnit;
+        this.thicknessUnit = thicknessUnit;
     }
 
     public double getVolume() {
-        return Volume;
+        return volume;
     }
 
     public void setVolume(double volume) {
-        Volume = volume;
+        this.volume = volume;
     }
 
-    public String getVolumneUnit() {
-        return VolumneUnit;
+    public String getVolumeUnit() {
+        return volumeUnit;
     }
 
-    public void setVolumneUnit(String volumneUnit) {
-        VolumneUnit = volumneUnit;
+    public void setVolumeUnit(String volumeUnit) {
+        this.volumeUnit = volumeUnit;
     }
 
     public double getEnvPerfAnalysis_TotalScore_Layer() {
