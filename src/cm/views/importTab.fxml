@@ -10,9 +10,9 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.controllers.ImportTabController">
     <children>
-        <ButtonBar layoutX="558.0" layoutY="474.0" prefHeight="40.0" prefWidth="200.0">
+        <ButtonBar layoutX="550" layoutY="450" prefHeight="40.0" prefWidth="200.0">
             <buttons>
-                <Button mnemonicParsing="false" onAction="#nextButton" text="Next" />
+                <Button mnemonicParsing="false" onAction="#SaveButton" text="Save" />
                 <Button mnemonicParsing="false" text="Close" />
             </buttons>
         </ButtonBar>

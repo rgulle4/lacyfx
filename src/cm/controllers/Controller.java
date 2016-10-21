@@ -14,17 +14,9 @@ public class Controller {
 
     @FXML
     private TabPane mainTabPane;
-    @FXML
-    private Tab layerInformation;
 
 
-
-    @FXML
-    public void initializae(){
-        mainTabPane.getTabs().add(1,layerInformation);
-    }
-
-    public void importTab_next(){
-        mainTabPane.getSelectionModel().select(layerInformation);
+    public void NextButton(){
+        mainTabPane.getSelectionModel().select(mainTabPane.getSelectionModel().getSelectedIndex()+1);
     }
 }

@@ -124,7 +124,7 @@ public class WeightsTabController {
     }
 
     @FXML
-    public void nextButton(){
+    public void SaveButton(){
 
         double w_enp = Double.parseDouble(envPerWeightTextField.getText())/100.0;
         double w_ecp = Double.parseDouble(encPerWeightTextField.getText())/100.0;
