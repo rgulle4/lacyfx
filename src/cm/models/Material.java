@@ -10,8 +10,6 @@ import java.util.Locale;
  */
 public class Material {
 
-
-
     //EPD
     private String Material_ID;
     private double CS;

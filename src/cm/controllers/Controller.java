@@ -1,6 +1,5 @@
 package cm.controllers;
 
-import cm.models.Model;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -12,8 +11,6 @@ import cm.controllers.WeightsTabController;
  * The main controller.
  */
 public class Controller {
-
-
 
     @FXML
     private TabPane mainTabPane;

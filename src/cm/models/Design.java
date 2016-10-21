@@ -1,20 +1,11 @@
 package cm.models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * A design is a pavement design, consisting of a number of layers. Each layer
  * has a thickness, and a material.
  */
 public class Design {
 
-    /* -- new stuff ------------------------------------ */
-
-    List<Layer> layers = new ArrayList<>();
-
-
-    /* -- existing stuff below ------------------------- */
     private String Design_ID;
     private String Design_Type;
     private String Pavement_Type;

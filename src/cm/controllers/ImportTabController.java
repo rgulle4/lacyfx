@@ -1,7 +1,6 @@
 package cm.controllers;
 
 import cm.models.Design;
-import cm.models.Model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,10 +14,6 @@ import static cm.App.designMap;
  * Created by royg59 on 9/21/16.
  */
 public class ImportTabController {
-
-
-
-
     ObservableList<String> DesignType = FXCollections.observableArrayList("New pavement","Overlay");       //Design type of pavement
     ObservableList<String> PavementType_newPavement = FXCollections.observableArrayList("Flexible pavement","Joint Reinforced concrete pavement"); //Pavement type
     ObservableList<String> PavementType_overlay = FXCollections.observableArrayList("AC over AC","AC over JRCP"); //Pavement type
@@ -146,16 +141,6 @@ public class ImportTabController {
             for (int i = Integer.parseInt(DesignNum.getValue().toString()); i<3;i++){
                 VBox[i].setVisible(false);
             }
-
-            // instantiate 3 design objects
-            Design design1 = new Design();
-            Design design2 = new Design();
-            Design design3 = new Design();
-
-            // shove them into the hashmap
-            Model.designs.put("Design1", design1);
-            Model.designs.put("Design2", design2);
-            Model.designs.put("Design3", design3);
         }
 
     }
@@ -170,9 +155,6 @@ public class ImportTabController {
     }
     public void nextButton(){
 
-        LayerIn
-
-
         Design design = new Design();
         for (int i =1;i<= Integer.parseInt(DesignNum.getValue().toString());i++){
             StringBuilder ID = new StringBuilder("Design");
@@ -183,23 +165,7 @@ public class ImportTabController {
             design.setPavement_Type(PavementType[i-1].getValue().toString());
             design.setNumberOfLayers(Integer.parseInt(LayerNum[i-1].getValue().toString()));
 
-
             designMap.put(design.getDesign_ID(),design);
-
-            Model.designs.get("design1").setDesign_Type(
-                  Designtype[0].getValue().toString()
-            );
-            Model.designs.get("design1").setPavement_Type(
-                  PavementType[0].getValue().toString()
-            );
-            Model.designs.get("design1").setNumberOfLayers(
-                  Integer.parseInt(LayerNum[0].getValue().toString())
-            );
-
-            DesignT
-
-
-
         }
         System.out.println("All the basic design information was saved!!");
     }
