@@ -21,10 +21,13 @@ public class Layer {
     private double volume;
     private String volumeUnit;
 
-    // Layer type... TODO: should we enumerate this?
+    // Layer type determines which material database to use.
+    // Maybe we should enumerate these?
     //   - Asphalt Concrete
     //   - Portland Cement Concrete
     //   - Aggregate
+    // Right now, we just have `db.rt`, which is for Portland
+    // Cement Concrete.
     private String layerType;
 
     /* == "Old" Stuff =================================================== */
