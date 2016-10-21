@@ -160,16 +160,13 @@ public class ImportTabController {
             StringBuilder ID = new StringBuilder("Design");
             String designID =ID.append(Integer.toString(i)).toString();
             design.setDesign_ID(designID);
-            StringBuilder sb_designType = new StringBuilder("Designtype");
-            sb_designType.append(Integer.toString(i)).toString();
 
-            design.setDesign_Type(Designtype1.getValue().toString());
-            design.setPavement_Type(Pavementtype1.getValue().toString());
-            design.setNumberOfLayers(Integer.parseInt(LayerNum1.getValue().toString()));
+            design.setDesign_Type(Designtype[i-1].getValue().toString());
+            design.setPavement_Type(PavementType[i-1].getValue().toString());
+            design.setNumberOfLayers(Integer.parseInt(LayerNum[i-1].getValue().toString()));
 
             designMap.put(design.getDesign_ID(),design);
-
         }
-
+        System.out.println("All the basic design information was saved!!");
     }
 }
