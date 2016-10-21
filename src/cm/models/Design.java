@@ -1,10 +1,95 @@
 package cm.models;
 
+import sun.security.krb5.internal.crypto.Des;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A design is a pavement design, consisting of a number of layers. Each layer
  * has a thickness, and a material.
  */
 public class Design {
+
+    /* -- Fields -------------------------------------------------------- */
+
+    // A design has a bunch of layers, added from top to bottom.
+    private List<Layer> layers = new ArrayList<>();
+
+    /* -- Constructor(s) ------------------------------------------------ */
+
+    /**
+     * Construct a new, empty design
+     */
+    public Design() {
+        /* noop */
+    }
+
+    /**
+     * Construct a new design with a number of empty layers.
+     * @param numberOfLayers The number of layers, typically between 2 and 8.
+     */
+    public Design(int numberOfLayers) {
+        this();
+        this.setNumberOfLayers(numberOfLayers);
+    }
+
+    /* -- Methods ------------------------------------------------------- */
+
+    /**
+     * Return a layer by number, layer 1 is the top.
+     * @param layerNumber
+     * @return
+     */
+    public Layer getLayer(int layerNumber) {
+        return layers.get(layerNumber - 1);
+    }
+
+    /**
+     * Get the list of layers.
+     * @return the list of layers.
+     */
+    public List<Layer> getLayers() {
+        return layers;
+    }
+
+    /**
+     * Add a layer to the bottom, or to the top if the design is empty.
+     * @param layer The layer to add.
+     */
+    public Design addLayer(Layer layer) {
+        layers.add(layer);
+        return this;
+    }
+
+    /**
+     * Add an empty layer to the bottom, or to the top if the design is empty.
+     */
+    public Design addLayer() {
+        layers.add(new Layer());
+        return this;
+    }
+
+    public Design setLayer(int layerNumber, Layer layer) {
+        layers.set(layerNumber - 1, layer);
+        return this;
+    }
+
+    /* -- Tester -------------------------------------------------------- */
+
+    public static void main(String[] args) {
+        Design d = new Design();
+        System.out.println(d.getNumberOfLayers());
+        d.addLayer();
+        System.out.println(d.getNumberOfLayers());
+        d.addLayer(new Layer());
+        System.out.println(d.getNumberOfLayers());
+        d = new Design(8);
+        System.out.println(d.getNumberOfLayers());
+    }
+
+    /* == "Old" Stuff =================================================== */
+
 
     private String Design_ID;
     private String Design_Type;
@@ -39,7 +124,8 @@ public class Design {
     }
 
     public int getNumberOfLayers() {
-        return NumberOfLayers;
+        return layers.size();
+//        return NumberOfLayers;
     }
 
     public void setNumberOfLayers(int numberOfLayers) {
