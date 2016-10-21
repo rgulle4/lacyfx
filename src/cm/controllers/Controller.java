@@ -22,8 +22,8 @@ public class Controller {
     // one, but just in case...
     Model model = new cm.models.Model();
 
+    @FXML
     private TabPane mainTabPane;
-
 
     public void NextButton(){
         mainTabPane.getSelectionModel().select(mainTabPane.getSelectionModel().getSelectedIndex()+1);
