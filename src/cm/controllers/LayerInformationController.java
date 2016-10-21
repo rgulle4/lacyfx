@@ -1,7 +1,7 @@
 package cm.controllers;
 
 import cm.App;
-import cm.EnvAnalysisCal;
+import cm.EnvAnalysis_cal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +9,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import cm.EnvAnalysis_cal;
 
 /**
  * Created by royg59 on 9/21/16.
@@ -49,14 +50,14 @@ public class LayerInformationController {
     private void LoadMatBtn() throws IOException {
 
         if (CB_T.getValue() == "meter"){
-            EnvAnalysisCal.setThickness(Double.parseDouble(TF_T.getText()));
-            EnvAnalysisCal.setTotV(EnvAnalysisCal.getThickness());
-            System.out.println(EnvAnalysisCal.getTotV());
+            EnvAnalysis_cal.setThickness(Double.parseDouble(TF_T.getText()));
+            EnvAnalysis_cal.setTotV(EnvAnalysis_cal.getThickness());
+            System.out.println(EnvAnalysis_cal.getTotV());
         }
         if (CB_T.getValue() == "inch"){
-            EnvAnalysisCal.setThickness(Double.parseDouble(TF_T.getText())*0.0254);     // 1 inch = 0.0254 inch
-            EnvAnalysisCal.setTotV(EnvAnalysisCal.getThickness());
-            System.out.println(EnvAnalysisCal.getTotV());
+            EnvAnalysis_cal.setThickness(Double.parseDouble(TF_T.getText())*0.0254);     // 1 inch = 0.0254 inch
+            EnvAnalysis_cal.setTotV(EnvAnalysis_cal.getThickness());
+            System.out.println(EnvAnalysis_cal.getTotV());
         }
         main.showLoadMaterial();
     }

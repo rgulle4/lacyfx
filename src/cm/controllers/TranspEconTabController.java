@@ -1,12 +1,13 @@
 package cm.controllers;
 
-import cm.CalEnp;
-import cm.EnvAnalysisCal;
+import cm.Cal_Enp;
+import cm.EnvAnalysis_cal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 
 /**
@@ -38,31 +39,31 @@ public class TranspEconTabController {
     public void nextButton(){
         //update distance
         double dst = Double.parseDouble(distance.getText());
-        EnvAnalysisCal.setDistance(dst);
+        EnvAnalysis_cal.setDistance(dst);
 
         //Ligtht-Duty truck selected
         if (vehicletype.getSelectionModel().isSelected(0)){
             //gasoline selected
             if (fueltype.getSelectionModel().isSelected(0)){
-                EnvAnalysisCal.setSub_GWP(184.2863);
-                EnvAnalysisCal.setSub_ODP(0.0);
-                EnvAnalysisCal.setSub_AP(0.606709);
-                EnvAnalysisCal.setSub_EP(0.0);
-                EnvAnalysisCal.setSub_POCP(0.236349);
-                EnvAnalysisCal.setSub_TW(0.0);
-                EnvAnalysisCal.setSub_DNER(184.2863);
-                EnvAnalysisCal.setFCF(22.3);
+                EnvAnalysis_cal.setSub_GWP(184.2863);
+                EnvAnalysis_cal.setSub_ODP(0.0);
+                EnvAnalysis_cal.setSub_AP(0.606709);
+                EnvAnalysis_cal.setSub_EP(0.0);
+                EnvAnalysis_cal.setSub_POCP(0.236349);
+                EnvAnalysis_cal.setSub_TW(0.0);
+                EnvAnalysis_cal.setSub_DNER(184.2863);
+                EnvAnalysis_cal.setFCF(22.3);
             }
             //diesel selected
             if (fueltype.getSelectionModel().isSelected(1)){
-                EnvAnalysisCal.setSub_GWP(90.30939);
-                EnvAnalysisCal.setSub_ODP(0.0);
-                EnvAnalysisCal.setSub_AP(0.135216);
-                EnvAnalysisCal.setSub_EP(0.008555);
-                EnvAnalysisCal.setSub_POCP(26.4664);
-                EnvAnalysisCal.setSub_TW(0.0);
-                EnvAnalysisCal.setSub_DNER(90.30939);
-                EnvAnalysisCal.setFCF(18.6);
+                EnvAnalysis_cal.setSub_GWP(90.30939);
+                EnvAnalysis_cal.setSub_ODP(0.0);
+                EnvAnalysis_cal.setSub_AP(0.135216);
+                EnvAnalysis_cal.setSub_EP(0.008555);
+                EnvAnalysis_cal.setSub_POCP(26.4664);
+                EnvAnalysis_cal.setSub_TW(0.0);
+                EnvAnalysis_cal.setSub_DNER(90.30939);
+                EnvAnalysis_cal.setFCF(18.6);
             }
         }
 
@@ -70,25 +71,25 @@ public class TranspEconTabController {
         if (vehicletype.getSelectionModel().isSelected(1)){
             //gasoline selected
             if (fueltype.getSelectionModel().isSelected(0)){
-                EnvAnalysisCal.setSub_GWP(184.2863);
-                EnvAnalysisCal.setSub_ODP(0.0);
-                EnvAnalysisCal.setSub_AP(0.606709);
-                EnvAnalysisCal.setSub_EP(0.0);
-                EnvAnalysisCal.setSub_POCP(0.236349);
-                EnvAnalysisCal.setSub_TW(0.0);
-                EnvAnalysisCal.setSub_DNER(184.2863);
-                EnvAnalysisCal.setFCF(40.1);
+                EnvAnalysis_cal.setSub_GWP(184.2863);
+                EnvAnalysis_cal.setSub_ODP(0.0);
+                EnvAnalysis_cal.setSub_AP(0.606709);
+                EnvAnalysis_cal.setSub_EP(0.0);
+                EnvAnalysis_cal.setSub_POCP(0.236349);
+                EnvAnalysis_cal.setSub_TW(0.0);
+                EnvAnalysis_cal.setSub_DNER(184.2863);
+                EnvAnalysis_cal.setFCF(40.1);
             }
             //diesel selected
             if (fueltype.getSelectionModel().isSelected(1)){
-                EnvAnalysisCal.setSub_GWP(90.30939);
-                EnvAnalysisCal.setSub_ODP(0.0);
-                EnvAnalysisCal.setSub_AP(0.135216);
-                EnvAnalysisCal.setSub_EP(0.008555);
-                EnvAnalysisCal.setSub_POCP(26.4664);
-                EnvAnalysisCal.setSub_TW(0.0);
-                EnvAnalysisCal.setSub_DNER(90.30939);
-                EnvAnalysisCal.setFCF(18.6);
+                EnvAnalysis_cal.setSub_GWP(90.30939);
+                EnvAnalysis_cal.setSub_ODP(0.0);
+                EnvAnalysis_cal.setSub_AP(0.135216);
+                EnvAnalysis_cal.setSub_EP(0.008555);
+                EnvAnalysis_cal.setSub_POCP(26.4664);
+                EnvAnalysis_cal.setSub_TW(0.0);
+                EnvAnalysis_cal.setSub_DNER(90.30939);
+                EnvAnalysis_cal.setFCF(18.6);
             }
         }
 
@@ -96,33 +97,33 @@ public class TranspEconTabController {
         if (vehicletype.getSelectionModel().isSelected(2)) {
             //gasoline selected
             if (fueltype.getSelectionModel().isSelected(0)) {
-                EnvAnalysisCal.setSub_GWP(184.2863);
-                EnvAnalysisCal.setSub_ODP(0.0);
-                EnvAnalysisCal.setSub_AP(0.606709);
-                EnvAnalysisCal.setSub_EP(0.0);
-                EnvAnalysisCal.setSub_POCP(0.236349);
-                EnvAnalysisCal.setSub_TW(0.0);
-                EnvAnalysisCal.setSub_DNER(184.2863);
-                EnvAnalysisCal.setFCF(42.3);
+                EnvAnalysis_cal.setSub_GWP(184.2863);
+                EnvAnalysis_cal.setSub_ODP(0.0);
+                EnvAnalysis_cal.setSub_AP(0.606709);
+                EnvAnalysis_cal.setSub_EP(0.0);
+                EnvAnalysis_cal.setSub_POCP(0.236349);
+                EnvAnalysis_cal.setSub_TW(0.0);
+                EnvAnalysis_cal.setSub_DNER(184.2863);
+                EnvAnalysis_cal.setFCF(42.3);
             }
             //diesel selected
             if (fueltype.getSelectionModel().isSelected(1)) {
-                EnvAnalysisCal.setSub_GWP(90.30939);
-                EnvAnalysisCal.setSub_ODP(0.0);
-                EnvAnalysisCal.setSub_AP(0.135216);
-                EnvAnalysisCal.setSub_EP(0.008555);
-                EnvAnalysisCal.setSub_POCP(26.4664);
-                EnvAnalysisCal.setSub_TW(0.0);
-                EnvAnalysisCal.setSub_DNER(90.30939);
-                EnvAnalysisCal.setFCF(40.0);
+                EnvAnalysis_cal.setSub_GWP(90.30939);
+                EnvAnalysis_cal.setSub_ODP(0.0);
+                EnvAnalysis_cal.setSub_AP(0.135216);
+                EnvAnalysis_cal.setSub_EP(0.008555);
+                EnvAnalysis_cal.setSub_POCP(26.4664);
+                EnvAnalysis_cal.setSub_TW(0.0);
+                EnvAnalysis_cal.setSub_DNER(90.30939);
+                EnvAnalysis_cal.setFCF(40.0);
             }
 
 
         }
         //Calculate
-        CalEnp cal_enp = new CalEnp();
+        Cal_Enp cal_enp = new Cal_Enp();
         cal_enp.cal();
-        enp_score.setText(Double.toString(EnvAnalysisCal.getEnp_Score()));
+        enp_score.setText(Double.toString(EnvAnalysis_cal.getEnp_Score()));
     }
 
 }
