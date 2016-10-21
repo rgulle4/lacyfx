@@ -145,17 +145,17 @@ public class WeightsTabController {
         Set and store Weights
          */
         Weights wgts = new Weights();
-        wgts.setW_EnP(w_enp);
-        wgts.setW_EcP(w_ecp);
-        wgts.setW_GWP(w_gwp);
-        wgts.setW_ODP(w_odp);
-        wgts.setW_AP(w_ap);
-        wgts.setW_EP(w_ep);
-        wgts.setW_POCP(w_pocp);
-        wgts.setW_ConcreteWaste(w_cw);
-        wgts.setW_TotalWaterConsumption(w_twc);
-        wgts.setW_TotalPrimaryEnergyConsumption(w_peu);
-        wgts.setW_MaterialResourceConsumption(w_mru);
+        wgts.setwEnvPerformance(w_enp);
+        wgts.setwEconPerformance(w_ecp);
+        wgts.setwGwp(w_gwp);
+        wgts.setwOdp(w_odp);
+        wgts.setwAp(w_ap);
+        wgts.setwEp(w_ep);
+        wgts.setwPocp(w_pocp);
+        wgts.setwConcreteWaste(w_cw);
+        wgts.setwTotalWaterConsumption(w_twc);
+        wgts.setwTotalPrimaryEnergyConsumption(w_peu);
+        wgts.setwMaterialResourceConsumption(w_mru);
 
         String predinfinedWeight = predefinedweightComboBox.getValue().toString();
 

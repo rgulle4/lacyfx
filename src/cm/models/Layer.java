@@ -32,11 +32,14 @@ public class Layer {
 
     /* == "Old" Stuff =================================================== */
 
+    // Calculated values
     private double EnvPerfAnalysis_TotalScore_Layer;
     private double EnvPerfAnalysis_EPDScore_Layer;
     private double EnvPerfAnalysis_TransportationScore_Layer;
 
-    //distributed contribution in details
+    // User inputs for weights of the different env impacts (EPD).
+    // Each of these is calculated by the impact's formula, times the
+    // "weight" specified by the user.
     private double GWP_EDP_Ctb;
     private double ODP_EDP_Ctb;
     private double AP_EDP_Ctb;

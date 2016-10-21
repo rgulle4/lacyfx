@@ -104,14 +104,14 @@ public class EnvPerformanceCalc {
         for (String key: weights_keys) {
             //abstract weights values from weight table
             weight = weightsMap.get(key);
-            W_ENP = weight.getW_EnP();
-            W_GWP = weight.getW_GWP();
-            W_ODP = weight.getW_ODP();
-            W_AP = weight.getW_AP();
-            W_EP = weight.getW_EP();
-            W_POCP = weight.getW_POCP();
-            W_TWC = weight.getW_TotalWaterConsumption();
-            W_TPEC = weight.getW_TotalPrimaryEnergyConsumption();
+            W_ENP = weight.getwEnvPerformance();
+            W_GWP = weight.getwGwp();
+            W_ODP = weight.getwOdp();
+            W_AP = weight.getwAp();
+            W_EP = weight.getwEp();
+            W_POCP = weight.getwPocp();
+            W_TWC = weight.getwTotalWaterConsumption();
+            W_TPEC = weight.getwTotalPrimaryEnergyConsumption();
         }
 
         for (String key_t:transportationPara_keys){
