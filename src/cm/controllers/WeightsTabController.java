@@ -1,6 +1,6 @@
 package cm.controllers;
 
-import cm.EnvAnalysisCalc;
+import cm.EnvAnalysisCal;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
@@ -67,20 +67,20 @@ public class WeightsTabController {
         /*
         Set and store Weights
          */
-        EnvAnalysisCalc.setwEnp(w_enp);
-        EnvAnalysisCalc.setwEcp(w_ecp);
-        EnvAnalysisCalc.setwGwp(w_gwp);
-        EnvAnalysisCalc.setwOdp(w_odp);
-        EnvAnalysisCalc.setwAp(w_ap);
-        EnvAnalysisCalc.setwEp(w_ep);
-        EnvAnalysisCalc.setwPocp(w_pocp);
-        EnvAnalysisCalc.setwChw(w_chw);
-        EnvAnalysisCalc.setwCnhw(w_cnhw);
-        EnvAnalysisCalc.setwTwc(w_twc);
-        EnvAnalysisCalc.setwRpeu(w_rpeu);
-        EnvAnalysisCalc.setwDner(w_dner);
-        EnvAnalysisCalc.setwRmru(w_rmru);
-        EnvAnalysisCalc.setwDnmr(w_dnmr);
+        EnvAnalysisCal.setwEnp(w_enp);
+        EnvAnalysisCal.setwEcp(w_ecp);
+        EnvAnalysisCal.setwGwp(w_gwp);
+        EnvAnalysisCal.setwOdp(w_odp);
+        EnvAnalysisCal.setwAp(w_ap);
+        EnvAnalysisCal.setwEp(w_ep);
+        EnvAnalysisCal.setwPocp(w_pocp);
+        EnvAnalysisCal.setwChw(w_chw);
+        EnvAnalysisCal.setwCnhw(w_cnhw);
+        EnvAnalysisCal.setwTwc(w_twc);
+        EnvAnalysisCal.setwRpeu(w_rpeu);
+        EnvAnalysisCal.setwDner(w_dner);
+        EnvAnalysisCal.setwRmru(w_rmru);
+        EnvAnalysisCal.setwDnmr(w_dnmr);
     }
 
 }
