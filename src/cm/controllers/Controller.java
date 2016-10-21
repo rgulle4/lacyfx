@@ -22,15 +22,11 @@ public class Controller {
     // one, but just in case...
     Model model = new cm.models.Model();
 
-    private TabPane mainTabPane;
+    @FXML
+    TabPane mainTabPane;
 
 
     public void NextButton(){
         mainTabPane.getSelectionModel().select(mainTabPane.getSelectionModel().getSelectedIndex()+1);
-    }
-
-    public static void main(String[] args) {
-        foo();
-        Model.foo();
     }
 }
