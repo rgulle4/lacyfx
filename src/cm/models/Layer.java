@@ -5,6 +5,8 @@ package cm.models;
  */
 public class Layer {
 
+    private Material material;
+
     private String Layer_ID;
     private double Lengthness= 1609.34;        //1 mile = 1609.34 meter
     private double Width = 12*0.3048;       //1 ft = 0.3048 meter;
