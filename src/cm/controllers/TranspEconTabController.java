@@ -121,7 +121,7 @@ public class TranspEconTabController {
         }
         //Calculate
         EnvPerformanceCalc cal_enp = new EnvPerformanceCalc();
-        cal_enp.calc();
+        cal_enp.cal();
         enp_score.setText(Double.toString(EnvAnalysisCalc.getEnp_Score()));
     }
 

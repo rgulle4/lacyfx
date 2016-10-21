@@ -35,7 +35,7 @@ public class EnvPerformanceCalc {
 
 
 
-    double environmentalScore = ConvF*W_ENP*((W_GWP*(GWP_EDP+GWP_TSP)/Norm_GWP
+    double Es= ConvF*W_ENP*((W_GWP*(GWP_EDP+GWP_TSP)/Norm_GWP
                         +W_ODP*(ODP_EDP+ODP_TSP)/Norm_ODP
                         +W_AP*(AP_EDP+AP_TSP)/Norm_AP
                         +W_EP*(EP_EDP+EP_TSP)/Norm_EP
@@ -44,7 +44,7 @@ public class EnvPerformanceCalc {
                         +W_DNER*(DNER_EDP+DNER_TSP)/Norm_DNER)
                         );
 
-    public void calc(){
-        EnvAnalysisCalc.setEnp_Score(environmentalScore);
+    public void cal(){
+        EnvAnalysisCalc.setEnp_Score(Es);
     }
 }
