@@ -31,7 +31,9 @@ public class Design {
      */
     public Design(int numberOfLayers) {
         this();
-        this.setNumberOfLayers(numberOfLayers);
+        for (int i = 0; i < numberOfLayers; i++) {
+            this.addLayer();
+        }
     }
 
     /* -- Methods ------------------------------------------------------- */
