@@ -62,6 +62,12 @@ public class App extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    // TODO: replace layerMap with new Design.layers list
+
+    // TODO: think about IA for the materialMap, which is for use case where user wants to evaluate what happens one design when just one of its layers is changed.
+
+    // TODO: start implementing the calculations for 1 design, 1 layer, 1 material.
     //create a static hashtable to store values for TransportationParameters step by step
     public static Map<String,Design> designMap = new Hashtable<String,Design>();
     public static Map<String,Layer> layerMap = new Hashtable<String,Layer>();
