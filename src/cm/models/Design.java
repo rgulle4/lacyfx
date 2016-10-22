@@ -38,6 +38,12 @@ public class Design {
 
     /* -- Methods ------------------------------------------------------- */
 
+    /**
+     * Set number of layers in the design, adding or removing at
+     * the the bottom as appropriate.
+     * @param numberOfLayers The number of layers.
+     * @return this, for chaining.
+     */
     public Design setNumberOfLayers(int numberOfLayers) {
         int numberOfLayersToAdd = numberOfLayers - getNumberOfLayers();
         if (getNumberOfLayers() == 0 || numberOfLayersToAdd > 0) {
