@@ -25,7 +25,7 @@ public class Controller {
     @FXML
     private TabPane mainTabPane;
 
-    public void NextButton(){
+    public void NextButton() {
         mainTabPane.getSelectionModel().select(mainTabPane.getSelectionModel().getSelectedIndex()+1);
     }
 

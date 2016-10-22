@@ -19,7 +19,6 @@ public class Layer {
     private double width = 12*0.3048;       //1 ft = 0.3048 meter;
     private double thickness;
     private String thicknessUnit;
-    private double volume;
     private String volumeUnit;
 
     // Layer type determines which material database to use.
@@ -95,11 +94,7 @@ public class Layer {
     }
 
     public double getVolume() {
-        return volume;
-    }
-
-    public void setVolume(double volume) {
-        this.volume = volume;
+        return getThickness() * getLength() * getWidth();
     }
 
     public String getVolumeUnit() {
