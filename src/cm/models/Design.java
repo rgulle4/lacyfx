@@ -104,24 +104,27 @@ public class Design {
         return Design_ID;
     }
 
-    public void setDesign_ID(String design_ID) {
+    public Design setDesign_ID(String design_ID) {
         Design_ID = design_ID;
+        return this;
     }
 
     public String getDesign_Type() {
         return Design_Type;
     }
 
-    public void setDesign_Type(String design_Type) {
+    public Design setDesign_Type(String design_Type) {
         Design_Type = design_Type;
+        return this;
     }
 
     public String getPavement_Type() {
         return Pavement_Type;
     }
 
-    public void setPavement_Type(String pavement_Type) {
+    public Design setPavement_Type(String pavement_Type) {
         Pavement_Type = pavement_Type;
+        return this;
     }
 
     public int getNumberOfLayers() {
@@ -133,23 +136,26 @@ public class Design {
         return EnvPerfAnalysis_TotalScore_Design;
     }
 
-    public void setEnvPerfAnalysis_TotalScore_Design(double envPerfAnalysis_TotalScore_Design) {
+    public Design setEnvPerfAnalysis_TotalScore_Design(double envPerfAnalysis_TotalScore_Design) {
         EnvPerfAnalysis_TotalScore_Design = envPerfAnalysis_TotalScore_Design;
+        return this;
     }
 
     public double getEnvPerfAnalysis_EPDScore_Design() {
         return EnvPerfAnalysis_EPDScore_Design;
     }
 
-    public void setEnvPerfAnalysis_EPDScore_Design(double envPerfAnalysis_EPDScore_Design) {
+    public Design setEnvPerfAnalysis_EPDScore_Design(double envPerfAnalysis_EPDScore_Design) {
         EnvPerfAnalysis_EPDScore_Design = envPerfAnalysis_EPDScore_Design;
+        return this;
     }
 
     public double getEnvPerfAnalysis_TransportationScore_Design() {
         return EnvPerfAnalysis_TransportationScore_Design;
     }
 
-    public void setEnvPerfAnalysis_TransportationScore_Design(double envPerfAnalysis_TransportationScore_Design) {
+    public Design setEnvPerfAnalysis_TransportationScore_Design(double envPerfAnalysis_TransportationScore_Design) {
         EnvPerfAnalysis_TransportationScore_Design = envPerfAnalysis_TransportationScore_Design;
+        return this;
     }
 }
