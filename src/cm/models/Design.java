@@ -14,6 +14,14 @@ public class Design {
     // A design has a bunch of layers, added from top to bottom.
     private List<Layer> layers = new ArrayList<>();
 
+    private String designId;
+    private String designType;
+    private String pavementType;
+
+    private double EnvPerfAnalysis_TotalScore_Design;
+    private double EnvPerfAnalysis_EPDScore_Design;
+    private double EnvPerfAnalysis_TransportationScore_Design;
+
     /* -- Constructor(s) ------------------------------------------------ */
 
     /**
@@ -109,37 +117,6 @@ public class Design {
         return this;
     }
 
-    /* -- Tester -------------------------------------------------------- */
-
-    public static void main(String[] args) {
-        Design d = new Design();
-        System.out.println(d.getNumberOfLayers());
-        d.addLayer();
-        System.out.println(d.getNumberOfLayers());
-        d.addLayer(new Layer());
-        System.out.println(d.getNumberOfLayers());
-        d = new Design(8);
-        System.out.println(d.getNumberOfLayers());
-        System.out.println("-----");
-        d = new Design();
-        d.setNumberOfLayers(3);
-        System.out.println(d.getNumberOfLayers());
-        d.setNumberOfLayers(2);
-        System.out.println(d.getNumberOfLayers());
-        d.setNumberOfLayers(6);
-        System.out.println(d.getNumberOfLayers());
-    }
-
-    /* == "Old" Stuff =================================================== */
-
-
-    private String designId;
-    private String designType;
-    private String pavementType;
-    private double EnvPerfAnalysis_TotalScore_Design;
-    private double EnvPerfAnalysis_EPDScore_Design;
-    private double EnvPerfAnalysis_TransportationScore_Design;
-
     public String getDesignId() {
         return designId;
     }
@@ -169,7 +146,6 @@ public class Design {
 
     public int getNumberOfLayers() {
         return layers.size();
-//        return NumberOfLayers;
     }
 
     public double getEnvPerfAnalysis_TotalScore_Design() {
