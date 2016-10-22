@@ -7,6 +7,7 @@ import static cm.App.*;
 
 /**
  * Created by Administrator on 2016/10/3.
+ * This is meant for a whole design (and also each layer).
  */
 public class EnvPerformanceCalc {
     Design design;

@@ -37,9 +37,11 @@ public class Layer {
     private double EnvPerfAnalysis_EPDScore_Layer;
     private double EnvPerfAnalysis_TransportationScore_Layer;
 
-    // User inputs for weights of the different env impacts (EPD).
-    // Each of these is calculated by the impact's formula, times the
-    // "weight" specified by the user.
+    // Subscores of EPD score for the different env impacts (before
+    // normalization). Each of these is calculated using the same basic
+    // formula:
+    //   GWP_EDP_Ctb = gwp (from material with epd.value per epd.unit)
+    //                 * "Conversion Factor (volume with matching unit)"
     private double GWP_EDP_Ctb;
     private double ODP_EDP_Ctb;
     private double AP_EDP_Ctb;
@@ -48,6 +50,9 @@ public class Layer {
     private double TW_EDP_Ctb;      // Total Water Consumption
     private double TPEC_EDP_Ctb;    // Total Primary Energy Consumption
 
+    // Subscores of Transportation score for the different env
+    // impacts (before normalization). Each of these is calculated using:
+    //   2 * distance * ??????
     private double GWP_Transportation_Ctb;
     private double ODP_Transportation_Ctb;
     private double AP_Transportation_Ctb;
