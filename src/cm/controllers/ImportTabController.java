@@ -106,31 +106,8 @@ public class ImportTabController {
             Designtype[i].setItems(DesignType);
             LayerNum[i].setItems(layerNum);
         }
-//        // set up all the comboBox items
-//        DesignNum.setItems(designNum);
-//        //Design 1
-//        Designtype1.setItems(DesignType);
-//        LayerNum1.setItems(layerNum);
-//        //Design 2
-//        Designtype2.setItems(DesignType);
-//        LayerNum2.setItems(layerNum);
-//        //Design 3
-//        Designtype3.setItems(DesignType);
-//        LayerNum3.setItems(layerNum);
-
-       // designNum.setItems(designNum);
 
         //set up special number of design to be visible
-
-//        if (DesignNum.getSelectionModel().isSelected(0)){
-//            showTheRightNumberOfDesigns();
-//        }
-//        if (DesignNum.getSelectionModel().isSelected(1)){
-//            showTheRightNumberOfDesigns();
-//        }
-//        if (DesignNum.getSelectionModel().isSelected(2)){
-//            showTheRightNumberOfDesigns();
-//        }
         if (DesignNum.getSelectionModel().getSelectedItem() != null)
             showTheRightNumberOfDesigns();
     }
