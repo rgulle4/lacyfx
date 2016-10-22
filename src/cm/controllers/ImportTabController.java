@@ -79,6 +79,8 @@ public class ImportTabController {
         PavementType[2] = Pavementtype3;
 
 
+
+
     }
 
 
@@ -120,33 +122,28 @@ public class ImportTabController {
 
         //set up special number of design to be visible
 
-        if (DesignNum.getSelectionModel().isSelected(0)){
-            for (int i=0;i<Integer.parseInt(DesignNum.getValue().toString());i++){
-                VBox[i].setVisible(true);
-            }
-            for (int i = Integer.parseInt(DesignNum.getValue().toString()); i<3;i++){
-                VBox[i].setVisible(false);
-            }
-
-        }
-        if (DesignNum.getSelectionModel().isSelected(1)){
-            for (int i=0;i<Integer.parseInt(DesignNum.getValue().toString());i++){
-                VBox[i].setVisible(true);
-            }
-            for (int i = Integer.parseInt(DesignNum.getValue().toString()); i<3;i++){
-                VBox[i].setVisible(false);
-            }
-        }
-        if (DesignNum.getSelectionModel().isSelected(2)){
-            for (int i=0;i<Integer.parseInt(DesignNum.getValue().toString());i++){
-                VBox[i].setVisible(true);
-            }
-            for (int i = Integer.parseInt(DesignNum.getValue().toString()); i<3;i++){
-                VBox[i].setVisible(false);
-            }
-        }
-
+//        if (DesignNum.getSelectionModel().isSelected(0)){
+//            showTheRightNumberOfDesigns();
+//        }
+//        if (DesignNum.getSelectionModel().isSelected(1)){
+//            showTheRightNumberOfDesigns();
+//        }
+//        if (DesignNum.getSelectionModel().isSelected(2)){
+//            showTheRightNumberOfDesigns();
+//        }
+        if (DesignNum.getSelectionModel().getSelectedItem() != null)
+            showTheRightNumberOfDesigns();
     }
+
+    public void showTheRightNumberOfDesigns() {
+        for (int i=0;i<Integer.parseInt(DesignNum.getValue().toString());i++){
+            VBox[i].setVisible(true);
+        }
+        for (int i = Integer.parseInt(DesignNum.getValue().toString()); i<3;i++){
+            VBox[i].setVisible(false);
+        }
+    }
+
     public void SelectDesignType(){
 
         for (int i=0;i<3;i++) {
