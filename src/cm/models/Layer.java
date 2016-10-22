@@ -1,5 +1,6 @@
 package cm.models;
 
+import static cm.models.Model.*;
 /**
  * A layer has a thickness (inches) and a material.
  */

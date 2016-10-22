@@ -1,5 +1,6 @@
 package cm.models;
 
+import static cm.models.Model.*;
 /**
  * Created by Administrator on 2016/10/17.
  */

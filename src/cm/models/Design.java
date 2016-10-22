@@ -4,6 +4,7 @@ import sun.security.krb5.internal.crypto.Des;
 
 import java.util.ArrayList;
 import java.util.List;
+import static cm.models.Model.*;
 
 /**
  * A design is a pavement design, consisting of a number of layers. Each layer

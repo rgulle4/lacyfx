@@ -3,6 +3,7 @@ package cm.models;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import static cm.models.Model.*;
 
 /**
  * EPDs are "Environmental Product Declarations", and this class represents a database full of them.

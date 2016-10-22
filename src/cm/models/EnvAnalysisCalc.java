@@ -4,6 +4,7 @@ package cm.models;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
+import static cm.models.Model.*;
 
 /**
  * Created by Administrator on 2016/10/1.
