@@ -11,7 +11,8 @@ import javafx.scene.control.*;
 import java.io.IOException;
 import java.util.Set;
 
-import static cm.App.designMap;
+//import static cm.App.designMap;
+import static cm.models.Model.*;
 import static cm.App.layerMap;
 
 /**

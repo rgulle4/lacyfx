@@ -2,6 +2,7 @@ package cm.models;
 
 import java.util.Set;
 
+import static cm.models.Model.*;
 import static cm.App.*;
 
 
@@ -17,7 +18,7 @@ public class EnvPerformanceCalc {
     TransportationParameters transportationParameters;
 
 
-    Set<String> design_keys = designMap.keySet();
+    Set<String> design_keys = DESIGNS.keySet();
     Set<String> layer_keys = layerMap.keySet();
     Set<String> material_keys = materialMap.keySet();
     Set<String> weights_keys = weightsMap.keySet();
@@ -103,7 +104,7 @@ public class EnvPerformanceCalc {
     public void EnvAnalysisCalc(){
 
         for (String key: weights_keys) {
-            //abstract weights values from weight table
+            //abstract WEIGHTS values from weight table
             weight = weightsMap.get(key);
             W_ENP = weight.getwEnvPerformance();
             W_GWP = weight.getwGwp();
@@ -187,7 +188,7 @@ public class EnvPerformanceCalc {
             design.setEnvPerfAnalysis_TotalScore_Design(envPerfScore_Design);
             design.setEnvPerfAnalysis_EPDScore_Design(envPerfScore_EDP_Design);
             design.setEnvPerfAnalysis_TransportationScore_Design(enPerfScore_Transportation_Design);
-            designMap.put(key_i,design);
+            DESIGNS.put(key_i,design);
         }
     }
 
