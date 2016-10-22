@@ -1,10 +1,7 @@
 package cm.models;
 
-import sun.security.krb5.internal.crypto.Des;
-
 import java.util.ArrayList;
 import java.util.List;
-import static cm.models.Model.*;
 
 /**
  * A design is a pavement design, consisting of a number of layers. Each layer
@@ -136,37 +133,37 @@ public class Design {
     /* == "Old" Stuff =================================================== */
 
 
-    private String Design_ID;
-    private String Design_Type;
-    private String Pavement_Type;
+    private String designId;
+    private String designType;
+    private String pavementType;
     private double EnvPerfAnalysis_TotalScore_Design;
     private double EnvPerfAnalysis_EPDScore_Design;
     private double EnvPerfAnalysis_TransportationScore_Design;
 
-    public String getDesign_ID() {
-        return Design_ID;
+    public String getDesignId() {
+        return designId;
     }
 
-    public Design setDesign_ID(String design_ID) {
-        Design_ID = design_ID;
+    public Design setDesignId(String designId) {
+        this.designId = designId;
         return this;
     }
 
-    public String getDesign_Type() {
-        return Design_Type;
+    public String getDesignType() {
+        return designType;
     }
 
-    public Design setDesign_Type(String design_Type) {
-        Design_Type = design_Type;
+    public Design setDesignType(String designType) {
+        this.designType = designType;
         return this;
     }
 
-    public String getPavement_Type() {
-        return Pavement_Type;
+    public String getPavementType() {
+        return pavementType;
     }
 
-    public Design setPavement_Type(String pavement_Type) {
-        Pavement_Type = pavement_Type;
+    public Design setPavementType(String pavementType) {
+        this.pavementType = pavementType;
         return this;
     }
 

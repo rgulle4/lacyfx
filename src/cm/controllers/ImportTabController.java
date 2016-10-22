@@ -137,22 +137,22 @@ public class ImportTabController {
         for (int i = 0; i < toInt(numberOfDesignsComboBox); i++) {
             Design aNewDesign = new Design();
 
-            // Design id string, "indexed" at 1
+            // Save dsesign id string, "indexed" at 1
             StringBuilder ID = new StringBuilder("Design");
             String designID = ID.append(Integer.toString(i+1)).toString();
-            aNewDesign.setDesign_ID(designID);
+            aNewDesign.setDesignId(designID);
 
-            // Set design type
-            aNewDesign.setDesign_Type(toString(designTypeComboBoxes[i]));
+            // Save design type
+            aNewDesign.setDesignType(toString(designTypeComboBoxes[i]));
 
-            // Set pavement type
-            aNewDesign.setPavement_Type(toString(pavementTypeComboBoxes[i]));
+            // Save pavement type
+            aNewDesign.setPavementType(toString(pavementTypeComboBoxes[i]));
 
-            // Set number of layers
+            // Save number of layers
             aNewDesign.setNumberOfLayers(toInt(layerNumComboBoxes[i]));
 
             // put into our DESIGNS collection
-            DESIGNS.put(aNewDesign.getDesign_ID(),aNewDesign);
+            DESIGNS.put(aNewDesign.getDesignId(),aNewDesign);
         }
 
 
