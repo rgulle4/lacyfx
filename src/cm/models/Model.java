@@ -13,6 +13,9 @@ public class Model {
     // the "weights" that we'll use for scoring
     public static Weights weights = new Weights();
 
+    // the destination zip code (used for distance calculations).
+    public static String destinationZipCode;
+
     // -- experiments ---------------------------- //
 
     public static void foo() {
