@@ -69,12 +69,18 @@ public class Design {
 
 
     /**
-     * Return a layer by number, layer 1 is the top.
+     * Return a layer by number, layer 0 is the top.
      * @param layerNumber
      * @return
      */
     public Layer getLayer(int layerNumber) {
-        return layers.get(layerNumber - 1);
+        return layers.get(layerNumber);
+    }
+
+    public boolean hasLayerIndex(int layerIndex) {
+        if (layerIndex < 0 || layerIndex > layers.size())
+            return false;
+        return true;
     }
 
     /**

@@ -81,6 +81,7 @@ public class ImportTabController {
     private ComboBox[] pavementTypeComboBoxes = new ComboBox[MAX_NUM_OF_DESIGNS];
     private ComboBox[] layerNumComboBoxes = new ComboBox[MAX_NUM_OF_DESIGNS];
 
+    @FXML
     public void initialize() {
         numberOfDesignsComboBox.setItems(numberOfDesigns);
         vBoxes[0] = vBox1;
@@ -137,8 +138,8 @@ public class ImportTabController {
         for (int i = 0; i < toInt(numberOfDesignsComboBox); i++) {
             Design aNewDesign = new Design();
 
-            // Save dsesign id string, "indexed" at 1
-            StringBuilder ID = new StringBuilder("Design");
+            // Save design id string, "indexed" at 1
+            StringBuilder ID = new StringBuilder("Design ");
             String designID = ID.append(Integer.toString(i+1)).toString();
             aNewDesign.setDesignId(designID);
 
