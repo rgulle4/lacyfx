@@ -1,6 +1,9 @@
 package cm.models;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * The main model.
@@ -11,7 +14,7 @@ public class Model {
     private Model() { /* */ }
 
     // the collection of DESIGNS that we're evaluating
-    public static final HashMap<String, Design> DESIGNS = new HashMap<>();
+    public static final Map<String, Design> DESIGNS = new LinkedHashMap<>();
 
     // the "WEIGHTS" that we'll use for scoring
     public static final Weights WEIGHTS = new Weights();
