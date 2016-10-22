@@ -96,7 +96,6 @@ public class Design {
     private String Design_ID;
     private String Design_Type;
     private String Pavement_Type;
-    private int NumberOfLayers;
     private double EnvPerfAnalysis_TotalScore_Design;
     private double EnvPerfAnalysis_EPDScore_Design;
     private double EnvPerfAnalysis_TransportationScore_Design;
@@ -128,10 +127,6 @@ public class Design {
     public int getNumberOfLayers() {
         return layers.size();
 //        return NumberOfLayers;
-    }
-
-    public void setNumberOfLayers(int numberOfLayers) {
-        NumberOfLayers = numberOfLayers;
     }
 
     public double getEnvPerfAnalysis_TotalScore_Design() {
