@@ -10,14 +10,14 @@ public class Model {
     // Instantiating a model isn't allowed, because it's a singleton.
     private Model() { /* */ }
 
-    // the collection of designs that we're evaluating
-    public static HashMap<String, Design> designs = new HashMap<>();
+    // the collection of DESIGNS that we're evaluating
+    public static final HashMap<String, Design> DESIGNS = new HashMap<>();
 
-    // the "weights" that we'll use for scoring
-    public static Weights weights = new Weights();
+    // the "WEIGHTS" that we'll use for scoring
+    public static final Weights WEIGHTS = new Weights();
 
     // the destination zip code (used for distance calculations).
-    public static String destinationZipCode;
+    public static String DESTINATION_ZIP_CODE_MUTABLE;
 
     // -- experiments ---------------------------- //
 
@@ -26,8 +26,8 @@ public class Model {
     }
 
     public static void main(String[] args) {
-        weights.setwOdp(200);
-        weights.setwRenewableEnergyConsumption(500);
-        weights.setwGwp(20).setwOdp(3);
+        WEIGHTS.setwOdp(200);
+        WEIGHTS.setwRenewableEnergyConsumption(500);
+        WEIGHTS.setwGwp(20).setwOdp(3);
     }
 }

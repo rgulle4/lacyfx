@@ -169,15 +169,15 @@ public class ImportTabController {
 
             aNewDesign.setNumberOfLayers(Integer.parseInt(LayerNum[i-1].getValue().toString()));
 
-            designs.put(aNewDesign.getDesign_ID(),aNewDesign);
+            DESIGNS.put(aNewDesign.getDesign_ID(),aNewDesign);
         }
         System.out.println("All the basic design information was saved!!");
 
-        // for (Design design : designs) {
+        // for (Design design : DESIGNS) {
         //
         // }
 
-        for (Map.Entry<String, Design> elt : designs.entrySet()) {
+        for (Map.Entry<String, Design> elt : DESIGNS.entrySet()) {
             System.out.println("Design with key [" + elt.getKey()
                         + "] has "
                         + elt.getValue().getNumberOfLayers()
