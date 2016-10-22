@@ -20,7 +20,7 @@ public class Controller {
 
     // we need to know about the model... probably just need
     // one, but just in case...
-    Model model = new cm.models.Model();
+//    Model model = new cm.models.Model();
 
     @FXML
     private TabPane mainTabPane;

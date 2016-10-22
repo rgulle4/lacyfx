@@ -7,6 +7,9 @@ import java.util.HashMap;
  */
 public class Model {
 
+    // Instantiating a model isn't allowed, because it's a singleton.
+    private Model() { /* */ }
+
     // the collection of designs that we're evaluating
     public static HashMap<String, Design> designs = new HashMap<>();
 
