@@ -38,6 +38,24 @@ public class Design {
 
     /* -- Methods ------------------------------------------------------- */
 
+    public Design setNumberOfLayers(int numberOfLayers) {
+        int numberOfLayersToAdd = numberOfLayers - getNumberOfLayers();
+        if (getNumberOfLayers() == 0 || numberOfLayersToAdd > 0) {
+            for (int i = 0; i < numberOfLayersToAdd; i++) {
+                this.addLayer();
+            }
+        } else if (numberOfLayersToAdd < 0) {
+            for (int i = numberOfLayersToAdd; i < 0; i++) {
+                this.removeLayer();
+            }
+        } else {
+            System.out.println("sadf");
+        }
+        return this;
+    }
+
+
+
     /**
      * Return a layer by number, layer 1 is the top.
      * @param layerNumber
@@ -72,6 +90,16 @@ public class Design {
         return this;
     }
 
+    /**
+     * Removes the bottom layer if it exists, otherwise noop.
+     * @return this.
+     */
+    public Design removeLayer() {
+        if (getNumberOfLayers() > 0)
+            layers.remove(layers.size() - 1);
+        return this;
+    }
+
     public Design setLayer(int layerNumber, Layer layer) {
         layers.set(layerNumber - 1, layer);
         return this;
@@ -87,6 +115,14 @@ public class Design {
         d.addLayer(new Layer());
         System.out.println(d.getNumberOfLayers());
         d = new Design(8);
+        System.out.println(d.getNumberOfLayers());
+        System.out.println("-----");
+        d = new Design();
+        d.setNumberOfLayers(3);
+        System.out.println(d.getNumberOfLayers());
+        d.setNumberOfLayers(2);
+        System.out.println(d.getNumberOfLayers());
+        d.setNumberOfLayers(6);
         System.out.println(d.getNumberOfLayers());
     }
 

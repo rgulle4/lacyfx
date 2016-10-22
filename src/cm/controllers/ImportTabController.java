@@ -7,7 +7,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
-import static cm.App.designMap;
+import java.util.Map;
+
+import static cm.models.Model.*;
+
 
 
 /**
@@ -155,18 +158,30 @@ public class ImportTabController {
     }
     public void SaveButton(){
 
-        Design design = new Design();
         for (int i =1;i<= Integer.parseInt(DesignNum.getValue().toString());i++){
+            Design aNewDesign = new Design();
             StringBuilder ID = new StringBuilder("Design");
             String designID =ID.append(Integer.toString(i)).toString();
-            design.setDesign_ID(designID);
+            aNewDesign.setDesign_ID(designID);
 
-            design.setDesign_Type(Designtype[i-1].getValue().toString());
-            design.setPavement_Type(PavementType[i-1].getValue().toString());
-            design.setNumberOfLayers(Integer.parseInt(LayerNum[i-1].getValue().toString()));
+            aNewDesign.setDesign_Type(Designtype[i-1].getValue().toString());
+            aNewDesign.setPavement_Type(PavementType[i-1].getValue().toString());
 
-            designMap.put(design.getDesign_ID(),design);
+            aNewDesign.setNumberOfLayers(Integer.parseInt(LayerNum[i-1].getValue().toString()));
+
+            designs.put(aNewDesign.getDesign_ID(),aNewDesign);
         }
         System.out.println("All the basic design information was saved!!");
+
+        // for (Design design : designs) {
+        //
+        // }
+
+        for (Map.Entry<String, Design> elt : designs.entrySet()) {
+            System.out.println("Design with key [" + elt.getKey()
+                        + "] has "
+                        + elt.getValue().getNumberOfLayers()
+                        + " number of layers");
+        }
     }
 }
