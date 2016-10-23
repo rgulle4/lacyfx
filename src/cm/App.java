@@ -1,5 +1,6 @@
 package cm;
 
+import cm.controllers.LoadMaterialController;
 import cm.models.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -29,17 +30,24 @@ public class App extends Application {
         primaryStage.show();
     }
 
-    public static void showLoadMaterial() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(App.class.getResource("views/loadMaterial_window.fxml"));
-        AnchorPane addNewMaterial = loader.load();
+    public static void showLoadMaterial(Layer currentLayer) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(App.class.getResource("views/loadMaterial_window.fxml"));
+        AnchorPane addNewMaterialAcnhorPane = fxmlLoader.load();
 
         Stage addDialogStage = new Stage();
         addDialogStage.setTitle("Add New Material");
         addDialogStage.initModality(Modality.WINDOW_MODAL);
         addDialogStage.initOwner(primaryStage);
 
-        Scene scene = new Scene(addNewMaterial);
+        /* -- pass currentLayer --------- */
+        LoadMaterialController loadMaterialController
+              = fxmlLoader.<LoadMaterialController>getController();
+
+        loadMaterialController.setCurrentLayer(currentLayer);
+        /* ------------------------------ */
+
+        Scene scene = new Scene(addNewMaterialAcnhorPane);
         addDialogStage.setScene(scene);
         addDialogStage.showAndWait();
     }

@@ -1,10 +1,7 @@
 package cm.controllers;
 
 import cm.App;
-import cm.models.EnvAnalysisCalc;
-import cm.models.AlternativeMat;
-import cm.models.EPDDatabase;
-import cm.models.Material;
+import cm.models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -56,8 +53,15 @@ public class LoadMaterialController {
     // Reference to the main application.
     private App mainApp;
 
-    // Constructor is called before the initialized method
-    public LoadMaterialController(){
+    // Constructor is called before the initialize method
+//    public LoadMaterialController() {
+//
+//    }
+
+    private Layer currentLayer;
+
+    public void setCurrentLayer(Layer currentLayer) {
+        this.currentLayer = currentLayer;
     }
 
     /**
@@ -65,6 +69,11 @@ public class LoadMaterialController {
      * after the fxml file has been loaded.
      */
     public void initialize() throws SQLException {
+        System.out.println("------------------------------------");
+        System.out.println("layer in LoadMaterialController...");
+        System.out.println(currentLayer);
+        System.out.println("------------------------------------");
+
         //set item for distance choiceBox
 
         distanceChoice.setValue("<25 miles");
@@ -90,6 +99,11 @@ public class LoadMaterialController {
 
     @FXML
     public void searchbutton() throws SQLException {
+        System.out.println("------------------------------------");
+        System.out.println("layer in LoadMaterialController...");
+        System.out.println(currentLayer);
+        System.out.println("------------------------------------");
+
         StringBuilder CS_field = new StringBuilder("CS >= ");
         String CS_Textfiled = CS_field.append("'").append(TF_CS.getText()).append("'").toString();
 
@@ -126,6 +140,7 @@ public class LoadMaterialController {
             cm.setConcreteNonHazardousWaste(result.get(i).getConcreteNonHazardousWaste());
             data.add(cm);
         }
+        System.out.println("Filtered down to " + data.size() + " records");
         MaterialTable.setItems(data);
     }
 
@@ -138,7 +153,7 @@ public class LoadMaterialController {
                 EnvAnalysisCalc.setConFc(EnvAnalysisCalc.getTotV());
             }
             if (AlterMaterials.get(i).getUnit().equals("y3")){
-                EnvAnalysisCalc.setConFc(EnvAnalysisCalc.getTotV()*1.30795);        //1 m^3 = 1 yd^3
+                EnvAnalysisCalc.setConFc(EnvAnalysisCalc.getTotV()*1.30795); //1 m^3 = 1 yd^3
             }
         }
 
@@ -171,6 +186,7 @@ public class LoadMaterialController {
     }
 
     public void nextButton() throws ParseException {
+        System.out.println("Begin nextButton() method");
         updatecvf();        //update conversion factor
         //test the consistency of data
         for (int i = 0; i < AlterMaterials.size(); i++) {
@@ -190,7 +206,7 @@ public class LoadMaterialController {
             material.setTotalPrimaryEnergyConsumption(AlterMaterials.get(i).getTotalPrimaryEnergyConsumption());
             material.setMixNum(AlterMaterials.get(i).getMixNum());
 //            materialMap.put(material.getMaterial_ID(),material);
-
+            System.out.println("END nextButton() method");
         }
     }
 

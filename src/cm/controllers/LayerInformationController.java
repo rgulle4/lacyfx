@@ -140,7 +140,7 @@ public class LayerInformationController {
         saveLayerType();
         saveThickness();
         System.out.println(currentLayer);
-        App.showLoadMaterial();
+        App.showLoadMaterial(currentLayer);
     }
 
     private void saveLayerType() {
