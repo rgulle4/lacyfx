@@ -8,6 +8,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -162,5 +163,15 @@ public class LayerInformationController {
 
     private String toString(ComboBox cb) {
         return cb.getValue().toString();
+    }
+
+    public void printDebugStuff(ActionEvent actionEvent) {
+        System.out.println(
+              currentLayer.getMaterial().getCS()
+                    + ","  + currentLayer.getMaterial().getCompany_Name()
+                    + " ," + currentLayer.getMaterial().getLocation()
+                    + " ," + currentLayer.getMaterial().getZipCode()
+                    + " ," + currentLayer.getMaterial().getMixNum());
+
     }
 }

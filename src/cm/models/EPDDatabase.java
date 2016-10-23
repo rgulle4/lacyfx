@@ -1,6 +1,7 @@
 package cm.models;
 
 import java.sql.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import static cm.models.Model.*;
@@ -51,8 +52,8 @@ public class EPDDatabase {
      * @param filterClause Example: 'GWP >= 10' has the effect of 'SELECT * FROM EPD WHERE GWP >= 10'.
      * @return
      */
-    public List<AlternativeMat> getResultsFilteredBy(String filterClause) throws SQLException {
-        List<AlternativeMat> result = new ArrayList<AlternativeMat>();
+    public List<Material> getResultsFilteredBy(String filterClause) throws SQLException, ParseException {
+        List<Material> result = new ArrayList<Material>();
 
         String str;
         StringBuilder sb = new StringBuilder(DEFAULT_SQL_QUERY);
@@ -64,12 +65,12 @@ public class EPDDatabase {
         s = conn.createStatement();
         r = s.executeQuery(str);
 
-        AlternativeMat g =null;
+        Material g =null;
         while(r.next()){
-            g = new AlternativeMat();
+            g = new Material();
 
-            g.setCS(r.getString("CS"));
-            g.setCM_name(r.getString("NAME"));
+            g.setCS(r.getDouble("CS"));
+            g.setCompany_Name(r.getString("NAME"));
             g.setLocation(r.getString("LOCATION"));
             g.setMixNum(r.getString("MIXNUMBER"));
             g.setZipCode(r.getString("ZIP"));
@@ -98,7 +99,7 @@ public class EPDDatabase {
      * @return A ResultSet of the entire EPD table.
      * @throws SQLException
      */
-    public List<AlternativeMat> getResults() throws SQLException {
+    public List<Material> getResults() throws SQLException, ParseException {
         return getResultsFilteredBy("");
     }
 

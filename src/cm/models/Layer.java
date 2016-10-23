@@ -33,6 +33,15 @@ public class Layer {
     // Cement Concrete.
     private String layerType;
 
+    public Layer setMaterial(Material material) {
+        this.material = material;
+        return this;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
     /* == "Old" Stuff =================================================== */
 
     // Calculated values
