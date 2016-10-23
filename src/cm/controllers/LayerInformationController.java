@@ -135,25 +135,32 @@ public class LayerInformationController {
     // used to parse design/layer numbers
     private StringBuilder sb;
 
-
-
-    private Layer layer = new Layer();
     @FXML
     private void loadMaterialBtnAction() throws IOException {
-
-        if (thicknessUnitChoiceBox.getValue() == "meter") {
-            layer.setThickness(toDouble(thicknessTextField));
-        }
-
-        if (thicknessUnitChoiceBox.getValue() == "inch") {
-            layer.setThickness(toDouble(thicknessTextField)
-                               * 0.0254);
-        }
-
+        saveLayerType();
+        saveThickness();
+        System.out.println(currentLayer);
         App.showLoadMaterial();
+    }
+
+    private void saveLayerType() {
+        currentLayer.setLayerType(toString(layerTypeComboBox));
+    }
+
+
+    private void saveThickness() {
+        Double thicknessValue = toDouble(thicknessTextField);
+        String thicknessUnit = thicknessUnitChoiceBox.getValue().toString();
+        if (thicknessUnit == "inch")
+            thicknessValue *= 0.0254;
+        currentLayer.setThickness(thicknessValue);
     }
 
     private Double toDouble(TextInputControl o) {
         return Double.parseDouble(o.getText());
+    }
+
+    private String toString(ComboBox cb) {
+        return cb.getValue().toString();
     }
 }

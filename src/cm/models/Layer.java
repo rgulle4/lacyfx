@@ -15,11 +15,14 @@ public class Layer {
     private String layerId;
 
     // Dimensions... the user specifies thickness and thicknessUnit.
-    private double length = 1609.34;        //1 mile = 1609.34 meter
-    private double width = 12*0.3048;       //1 ft = 0.3048 meter;
+    private double length = 1609.34;        // 1 mile
+    private double width = 12/3.28084;       // 12 ft
     private double thickness;
-    private String thicknessUnit;
-    private String volumeUnit;
+
+    @Override
+    public String toString() {
+        return ("layerType,l,w,t,v = " + getLayerType() + "," + length + "," + width + "," + thickness + "," + getVolume());
+    }
 
     // Layer type determines which material database to use.
     // Maybe we should enumerate these?
@@ -85,24 +88,8 @@ public class Layer {
         this.thickness = thickness;
     }
 
-    public String getThicknessUnit() {
-        return thicknessUnit;
-    }
-
-    public void setThicknessUnit(String thicknessUnit) {
-        this.thicknessUnit = thicknessUnit;
-    }
-
     public double getVolume() {
         return getThickness() * getLength() * getWidth();
-    }
-
-    public String getVolumeUnit() {
-        return volumeUnit;
-    }
-
-    public void setVolumeUnit(String volumeUnit) {
-        this.volumeUnit = volumeUnit;
     }
 
     public double getEnvPerfAnalysis_TotalScore_Layer() {

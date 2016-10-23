@@ -84,7 +84,7 @@ public class ImportTabController {
     @FXML
     public void initialize() {
         numberOfDesignsComboBox.setItems(numberOfDesigns);
-        numberOfDesignsComboBox.setValue(numberOfDesigns.get(0));
+
         vBoxes[0] = vBox1;
         vBoxes[1] = vBox2;
         vBoxes[2] = vBox3;
@@ -108,6 +108,18 @@ public class ImportTabController {
         // show the designs based on number of designs combo box
         if (numberOfDesignsComboBox.getSelectionModel().getSelectedItem() != null)
             showTheRightNumberOfDesigns();
+
+//        setDefaultSelections();
+    }
+
+    // TODO: this doesn't work, maybe delete it?
+    private void setDefaultSelections() {
+        numberOfDesignsComboBox.setValue(numberOfDesigns.get(0));
+        vBoxes[0].setVisible(true);
+        designType1ComboBox.setValue(designTypes.get(0));
+        pavementType1ComboBox.setValue(newPavementTypes.get(0));
+        numberOfLayers1ComboBox.setValue(layerNum.get(0));
+
     }
 
     public void showTheRightNumberOfDesigns() {
