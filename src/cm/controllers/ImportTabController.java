@@ -81,6 +81,7 @@ public class ImportTabController {
 
     public void initialize(){
         DesignNum.setItems(designNum);
+        DesignNum.setValue(designNum.get(0));
 
         VBox[0] = vBox1;
         VBox[1] = vBox2;
