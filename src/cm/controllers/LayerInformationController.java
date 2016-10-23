@@ -1,83 +1,159 @@
 package cm.controllers;
 
 import cm.App;
+import static cm.models.Model.*;
 import cm.models.Design;
 import cm.models.Layer;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.io.IOException;
-import java.util.Set;
-
-import static cm.App.designMap;
-import static cm.App.layerMap;
 
 /**
  * Created by royg59 on 9/21/16.
  */
 public class LayerInformationController {
 
-    ObservableList<String> LayerType = FXCollections.observableArrayList("Asphalt Concrete","Portland Cement Concrete","Aggregate");       //Material type of a layer
-    ObservableList<String> ThicknessUnit = FXCollections.observableArrayList("inch","meter");
+    // The allowed material types
+    ObservableList<String> layerTypes = FXCollections.observableArrayList(
+          "Asphalt Concrete",
+          "Portland Cement Concrete",
+          "Aggregate");
+
+    // The allowed thickness units
+    ObservableList<String> thicknessUnits = FXCollections.observableArrayList(
+          "inch",
+          "meter");
+
+
+    // Some layer specs
+    @FXML
+    public ComboBox layerTypeComboBox;
+    @FXML
+    public TextField thicknessTextField;
+    @FXML
+    public ChoiceBox thicknessUnitChoiceBox;
+
+    // The TabPanes
+    @FXML
+    TabPane designsTabPane;
+    @FXML
+    TabPane layersTabPane;
+
+    // vars we'll use for current design, current layer
+    String currentDesignKey = "Design 1";
+    int currentLayerIndex = 0;
+
+    Design currentDesign = null;
+    Layer currentLayer = null;
+
+    private void printCurrentIndexes() {
+        System.out.println("-----------");
+        System.out.println("Design Key = " + currentDesignKey);
+        System.out.println("Layer index = " + currentLayerIndex);
+    }
+
+    private void addDesignsTabsListener() {
+        designsTabPane.getSelectionModel().selectedItemProperty()
+              .addListener((observable, oldValue, newValue) -> {
+                  currentDesignKey = getSelectedTabText(designsTabPane);
+                  printCurrentIndexes();
+                  setCurrentDesign(currentDesignKey);
+        });
+    }
+
+    private void setCurrentDesign(String designKey) {
+        if (DESIGNS.containsKey(designKey)) {
+            currentDesign = DESIGNS.get(designKey);
+            System.out.println("setCurrentDesign() success");
+        } else {
+            System.out.println("Couldn't set current design with key = " + designKey);
+        }
+    }
+
+    private void addLayersTabsListener() {
+        layersTabPane.getSelectionModel().selectedIndexProperty()
+              .addListener((observable1, oldValue1, newValue1) -> {
+                  currentLayerIndex = getSelectedTabIndex(layersTabPane);
+                  printCurrentIndexes();
+                  setCurrentLayer(currentLayerIndex);
+              });
+    }
+
+    private void setCurrentLayer(int layerIndex) {
+        boolean designHasOurCurrentKey = DESIGNS.containsKey(currentDesignKey);
+        boolean layerIndexIsValid = false;
+        if (currentDesign != null) {
+            layerIndexIsValid = currentDesign.hasLayerIndex(layerIndex);
+        }
+        if (designHasOurCurrentKey && layerIndexIsValid) {
+            currentLayer = currentDesign.getLayer(layerIndex);
+            System.out.println(
+                  "setCurrentLayer() success");
+        } else {
+            System.out.println(
+                  "Couldn't set current layer with index = " + layerIndex);
+        }
+    }
+
+
+    private String getSelectedTabText(TabPane tabPane) {
+        return tabPane.getSelectionModel().getSelectedItem().getText();
+    }
+    private int getSelectedTabIndex(TabPane tabPane) {
+        return tabPane.getSelectionModel().getSelectedIndex();
+    }
 
 
     @FXML
-    //All the items in a layerInformation tab
-    public ComboBox comboLayerType;
-    @FXML
-    public ChoiceBox ChoiceBox_ThicknessUnit;
-    @FXML
-    public TextField TextField_Thickness;
-    @FXML
-    public Tab DesginTab1;
-    @FXML
-    public Tab LayerTab1;
+    private void initialize() {
+        printCurrentIndexes();
 
-    private App main;
+        // add listeners so we know the current tabs
+        addDesignsTabsListener();
+        addLayersTabsListener();
 
+        // Set up gui elements
+        layerTypeComboBox.setItems(layerTypes);
+        thicknessUnitChoiceBox.setValue("inch");
+        thicknessUnitChoiceBox.setItems(thicknessUnits);
+        thicknessTextField.setText("10.0");
+
+        // figure out current design and current layer at initialize
+        currentDesignKey = getSelectedTabText(designsTabPane);
+        setCurrentDesign(currentDesignKey);
+        currentLayerIndex = getSelectedTabIndex(layersTabPane);
+        setCurrentLayer(currentLayerIndex);
+
+        System.out.println();
+    }
+
+    // used to parse design/layer numbers
     private StringBuilder sb;
 
-    @FXML
-    private void initialize(){
 
-        //Design 1
-        comboLayerType.setItems(LayerType);
-        ChoiceBox_ThicknessUnit.setValue("inch");
-        ChoiceBox_ThicknessUnit.setItems(ThicknessUnit);
-        TextField_Thickness.setText("10.0");
-
-    }
 
     private Layer layer = new Layer();
     @FXML
-    private void LoadMatBtn() throws IOException {
+    private void loadMaterialBtnAction() throws IOException {
 
-
-        if (ChoiceBox_ThicknessUnit.getValue() == "meter") {
-            layer.setThickness(Double.parseDouble(TextField_Thickness.getText()));
-            double Volume = layer.getThickness() * layer.getLengthness() * layer.getWidth();
-            layer.setVolume(Volume);
-
+        if (thicknessUnitChoiceBox.getValue() == "meter") {
+            layer.setThickness(toDouble(thicknessTextField));
         }
-        if (ChoiceBox_ThicknessUnit.getValue() == "inch") {
 
-            layer.setThickness(Double.parseDouble(TextField_Thickness.getText()) * 0.0254);
-            double Volume = layer.getThickness() * layer.getLengthness() * layer.getWidth();
-            layer.setVolume(Volume);
-
+        if (thicknessUnitChoiceBox.getValue() == "inch") {
+            layer.setThickness(toDouble(thicknessTextField)
+                               * 0.0254);
         }
-//                sb.append("L"+Integer.toString(i));
-//                String layerID = sb.toString();
-//                layer.setLayer_ID(layerID);
-//
-//                layer.setLayerType(this.comboLayerType.getValue().toString());
-//                //save data in the layerMap
-//                layerMap.put(layer.getLayer_ID(),layer);
-//                System.out.println("Volume:  "+layerMap.get(layer.getLayer_ID()).getVolume()+"   LayerType:  "+layerMap.get(layer.getLayer_ID()).getLayerType());
 
+        App.showLoadMaterial();
+    }
 
-        main.showLoadMaterial();
+    private Double toDouble(TextInputControl o) {
+        return Double.parseDouble(o.getText());
     }
 }

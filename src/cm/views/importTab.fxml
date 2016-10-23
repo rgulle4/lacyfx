@@ -12,7 +12,7 @@
     <children>
         <ButtonBar layoutX="550" layoutY="450" prefHeight="40.0" prefWidth="200.0">
             <buttons>
-                <Button mnemonicParsing="false" onAction="#SaveButton" text="Save" />
+                <Button mnemonicParsing="false" onAction="#saveButtonAction" text="Save" />
                 <Button mnemonicParsing="false" text="Close" />
             </buttons>
         </ButtonBar>
@@ -24,18 +24,18 @@
                </padding>
             </Label>
             <Label text="Design type:" />
-            <ComboBox fx:id="Designtype1" onAction="#SelectDesignType" prefWidth="150.0" />
+            <ComboBox fx:id="designType1ComboBox" onAction="#updatePavementTypeComboBox" prefWidth="150.0" />
             <Label fx:id="label1" text="Pavement type:" />
-            <ComboBox fx:id="Pavementtype1" prefWidth="150.0" />
+            <ComboBox fx:id="pavementType1ComboBox" prefWidth="150.0" />
             <Label text="Number of layers to be analyized:" />
-            <ComboBox fx:id="LayerNum1" prefWidth="150.0" />
+            <ComboBox fx:id="numberOfLayers1ComboBox" prefWidth="150.0" />
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
       </VBox>
       <Label layoutX="209.0" layoutY="50.0" prefHeight="15.0" prefWidth="240.0" text="Select number of designs" />
-      <ComboBox fx:id="DesignNum" layoutX="374.0" layoutY="46.0" onAction="#initialize" prefWidth="150.0" />
+      <ComboBox fx:id="numberOfDesignsComboBox" layoutX="374.0" layoutY="46.0" onAction="#initialize" prefWidth="150.0" />
       <VBox fx:id="vBox2" layoutX="273.0" layoutY="93.0" prefHeight="204.0" prefWidth="240.0" spacing="10.0">
          <children>
             <Label text="Design 2">
@@ -44,11 +44,11 @@
                </padding>
             </Label>
             <Label text="Design type:" />
-            <ComboBox fx:id="Designtype2" onAction="#SelectDesignType" prefWidth="150.0" />
+            <ComboBox fx:id="designType2ComboBox" onAction="#updatePavementTypeComboBox" prefWidth="150.0" />
             <Label fx:id="label2" text="Pavement type:" />
-            <ComboBox fx:id="Pavementtype2" prefWidth="150.0" />
+            <ComboBox fx:id="pavementType2ComboBox" prefWidth="150.0" />
             <Label text="Number of layers to be analyized:" />
-            <ComboBox fx:id="LayerNum2" prefWidth="150.0" />
+            <ComboBox fx:id="numberOfLayers2ComboBox" prefWidth="150.0" />
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -62,11 +62,11 @@
                </padding>
             </Label>
             <Label text="Design type:" />
-            <ComboBox fx:id="Designtype3" onAction="#SelectDesignType" prefWidth="150.0" />
+            <ComboBox fx:id="designType3ComboBox" onAction="#updatePavementTypeComboBox" prefWidth="150.0" />
             <Label fx:id="label3" text="Pavement type:" />
-            <ComboBox fx:id="Pavementtype3" prefWidth="150.0" />
+            <ComboBox fx:id="pavementType3ComboBox" prefWidth="150.0" />
             <Label text="Number of layers to be analyized:" />
-            <ComboBox fx:id="LayerNum3" prefWidth="150.0" />
+            <ComboBox fx:id="numberOfLayers3ComboBox" prefWidth="150.0" />
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

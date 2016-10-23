@@ -7,41 +7,67 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
-import static cm.App.designMap;
+import java.util.Map;
+
+import static cm.models.Model.*;
+
 
 
 /**
  * Created by royg59 on 9/21/16.
  */
 public class ImportTabController {
-    ObservableList<String> DesignType = FXCollections.observableArrayList("New pavement","Overlay");       //Design type of pavement
-    ObservableList<String> PavementType_newPavement = FXCollections.observableArrayList("Flexible pavement","Joint Reinforced concrete pavement"); //Pavement type
-    ObservableList<String> PavementType_overlay = FXCollections.observableArrayList("AC over AC","AC over JRCP"); //Pavement type
 
-    ObservableList<String> layerNum = FXCollections.observableArrayList("1","2","3","4","5","6","7","8","others");       //number of layers in a design
-    ObservableList<String> designNum = FXCollections.observableArrayList("1","2","3");       //number of design
+    private final int MAX_NUM_OF_DESIGNS = 3;
+
+    // Number of designs
+    ObservableList<String> numberOfDesigns = FXCollections.
+          observableArrayList("1","2","3");
+
+    // Design Type
+    ObservableList<String> designTypes = FXCollections
+          .observableArrayList(
+                "New pavement",
+                "Overlay");
+
+    // Pavement type (when design is new pavement)
+    ObservableList<String> newPavementTypes = FXCollections
+          .observableArrayList(
+                "Flexible pavement",
+                "Joint Reinforced concrete pavement");
+
+    // Pavement type (when design is overlay)
+    ObservableList<String> overlayPavementTypes = FXCollections.
+          observableArrayList(
+                "AC over AC",
+                "AC over JRCP");
+
+    // Number of layers in this design
+    ObservableList<String> layerNum = FXCollections
+          .observableArrayList(
+                "1","2","3","4","5","6","7","8","others");
 
     @FXML
-    private ComboBox Designtype1;
+    private ComboBox designType1ComboBox;
     @FXML
-    private ComboBox Pavementtype1;
+    private ComboBox pavementType1ComboBox;
     @FXML
-    private ComboBox LayerNum1;
+    private ComboBox numberOfLayers1ComboBox;
     @FXML
-    private ComboBox Designtype2;
+    private ComboBox designType2ComboBox;
     @FXML
-    private ComboBox Pavementtype2;
+    private ComboBox pavementType2ComboBox;
     @FXML
-    private ComboBox LayerNum2;
+    private ComboBox numberOfLayers2ComboBox;
     @FXML
-    private ComboBox Designtype3;
+    private ComboBox designType3ComboBox;
     @FXML
-    private ComboBox Pavementtype3;
+    private ComboBox pavementType3ComboBox;
     @FXML
-    private ComboBox LayerNum3;
+    private ComboBox numberOfLayers3ComboBox;
 
     @FXML
-    private ComboBox DesignNum;
+    private ComboBox numberOfDesignsComboBox;
     @FXML
     private VBox vBox1;
     @FXML
@@ -50,124 +76,108 @@ public class ImportTabController {
     private VBox vBox3;
 
 
-    private ComboBox[] Designtype = new ComboBox[10];
+    private ComboBox[] designTypeComboBoxes = new ComboBox[MAX_NUM_OF_DESIGNS];
+    private VBox[] vBoxes = new VBox[MAX_NUM_OF_DESIGNS];
+    private ComboBox[] pavementTypeComboBoxes = new ComboBox[MAX_NUM_OF_DESIGNS];
+    private ComboBox[] layerNumComboBoxes = new ComboBox[MAX_NUM_OF_DESIGNS];
 
-    private VBox[] VBox = new VBox[10];
+    @FXML
+    public void initialize() {
+        numberOfDesignsComboBox.setItems(numberOfDesigns);
+        numberOfDesignsComboBox.setValue(numberOfDesigns.get(0));
+        vBoxes[0] = vBox1;
+        vBoxes[1] = vBox2;
+        vBoxes[2] = vBox3;
+        designTypeComboBoxes[0] = designType1ComboBox;
+        designTypeComboBoxes[1] = designType2ComboBox;
+        designTypeComboBoxes[2] = designType3ComboBox;
+        layerNumComboBoxes[0] = numberOfLayers1ComboBox;
+        layerNumComboBoxes[1] = numberOfLayers2ComboBox;
+        layerNumComboBoxes[2] = numberOfLayers3ComboBox;
+        pavementTypeComboBoxes[0] = pavementType1ComboBox;
+        pavementTypeComboBoxes[1] = pavementType2ComboBox;
+        pavementTypeComboBoxes[2] = pavementType3ComboBox;
 
-    private ComboBox[] PavementType = new ComboBox[10];
-
-    private ComboBox[] LayerNum = new ComboBox[10];
-
-
-
-    private void initializeNew(){
-
-        VBox[0] = vBox1;
-        VBox[1] = vBox2;
-        VBox[2] = vBox3;
-        Designtype[0] = Designtype1;
-        Designtype[1] = Designtype2;
-        Designtype[0] = Designtype3;
-        LayerNum[0] = LayerNum1;
-        LayerNum[1] = LayerNum2;
-        LayerNum[2] = LayerNum3;
-        PavementType[0] = Pavementtype1;
-        PavementType[1] = Pavementtype2;
-        PavementType[2] = Pavementtype3;
-
-
-    }
-
-
-    public void initialize(){
-        DesignNum.setItems(designNum);
-        DesignNum.setValue(designNum.get(0));
-
-        VBox[0] = vBox1;
-        VBox[1] = vBox2;
-        VBox[2] = vBox3;
-        Designtype[0] = Designtype1;
-        Designtype[1] = Designtype2;
-        Designtype[2] = Designtype3;
-        LayerNum[0] = LayerNum1;
-        LayerNum[1] = LayerNum2;
-        LayerNum[2] = LayerNum3;
-        PavementType[0] = Pavementtype1;
-        PavementType[1] = Pavementtype2;
-        PavementType[2] = Pavementtype3;
-
+        // hide all the design choices
         for (int i=0;i<3;i++){
-            //hidden all the design choices
-            VBox[i].setVisible(false);
-            Designtype[i].setItems(DesignType);
-            LayerNum[i].setItems(layerNum);
-        }
-//        // set up all the comboBox items
-//        DesignNum.setItems(designNum);
-//        //Design 1
-//        Designtype1.setItems(DesignType);
-//        LayerNum1.setItems(layerNum);
-//        //Design 2
-//        Designtype2.setItems(DesignType);
-//        LayerNum2.setItems(layerNum);
-//        //Design 3
-//        Designtype3.setItems(DesignType);
-//        LayerNum3.setItems(layerNum);
-
-       // designNum.setItems(designNum);
-
-        //set up special number of design to be visible
-
-        if (DesignNum.getSelectionModel().isSelected(0)){
-            for (int i=0;i<Integer.parseInt(DesignNum.getValue().toString());i++){
-                VBox[i].setVisible(true);
-            }
-            for (int i = Integer.parseInt(DesignNum.getValue().toString()); i<3;i++){
-                VBox[i].setVisible(false);
-            }
-
-        }
-        if (DesignNum.getSelectionModel().isSelected(1)){
-            for (int i=0;i<Integer.parseInt(DesignNum.getValue().toString());i++){
-                VBox[i].setVisible(true);
-            }
-            for (int i = Integer.parseInt(DesignNum.getValue().toString()); i<3;i++){
-                VBox[i].setVisible(false);
-            }
-        }
-        if (DesignNum.getSelectionModel().isSelected(2)){
-            for (int i=0;i<Integer.parseInt(DesignNum.getValue().toString());i++){
-                VBox[i].setVisible(true);
-            }
-            for (int i = Integer.parseInt(DesignNum.getValue().toString()); i<3;i++){
-                VBox[i].setVisible(false);
-            }
+            vBoxes[i].setVisible(false);
+            designTypeComboBoxes[i].setItems(designTypes);
+            layerNumComboBoxes[i].setItems(layerNum);
         }
 
+        // show the designs based on number of designs combo box
+        if (numberOfDesignsComboBox.getSelectionModel().getSelectedItem() != null)
+            showTheRightNumberOfDesigns();
     }
-    public void SelectDesignType(){
 
-        for (int i=0;i<3;i++) {
-            if (Designtype[i].getSelectionModel().isSelected(0))
-            PavementType[i].setItems(PavementType_newPavement);
-            if (Designtype[i].getSelectionModel().isSelected(1))
-            PavementType[i].setItems(PavementType_overlay);
+    public void showTheRightNumberOfDesigns() {
+        // show new ones
+        for (int i = 0; i < toInt(numberOfDesignsComboBox); i++){
+            vBoxes[i].setVisible(true);
+        }
+        // hide "deleted" ones
+        for (int i = toInt(numberOfDesignsComboBox); i < MAX_NUM_OF_DESIGNS; i++) {
+            vBoxes[i].setVisible(false);
         }
     }
-    public void SaveButton(){
 
-        Design design = new Design();
-        for (int i =1;i<= Integer.parseInt(DesignNum.getValue().toString());i++){
-            StringBuilder ID = new StringBuilder("Design");
-            String designID =ID.append(Integer.toString(i)).toString();
-            design.setDesign_ID(designID);
 
-            design.setDesign_Type(Designtype[i-1].getValue().toString());
-            design.setPavement_Type(PavementType[i-1].getValue().toString());
-            design.setNumberOfLayers(Integer.parseInt(LayerNum[i-1].getValue().toString()));
 
-            designMap.put(design.getDesign_ID(),design);
+    public void updatePavementTypeComboBox() {
+        for (int i = 0; i < MAX_NUM_OF_DESIGNS; i++) {
+            if (designTypeComboBoxes[i].getSelectionModel().isSelected(0))
+                pavementTypeComboBoxes[i].setItems(newPavementTypes);
+            if (designTypeComboBoxes[i].getSelectionModel().isSelected(1))
+                pavementTypeComboBoxes[i].setItems(overlayPavementTypes);
         }
+    }
+
+
+    public void saveButtonAction() {
+
+        // loop through, and put all the basic design specs into DESIGNS
+        for (int i = 0; i < toInt(numberOfDesignsComboBox); i++) {
+            Design aNewDesign = new Design();
+
+            // Save design id string, "indexed" at 1
+            StringBuilder ID = new StringBuilder("Design ");
+            String designID = ID.append(Integer.toString(i+1)).toString();
+            aNewDesign.setDesignId(designID);
+
+            // Save design type
+            aNewDesign.setDesignType(toString(designTypeComboBoxes[i]));
+
+            // Save pavement type
+            aNewDesign.setPavementType(toString(pavementTypeComboBoxes[i]));
+
+            // Save number of layers
+            aNewDesign.setNumberOfLayers(toInt(layerNumComboBoxes[i]));
+
+            // put into our DESIGNS collection
+            DESIGNS.put(aNewDesign.getDesignId(),aNewDesign);
+        }
+
+
+
+        /* -- some debug stuff ------------------------------------- */
+
         System.out.println("All the basic design information was saved!!");
+
+        for (Map.Entry<String, Design> elt : DESIGNS.entrySet()) {
+            System.out.println("Design with key [" + elt.getKey()
+                        + "] has "
+                        + elt.getValue().getNumberOfLayers()
+                        + " number of layers");
+        }
+    }
+
+    /* -- helper methods -------------------------------------------- */
+
+    private int toInt(ComboBox cb) {
+        return Integer.parseInt(cb.getValue().toString());
+    }
+
+    private String toString(ComboBox cb) {
+        return cb.getValue().toString();
     }
 }

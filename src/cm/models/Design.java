@@ -1,7 +1,5 @@
 package cm.models;
 
-import sun.security.krb5.internal.crypto.Des;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +13,14 @@ public class Design {
 
     // A design has a bunch of layers, added from top to bottom.
     private List<Layer> layers = new ArrayList<>();
+
+    private String designId;
+    private String designType;
+    private String pavementType;
+
+    private double EnvPerfAnalysis_TotalScore_Design;
+    private double EnvPerfAnalysis_EPDScore_Design;
+    private double EnvPerfAnalysis_TransportationScore_Design;
 
     /* -- Constructor(s) ------------------------------------------------ */
 
@@ -31,18 +37,50 @@ public class Design {
      */
     public Design(int numberOfLayers) {
         this();
-        this.setNumberOfLayers(numberOfLayers);
+        for (int i = 0; i < numberOfLayers; i++) {
+            this.addLayer();
+        }
     }
 
     /* -- Methods ------------------------------------------------------- */
 
     /**
-     * Return a layer by number, layer 1 is the top.
+     * Set number of layers in the design, adding or removing at
+     * the the bottom as appropriate.
+     * @param numberOfLayers The number of layers.
+     * @return this, for chaining.
+     */
+    public Design setNumberOfLayers(int numberOfLayers) {
+        int numberOfLayersToAdd = numberOfLayers - getNumberOfLayers();
+        if (getNumberOfLayers() == 0 || numberOfLayersToAdd > 0) {
+            for (int i = 0; i < numberOfLayersToAdd; i++) {
+                this.addLayer();
+            }
+        } else if (numberOfLayersToAdd < 0) {
+            for (int i = numberOfLayersToAdd; i < 0; i++) {
+                this.removeLayer();
+            }
+        } else {
+            System.out.println("sadf");
+        }
+        return this;
+    }
+
+
+
+    /**
+     * Return a layer by number, layer 0 is the top.
      * @param layerNumber
      * @return
      */
     public Layer getLayer(int layerNumber) {
-        return layers.get(layerNumber - 1);
+        return layers.get(layerNumber);
+    }
+
+    public boolean hasLayerIndex(int layerIndex) {
+        if (layerIndex < 0 || layerIndex > layers.size())
+            return false;
+        return true;
     }
 
     /**
@@ -70,89 +108,76 @@ public class Design {
         return this;
     }
 
+    /**
+     * Removes the bottom layer if it exists, otherwise noop.
+     * @return this.
+     */
+    public Design removeLayer() {
+        if (getNumberOfLayers() > 0)
+            layers.remove(layers.size() - 1);
+        return this;
+    }
+
     public Design setLayer(int layerNumber, Layer layer) {
         layers.set(layerNumber - 1, layer);
         return this;
     }
 
-    /* -- Tester -------------------------------------------------------- */
-
-    public static void main(String[] args) {
-        Design d = new Design();
-        System.out.println(d.getNumberOfLayers());
-        d.addLayer();
-        System.out.println(d.getNumberOfLayers());
-        d.addLayer(new Layer());
-        System.out.println(d.getNumberOfLayers());
-        d = new Design(8);
-        System.out.println(d.getNumberOfLayers());
+    public String getDesignId() {
+        return designId;
     }
 
-    /* == "Old" Stuff =================================================== */
-
-
-    private String Design_ID;
-    private String Design_Type;
-    private String Pavement_Type;
-    private int NumberOfLayers;
-    private double EnvPerfAnalysis_TotalScore_Design;
-    private double EnvPerfAnalysis_EPDScore_Design;
-    private double EnvPerfAnalysis_TransportationScore_Design;
-
-    public String getDesign_ID() {
-        return Design_ID;
+    public Design setDesignId(String designId) {
+        this.designId = designId;
+        return this;
     }
 
-    public void setDesign_ID(String design_ID) {
-        Design_ID = design_ID;
+    public String getDesignType() {
+        return designType;
     }
 
-    public String getDesign_Type() {
-        return Design_Type;
+    public Design setDesignType(String designType) {
+        this.designType = designType;
+        return this;
     }
 
-    public void setDesign_Type(String design_Type) {
-        Design_Type = design_Type;
+    public String getPavementType() {
+        return pavementType;
     }
 
-    public String getPavement_Type() {
-        return Pavement_Type;
-    }
-
-    public void setPavement_Type(String pavement_Type) {
-        Pavement_Type = pavement_Type;
+    public Design setPavementType(String pavementType) {
+        this.pavementType = pavementType;
+        return this;
     }
 
     public int getNumberOfLayers() {
         return layers.size();
-//        return NumberOfLayers;
-    }
-
-    public void setNumberOfLayers(int numberOfLayers) {
-        NumberOfLayers = numberOfLayers;
     }
 
     public double getEnvPerfAnalysis_TotalScore_Design() {
         return EnvPerfAnalysis_TotalScore_Design;
     }
 
-    public void setEnvPerfAnalysis_TotalScore_Design(double envPerfAnalysis_TotalScore_Design) {
+    public Design setEnvPerfAnalysis_TotalScore_Design(double envPerfAnalysis_TotalScore_Design) {
         EnvPerfAnalysis_TotalScore_Design = envPerfAnalysis_TotalScore_Design;
+        return this;
     }
 
     public double getEnvPerfAnalysis_EPDScore_Design() {
         return EnvPerfAnalysis_EPDScore_Design;
     }
 
-    public void setEnvPerfAnalysis_EPDScore_Design(double envPerfAnalysis_EPDScore_Design) {
+    public Design setEnvPerfAnalysis_EPDScore_Design(double envPerfAnalysis_EPDScore_Design) {
         EnvPerfAnalysis_EPDScore_Design = envPerfAnalysis_EPDScore_Design;
+        return this;
     }
 
     public double getEnvPerfAnalysis_TransportationScore_Design() {
         return EnvPerfAnalysis_TransportationScore_Design;
     }
 
-    public void setEnvPerfAnalysis_TransportationScore_Design(double envPerfAnalysis_TransportationScore_Design) {
+    public Design setEnvPerfAnalysis_TransportationScore_Design(double envPerfAnalysis_TransportationScore_Design) {
         EnvPerfAnalysis_TransportationScore_Design = envPerfAnalysis_TransportationScore_Design;
+        return this;
     }
 }

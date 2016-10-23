@@ -3,6 +3,7 @@ package cm.models;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
+import static cm.models.Model.*;
 
 /**
  * A material is a component of a layer (along with a defined thickness). A

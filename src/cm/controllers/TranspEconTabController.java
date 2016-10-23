@@ -22,8 +22,13 @@ import cm.models.TransportationParameters;
  * Created by royg59 on 9/21/16.
  */
 public class TranspEconTabController {
-    ObservableList<String> VehicleList = FXCollections.observableArrayList("Light-Duty Trucks","Medium-Duty Trucks","Heavy-Duty Trucks");
-    ObservableList<String> FuelList = FXCollections.observableArrayList("Gasoline","Diesel");
+    ObservableList<String> VehicleList = FXCollections.observableArrayList(
+          "Light-Duty Trucks",
+          "Medium-Duty Trucks",
+          "Heavy-Duty Trucks");
+    ObservableList<String> FuelList = FXCollections.observableArrayList(
+          "Gasoline",
+          "Diesel");
 
     private App main;
 

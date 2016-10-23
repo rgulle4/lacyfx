@@ -2,11 +2,13 @@ package cm.models;
 
 import java.util.Set;
 
+import static cm.models.Model.*;
 import static cm.App.*;
 
 
 /**
  * Created by Administrator on 2016/10/3.
+ * This is meant for a whole design (and also each layer).
  */
 public class EnvPerformanceCalc {
     Design design;
@@ -16,7 +18,7 @@ public class EnvPerformanceCalc {
     TransportationParameters transportationParameters;
 
 
-    Set<String> design_keys = designMap.keySet();
+    Set<String> design_keys = DESIGNS.keySet();
     Set<String> layer_keys = layerMap.keySet();
     Set<String> material_keys = materialMap.keySet();
     Set<String> weights_keys = weightsMap.keySet();
@@ -102,16 +104,16 @@ public class EnvPerformanceCalc {
     public void EnvAnalysisCalc(){
 
         for (String key: weights_keys) {
-            //abstract weights values from weight table
+            //abstract WEIGHTS values from weight table
             weight = weightsMap.get(key);
-            W_ENP = weight.getW_EnP();
-            W_GWP = weight.getW_GWP();
-            W_ODP = weight.getW_ODP();
-            W_AP = weight.getW_AP();
-            W_EP = weight.getW_EP();
-            W_POCP = weight.getW_POCP();
-            W_TWC = weight.getW_TotalWaterConsumption();
-            W_TPEC = weight.getW_TotalPrimaryEnergyConsumption();
+            W_ENP = weight.getwEnvPerformance();
+            W_GWP = weight.getwGwp();
+            W_ODP = weight.getwOdp();
+            W_AP = weight.getwAp();
+            W_EP = weight.getwEp();
+            W_POCP = weight.getwPocp();
+            W_TWC = weight.getwTotalWaterConsumption();
+            W_TPEC = weight.getwTotalPrimaryEnergyConsumption();
         }
 
         for (String key_t:transportationPara_keys){
@@ -186,7 +188,7 @@ public class EnvPerformanceCalc {
             design.setEnvPerfAnalysis_TotalScore_Design(envPerfScore_Design);
             design.setEnvPerfAnalysis_EPDScore_Design(envPerfScore_EDP_Design);
             design.setEnvPerfAnalysis_TransportationScore_Design(enPerfScore_Transportation_Design);
-            designMap.put(key_i,design);
+            DESIGNS.put(key_i,design);
         }
     }
 

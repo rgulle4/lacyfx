@@ -20,13 +20,18 @@ public class Controller {
 
     // we need to know about the model... probably just need
     // one, but just in case...
-    Model model = new cm.models.Model();
+//    Model model = new cm.models.Model();
 
     @FXML
-    TabPane mainTabPane;
+    private TabPane mainTabPane;
 
-
-    public void NextButton(){
+    public void NextButton() {
         mainTabPane.getSelectionModel().select(mainTabPane.getSelectionModel().getSelectedIndex()+1);
+    }
+
+    public static void main(String[] args) {
+        foo();
+        Model.foo();
+        // both of those work
     }
 }

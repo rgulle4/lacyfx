@@ -4,9 +4,11 @@ package cm.models;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
+import static cm.models.Model.*;
 
 /**
  * Created by Administrator on 2016/10/1.
+ * This is meant for a single layer. (Deprecated).
  */
 public class EnvAnalysisCalc {
     static double length = 1609.34;        //1 mile = 1609.34 meter

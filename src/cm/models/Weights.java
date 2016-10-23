@@ -4,179 +4,179 @@ package cm.models;
  * Created by Administrator on 2016/10/2.
  */
 public class Weights {
-    private double W_EnP;
-    private double W_EcP;
-    private double W_GWP;
-    private double W_ODP;
-    private double W_AP;
-    private double W_EP;
-    private double W_POCP;
-    private double W_ConcreteWaste;
-    private double W_ConcretHazardousWaste;
-    private double W_ConcretNonHazardousWaste;
-    private double W_TotalWaterConsumption;
-    private double W_TotalPrimaryEnergyConsumption;
-    private double W_RenewableEnergyConsumption;
-    private double W_NonRenewableEnergyConsumption;
-    private double W_MaterialResourceConsumption;
-    private double W_RenewableMaterialResourceConsumption;
-    private double W_NonRenewableMaterialResourceConsumption;
 
-//    // initialize
-//    public Weights(double W_enp, double W_ecp, double W_gwp, double W_odp,
-//                    double W_ap, double W_ep, double W_pocp, double W_chw,
-//                    double W_cnhw, double W_twc, double W_rpeo, double W_dner,
-//                    double W_rmru, double W_dnmr)
-//    {
-//        this.W_EnP = W_enp;
-//        this.W_EcP = W_ecp;
-//        this.W_GWP = W_gwp;
-//        this.W_ODP = W_odp;
-//        this.W_AP = W_ap;
-//        this.W_EP = W_ep;
-//        this.W_POCP = W_pocp;
-//        this.W_ConcretHazardousWaste = W_chw;
-//        this.W_ConcretNonHazardousWaste = W_cnhw;
-//        this.W_TotalWaterConsumption = W_twc;
-//        this.W_RenewableEnergyConsumption = W_rpeo;
-//        this.W_NonRenewableEnergyConsumption = W_dner;
-//        this.W_RenewableMaterialResourceConsumption = W_rmru;
-//        this.W_NonRenewableMaterialResourceConsumption = W_dnmr;
-//
-//    }
-    public double getW_EnP() {
-        return W_EnP;
+    // Weights for scoring Env + Econ for total score.
+    private double wEnvPerformance;
+    private double wEconPerformance;
+
+    // Environmental impact weights (used by
+    // both EPD and for Transportation).
+    private double wGwp;
+    private double wOdp;
+    private double wAp;
+    private double wEp;
+    private double wPocp;
+    private double wConcreteWaste;
+    private double wConcreteHazWaste;    // "hidden" from user
+    private double wConcreteNonHazWaste; // "hidden" from user
+    private double wTotalWaterConsumption;
+    private double wTotalPrimaryEnergyConsumption;
+    private double wRenewableEnergyConsumption; // "hidden" from user
+    private double wNonRenewableEnergyConsumption; // "hidden" from user
+    private double wMaterialResourceConsumption;
+    private double wRenewableMaterialResourceConsumption; // "hidden" from user
+    private double wNonRenewableMaterialResourceConsumption; // "hidden" from user
+
+    public double getwEnvPerformance() {
+        return wEnvPerformance;
     }
 
-    public void setW_EnP(double w_EnP) {
-        W_EnP = w_EnP;
+    public Weights setwEnvPerformance(double wEnvPerformance) {
+        this.wEnvPerformance = wEnvPerformance;
+        return this;
     }
 
-    public double getW_EcP() {
-        return W_EcP;
+    public double getwEconPerformance() {
+        return wEconPerformance;
     }
 
-    public void setW_EcP(double w_EcP) {
-        W_EcP = w_EcP;
+    public Weights setwEconPerformance(double wEconPerformance) {
+        this.wEconPerformance = wEconPerformance;
+        return this;
     }
 
-    public double getW_GWP() {
-        return W_GWP;
+    public double getwGwp() {
+        return wGwp;
     }
 
-    public void setW_GWP(double w_GWP) {
-        W_GWP = w_GWP;
+    public Weights setwGwp(double wGwp) {
+        this.wGwp = wGwp;
+        return this;
     }
 
-    public double getW_ODP() {
-        return W_ODP;
+    public double getwOdp() {
+        return wOdp;
     }
 
-    public void setW_ODP(double w_ODP) {
-        W_ODP = w_ODP;
+    public Weights setwOdp(double wOdp) {
+        this.wOdp = wOdp;
+        return this;
     }
 
-    public double getW_AP() {
-        return W_AP;
+    public double getwAp() {
+        return wAp;
     }
 
-    public void setW_AP(double w_AP) {
-        W_AP = w_AP;
+    public Weights setwAp(double wAp) {
+        this.wAp = wAp;
+        return this;
     }
 
-    public double getW_EP() {
-        return W_EP;
+    public double getwEp() {
+        return wEp;
     }
 
-    public void setW_EP(double w_EP) {
-        W_EP = w_EP;
+    public Weights setwEp(double wEp) {
+        this.wEp = wEp;
+        return this;
     }
 
-    public double getW_POCP() {
-        return W_POCP;
+    public double getwPocp() {
+        return wPocp;
     }
 
-    public void setW_POCP(double w_POCP) {
-        W_POCP = w_POCP;
+    public Weights setwPocp(double wPocp) {
+        this.wPocp = wPocp;
+        return this;
     }
 
-    public double getW_ConcretHazardousWaste() {
-        return W_ConcretHazardousWaste;
+    public double getwConcreteHazWaste() {
+        return wConcreteHazWaste;
     }
 
-    public void setW_ConcretHazardousWaste(double w_ConcretHazardousWaste) {
-        W_ConcretHazardousWaste = w_ConcretHazardousWaste;
+    public Weights setwConcreteHazWaste(double wConcreteHazWaste) {
+        this.wConcreteHazWaste = wConcreteHazWaste;
+        return this;
     }
 
-    public double getW_ConcretNonHazardousWaste() {
-        return W_ConcretNonHazardousWaste;
+    public double getwConcreteNonHazWaste() {
+        return wConcreteNonHazWaste;
     }
 
-    public void setW_ConcretNonHazardousWaste(double w_ConcretNonHazardousWaste) {
-        W_ConcretNonHazardousWaste = w_ConcretNonHazardousWaste;
+    public Weights setwConcreteNonHazWaste(double wConcreteNonHazWaste) {
+        this.wConcreteNonHazWaste = wConcreteNonHazWaste;
+        return this;
     }
 
-    public double getW_TotalWaterConsumption() {
-        return W_TotalWaterConsumption;
+    public double getwTotalWaterConsumption() {
+        return wTotalWaterConsumption;
     }
 
-    public void setW_TotalWaterConsumption(double w_TotalWaterConsumption) {
-        W_TotalWaterConsumption = w_TotalWaterConsumption;
+    public Weights setwTotalWaterConsumption(double wTotalWaterConsumption) {
+        this.wTotalWaterConsumption = wTotalWaterConsumption;
+        return this;
     }
 
-    public double getW_RenewableEnergyConsumption() {
-        return W_RenewableEnergyConsumption;
+    public double getwRenewableEnergyConsumption() {
+        return wRenewableEnergyConsumption;
     }
 
-    public void setW_RenewableEnergyConsumption(double w_RenewableEnergyConsumption) {
-        W_RenewableEnergyConsumption = w_RenewableEnergyConsumption;
+    public Weights setwRenewableEnergyConsumption(double wRenewableEnergyConsumption) {
+        this.wRenewableEnergyConsumption = wRenewableEnergyConsumption;
+        return this;
     }
 
-    public double getW_NonRenewableEnergyConsumption() {
-        return W_NonRenewableEnergyConsumption;
+    public double getwNonRenewableEnergyConsumption() {
+        return wNonRenewableEnergyConsumption;
     }
 
-    public void setW_NonRenewableEnergyConsumption(double w_NonRenewableEnergyConsumption) {
-        W_NonRenewableEnergyConsumption = w_NonRenewableEnergyConsumption;
+    public Weights setwNonRenewableEnergyConsumption(double wNonRenewableEnergyConsumption) {
+        this.wNonRenewableEnergyConsumption = wNonRenewableEnergyConsumption;
+        return this;
     }
 
-    public double getW_RenewableMaterialResourceConsumption() {
-        return W_RenewableMaterialResourceConsumption;
+    public double getwRenewableMaterialResourceConsumption() {
+        return wRenewableMaterialResourceConsumption;
     }
 
-    public void setW_RenewableMaterialResourceConsumption(double w_RenewableMaterialResourceConsumption) {
-        W_RenewableMaterialResourceConsumption = w_RenewableMaterialResourceConsumption;
+    public Weights setwRenewableMaterialResourceConsumption(double wRenewableMaterialResourceConsumption) {
+        this.wRenewableMaterialResourceConsumption = wRenewableMaterialResourceConsumption;
+        return this;
     }
 
-    public double getW_NonRenewableMaterialResourceConsumption() {
-        return W_NonRenewableMaterialResourceConsumption;
+    public double getwNonRenewableMaterialResourceConsumption() {
+        return wNonRenewableMaterialResourceConsumption;
     }
 
-    public void setW_NonRenewableMaterialResourceConsumption(double w_NonRenewableMaterialResourceConsumption) {
-        W_NonRenewableMaterialResourceConsumption = w_NonRenewableMaterialResourceConsumption;
+    public Weights setwNonRenewableMaterialResourceConsumption(double wNonRenewableMaterialResourceConsumption) {
+        this.wNonRenewableMaterialResourceConsumption = wNonRenewableMaterialResourceConsumption;
+        return this;
     }
 
-    public double getW_ConcreteWaste() {
-        return W_ConcreteWaste;
+    public double getwConcreteWaste() {
+        return wConcreteWaste;
     }
 
-    public void setW_ConcreteWaste(double w_ConcreteWaste) {
-        W_ConcreteWaste = w_ConcreteWaste;
+    public Weights setwConcreteWaste(double wConcreteWaste) {
+        this.wConcreteWaste = wConcreteWaste;
+        return this;
     }
 
-    public double getW_TotalPrimaryEnergyConsumption() {
-        return W_TotalPrimaryEnergyConsumption;
+    public double getwTotalPrimaryEnergyConsumption() {
+        return wTotalPrimaryEnergyConsumption;
     }
 
-    public void setW_TotalPrimaryEnergyConsumption(double w_TotalPrimaryEnergyConsumption) {
-        W_TotalPrimaryEnergyConsumption = w_TotalPrimaryEnergyConsumption;
+    public Weights setwTotalPrimaryEnergyConsumption(double wTotalPrimaryEnergyConsumption) {
+        this.wTotalPrimaryEnergyConsumption = wTotalPrimaryEnergyConsumption;
+        return this;
     }
 
-    public double getW_MaterialResourceConsumption() {
-        return W_MaterialResourceConsumption;
+    public double getwMaterialResourceConsumption() {
+        return wMaterialResourceConsumption;
     }
 
-    public void setW_MaterialResourceConsumption(double w_MaterialResourceConsumption) {
-        W_MaterialResourceConsumption = w_MaterialResourceConsumption;
+    public Weights setwMaterialResourceConsumption(double wMaterialResourceConsumption) {
+        this.wMaterialResourceConsumption = wMaterialResourceConsumption;
+        return this;
     }
 }

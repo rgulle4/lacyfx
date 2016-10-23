@@ -11,7 +11,8 @@ import javafx.scene.chart.XYChart;
 import java.util.Arrays;
 import java.util.Set;
 
-import static cm.App.designMap;
+//import static cm.App.designMap;
+import static cm.models.Model.*;
 import static cm.App.layerMap;
 import static cm.App.materialMap;
 
@@ -80,7 +81,7 @@ public class EnvironmentalReportController {
         Layer layer;
         Material material;
 
-        Set<String> design_keys = designMap.keySet();
+        Set<String> design_keys = DESIGNS.keySet();
         Set<String> layer_keys = layerMap.keySet();
         Set<String> material_keys = materialMap.keySet();
 
@@ -88,17 +89,17 @@ public class EnvironmentalReportController {
         envPerformanceCalc.EnvAnalysisCalc();
 
         for (String key_design:design_keys){
-            design = designMap.get(key_design);
+            design = DESIGNS.get(key_design);
             xAxis.setLabel("Alternative");
-            xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(design.getDesign_ID(),design.getDesign_ID())));
+            xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList(design.getDesignId(),design.getDesignId())));
             yAxis.setLabel("Score");
 
             serie_envPerf_EPDScore.setName("envPerf_EPDScore");
             serie_envPerf_TransportationScore.setName("envPerf_TransportationScore");
             //Stacked Chart for EPD_score and Transportation_score of Environmental analysis
 
-            serie_envPerf_EPDScore.getData().add(new XYChart.Data<>(design.getDesign_ID(), design.getEnvPerfAnalysis_EPDScore_Design()));
-            serie_envPerf_TransportationScore.getData().add(new XYChart.Data<>(design.getDesign_ID(), design.getEnvPerfAnalysis_TransportationScore_Design()));
+            serie_envPerf_EPDScore.getData().add(new XYChart.Data<>(design.getDesignId(), design.getEnvPerfAnalysis_EPDScore_Design()));
+            serie_envPerf_TransportationScore.getData().add(new XYChart.Data<>(design.getDesignId(), design.getEnvPerfAnalysis_TransportationScore_Design()));
             sbc.getData().addAll(serie_envPerf_EPDScore,serie_envPerf_TransportationScore);
             for(String key_layer:layer_keys){
 
