@@ -22,6 +22,9 @@ public class Model {
     // the destination zip code (used for distance calculations).
     public static String DESTINATION_ZIP_CODE_MUTABLE;
 
+    // the "NORMALIZATIONS" that we'll use for scoring;
+    public static final Normalization NORMALIZATIONS = new Normalization();
+
     // -- experiments ---------------------------- //
 
     public static void foo() {
