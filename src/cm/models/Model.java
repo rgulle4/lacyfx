@@ -25,6 +25,9 @@ public class Model {
     // the "NORMALIZATIONS" that we'll use for scoring;
     public static final Normalization NORMALIZATIONS = new Normalization();
 
+    // the "TRANSPORTATION_PARAMETERS" that we will use for scoring
+    public static final TransportationParameters TRANSPORTATION_PARAMETERS = new TransportationParameters();
+
     // -- experiments ---------------------------- //
 
     public static void foo() {
