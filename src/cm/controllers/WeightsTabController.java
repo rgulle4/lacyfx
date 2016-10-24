@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
-import static cm.App.weightsMap;
+import static cm.models.Model.*;
 
 /**
  * Controller for the Weights tab.
@@ -144,22 +144,17 @@ public class WeightsTabController {
         /*
         Set and store Weights
          */
-        Weights wgts = new Weights();
-        wgts.setwEnvPerformance(w_enp);
-        wgts.setwEconPerformance(w_ecp);
-        wgts.setwGwp(w_gwp);
-        wgts.setwOdp(w_odp);
-        wgts.setwAp(w_ap);
-        wgts.setwEp(w_ep);
-        wgts.setwPocp(w_pocp);
-        wgts.setwConcreteWaste(w_cw);
-        wgts.setwTotalWaterConsumption(w_twc);
-        wgts.setwTotalPrimaryEnergyConsumption(w_peu);
-        wgts.setwMaterialResourceConsumption(w_mru);
-
-        String predinfinedWeight = predefinedweightComboBox.getValue().toString();
-
-        weightsMap.put(predinfinedWeight,wgts);
+        WEIGHTS.setwEnvPerformance(w_enp);
+        WEIGHTS.setwEconPerformance(w_ecp);
+        WEIGHTS.setwGwp(w_gwp);
+        WEIGHTS.setwOdp(w_odp);
+        WEIGHTS.setwAp(w_ap);
+        WEIGHTS.setwEp(w_ep);
+        WEIGHTS.setwPocp(w_pocp);
+        WEIGHTS.setwConcreteWaste(w_cw);
+        WEIGHTS.setwTotalWaterConsumption(w_twc);
+        WEIGHTS.setwTotalPrimaryEnergyConsumption(w_peu);
+        WEIGHTS.setwMaterialResourceConsumption(w_mru);
 
 
         System.out.println("Set up Weights in the static method EnvAnalysis_Calc");
