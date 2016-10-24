@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A design is a pavement design, consisting of a number of layers. Each layer
+ * A design_temp is a pavement design_temp, consisting of a number of layers. Each layer_temp
  * has a thickness, and a material.
  */
 public class Design {
 
     /* -- Fields -------------------------------------------------------- */
 
-    // A design has a bunch of layers, added from top to bottom.
+    // A design_temp has a bunch of layers, added from top to bottom.
     private List<Layer> layers = new ArrayList<>();
 
     private String designId;
@@ -25,14 +25,14 @@ public class Design {
     /* -- Constructor(s) ------------------------------------------------ */
 
     /**
-     * Construct a new, empty design
+     * Construct a new, empty design_temp
      */
     public Design() {
         /* noop */
     }
 
     /**
-     * Construct a new design with a number of empty layers.
+     * Construct a new design_temp with a number of empty layers.
      * @param numberOfLayers The number of layers, typically between 2 and 8.
      */
     public Design(int numberOfLayers) {
@@ -45,7 +45,7 @@ public class Design {
     /* -- Methods ------------------------------------------------------- */
 
     /**
-     * Set number of layers in the design, adding or removing at
+     * Set number of layers in the design_temp, adding or removing at
      * the the bottom as appropriate.
      * @param numberOfLayers The number of layers.
      * @return this, for chaining.
@@ -69,7 +69,7 @@ public class Design {
 
 
     /**
-     * Return a layer by number, layer 0 is the top.
+     * Return a layer_temp by number, layer_temp 0 is the top.
      * @param layerNumber
      * @return
      */
@@ -92,8 +92,8 @@ public class Design {
     }
 
     /**
-     * Add a layer to the bottom, or to the top if the design is empty.
-     * @param layer The layer to add.
+     * Add a layer_temp to the bottom, or to the top if the design_temp is empty.
+     * @param layer The layer_temp to add.
      */
     public Design addLayer(Layer layer) {
         layers.add(layer);
@@ -101,7 +101,7 @@ public class Design {
     }
 
     /**
-     * Add an empty layer to the bottom, or to the top if the design is empty.
+     * Add an empty layer_temp to the bottom, or to the top if the design_temp is empty.
      */
     public Design addLayer() {
         layers.add(new Layer());
@@ -109,7 +109,7 @@ public class Design {
     }
 
     /**
-     * Removes the bottom layer if it exists, otherwise noop.
+     * Removes the bottom layer_temp if it exists, otherwise noop.
      * @return this.
      */
     public Design removeLayer() {

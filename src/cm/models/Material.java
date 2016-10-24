@@ -3,10 +3,9 @@ package cm.models;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
-import static cm.models.Model.*;
 
 /**
- * A material is a component of a layer (along with a defined thickness). A
+ * A material is a component of a layer_temp (along with a defined thickness). A
  * material will also probably correspond to a row in the EPD database.
  */
 public class Material {
@@ -34,11 +33,22 @@ public class Material {
     private double NonRenewableMaterialResource;
     private double Price;
     private double Distance;
+    private double unitConversion_Factor;
+
     //Scores
     private double EnvPerfAnalysis_TotalScore_Material;
     private double EnvPerfAnalysis_EPDScore_Material;
     private double EnvPerfAnalysis_TransportationScore_Material;
 
+    public void setUnitConversion_Factor(){
+        if (this.Unit.equalsIgnoreCase("m3"))
+            unitConversion_Factor = 1.0;
+        else
+            unitConversion_Factor = 1.30795;     // 1 m^3 = 1.30795 yd^3
+    }
+    public double getUnitConversion_Factor(){
+        return unitConversion_Factor;
+    }
 
     public String getMaterial_ID() {
         return Material_ID;

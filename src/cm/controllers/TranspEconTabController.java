@@ -132,7 +132,6 @@ public class TranspEconTabController {
         //Calculate
         EnvPerformanceCalc envPerformanceCalc = new EnvPerformanceCalc();
         envPerformanceCalc.EnvAnalysisCalc();
-        envPerformanceCalc.cal();
 
 
         //step by step test
@@ -148,10 +147,10 @@ public class TranspEconTabController {
 //                            +"EPD_OPD: "+EnvAnalysisCalc.getODP_EDP_Ctb()+"\n"+"EPD_AP: "+EnvAnalysisCalc.getAP_EDP_Ctb()+"\n"+"EPD_EP: "+EnvAnalysisCalc.getPOCP_EDP_Ctb()
 //                            +"\n"+"EPD_TW: "+EnvAnalysisCalc.getTotalWater_EDP_Ctb()+"\n"+"EPD_TPEC: "+EnvAnalysisCalc.getTotalPrimaryEnergyConsumption_EDP_Ctb());
 
-                System.out.println("TSP_GWP: "+EnvAnalysisCalc.getGWP_Transportation_Ctb()+"\n"
-                            +"TSP_OPD: "+EnvAnalysisCalc.getODP_Transportation_Ctb()+"\n"+"TSP_AP: "+EnvAnalysisCalc.getAP_Transportation_Ctb()+"\n"+"TSP_EP: "+EnvAnalysisCalc.getPOCP_Transportation_Ctb()
-                            +"\n"+"TSP_TW: "+EnvAnalysisCalc.getTotalWater_Transportation_Ctb()+"\n");
-    }
+//                System.out.println("TSP_GWP: "+EnvAnalysisCalc.getGWP_Transportation_Ctb()+"\n"
+//                            +"TSP_OPD: "+EnvAnalysisCalc.getODP_Transportation_Ctb()+"\n"+"TSP_AP: "+EnvAnalysisCalc.getAP_Transportation_Ctb()+"\n"+"TSP_EP: "+EnvAnalysisCalc.getPOCP_Transportation_Ctb()
+//                            +"\n"+"TSP_TW: "+EnvAnalysisCalc.getTotalWater_Transportation_Ctb()+"\n");
+   }
 
     public void showReport() throws IOException{
         App.showEnvironmentalScoreReport();
