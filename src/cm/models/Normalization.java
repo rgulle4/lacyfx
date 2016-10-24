@@ -12,6 +12,7 @@ public class Normalization {
     double Norm_POCP;
     double Norm_fuel;
     double Norm_water;
+    double Norm_hazardous_waste;
 
     //initialization
     public Normalization(){
@@ -20,8 +21,9 @@ public class Normalization {
         this.Norm_AP =91;
         this.Norm_EP =22;
         this.Norm_POCP =1400;
-        this.Norm_fuel =529.9587;
-        this.Norm_water =17000;
+        this.Norm_fuel =17000;
+        this.Norm_water =529.9587;
+        this.Norm_hazardous_waste= 260.63348;
 
     }
 
@@ -53,4 +55,9 @@ public class Normalization {
     public double getNorm_water() {
         return Norm_water;
     }
+
+    public double getNorm_hazardous_waste() {
+        return Norm_hazardous_waste;
+    }
 }
+

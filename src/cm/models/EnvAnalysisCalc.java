@@ -8,7 +8,7 @@ import static cm.models.Model.*;
 
 /**
  * Created by Administrator on 2016/10/1.
- * This is meant for a single layer. (Deprecated).
+ * This is meant for a single layer_temp. (Deprecated).
  */
 public class EnvAnalysisCalc {
     static double length = 1609.34;        //1 mile = 1609.34 meter
