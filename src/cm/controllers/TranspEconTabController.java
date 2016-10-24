@@ -55,7 +55,7 @@ public class TranspEconTabController {
     public void computeButton(){
         //update distance
         double dst = Double.parseDouble(distance.getText());       //convert miles to kilometers bc the unit of sun-content is kg/mile
-
+        TRANSPORTATION_PARAMETERS.setDistance(dst);
         //update substance value in TransportationParameters model
         //Ligtht-Duty truck selected
         if (vehicletype.getSelectionModel().isSelected(0)){
