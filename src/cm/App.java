@@ -18,6 +18,9 @@ import java.util.Map;
 
 public class App extends Application {
     private static Stage primaryStage;
+    private ObservableList<Material> MaterialData = FXCollections.observableArrayList();
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {

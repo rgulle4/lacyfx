@@ -4,6 +4,8 @@ import java.sql.*;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import static cm.models.Model.*;
 
 /**
@@ -14,12 +16,12 @@ public class EPDDatabase {
     /* -- Fields ----------------------------------------------------- */
 
     private String DEFAULT_DB_FILE_NAME = "rt.db";
-    private String DEFAULT_SQL_QUERY = "SELECT * FROM EPD";
+    private String DEFAULT_SQL_QUERY = "SELECT * FROM EPD WHERE 1";
 
     private String dbFileName;
     private Connection conn;
     private Statement s;
-    private ResultSet r;
+    private ResultSet rs;
 
     /* -- Constructor(s) --------------------------------------------- */
 
@@ -46,53 +48,67 @@ public class EPDDatabase {
     // TODO: figure out if these sql ResultSets play nice with some JavaFX components. If not, then we'll have to go full ORM.
 
     // TODO: beware of SQL injection (again, overengineering?)
+    /* -- new test code -------------------------------------------------------
 
-    /**
-     * Returns an sql ResultSet, filtered.
-     * @param filterClause Example: 'GWP >= 10' has the effect of 'SELECT * FROM EPD WHERE GWP >= 10'.
-     * @return
-     */
-    public List<Material> getResultsFilteredBy(String filterClause) throws SQLException, ParseException {
+    * */
+    private  String sql;
+    public List<Material> getResultsFilteredBy(String zipCode, String cs, String companyName) throws SQLException, ParseException {
         List<Material> result = new ArrayList<Material>();
 
-        String str;
         StringBuilder sb = new StringBuilder(DEFAULT_SQL_QUERY);
-        if (filterClause.isEmpty()) {
-            str = sb.toString();
-        } else {
-            str = sb.append(" WHERE ").append(filterClause).toString();
+        PreparedStatement ptmt = null;
+        if (zipCode.isEmpty() && companyName.isEmpty() && cs.isEmpty()) {
+            ptmt = conn.prepareStatement(sql);
         }
-        s = conn.createStatement();
-        r = s.executeQuery(str);
+        else {
+            if (!zipCode.isEmpty()) {
+                sql = sb.append(" AND ZIP =?").toString();
+                ptmt = conn.prepareStatement(sql);
+                ptmt.setString(1, zipCode);
+            }
+            if (!companyName.isEmpty()) {
+                sql = sb.append(" AND NAME =?").toString();
+                ptmt = conn.prepareStatement(sql);
+                ptmt.setString(1, companyName);
+            }
+            if (!cs.isEmpty()) {
+                sql = sb.append(" AND CS >= ?").toString();
+                ptmt = conn.prepareStatement(sql);
+                ptmt.setString(1, cs);
+            }
+        }
+        rs = ptmt.executeQuery();
 
-        Material g =null;
-        while(r.next()){
+        Material g;
+        while(rs.next()){
             g = new Material();
 
-            g.setCS(r.getDouble("CS"));
-            g.setCompany_Name(r.getString("NAME"));
-            g.setLocation(r.getString("LOCATION"));
-            g.setMixNum(r.getString("MIXNUMBER"));
-            g.setZipCode(r.getString("ZIP"));
-            g.setGWP(r.getDouble("GWP"));
-            g.setODP(r.getDouble("ODP"));
-            g.setAP(r.getDouble("AP"));
-            g.setEP(r.getDouble("EP"));
-            g.setPOCP(r.getDouble("POCP"));
-            g.setUnit(r.getString("UNITS"));
-            g.setConcreteHazardousWaste(r.getDouble("CHW"));
-            g.setConcreteNonHazardousWaste(r.getDouble("CNHW"));
-            g.setTotalWaterConsumption(r.getDouble("TW"));
-            g.setTotalPrimaryEnergyConsumption(r.getString("PEC"));
-            g.setRenewablePrimaryEnergyUse(r.getDouble("RE"));
-            g.setNonRenewableEnergyUse(r.getDouble("NRE"));
-            g.setRenewableMaterialResourcesUse(r.getDouble("RM"));
-            g.setNonRenewableMaterialResource(r.getDouble("NRM"));
+            g.setCS(rs.getString("CS"));
+            g.setCompany_Name(rs.getString("NAME"));
+            g.setLocation(rs.getString("LOCATION"));
+            g.setMixNum(rs.getString("MIXNUMBER"));
+            g.setZipCode(rs.getString("ZIP"));
+            g.setGWP(rs.getDouble("GWP"));
+            g.setODP(rs.getDouble("ODP"));
+            g.setAP(rs.getDouble("AP"));
+            g.setEP(rs.getDouble("EP"));
+            g.setPOCP(rs.getDouble("POCP"));
+            g.setUnit(rs.getString("UNITS"));
+            g.setConcreteHazardousWaste(rs.getDouble("CHW"));
+            g.setConcreteNonHazardousWaste(rs.getDouble("CNHW"));
+            g.setTotalWaterConsumption(rs.getDouble("TW"));
+            g.setTotalPrimaryEnergyConsumption(rs.getString("PEC"));
+            g.setRenewablePrimaryEnergyUse(rs.getDouble("RE"));
+            g.setNonRenewableEnergyUse(rs.getDouble("NRE"));
+            g.setRenewableMaterialResourcesUse(rs.getDouble("RM"));
+            g.setNonRenewableMaterialResource(rs.getDouble("NRM"));
 
             result.add(g);
         }
         return result;
     }
+
+
 
     /**
      * Return the entire EPD table.
@@ -100,15 +116,15 @@ public class EPDDatabase {
      * @throws SQLException
      */
     public List<Material> getResults() throws SQLException, ParseException {
-        return getResultsFilteredBy("");
+        return getResultsFilteredBy("","","");
     }
 
     /**
      * Rough tester
      */
 //    public static void main(String[] args) throws SQLException {
-//        ResultSet r = new EPDDatabase().getResultsFilteredBy("CS >= '7000'");
-//        DBTablePrinter.printResultSet(r);
+//        ResultSet rs = new EPDDatabase().getResultsFilteredBy("CS >= '7000'");
+//        DBTablePrinter.printResultSet(rs);
 //    }
 
 }
