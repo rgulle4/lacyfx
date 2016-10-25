@@ -12,7 +12,7 @@ public class Material {
 
     //EPD
     private String Material_ID;
-    private double CS;
+    private String CS;
     private String Company_Name;
     private String Location;
     private String MixNum;
@@ -58,11 +58,11 @@ public class Material {
         Material_ID = material_ID;
     }
 
-    public double getCS() {
+    public String  getCS() {
         return CS;
     }
 
-    public void setCS(double CS) {
+    public void setCS(String CS) {
         this.CS = CS;
     }
 

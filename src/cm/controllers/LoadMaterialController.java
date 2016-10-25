@@ -24,7 +24,11 @@ public class LoadMaterialController {
     private ChoiceBox distanceChoice;
     // To DO: select alternative materials from database for calculating and comparing
     @FXML
-    private TextField TF_CS;
+    private TextField textField_CS;
+    @FXML
+    private TextField textField_companyName;
+    @FXML
+    private TextField textField_ZipCode;
     @FXML
     private TableView<Material> MaterialTable;
     @FXML
@@ -50,9 +54,6 @@ public class LoadMaterialController {
     @FXML
     private TableColumn<Material,String> ZipCode_Column_selected;
 
-    // Reference to the main application.
-    private App mainApp;
-
     // Constructor is called before the initialize method
 //    public LoadMaterialController() {
 //
@@ -76,8 +77,12 @@ public class LoadMaterialController {
 
         //set item for distance choiceBox
 
+        textField_CS.setText("0.0");
+//        textField_companyName.setText("");
+        textField_ZipCode.setText("70820");
         distanceChoice.setValue("<25 miles");
         distanceChoice.setItems(DistanceList);
+
 
         //Alternative materials
         CS_Column.setCellValueFactory(new PropertyValueFactory<Material, String>("CS"));
@@ -98,22 +103,17 @@ public class LoadMaterialController {
     private ObservableList<Material> data;
 
     @FXML
+
     public void searchbutton() throws SQLException, ParseException {
-        System.out.println("------------------------------------");
-        System.out.println("layer in LoadMaterialController...");
-        System.out.println(currentLayer);
-        System.out.println("------------------------------------");
+//        StringBuilder CS_field = new StringBuilder("CS >= ");
+//        String CS_Textfiled = CS_field.append(textField_CS.getText()).toString();
+//        List<Material> result = new EPDDatabase().getResultsFilteredBy(CS_Textfiled);
 
-        StringBuilder CS_field = new StringBuilder("CS >= ");
-        String CS_Textfiled = CS_field.append("'").append(TF_CS.getText()).append("'").toString();
+        String CS = textField_CS.getText();
+        String zipcode = textField_ZipCode.getText();
+        String cmName = textField_companyName.getText();
+        List<Material> result = new EPDDatabase().getResultsFilteredBy(zipcode,CS,cmName);
 
-        List<Material> result = new EPDDatabase().getResultsFilteredBy(CS_Textfiled);
-
-//        //test the consistency of data
-//        for (int i = 0; i < result.size(); i++){
-//            System.out.println(result.get(i).getCS()+
-//                    ":"+result.get(i).getODP()+" "+result.get(i).getAP());
-//        }
         data = FXCollections.observableArrayList();
 
         // get material properties from the column names.
@@ -129,19 +129,6 @@ public class LoadMaterialController {
 
     ObservableList<Material> SelectedMaterialsList = FXCollections.observableArrayList();
 
-    //update conversion factor
-    public void updatecvf(){
-        for (int i = 0; i < SelectedMaterialsList.size(); i++){
-            Material selectedMaterial = SelectedMaterialsList.get(i);
-            if (selectedMaterial.getUnit().equals("m3")){
-                EnvAnalysisCalc.setConFc(EnvAnalysisCalc.getTotV());
-            }
-            if (selectedMaterial.getUnit().equals("y3")){
-                EnvAnalysisCalc.setConFc(EnvAnalysisCalc.getTotV()*1.30795); //1 m^3 = 1 yd^3
-            }
-        }
-
-    }
     @FXML
     public void selectButton(){
 
@@ -171,7 +158,6 @@ public class LoadMaterialController {
 
     public void nextButton() throws ParseException {
         System.out.println("Begin nextButton() method");
-        updatecvf();        //update conversion factor
         int i =0;
         Material firstSelectedMaterial = SelectedMaterialsList.get(i);
         currentLayer.setMaterial(firstSelectedMaterial);

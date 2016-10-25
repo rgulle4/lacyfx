@@ -35,10 +35,10 @@
                         <Label text="Distance:" />
                         <Label text="Compressive Strength:" GridPane.rowIndex="1" />
                         <Label text="Company Name:" GridPane.rowIndex="2" />
-                        <Label text="Mix number:" GridPane.rowIndex="3" />
-                        <TextField fx:id="TF_CS" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Zipcode:" GridPane.rowIndex="3" />
+                        <TextField fx:id="textField_CS" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="textField_companyName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="textField_ZipCode" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <ChoiceBox fx:id="distanceChoice" prefWidth="150.0" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
