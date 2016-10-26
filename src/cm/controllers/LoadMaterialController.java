@@ -123,6 +123,15 @@ public class LoadMaterialController {
             data.add(m);
         }
 
+        // get a zipCode list
+        List<String> zipCode_result = new EPDDatabase().getAllZipcode();
+
+        for (int j = 0; j< zipCode_result.size();j++){
+            String zip_code = zipCode_result.get(j);
+            // show result of the zipcode list
+            System.out.println(zip_code);
+        }
+
         System.out.println("Filtered down to " + data.size() + " records");
         MaterialTable.setItems(data);
     }
