@@ -154,8 +154,6 @@ public class TranspEconTabController {
 
     public void showReport() throws IOException{
         App.showEnvironmentalScoreReport();
-      //  EnvironmentalReportController environmentalReportController = new EnvironmentalReportController();
-//        environmentalReportController.initialize();
     }
 
 }
