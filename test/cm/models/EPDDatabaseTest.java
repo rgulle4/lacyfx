@@ -7,7 +7,7 @@ import java.sql.*;
 
 public class EPDDatabaseTest {
 
-    @Test
+//    @Test
 //    public void testGetResultsFilteredBy() throws Exception {
 //        EPDDatabase epds = new EPDDatabase("test.db");
 //        ResultSet rs = epds.getResultsFilteredBy("CS >= '7000'");
@@ -22,11 +22,11 @@ public class EPDDatabaseTest {
 //        int expectedNumRecords = 880;
 //        Assert.assertEquals(expectedNumRecords, numRecords(rsAll));
 //    }
-
-    private int numRecords(ResultSet rs) throws SQLException {
-        int numRows = 0;
-        while (rs.next())
-            numRows++;
-        return numRows;
-    }
+//
+//    private int numRecords(ResultSet rs) throws SQLException {
+//        int numRows = 0;
+//        while (rs.next())
+//            numRows++;
+//        return numRows;
+//    }
 }
