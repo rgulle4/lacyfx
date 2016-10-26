@@ -5,12 +5,14 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static cm.models.Model.*;
@@ -62,7 +64,7 @@ public class ZipCodeUtil {
     /**
      * Distance (meters) between two zip codes.
      * @param originZip Zip code of the origin.
-     * @param destinationZip Zip code of the destination.
+     * @param destinationZip Optional, zip code of the destination.
      * @return The distance in meters (0 if zips are bad).
      */
     public Double getDistance(String originZip, String destinationZip) {
@@ -71,14 +73,75 @@ public class ZipCodeUtil {
         Gson gson = new Gson();
         Response response1 = getResponse(originZip, destinationZip);
         System.out.println(gson.toJson(response1, Response.class));
-        int distance = response1.rows[0].elements[0].distance.value;
+        long distance = response1.rows[0].elements[0].distance.value;
         return new Double(distance);
     }
 
-//    public ArrayList<String> getZipsByRadius() {
-//
-//        return zips;
-//    }
+    /**
+     * Maps a list of originZips to their respective distances (meters) to
+     * one destinationZip.
+     * @param originZips A list of origin zips.
+     * @param destinationZip A destination zip.
+     * @return A Map String zip -> Double distance (in meters).
+     */
+    public Map<String, Double> getDistances(List<String> originZips,
+                                            String destinationZip)
+    {
+        if (!isValidZipCode(destinationZip))
+            return null;
+        Response response = getResponse(originZips, destinationZip);
+
+        int sizeOfOriginZips = originZips.size();
+        int sizeOfResponse = response.origin_addresses.length;
+        Map<String, Double> result = new LinkedHashMap<>();
+        for (int i = 0; i < sizeOfResponse; i++) {
+            String address = response.origin_addresses[i];
+            String extractedZip = extractZipFromAddress(address);
+            Double distance = new Double(
+                  response.rows[i].elements[0].distance.value);
+            result.put(extractedZip, distance);
+        }
+
+        return result;
+    }
+
+
+    /**
+     * Given a list of origin zips,returns a map with a keyset that's the
+     * subset of the origin zips that are within radius (meters) to the
+     * destination; each zip is mapped to its distance (meters).
+     * @param radius Radius in meters.
+     * @param originZips A list of origin zips.
+     * @param destinationZip A destination zip.
+     * @return A map from zip -> distance (meters).
+     */
+    public Map<String, Double> zipsWithinRadius(Double radius,
+                                                List<String> originZips,
+                                                String destinationZip)
+    {
+        if (!isValidZipCode(destinationZip))
+            return null;
+        Response response = getResponse(originZips, destinationZip);
+
+
+        int sizeOfResponse = response.origin_addresses.length;
+        Map<String, Double> result = new LinkedHashMap<>();
+        for (int i = 0; i < sizeOfResponse; i++) {
+            Double distance
+                  = new Double(response.rows[i].elements[0].distance.value);
+            if (distance <= radius) {
+                String address = response.origin_addresses[i];
+                String extractedZip = extractZipFromAddress(address);
+                result.put(extractedZip, distance);
+            }
+        }
+        return result;
+    }
+    public Map<String, Double> zipsWithinRadius(Double radius,
+                                                List<String> originZips)
+    {
+        return zipsWithinRadius(radius, originZips, Model.DESTINATION_ZIP_CODE_MUTABLE);
+    }
 
     /* -- misc method(s) ---------------------------------------------- */
 
@@ -88,9 +151,26 @@ public class ZipCodeUtil {
     public boolean isValidZipCode(String zipCode) {
         if (zipCode == null)
             return false;
-        String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
-        Pattern pattern = Pattern.compile(regex);
+        final String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
+        final Pattern pattern = Pattern.compile(regex);
         return pattern.matcher(zipCode).matches();
+    }
+
+    /**
+     * Extracts a 5- or 9-digit zip code string from an address string.
+     * @param addressString like "New Orleans, LA 70115, USA"
+     * @return A 5- or 9-digit zip code string.
+     */
+    public String extractZipFromAddress(String addressString) {
+        if (addressString == null)
+            return null;
+        final String regex = "[0-9]{5}(?:-[0-9]{4})?";
+        final Pattern pattern = Pattern.compile(regex);
+        final Matcher matcher = pattern.matcher(addressString);
+        String result = null;
+        if (matcher.find())
+            result = matcher.group();
+        return result;
     }
 
     /* -- methods for building url ------------------------------------ */
