@@ -54,7 +54,7 @@ import com.google.gson.Gson;
  *     "status": "OK"
  *   }
  */
-public class ZipsByRadius {
+public class ZipCodeUtil {
 
     /* -- field(s) ---------------------------------------------------- */
     private String destinationZip;
@@ -63,10 +63,10 @@ public class ZipsByRadius {
 
     /* -- constructor(s) ---------------------------------------------- */
 
-    private ZipsByRadius() { /* */ }
+    private ZipCodeUtil() { /* */ }
 
-    public ZipsByRadius(String destinationZip,
-                        Double radius) {
+    public ZipCodeUtil(String destinationZip,
+                       Double radius) {
         this.destinationZip = destinationZip;
         this.radius = radius;
     }
