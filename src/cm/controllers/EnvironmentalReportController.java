@@ -5,10 +5,7 @@ import cm.models.Layer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.StackedBarChart;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
@@ -32,6 +29,8 @@ public class EnvironmentalReportController {
     private NumberAxis yAxis = new NumberAxis();
     @FXML
     private StackedBarChart<String, Number> sbc = new StackedBarChart<>(xAxis, yAxis);
+    @FXML
+    private BarChart<String, Number> bc = new BarChart<>(xAxis,yAxis);
     @FXML
     private XYChart.Series<String, Number> serie_GWP = new XYChart.Series<>();
     @FXML
@@ -65,11 +64,15 @@ public class EnvironmentalReportController {
     private ComboBox layer_ComboBox;
     @FXML
     private ComboBox alternative_ComboBox;
+    @FXML
+    private ComboBox impactCategory;
 
     @FXML
     private RadioButton sumGraph_RadioButton;
     @FXML
     private Button show_Button;
+    @FXML
+    private Button clean_Button;
 
     // Type of performance
     ObservableList<String> performanceType = FXCollections.
@@ -96,19 +99,25 @@ public class EnvironmentalReportController {
             observableArrayList(
                     "Design 1", "Design 2", "Design 3", "Design 4",
                     "Design 5", "Design 6", "Design 7", "Design 8",
-                    "All designs");
+                    "Overall");
     // Number of layers in this design
     ObservableList<String> layerNum = FXCollections
             .observableArrayList(
                     "Layer 1", "Layer 2", "Layer 3", "Layer 4",
                     "Layer 5", "Layer 6", "Layer 7", "Layer 8",
-                    "All layers");
+                    "Overall");
     // Number of layers in this design
     ObservableList<String> alternativeNum = FXCollections
             .observableArrayList(
                     "Alternative 1", "Alternative 2", "Alternative 3",
                     "Alternative 4", "Alternative 5", "Alternative 6",
-                    "Alternative 7", "Alternative 8", "All alternatives");
+                    "Alternative 7", "Alternative 8","Overall");
+    // Impact Category
+    ObservableList<String> impacyCategoryName =FXCollections
+            .observableArrayList(
+                    "Overall","GWP","ODP","AP","EP",
+                    "POCP","TotalWater","PrimaryEnergyConsumption"
+            );
 
     @FXML
     public void initialize() {
@@ -127,6 +136,8 @@ public class EnvironmentalReportController {
         layer_ComboBox.setValue(layerNum.get(0));
         alternative_ComboBox.setItems(alternativeNum);
         alternative_ComboBox.setValue(alternativeNum.get(0));
+        impactCategory.setItems(impacyCategoryName);
+        impactCategory.setValue(impacyCategoryName.get(0));
 
 
 //            serie_envPerf_EPDScore.setName("envPerf_EPDScore");
@@ -139,9 +150,11 @@ public class EnvironmentalReportController {
 
     }
 
-    public void showStackBarChart() {
+    public void showOutputChart() {
         //Environmental analysis in details
         // get design key which is same as design
+        sbc.setVisible(false);
+        bc.setVisible(false);
         String designID = design_ComboBox.getSelectionModel().getSelectedItem().toString();
         Design designTemp = DESIGNS.get(designID);
         int layerIndex = layer_ComboBox.getSelectionModel().getSelectedIndex();
@@ -153,17 +166,29 @@ public class EnvironmentalReportController {
             if (environmentalImpact_ComboBox.getSelectionModel().isSelected(0)){
                 // EPD is selected
                 if (rawValue_ComboBox.getSelectionModel().isSelected(0)) {
-                    // EPD_Ctb is selected
-                    setValue_EPD_Ctb(designID, layerTemp);
+                    //ctb is selected
+                    barChart_EPD_Ctr_Alternative(designID,layerTemp);
+                }
+                if(rawValue_ComboBox.getSelectionModel().isSelected(1)){
+                    //Norm is selected
+                    barChart_EPD_Norm_Alternative(designID,layerTemp);
+                }
+                if(rawValue_ComboBox.getSelectionModel().isSelected(2)){
+                    //SubScore is selected
+                    barChart_EPD_SubScore_Alternative(designID,layerTemp);
                 }
             }
         }
     }
 
-    private void setValue_EPD_Ctb(String designID, Layer layerTemp){
+    public void stackBarChart_EPD_Ctb_Alternative(String designID, Layer layerTemp){
         // clear old data
-//        sbc.getData().clear();
-//        sbc.layout();
+        bc.getData().clear();
+        bc.setVisible(false);
+        bc.layout();
+        sbc.getData().clear();
+        sbc.setVisible(true);
+        sbc.layout();
         // set up axis label
         xAxis.setLabel("Alternative");
         yAxis.setLabel("Score");
@@ -202,5 +227,142 @@ public class EnvironmentalReportController {
         serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getTPEC_EDP_Ctb()));
         serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getTPEC_EDP_Ctb()));
         sbc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalWater, serie_TotalPrimaryEnergyConsumption);
+    }
+
+    public void barChart_EPD_Ctr_Alternative(String designID, Layer layerTemp){
+        // clear old data
+        sbc.getData().clear();
+        sbc.setVisible(false);
+        sbc.layout();
+        bc.getData().clear();
+        bc.setVisible(true);
+        bc.layout();
+        // set up axis label
+        xAxis.setLabel("Alternative");
+        yAxis.setLabel("Score");
+
+        serie_GWP.setName("GWP");
+        serie_GWP.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getGWP_EDP_Ctb()));
+        serie_GWP.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getGWP_EDP_Ctb()));
+        serie_GWP.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getGWP_EDP_Ctb()));
+        serie_ODP.setName("ODP");
+        serie_ODP.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getODP_EDP_Ctb()));
+        serie_ODP.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getODP_EDP_Ctb()));
+        serie_ODP.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getODP_EDP_Ctb()));
+        serie_AP.setName("AP");
+        serie_AP.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getAP_EDP_Ctb()));
+        serie_AP.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getAP_EDP_Ctb()));
+        serie_AP.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getAP_EDP_Ctb()));
+        serie_EP.setName("EP");
+        serie_EP.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getEP_EDP_Ctb()));
+        serie_EP.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getEP_EDP_Ctb()));
+        serie_EP.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getEP_EDP_Ctb()));
+        serie_POCP.setName("POCP");
+        serie_POCP.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getPOCP_EDP_Ctb()));
+        serie_POCP.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getPOCP_EDP_Ctb()));
+        serie_POCP.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getPOCP_EDP_Ctb()));
+        serie_TotalWater.setName("TotalWater");
+        serie_TotalWater.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getTW_EDP_Ctb()));
+        serie_TotalWater.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getTW_EDP_Ctb()));
+        serie_TotalWater.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getTW_EDP_Ctb()));
+        serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
+        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getTPEC_EDP_Ctb()));
+        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getTPEC_EDP_Ctb()));
+        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getTPEC_EDP_Ctb()));
+        bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalWater, serie_TotalPrimaryEnergyConsumption);
+    }
+
+    public void barChart_EPD_Norm_Alternative(String designID, Layer layerTemp){
+        // clear old data
+        sbc.getData().clear();
+        sbc.setVisible(false);
+        sbc.layout();
+        bc.getData().clear();
+        bc.setVisible(true);
+        bc.layout();
+        // set up axis label
+        xAxis.setLabel("Alternative");
+        yAxis.setLabel("Score");
+
+        serie_GWP.setName("GWP");
+        serie_GWP.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getGWP_EDP_NORM()));
+        serie_GWP.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getGWP_EDP_NORM()));
+        serie_GWP.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getGWP_EDP_NORM()));
+        serie_ODP.setName("ODP");
+        serie_ODP.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getODP_EDP_NORM()));
+        serie_ODP.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getODP_EDP_NORM()));
+        serie_ODP.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getODP_EDP_NORM()));
+        serie_AP.setName("AP");
+        serie_AP.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getAP_EDP_NORM()));
+        serie_AP.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getAP_EDP_NORM()));
+        serie_AP.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getAP_EDP_NORM()));
+        serie_EP.setName("EP");
+        serie_EP.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getEP_EDP_NORM()));
+        serie_EP.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getEP_EDP_NORM()));
+        serie_EP.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getEP_EDP_NORM()));
+        serie_POCP.setName("POCP");
+        serie_POCP.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getPOCP_EDP_NORM()));
+        serie_POCP.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getPOCP_EDP_NORM()));
+        serie_POCP.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getPOCP_EDP_NORM()));
+        serie_TotalWater.setName("TotalWater");
+        serie_TotalWater.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getTW_EDP_NORM()));
+        serie_TotalWater.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getTW_EDP_NORM()));
+        serie_TotalWater.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getTW_EDP_NORM()));
+        serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
+        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getTPEC_EDP_NORM()));
+        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getTPEC_EDP_NORM()));
+        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getTPEC_EDP_NORM()));
+        bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalWater, serie_TotalPrimaryEnergyConsumption);
+    }
+
+    public void barChart_EPD_SubScore_Alternative(String designID, Layer layerTemp){
+        // clear old data
+        sbc.getData().clear();
+        sbc.setVisible(false);
+        sbc.layout();
+        bc.getData().clear();
+        bc.setVisible(true);
+        bc.layout();
+        // set up axis label
+        xAxis.setLabel("Alternative");
+        yAxis.setLabel("Score");
+
+        serie_GWP.setName("GWP");
+        serie_GWP.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getGWP_EDP_Subsore()));
+        serie_GWP.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getGWP_EDP_Subsore()));
+        serie_GWP.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getGWP_EDP_Subsore()));
+        serie_ODP.setName("ODP");
+        serie_ODP.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getODP_EDP_Subsore()));
+        serie_ODP.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getODP_EDP_Subsore()));
+        serie_ODP.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getODP_EDP_Subsore()));
+        serie_AP.setName("AP");
+        serie_AP.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getAP_EDP_Subsore()));
+        serie_AP.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getAP_EDP_Subsore()));
+        serie_AP.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getAP_EDP_Subsore()));
+        serie_EP.setName("EP");
+        serie_EP.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getEP_EDP_Subsore()));
+        serie_EP.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getEP_EDP_Subsore()));
+        serie_EP.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getEP_EDP_Subsore()));
+        serie_POCP.setName("POCP");
+        serie_POCP.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getPOCP_EDP_Subsore()));
+        serie_POCP.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getPOCP_EDP_Subsore()));
+        serie_POCP.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getPOCP_EDP_Subsore()));
+        serie_TotalWater.setName("TotalWater");
+        serie_TotalWater.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getTW_EDP_Subsore()));
+        serie_TotalWater.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getTW_EDP_Subsore()));
+        serie_TotalWater.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getTW_EDP_Subsore()));
+        serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
+        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("alternative 1", layerTemp.getTPEC_EDP_Subsore()));
+        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("alternative 2", layerTemp.getTPEC_EDP_Subsore()));
+        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("alternative 3", layerTemp.getTPEC_EDP_Subsore()));
+        bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalWater, serie_TotalPrimaryEnergyConsumption);
+    }
+
+    public void cleanChart(){
+        // clear old data
+        sbc.getData().clear();
+        sbc.layout();
+        bc.getData().clear();
+        bc.layout();
     }
 }
