@@ -8,10 +8,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,12 +24,44 @@ import static cm.models.Model.*;
  * Usage examples:
  *     ZipCodeUtil zcu = new ZipCodeUtil();
  *     Double result1 = zcu.getDistance("70115", "70803"); // returns 133917
+ *
  */
 public class ZipCodeUtil {
 
+    /* -- example usage ----------------------------------------------- */
+
+    public static void main(String[] args) {
+        ZipCodeUtil zcu = new ZipCodeUtil();
+        String destination = "70803";
+        Double radius = 100000.0; // 250 kilometers
+        List<String> origins = Arrays.asList(
+              "77001", "70821", "70822", "70823",
+              "70115", "70825", "70826", "70601");
+        Map<String, Double> filteredZips
+              = zcu.zipsWithinRadius(radius,origins,destination);
+
+        // original list has 8 zips.
+        System.out.println("origins.size() = " + origins.size());
+
+        // new list has 4 zips.
+        System.out.println("filteredZips.size() = " + filteredZips.size());
+
+        System.out.println("newZips within " + radius / 1000 + " kilometers...");
+        for (String zip : filteredZips.keySet()) {
+            System.out.println(
+                  "Zip = " + zip + "... "
+                  + filteredZips.get(zip) / 1000 + " kilometers");
+        }
+
+    }
+
     /* -- field(s) ---------------------------------------------------- */
 
-    private static final String BASE_URL = "https://maps.googleapis.com/maps/api/distancematrix/json?&mode=car&sensor=false&units=imperial";
+    private static final String BASE_URL = "https://maps.googleapis.com/" +
+          "maps/api/distancematrix/json?" +
+          "&mode=car" +
+          "&sensor=false" +
+          "&units=imperial";
     private static final String BASE_DESTINATION_PARAM = "&destinations=" ;
     private static final String BASE_ORIGINS_PARAM = "&origins="; // multiple origins separated by "|"
     private static final String ZIPS_SEPARATOR = "|"; // multiple zips separated by "|"
@@ -72,7 +101,6 @@ public class ZipCodeUtil {
             return ZERO;
         Gson gson = new Gson();
         Response response1 = getResponse(originZip, destinationZip);
-        System.out.println(gson.toJson(response1, Response.class));
         long distance = response1.rows[0].elements[0].distance.value;
         return new Double(distance);
     }
@@ -97,8 +125,11 @@ public class ZipCodeUtil {
         for (int i = 0; i < sizeOfResponse; i++) {
             String address = response.origin_addresses[i];
             String extractedZip = extractZipFromAddress(address);
-            Double distance = new Double(
-                  response.rows[i].elements[0].distance.value);
+            Double distance = ZERO;
+            if (response.rows[i].elements[0].status.equals("OK")) {
+                distance = new Double(
+                      response.rows[i].elements[0].distance.value);
+            }
             result.put(extractedZip, distance);
         }
 
@@ -127,8 +158,11 @@ public class ZipCodeUtil {
         int sizeOfResponse = response.origin_addresses.length;
         Map<String, Double> result = new LinkedHashMap<>();
         for (int i = 0; i < sizeOfResponse; i++) {
-            Double distance
-                  = new Double(response.rows[i].elements[0].distance.value);
+            Double distance = ZERO;
+            if (response.rows[i].elements[0].status.equals("OK")) {
+                distance = new Double(
+                      response.rows[i].elements[0].distance.value);
+            }
             if (distance <= radius) {
                 String address = response.origin_addresses[i];
                 String extractedZip = extractZipFromAddress(address);
@@ -225,9 +259,8 @@ public class ZipCodeUtil {
                   new InputStreamReader(conn.getInputStream()));
             StringBuilder sbResponse = new StringBuilder();
             String line;
-            while ((line = rd.readLine()) != null) {
+            while ((line = rd.readLine()) != null)
                 sbResponse.append(line);
-            }
             rd.close();
             conn.disconnect();
             String responseString = sbResponse.toString();
@@ -238,94 +271,6 @@ public class ZipCodeUtil {
         }
         return null;
     }
-
-    /**
-     * main, used for testing
-     */
-    public static void main(String[] args) {
-        ZipCodeUtil zcu = new ZipCodeUtil();
-        Gson gson = new Gson();
-        String destinationZip1 = "70803"; // Baton Rouge
-        Model.DESTINATION_ZIP_CODE_MUTABLE = destinationZip1;
-
-        String originZip1 = "70115"; // New Orleans
-        String originZip2 = "70601"; // Lake Charles
-        String originZip3 = "77001"; // Houston
-
-        Response response1 = zcu.getResponse(originZip1, destinationZip1);
-        System.out.println(gson.toJson(response1, Response.class));
-
-        int distance = response1.rows[0].elements[0].distance.value;
-    }
-
-
-    /**
-     * main1 method, used just for testing.
-     */
-    public static void main1(String[] args) throws IOException {
-        ZipCodeUtil zcu = new ZipCodeUtil();
-        String destinationZip1 = "70803"; // Baton Rouge
-        Model.DESTINATION_ZIP_CODE_MUTABLE = destinationZip1;
-
-        String originZip1 = "70115"; // New Orleans
-        String originZip2 = "70601"; // Lake Charles
-        String originZip3 = "77001"; // Houston
-        String expectedUrl1 = "https://maps.googleapis.com/maps/api/distancematrix/json?&mode=car&sensor=false&units=imperial&destinations=70803&origins=70115";
-
-
-        List<String> originsList = Arrays.asList(originZip1, originZip2, originZip3);
-        String builtUrl = zcu.buildUrl(originsList);
-//        String builtUrl = zcu.buildUrl(originZip1);
-
-        System.out.println(builtUrl);
-        System.out.println("---");
-        System.out.println(expectedUrl1);
-        System.out.println("OK? = " + expectedUrl1.equals(builtUrl));
-        System.out.println("--------");
-
-        StringBuilder sbResponse = new StringBuilder();
-        URL url = new URL(builtUrl);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-        String line;
-        while ((line = rd.readLine()) != null) {
-            System.out.println(line);
-            sbResponse.append(line);
-        }
-        rd.close();
-        conn.disconnect();
-        System.out.println("----");
-
-        String responseString = sbResponse.toString();
-        Gson gson = new Gson();
-        Response response = gson.fromJson(responseString, Response.class);
-//        System.out.println(gson.toJson(responseString));
-//        println(response.destination_addresses[0]);
-
-        println();
-        println("Destination addresses....");
-        printList(response.destination_addresses);
-
-        println();
-        println("Origin addresses....");
-        printList(response.origin_addresses);
-
-        println();
-        println("Distances.... (as (text, value))");
-        println("text = " + response.rows[0].elements[0].distance.text);
-        println("value = " + response.rows[0].elements[0].distance.value);
-    }
-
-    private static void printList(String[] stringArray) {
-        printList(Arrays.asList(stringArray));
-    }
-    private static void printList(List<String> list) {
-        for (String s : list) println((new StringBuilder()).append("  - ").append(s));
-    }
-    private static void println()         { System.out.println(); }
-    private static void println(Object o) { System.out.println(o); }
 
     /**
      * https://developers.google.com/maps/documentation/distance-matrix/intro
