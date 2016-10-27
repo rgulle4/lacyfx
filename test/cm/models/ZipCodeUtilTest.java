@@ -62,6 +62,7 @@ public class ZipCodeUtilTest {
         assertTrue(zcu.isValidZipCode("12345"));
         assertTrue(zcu.isValidZipCode("12345-6789"));
         assertFalse(zcu.isValidZipCode("1234"));
+        assertFalse(zcu.isValidZipCode("123456"));
         assertFalse(zcu.isValidZipCode(null));
     }
 

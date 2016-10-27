@@ -14,11 +14,6 @@ import java.util.regex.Pattern;
 
 import static cm.models.Model.*;
 
-/*
- * STOPPING POINT: see tabs list in 00notes/TODO-urls.txt
- */
-
-
 /**
  * Provides methods for dealing with distances (meters) between zip codes.
  * Usage examples:
@@ -67,6 +62,7 @@ public class ZipCodeUtil {
     private static final String ZIPS_SEPARATOR = "|"; // multiple zips separated by "|"
 
     private static final Double ZERO = new Double(0);
+    private static final Gson gson = new Gson();
 
     /* -- constructor(s) ---------------------------------------------- */
 
@@ -99,7 +95,6 @@ public class ZipCodeUtil {
     public Double getDistance(String originZip, String destinationZip) {
         if (!isValidZipCode(originZip) || !isValidZipCode(destinationZip))
             return ZERO;
-        Gson gson = new Gson();
         Response response1 = getResponse(originZip, destinationZip);
         long distance = response1.rows[0].elements[0].distance.value;
         return new Double(distance);
@@ -187,7 +182,8 @@ public class ZipCodeUtil {
             return false;
         final String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
         final Pattern pattern = Pattern.compile(regex);
-        return pattern.matcher(zipCode).matches();
+        final Matcher matcher = pattern.matcher(zipCode);
+        return matcher.matches();
     }
 
     /**
@@ -264,7 +260,6 @@ public class ZipCodeUtil {
             rd.close();
             conn.disconnect();
             String responseString = sbResponse.toString();
-            Gson gson = new Gson();
             return gson.fromJson(responseString, Response.class);
         } catch (IOException e) {
             e.printStackTrace();
@@ -287,16 +282,16 @@ public class ZipCodeUtil {
         }
         class Element {
             Distance distance;
-            Duration duration;
+//            Duration duration;
             String status; // "Ok"
         }
         class Distance {
-            String text; // "83.2 mi"
+//            String text; // "83.2 mi"
             int value;   // 133917 (meters)
         }
-        class Duration {
-            String text; // "1 hour 27 mins"
-            int value;   // 5200 (seconds)
-        }
+//        class Duration {
+//            String text; // "1 hour 27 mins"
+//            int value;   // 5200 (seconds)
+//        }
     }
 }
