@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class LoadMaterialController {
 
-    ObservableList<String> DistanceList = FXCollections.observableArrayList("<25 miles","<50 miles","<100 miles",">100 miles");
+    ObservableList<String> DistanceList = FXCollections.observableArrayList("<10 miles","<25 miles","<50 miles","<100 miles");
     @FXML
     private ChoiceBox distanceChoice;
     // To DO: select alternative materials from database for calculating and comparing
@@ -77,10 +77,10 @@ public class LoadMaterialController {
 
         //set item for distance choiceBox
 
-        textField_CS.setText("0.0");
+        textField_CS.setText("");
 //        textField_companyName.setText("");
-        textField_ZipCode.setText("70820");
-        distanceChoice.setValue("<25 miles");
+        textField_ZipCode.setText("");
+        distanceChoice.setValue("<10 miles");
         distanceChoice.setItems(DistanceList);
 
 
@@ -112,6 +112,10 @@ public class LoadMaterialController {
         String CS = textField_CS.getText();
         String zipcode = textField_ZipCode.getText();
         String cmName = textField_companyName.getText();
+        // get a zip set within a certain radius to the location of project
+        ZipCodeUtil zcu = new ZipCodeUtil();
+
+
         List<Material> result = new EPDDatabase().getResultsFilteredBy(zipcode,CS,cmName);
 
         data = FXCollections.observableArrayList();

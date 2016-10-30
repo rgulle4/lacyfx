@@ -62,7 +62,7 @@ public class EPDDatabase {
         }
         else {
             if (!zipCode.isEmpty()) {
-                sql = sb.append(" AND ZIP =?").toString();
+                sql = sb.append(" AND ZIP in ?").toString();
                 ptmt = conn.prepareStatement(sql);
                 ptmt.setString(1, zipCode);
             }

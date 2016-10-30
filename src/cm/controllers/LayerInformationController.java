@@ -29,7 +29,9 @@ public class LayerInformationController {
     ObservableList<String> thicknessUnits = FXCollections.observableArrayList(
           "inch",
           "meter");
-
+    //Save the zip code of location
+    @FXML
+    public TextField proLocationTextField;
 
     // Some layer specs
     @FXML
@@ -119,6 +121,7 @@ public class LayerInformationController {
         addLayersTabsListener();
 
         // Set up gui elements
+        proLocationTextField.setText("70820");
         layerTypeComboBox.setItems(layerTypes);
         thicknessUnitChoiceBox.setValue("inch");
         thicknessUnitChoiceBox.setItems(thicknessUnits);
@@ -138,11 +141,14 @@ public class LayerInformationController {
 
     @FXML
     private void loadMaterialBtnAction() throws IOException {
+        saveProjectLocation();
         saveLayerType();
         saveThickness();
         System.out.println(currentLayer);
         App.showLoadMaterial(currentLayer);
     }
+    private void saveProjectLocation(){
+        DESTINATION_ZIP_CODE_MUTABLE = proLocationTextField.getText();}
 
     private void saveLayerType() {
         currentLayer.setLayerType(toString(layerTypeComboBox));
