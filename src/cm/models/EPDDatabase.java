@@ -58,7 +58,7 @@ public class EPDDatabase {
         StringBuilder sb = new StringBuilder(DEFAULT_SQL_QUERY);
         PreparedStatement ptmt = null;
         if (zipCode.isEmpty() && companyName.isEmpty() && cs.isEmpty()) {
-            ptmt = conn.prepareStatement(sql);
+            ptmt = conn.prepareStatement(sb.toString());
         }
         else {
             if (!zipCode.isEmpty()) {
