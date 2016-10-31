@@ -1,9 +1,10 @@
 package cm.models;
 
-import java.util.HashMap;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * The main model.
@@ -28,15 +29,34 @@ public class Model {
     // the "TRANSPORTATION_PARAMETERS" that we will use for scoring
     public static final TransportationParameters TRANSPORTATION_PARAMETERS = new TransportationParameters();
 
-    // -- experiments ---------------------------- //
-
-    public static void foo() {
-        System.out.println("Model.foo() called!");
+    /**
+     * Append a new design to DESIGNS, with an appropriate key.
+     * @return The new design object, for convenience.
+     */
+    public static final Design addNewDesign() {
+        int newDesignNumber = 1 + DESIGNS.size();
+        String newDesignKey = "Design " + newDesignNumber;
+        Design newDesign = (new Design()).setDesignId(newDesignKey);
+        DESIGNS.put(newDesignKey, newDesign);
+        printDebugMsg("Added new design, we now have " + newDesignNumber + " of them.");
+        return newDesign;
     }
 
-    public static void main(String[] args) {
-        WEIGHTS.setwOdp(200);
-        WEIGHTS.setwRenewableEnergyConsumption(500);
-        WEIGHTS.setwGwp(20).setwOdp(3);
+    /* -- debugging -------------------------------------------- */
+
+    private static final boolean DEBUG_MODE = true;
+    private static void printDebugMsg() { if (DEBUG_MODE) println(); }
+    private static void printDebugMsg(Object o) { if (DEBUG_MODE) println(o); }
+
+    private static void println() { System.out.println(); }
+    private static void println(Object o) { System.out.println(o);}
+
+    private static final Gson GSON_PP = new GsonBuilder().setPrettyPrinting().create();
+    public static final void printDebugDesigns() {
+        if (!DEBUG_MODE) return;
+        printDebugMsg("=======================");
+        printDebugMsg("Number of designs: " + DESIGNS.size());
+        printDebugMsg(GSON_PP.toJson(DESIGNS));
+        printDebugMsg("- - - - - - - - - - - -");
     }
 }

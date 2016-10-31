@@ -26,7 +26,9 @@ public class App extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("views/view.fxml"));
         primaryStage.setTitle("lacyfx WIP");
-        primaryStage.setScene(new Scene(root, 800, 600));
+        Scene scene = new Scene(root, 800, 600);
+        scene.getStylesheets().add(String.valueOf(getClass().getResource("views/css/application.css")));
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 

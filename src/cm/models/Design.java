@@ -1,38 +1,41 @@
 package cm.models;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A design_temp is a pavement design_temp, consisting of a number of layers. Each layer_temp
+ * A design is a pavement design, consisting of a number of layers. Each layer
  * has a thickness, and a material.
  */
 public class Design {
 
     /* -- Fields -------------------------------------------------------- */
 
-    // A design_temp has a bunch of layers, added from top to bottom.
-    private List<Layer> layers = new ArrayList<>();
-
     private String designId;
     private String designType;
     private String pavementType;
 
-    private double EnvPerfAnalysis_TotalScore_Design;
-    private double EnvPerfAnalysis_EPDScore_Design;
-    private double EnvPerfAnalysis_TransportationScore_Design;
+    // A design has a bunch of layers, added from top to bottom.
+    private List<Layer> layers = new ArrayList<>();
+
+    private Double EnvPerfAnalysis_TotalScore_Design;
+    private Double EnvPerfAnalysis_EPDScore_Design;
+    private Double EnvPerfAnalysis_TransportationScore_Design;
 
     /* -- Constructor(s) ------------------------------------------------ */
 
     /**
-     * Construct a new, empty design_temp
+     * Construct a new, empty design
      */
     public Design() {
         /* noop */
     }
 
     /**
-     * Construct a new design_temp with a number of empty layers.
+     * Construct a new design with a number of empty layers.
      * @param numberOfLayers The number of layers, typically between 2 and 8.
      */
     public Design(int numberOfLayers) {
@@ -45,7 +48,7 @@ public class Design {
     /* -- Methods ------------------------------------------------------- */
 
     /**
-     * Set number of layers in the design_temp, adding or removing at
+     * Set number of layers in the design, adding or removing at
      * the the bottom as appropriate.
      * @param numberOfLayers The number of layers.
      * @return this, for chaining.
@@ -69,7 +72,7 @@ public class Design {
 
 
     /**
-     * Return a layer_temp by number, layer_temp 0 is the top.
+     * Return a layer by number, layer 0 is the top.
      * @param layerNumber
      * @return
      */
@@ -78,7 +81,7 @@ public class Design {
     }
 
     public boolean hasLayerIndex(int layerIndex) {
-        if (layerIndex < 0 || layerIndex > layers.size())
+        if (layerIndex < 0 || layerIndex >= layers.size())
             return false;
         return true;
     }
@@ -92,30 +95,33 @@ public class Design {
     }
 
     /**
-     * Add a layer_temp to the bottom, or to the top if the design_temp is empty.
-     * @param layer The layer_temp to add.
+     * Add a layer to the bottom, or to the top if the design is empty.
+     * @param layer
+     * @return the newly-added layer.
      */
-    public Design addLayer(Layer layer) {
+    public Layer addLayer(Layer layer) {
         layers.add(layer);
-        return this;
+        return layer;
     }
 
     /**
-     * Add an empty layer_temp to the bottom, or to the top if the design_temp is empty.
+     * Add an empty layer to the bottom, or to the top if the design is empty.
+     * @return The newly-added empty layer.
      */
-    public Design addLayer() {
-        layers.add(new Layer());
-        return this;
+    public Layer addLayer() {
+        Layer newLayer  = new Layer();
+        layers.add(newLayer);
+        return newLayer;
     }
 
     /**
-     * Removes the bottom layer_temp if it exists, otherwise noop.
-     * @return this.
+     * Removes the bottom layer if it exists, otherwise noop.
+     * @return The newly-removed layer.
      */
-    public Design removeLayer() {
+    public Layer removeLayer() {
         if (getNumberOfLayers() > 0)
-            layers.remove(layers.size() - 1);
-        return this;
+            return layers.remove(layers.size() - 1);
+        return null;
     }
 
     public Design setLayer(int layerNumber, Layer layer) {
@@ -180,4 +186,12 @@ public class Design {
         EnvPerfAnalysis_TransportationScore_Design = envPerfAnalysis_TransportationScore_Design;
         return this;
     }
+
+    /* -- debugging -------------------------------------------- */
+
+    private static final Gson GSON_PP = new GsonBuilder().setPrettyPrinting().create();
+
+    @Override
+    public String toString() { return GSON_PP.toJson(this); }
+
 }

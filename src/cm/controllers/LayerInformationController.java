@@ -4,20 +4,64 @@ import cm.App;
 import static cm.models.Model.*;
 import cm.models.Design;
 import cm.models.Layer;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import cm.models.Model;
+import cm.models.ZipCodeUtil;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.Region;
 
 import java.io.IOException;
+import java.util.List;
 
-/**
- * Created by royg59 on 9/21/16.
- */
 public class LayerInformationController {
+
+    /* -- new stuff --------------------------------------- */
+
+    private final ZipCodeUtil ZCU = new ZipCodeUtil();
+
+    @FXML private ComboBox designTypeComboBox;
+    @FXML private ComboBox pavementTypeComboBox;
+
+    // Design types
+    ObservableList<String> designTypes = FXCollections.observableArrayList(
+          "New pavement",
+          "Overlay");
+
+    // Pavement types (when design is new pavement)
+    ObservableList<String> newPavementTypes = FXCollections.observableArrayList(
+          "Flexible pavement",
+          "Joint Reinforced concrete pavement");
+
+    // Pavement types (when design is overlay)
+    ObservableList<String> overlayPavementTypes = FXCollections.observableArrayList(
+          "AC over AC",
+          "AC over JRCP");
+
+    @FXML
+    public void populatePavementTypeComboBox() {
+        if (selectedDesignTypeIsNewPavement())
+            pavementTypeComboBox.setItems(newPavementTypes);
+        else if (selectedDesignTypeIsOverlay())
+            pavementTypeComboBox.setItems(overlayPavementTypes);
+        else
+            return;
+        selectFirst(pavementTypeComboBox);
+    }
+
+    private boolean selectedDesignTypeIsNewPavement() {
+        return (designTypeComboBox.getSelectionModel().isSelected(0));
+    }
+
+    private boolean selectedDesignTypeIsOverlay() {
+        return (designTypeComboBox.getSelectionModel().isSelected(1));
+    }
+
+    /* -- "OLD" stuff ------------------------------------- */
+
 
     // The allowed material types
     ObservableList<String> layerTypes = FXCollections.observableArrayList(
@@ -29,23 +73,18 @@ public class LayerInformationController {
     ObservableList<String> thicknessUnits = FXCollections.observableArrayList(
           "inch",
           "meter");
+
     //Save the zip code of location
-    @FXML
-    public TextField proLocationTextField;
+    @FXML public TextField projectLocationTextField;
 
     // Some layer specs
-    @FXML
-    public ComboBox layerTypeComboBox;
-    @FXML
-    public TextField thicknessTextField;
-    @FXML
-    public ChoiceBox thicknessUnitChoiceBox;
+    @FXML public ComboBox layerTypeComboBox;
+    @FXML public TextField thicknessTextField;
+    @FXML public ChoiceBox thicknessUnitChoiceBox;
 
     // The TabPanes
-    @FXML
-    TabPane designsTabPane;
-    @FXML
-    TabPane layersTabPane;
+    @FXML public TabPane designsTabPane;
+//    @FXML TabPane layersTabPane;
 
     // vars we'll use for current design, current layer
     String currentDesignKey = "Design 1";
@@ -54,38 +93,60 @@ public class LayerInformationController {
     Design currentDesign = null;
     Layer currentLayer = null;
 
-    private void printCurrentIndexes() {
-        System.out.println("-----------");
-        System.out.println("Design Key = " + currentDesignKey);
-        System.out.println("Layer index = " + currentLayerIndex);
+    @FXML
+    Tab newTabTab;
+
+    @FXML
+    private void debugButtonListener(ActionEvent actionEvent) {
+        Model.printDebugDesigns();
+    }
+
+    private List<Tab> designTabsList;
+
+    private void addDesign() {
+        if (designTabsList == null) return;
+        int numTabs = designTabsList.size();
+        int newTabPosition = numTabs - 1;
+        int newDesignNumber = newTabPosition + 1;
+        String newDesignId = "Design " + newDesignNumber;
+
+        Design newDesign = Model.addNewDesign();
+        Layer newLayer = newDesign.addLayer();
+
+        Tab newTab  = new Tab(newDesignId);
+        designsTabPane.getTabs().add(newTabPosition, newTab);
     }
 
     private void addDesignsTabsListener() {
-        designsTabPane.getSelectionModel().selectedItemProperty()
-              .addListener((observable, oldValue, newValue) -> {
-                  currentDesignKey = getSelectedTabText(designsTabPane);
-                  printCurrentIndexes();
-                  setCurrentDesign(currentDesignKey);
+        SelectionModel selectionModel
+              = designsTabPane.getSelectionModel();
+        ReadOnlyObjectProperty<Tab> property
+              = selectionModel.selectedItemProperty();
+        property.addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals(newTabTab)) {
+                selectionModel.select(oldValue);
+                addDesign();
+            }
         });
     }
 
     private void setCurrentDesign(String designKey) {
         if (DESIGNS.containsKey(designKey)) {
             currentDesign = DESIGNS.get(designKey);
-            System.out.println("setCurrentDesign() success");
+            printDebugMsg("setCurrentDesign() success");
         } else {
-            System.out.println("Couldn't set current design with key = " + designKey);
+            printDebugMsg("Couldn't set current design with key = " + designKey);
         }
     }
 
-    private void addLayersTabsListener() {
-        layersTabPane.getSelectionModel().selectedIndexProperty()
-              .addListener((observable1, oldValue1, newValue1) -> {
-                  currentLayerIndex = getSelectedTabIndex(layersTabPane);
-                  printCurrentIndexes();
-                  setCurrentLayer(currentLayerIndex);
-              });
-    }
+//    private void addLayersTabsListener() {
+//        layersTabPane.getSelectionModel().selectedIndexProperty()
+//              .addListener((observable1, oldValue1, newValue1) -> {
+//                  currentLayerIndex = getSelectedTabIndex(layersTabPane);
+//                  printCurrentIndexes();
+//                  setCurrentLayer(currentLayerIndex);
+//              });
+//    }
 
     private void setCurrentLayer(int layerIndex) {
         boolean designHasOurCurrentKey = DESIGNS.containsKey(currentDesignKey);
@@ -95,82 +156,120 @@ public class LayerInformationController {
         }
         if (designHasOurCurrentKey && layerIndexIsValid) {
             currentLayer = currentDesign.getLayer(layerIndex);
-            System.out.println(
-                  "setCurrentLayer() success");
+            printDebugMsg("setCurrentLayer() success");
         } else {
-            System.out.println(
+            printDebugMsg(
                   "Couldn't set current layer with index = " + layerIndex);
         }
     }
 
-
-    private String getSelectedTabText(TabPane tabPane) {
-        return tabPane.getSelectionModel().getSelectedItem().getText();
-    }
-    private int getSelectedTabIndex(TabPane tabPane) {
-        return tabPane.getSelectionModel().getSelectedIndex();
-    }
-
+//    private String getSelectedTabText(TabPane tabPane) {
+//        return tabPane.getSelectionModel().getSelectedItem().getText();
+//    }
+//    private int getSelectedTabIndex(TabPane tabPane) {
+//        return tabPane.getSelectionModel().getSelectedIndex();
+//    }
 
     @FXML
     private void initialize() {
+        designTabsList = designsTabPane.getTabs();
+        projectLocationTextField.setText("70820");
+
+        setDesignOptionsToDefaults();
+        setLayerOptionsToDefaults();
+
+        Design firstDesign = Model.addNewDesign();
+        Layer firstLayer = firstDesign.addLayer();
+
+
         printCurrentIndexes();
 
-        // add listeners so we know the current tabs
+        /* add listeners so we know the current tabs */
         addDesignsTabsListener();
-        addLayersTabsListener();
+//        addLayersTabsListener();
 
-        // Set up gui elements
-        proLocationTextField.setText("70820");
+        /* figure out current design and current layer at initialize */
+//        currentDesignKey = getSelectedTabText(designsTabPane);
+        setCurrentDesign(currentDesignKey);
+//        currentLayerIndex = getSelectedTabIndex(layersTabPane);
+        setCurrentLayer(currentLayerIndex);
+    }
+
+    private void setDesignOptionsToDefaults() {
+        designTypeComboBox.setItems(designTypes);
+        selectFirst(designTypeComboBox);
+        populatePavementTypeComboBox();
+        selectFirst(pavementTypeComboBox);
+    }
+
+    private void setLayerOptionsToDefaults() {
         layerTypeComboBox.setItems(layerTypes);
+        selectFirst(layerTypeComboBox);
         thicknessUnitChoiceBox.setValue("inch");
         thicknessUnitChoiceBox.setItems(thicknessUnits);
         thicknessTextField.setText("10.0");
-
-        // figure out current design and current layer at initialize
-        currentDesignKey = getSelectedTabText(designsTabPane);
-        setCurrentDesign(currentDesignKey);
-        currentLayerIndex = getSelectedTabIndex(layersTabPane);
-        setCurrentLayer(currentLayerIndex);
-
-        System.out.println();
     }
-
-    // used to parse design/layer numbers
-    private StringBuilder sb;
 
     @FXML
     private void loadMaterialBtnAction() throws IOException {
         saveProjectLocation();
         saveLayerType();
         saveThickness();
-        System.out.println(currentLayer);
+        printDebugMsg(currentLayer);
         App.showLoadMaterial(currentLayer);
     }
-    private void saveProjectLocation(){
-        DESTINATION_ZIP_CODE_MUTABLE = proLocationTextField.getText();}
+    private void saveProjectLocation() {
+        DESTINATION_ZIP_CODE_MUTABLE = projectLocationTextField.getText();
+    }
 
     private void saveLayerType() {
         currentLayer.setLayerType(toString(layerTypeComboBox));
     }
 
-
     private void saveThickness() {
         Double thicknessValue = toDouble(thicknessTextField);
-        String thicknessUnit = thicknessUnitChoiceBox.getValue().toString();
+        String thicknessUnit = toString(thicknessUnitChoiceBox);
         if (thicknessUnit == "inch")
-            thicknessValue *= 0.0254;
+            thicknessValue /= 39.3701;
         currentLayer.setThickness(thicknessValue);
+    }
+
+    /* -- aliases for dealing with javafx components ------ */
+
+    private void selectFirst(ComboBox cbb) {
+        cbb.getSelectionModel().selectFirst();
     }
 
     private Double toDouble(TextInputControl o) {
         return Double.parseDouble(o.getText());
     }
 
-    private String toString(ComboBox cb) {
-        return cb.getValue().toString();
+    private String toString(ComboBox cbb) {
+        return cbb.getValue().toString();
     }
 
+    private String toString(ChoiceBox chb) {
+        return chb.getValue().toString();
+    }
+
+    /* -- helper methods for debugging -------------------- */
+
+    private void println() { System.out.println(); }
+    private void println(Object o) { System.out.println(o); }
+
+    private final boolean DEBUG_MODE  = true;
+
+    private void printDebugMsg() { if (DEBUG_MODE) println(); }
+    private void printDebugMsg(Object o) { if (DEBUG_MODE) println(o); }
+
+    private void printCurrentIndexes() {
+        if (!DEBUG_MODE) return;
+        printDebugMsg("-----------");
+        printDebugMsg("Design Key = " + currentDesignKey);
+        printDebugMsg("Layer index = " + currentLayerIndex);
+    }
+
+    @FXML
     public void printDebugStuff(ActionEvent actionEvent) {
         System.out.println(
               currentLayer.getMaterial(1).getCS()
@@ -178,6 +277,7 @@ public class LayerInformationController {
                     + " ," + currentLayer.getMaterial(1).getLocation()
                     + " ," + currentLayer.getMaterial(1).getZipCode()
                     + " ," + currentLayer.getMaterial(1).getMixNum());
-
     }
+
+
 }

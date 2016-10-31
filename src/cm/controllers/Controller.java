@@ -29,9 +29,8 @@ public class Controller {
         mainTabPane.getSelectionModel().select(mainTabPane.getSelectionModel().getSelectedIndex()+1);
     }
 
-    public static void main(String[] args) {
-        foo();
-        Model.foo();
-        // both of those work
+    @FXML
+    private void initialize() {
+        mainTabPane.getSelectionModel().select(1);
     }
 }
