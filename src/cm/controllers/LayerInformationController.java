@@ -6,11 +6,15 @@ import cm.models.Design;
 import cm.models.Layer;
 import cm.models.Model;
 import cm.models.ZipCodeUtil;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 
@@ -22,43 +26,6 @@ public class LayerInformationController {
     /* -- new stuff --------------------------------------- */
 
     private final ZipCodeUtil ZCU = new ZipCodeUtil();
-
-    @FXML private ComboBox designTypeComboBox;
-    @FXML private ComboBox pavementTypeComboBox;
-
-    // Design types
-    ObservableList<String> designTypes = FXCollections.observableArrayList(
-          "New pavement",
-          "Overlay");
-
-    // Pavement types (when design is new pavement)
-    ObservableList<String> newPavementTypes = FXCollections.observableArrayList(
-          "Flexible pavement",
-          "Joint Reinforced concrete pavement");
-
-    // Pavement types (when design is overlay)
-    ObservableList<String> overlayPavementTypes = FXCollections.observableArrayList(
-          "AC over AC",
-          "AC over JRCP");
-
-    @FXML
-    public void populatePavementTypeComboBox() {
-        if (selectedDesignTypeIsNewPavement())
-            pavementTypeComboBox.setItems(newPavementTypes);
-        else if (selectedDesignTypeIsOverlay())
-            pavementTypeComboBox.setItems(overlayPavementTypes);
-        else
-            return;
-        selectFirst(pavementTypeComboBox);
-    }
-
-    private boolean selectedDesignTypeIsNewPavement() {
-        return (designTypeComboBox.getSelectionModel().isSelected(0));
-    }
-
-    private boolean selectedDesignTypeIsOverlay() {
-        return (designTypeComboBox.getSelectionModel().isSelected(1));
-    }
 
     /* -- "OLD" stuff ------------------------------------- */
 
@@ -96,9 +63,20 @@ public class LayerInformationController {
     @FXML
     Tab newTabTab;
 
+    private static final Gson GSON_PP = new GsonBuilder().setPrettyPrinting().create();
+
     @FXML
     private void debugButtonListener(ActionEvent actionEvent) {
         Model.printDebugDesigns();
+        printDebugMsg("Current design key: " + currentDesignKey);
+        printDebugMsg("Current design object: ");
+        printDebugMsg(GSON_PP.toJson(currentDesign));
+    }
+
+    private Tab getNewestTab() {
+        if (designTabsList == null) return null;
+        int numTabs = designTabsList.size();
+        return designsTabPane.getTabs().get(numTabs - 1);
     }
 
     private List<Tab> designTabsList;
@@ -111,9 +89,18 @@ public class LayerInformationController {
         String newDesignId = "Design " + newDesignNumber;
 
         Design newDesign = Model.addNewDesign();
-        Layer newLayer = newDesign.addLayer();
-
         Tab newTab  = new Tab(newDesignId);
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(
+              App.class.getResource("views/designView.fxml"));
+        Node node = null;
+        try { node = fxmlLoader.load(); }
+        catch (IOException e) { e.printStackTrace(); }
+        DesignController newDesignTabController
+              = fxmlLoader.<DesignController>getController();
+        newDesignTabController.setCurrentDesign(newDesign);
+        newTab.setContent(node);
+
         designsTabPane.getTabs().add(newTabPosition, newTab);
     }
 
@@ -125,7 +112,7 @@ public class LayerInformationController {
         property.addListener((observable, oldValue, newValue) -> {
             if (newValue.equals(newTabTab)) {
                 selectionModel.select(oldValue);
-                addDesign();
+                this.addDesign();
             }
         });
     }
@@ -172,14 +159,28 @@ public class LayerInformationController {
 
     @FXML
     private void initialize() {
-        designTabsList = designsTabPane.getTabs();
         projectLocationTextField.setText("70820");
 
-        setDesignOptionsToDefaults();
-        setLayerOptionsToDefaults();
-
+        designTabsList = designsTabPane.getTabs();
         Design firstDesign = Model.addNewDesign();
         Layer firstLayer = firstDesign.addLayer();
+
+        Tab firstTab = designTabsList.get(0);
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(
+              App.class.getResource("views/designView.fxml"));
+        Node node = null;
+        try {
+            node = fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        DesignController firstTabController
+              = fxmlLoader.<DesignController>getController();
+
+        firstTab.setContent(node);
+        firstTabController.setCurrentDesign(firstDesign);
+        printDebugMsg(firstTabController.getCurrentDesign());
 
 
         printCurrentIndexes();
@@ -195,20 +196,7 @@ public class LayerInformationController {
         setCurrentLayer(currentLayerIndex);
     }
 
-    private void setDesignOptionsToDefaults() {
-        designTypeComboBox.setItems(designTypes);
-        selectFirst(designTypeComboBox);
-        populatePavementTypeComboBox();
-        selectFirst(pavementTypeComboBox);
-    }
 
-    private void setLayerOptionsToDefaults() {
-        layerTypeComboBox.setItems(layerTypes);
-        selectFirst(layerTypeComboBox);
-        thicknessUnitChoiceBox.setValue("inch");
-        thicknessUnitChoiceBox.setItems(thicknessUnits);
-        thicknessTextField.setText("10.0");
-    }
 
     @FXML
     private void loadMaterialBtnAction() throws IOException {
