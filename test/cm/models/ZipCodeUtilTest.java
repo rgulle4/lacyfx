@@ -98,13 +98,28 @@ public class ZipCodeUtilTest {
     @Test
     public void testZipsWithinRadius() throws Exception {
         Double radius = 250000.0;
+
+        // https://maps.googleapis.com/maps/api/distancematrix/json?&mode=car&sensor=false&units=imperial&destinations=70803&origins=70115|70601|77001|12|00000|33
+
+        List<String> origins = Arrays.asList(
+              "70115",  // New Orleans
+              "70601",  // Lake Charles
+              "77001",  // Houston
+              "12",     // invalid zipcode
+              "00000",  // "valid" zip code, but doesn't exist
+              "33"      // invalid zip code, but actually in France
+        );
+
         Map<String, Double> results =
-              zcu.zipsWithinRadius(radius,originsList,destinationZip1);
+              zcu.zipsWithinRadius(
+                    radius,
+                    origins,
+                    destinationZip1);
 
         // sanity check... our original list has 3 zips
-        assertEquals(3, originsList.size());
+        assertEquals(6, origins.size());
 
-        // only 2 zips should be within 250km
+        // only 3 zips should be within 250km
         assertEquals(2, results.size());
 
         // The Houston zip code should not pass the filter.

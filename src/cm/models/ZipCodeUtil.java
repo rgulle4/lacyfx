@@ -64,6 +64,13 @@ public class ZipCodeUtil {
     private static final Double ZERO = new Double(0);
     private static final Gson gson = new Gson();
 
+    // print debug messages?
+    private static final boolean DEBUG_MODE = true;
+
+    private void printDebugMsg(Object o) {
+        if (DEBUG_MODE) System.out.println(o);
+    }
+
     /* -- constructor(s) ---------------------------------------------- */
 
     public ZipCodeUtil() { /* */ }
@@ -149,21 +156,38 @@ public class ZipCodeUtil {
             return null;
         Response response = getResponse(originZips, destinationZip);
 
-
         int sizeOfResponse = response.origin_addresses.length;
+        printDebugMsg("Size of originZips: " + originZips.size());
+        printDebugMsg("Size of response: " + sizeOfResponse);
         Map<String, Double> result = new LinkedHashMap<>();
         for (int i = 0; i < sizeOfResponse; i++) {
             Double distance = ZERO;
-            if (response.rows[i].elements[0].status.equals("OK")) {
+            String currentZip = originZips.get(i);
+            boolean currentZipIsValid = isValidZipCode(currentZip);
+            String responseStatus = response.rows[i].elements[0].status;
+            boolean responseIsOk = responseStatus.equals("OK");
+
+            if (responseIsOk && currentZipIsValid) {
                 distance = new Double(
                       response.rows[i].elements[0].distance.value);
+            } else {
+                String badZipCode = currentZip;
+                if (!currentZipIsValid)
+                    printDebugMsg("Bad zip: " + badZipCode + " (Invalid)");
+                else
+                    printDebugMsg("Bad zip: " + badZipCode +
+                          " (returns status \"" + responseStatus + "\")");
             }
-            if (distance <= radius) {
-                String address = response.origin_addresses[i];
-                String extractedZip = extractZipFromAddress(address);
+
+            if (currentZipIsValid && responseIsOk && distance <= radius) {
+                String extractedZip = originZips.get(i);
                 result.put(extractedZip, distance);
             }
         }
+        printDebugMsg("Size of zips within radius " +
+              radius + ": " + result.size());
+        for (String zip : result.keySet())
+            printDebugMsg(zip + " -> " + result.get(zip));
         return result;
     }
     public Map<String, Double> zipsWithinRadius(Double radius,
