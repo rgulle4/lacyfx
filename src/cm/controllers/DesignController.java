@@ -15,13 +15,8 @@ public class DesignController {
 
     private Design design;
 
-    private static boolean firstInstanceHasBeenMade = false;
     public DesignController() {
         super();
-        if (!firstInstanceHasBeenMade)
-            firstInstanceHasBeenMade = true;
-//        if (firstInstanceHasBeenMade)
-//            this.setCurrentDesign(Model.addNewDesign());
     }
 
     public DesignController(Design design) {
