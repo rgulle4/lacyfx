@@ -78,10 +78,10 @@ public class ZipCodeUtil {
     /* -- methods) ---------------------------------------------------- */
 
     /**
-     * Distance (meters) from an origin zip code to project DESTINATION_ZIP_CODE;
-     * (0 if zips are bad).
-     * @param originZip The zip code of the origin.
-     * @return The distance in meters (0 if zips are bad).
+     * Works like {@link ZipCodeUtil#getDistance(String, String)}, but
+     * destinationZip defaults to Model.DESTINATION_ZIP_CODE_MUTABLE.
+     * @param originZip
+     * @return
      */
     public Double getDistance(String originZip) {
         if (Model.DESTINATION_ZIP_CODE_MUTABLE == null)
@@ -190,9 +190,13 @@ public class ZipCodeUtil {
             printDebugMsg(zip + " -> " + result.get(zip));
         return result;
     }
+
+    /**
+     * Works like {@link ZipCodeUtil#zipsWithinRadius(Double, List, String)},
+     * but destinationZip defaults to Model.DESTINATION_ZIP_CODE_MUTABLE.
+     */
     public Map<String, Double> zipsWithinRadius(Double radius,
-                                                List<String> originZips)
-    {
+                                                List<String> originZips) {
         return zipsWithinRadius(radius, originZips, Model.DESTINATION_ZIP_CODE_MUTABLE);
     }
 
