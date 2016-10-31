@@ -38,7 +38,6 @@ public class Model {
         String newDesignKey = "Design " + newDesignNumber;
         Design newDesign = (new Design()).setDesignId(newDesignKey);
         DESIGNS.put(newDesignKey, newDesign);
-        printDebugMsg("Added new design, we now have " + newDesignNumber + " of them.");
         return newDesign;
     }
 
@@ -55,7 +54,7 @@ public class Model {
     public static final void printDebugDesigns() {
         if (!DEBUG_MODE) return;
         printDebugMsg("=======================");
-        printDebugMsg("Number of designs: " + DESIGNS.size());
+        printDebugMsg("Number of designs: " + DESIGNS.size() + "... ");
         printDebugMsg(GSON_PP.toJson(DESIGNS));
         printDebugMsg("- - - - - - - - - - - -");
     }

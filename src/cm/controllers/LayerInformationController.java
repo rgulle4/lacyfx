@@ -12,10 +12,13 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 
 import java.io.IOException;
@@ -115,6 +118,29 @@ public class LayerInformationController {
                 this.addDesign();
             }
         });
+
+        designsTabPane.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+            if (e.isControlDown() && e.getCode() == KeyCode.TAB) {
+                int numTabs = designTabsList.size();
+                SingleSelectionModel<Tab> sm = designsTabPane.getSelectionModel();
+                Tab firstTab = designTabsList.get(0);
+                Tab lastTab = designTabsList.get(designTabsList.size() - 2);
+                if (sm.getSelectedIndex() == numTabs - 2) {
+//                    printDebugMsg("@ 'last' tab, go back to first?");
+                    sm.select(firstTab);
+                } else if (e.isShiftDown() && sm.getSelectedIndex() == 0) {
+//                    printDebugMsg("@ first tab, go to 'last'?");
+                    sm.select(lastTab);
+                }
+            }
+        });
+
+//        designsTabPane.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent event) {
+//
+//            }
+//        });
     }
 
     private void setCurrentDesign(String designKey) {
