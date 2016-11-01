@@ -8,20 +8,13 @@ import cm.models.Model;
 import cm.models.ZipCodeUtil;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Region;
 
 import java.io.IOException;
 import java.util.List;
@@ -109,50 +102,9 @@ public class LayerInformationController {
         designsTabPane.getTabs().add(newTabPosition, newTab);
     }
 
-    private final Label clickableNewTabThing = new Label("+");
-
+    private final Button newTabButton = new Button("+");
     private void addDesignsTabsListener() {
-
-        clickableNewTabThing.setOnMouseClicked(mouseEvent -> {
-            if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-                this.addDesign();
-            }
-        });
-
-
-//        SelectionModel selectionModel
-//              = designsTabPane.getSelectionModel();
-//        ReadOnlyObjectProperty<Tab> property
-//              = selectionModel.selectedItemProperty();
-//        property.addListener((observable, oldValue, newValue) -> {
-//            if (newValue.equals(newTabTab)) {
-//                selectionModel.select(oldValue);
-//                this.addDesign();
-//            }
-//        });
-//
-//        designsTabPane.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
-//            if (e.isControlDown() && e.getCode() == KeyCode.TAB) {
-//                int numTabs = designTabsList.size();
-//                SingleSelectionModel<Tab> sm = designsTabPane.getSelectionModel();
-//                Tab firstTab = designTabsList.get(0);
-//                Tab lastTab = designTabsList.get(designTabsList.size() - 2);
-//                if (sm.getSelectedIndex() == numTabs - 2) {
-////                    printDebugMsg("@ 'last' tab, go back to first?");
-//                    sm.select(firstTab);
-//                } else if (e.isShiftDown() && sm.getSelectedIndex() == 0) {
-////                    printDebugMsg("@ first tab, go to 'last'?");
-//                    sm.select(lastTab);
-//                }
-//            }
-//        });
-
-//        designsTabPane.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-//            @Override
-//            public void handle(KeyEvent event) {
-//
-//            }
-//        });
+        newTabButton.setOnAction(e -> {this.addDesign(); });
     }
 
     private void setCurrentDesign(String designKey) {
@@ -222,7 +174,8 @@ public class LayerInformationController {
 
 
         // set up newTabTab label thingy
-        newTabTab.setGraphic(clickableNewTabThing);
+        newTabButton.getStyleClass().add("tab-button");
+        newTabTab.setGraphic(newTabButton);
 
         printCurrentIndexes();
 
