@@ -46,5 +46,6 @@
          </children>
       </HBox>
       <RadioButton layoutX="55.0" layoutY="65.0" mnemonicParsing="false" text="Summary Table" />
+      <Button fx:id="clean_Button" layoutX="1076.0" layoutY="136.0" mnemonicParsing="false" onAction="#cleanChart" text="Clean" />
    </children>
 </AnchorPane>
