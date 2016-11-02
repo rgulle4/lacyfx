@@ -1,5 +1,8 @@
 package cm.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static cm.models.Model.*;
 /**
  * A layer_temp has a thickness (inches) and a material.
@@ -9,7 +12,7 @@ public class Layer {
     /* -- Fields -------------------------------------------------------- */
 
     // A layer_temp has one material
-    private Material material;
+    private List<Material> materials = new ArrayList<>();
 
     // A layerId is probably "layer1", "layer2", etc.
     private String layerId;
@@ -33,13 +36,51 @@ public class Layer {
     // Cement Concrete.
     private String layerType;
 
-    public Layer setMaterial(Material material) {
-        this.material = material;
+    public Layer setNumberofMaterials(int numberofMaterials){
+        int numberofMaterialsToAdd = numberofMaterials - getNumberofMaterials();
+        if(getNumberofMaterials() == 0 || numberofMaterialsToAdd > 0){
+            for (int i = 0; i < numberofMaterialsToAdd; i++){
+                this.addMaterial();
+            }
+        }else if (numberofMaterialsToAdd < 0){
+            for (int i = numberofMaterialsToAdd; i < 0; i++){
+                this.removeMaterial();
+            }
+        }else{
+            System.out.println("sadf");
+        }
         return this;
     }
 
-    public Material getMaterial() {
-        return material;
+    public List<Material> getMaterials(){
+        return materials;
+    }
+
+    public Layer addMaterial(Material material) {
+        this.materials.add(material);
+        return this;
+    }
+    public Layer addMaterial(){
+        materials.add(new Material());
+        return this;
+    }
+
+    public Material getMaterial(int materialNumber) {
+        return materials.get(materialNumber);
+    }
+
+    public int getNumberofMaterials(){
+        return materials.size();
+    }
+
+    public Layer removeMaterial(){
+        if (getNumberofMaterials() > 0)
+            materials.remove(materials.size() - 1);
+        return this;
+    }
+    public Layer setMaterial(int materialNumber, Material material){
+        materials.set(materialNumber -1, material);
+        return this;
     }
 
     /* == "Old" Stuff =================================================== */

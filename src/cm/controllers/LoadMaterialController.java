@@ -179,7 +179,7 @@ public class LoadMaterialController {
         System.out.println("Begin nextButton() method");
         int i =0;
         Material firstSelectedMaterial = SelectedMaterialsList.get(i);
-        currentLayer.setMaterial(firstSelectedMaterial);
+        currentLayer.addMaterial(firstSelectedMaterial);
         printMaterialInfo();
         System.out.println("END nextButton() method");
 
@@ -187,11 +187,12 @@ public class LoadMaterialController {
 
     private void printMaterialInfo() {
         System.out.println(
-              currentLayer.getMaterial().getCS()
-                    + "," + currentLayer.getMaterial().getCompany_Name()
-                    + " ," + currentLayer.getMaterial().getLocation()
-                    + " ," + currentLayer.getMaterial().getZipCode()
-                    + " ," + currentLayer.getMaterial().getMixNum());
+                // print information of the first material
+              currentLayer.getMaterial(0).getCS()
+                    + "," + currentLayer.getMaterial(0).getCompany_Name()
+                    + " ," + currentLayer.getMaterial(0).getLocation()
+                    + " ," + currentLayer.getMaterial(0).getZipCode()
+                    + " ," + currentLayer.getMaterial(0).getMixNum());
     }
 
     private double getRadius(){

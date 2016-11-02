@@ -173,11 +173,11 @@ public class LayerInformationController {
 
     public void printDebugStuff(ActionEvent actionEvent) {
         System.out.println(
-              currentLayer.getMaterial().getCS()
-                    + ","  + currentLayer.getMaterial().getCompany_Name()
-                    + " ," + currentLayer.getMaterial().getLocation()
-                    + " ," + currentLayer.getMaterial().getZipCode()
-                    + " ," + currentLayer.getMaterial().getMixNum());
+              currentLayer.getMaterial(1).getCS()
+                    + ","  + currentLayer.getMaterial(1).getCompany_Name()
+                    + " ," + currentLayer.getMaterial(1).getLocation()
+                    + " ," + currentLayer.getMaterial(1).getZipCode()
+                    + " ," + currentLayer.getMaterial(1).getMixNum());
 
     }
 }
