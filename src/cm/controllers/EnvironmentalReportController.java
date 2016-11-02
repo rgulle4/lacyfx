@@ -85,14 +85,15 @@ public class EnvironmentalReportController {
     ObservableList<String> impactType = FXCollections.
             observableArrayList(
                     "EPD",
-                    "TSP"
+                    "TSP",
+                    "Overall"
             );
     // raw Value type
     ObservableList<String> rawValueType = FXCollections.
             observableArrayList(
-                    "Raw value",
-                    "Normalized value",
-                    "Weighted value"
+                    "Raw impact per functional unit",
+                    "Normalized impact per functional unit",
+                    "Weighted impact per functional unit"
             );
 
     // Number of designs
@@ -110,9 +111,9 @@ public class EnvironmentalReportController {
     // Number of layers in this design
     ObservableList<String> alternativeNum = FXCollections
             .observableArrayList(
-                    "Alternative 1", "Alternative 2", "Alternative 3",
-                    "Alternative 4", "Alternative 5", "Alternative 6",
-                    "Alternative 7", "Alternative 8","Overall");
+                    "Mix 1", "Mix 2", "Mix 3",
+                    "Mix 4", "Mix 5", "Mix 6",
+                    "Mix 7", "Mix 8","Overall");
     // Impact Category
     ObservableList<String> impacyCategoryName =FXCollections
             .observableArrayList(
