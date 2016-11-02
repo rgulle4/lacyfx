@@ -1,25 +1,26 @@
 package cm.controllers;
 
-import cm.App;
 import cm.models.*;
-import com.sun.org.apache.bcel.internal.generic.Select;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import sun.plugin2.os.windows.SECURITY_ATTRIBUTES;
 
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
+
+import static cm.models.Model.DESTINATION_ZIP_CODE_MUTABLE;
 
 /**
  * Created by Administrator on 2016/9/28.
  */
 public class LoadMaterialController {
 
-    ObservableList<String> DistanceList = FXCollections.observableArrayList("<10 miles","<25 miles","<50 miles","<100 miles");
+    ObservableList<String> DistanceList = FXCollections.observableArrayList(
+            "<10 miles","<25 miles","<50 miles","<100 miles");
     @FXML
     private ChoiceBox distanceChoice;
     // To DO: select alternative materials from database for calculating and comparing
@@ -110,13 +111,18 @@ public class LoadMaterialController {
 //        List<Material> result = new EPDDatabase().getResultsFilteredBy(CS_Textfiled);
 
         String CS = textField_CS.getText();
-        String zipcode = textField_ZipCode.getText();
         String cmName = textField_companyName.getText();
         // get a zip set within a certain radius to the location of project
         ZipCodeUtil zcu = new ZipCodeUtil();
-
-
-        List<Material> result = new EPDDatabase().getResultsFilteredBy(zipcode,CS,cmName);
+        String destinationZipcode = DESTINATION_ZIP_CODE_MUTABLE;
+        Double radius = getRadius();
+        // TEST: Get 41 zip codes of original place from database;
+        List<String> origins = new EPDDatabase().get20Zipcode();
+        Map<String, Double> filteredZipcodeMap
+                = zcu.zipsWithinRadius(radius,origins,destinationZipcode);
+        // get qualified material after searching
+        List<Material> result = new EPDDatabase()
+                .getResultsFilteredBy(filteredZipcodeMap,CS,cmName);
 
         data = FXCollections.observableArrayList();
 
@@ -188,6 +194,23 @@ public class LoadMaterialController {
                     + " ," + currentLayer.getMaterial().getMixNum());
     }
 
+    private double getRadius(){
+        Double radius;
+        if (distanceChoice.getSelectionModel().isSelected(0)){
+            radius = 10.0*1609.344; //1 miles = 1609.344 meters
+        }
+        else if (distanceChoice.getSelectionModel().isSelected(1)){
+            radius = 25.0*1609.344; //1 miles = 1609.344 meters
+        }
+        else if (distanceChoice.getSelectionModel().isSelected(2)){
+            radius = 50.0*1609.344; //1 miles = 1609.344 meters
+        }
+        else if (distanceChoice.getSelectionModel().isSelected(3)){
+            radius = 100.0*1609.344; //1 miles = 1609.344 meters
+        }
+        else radius = 0.0;
+        return radius;
+    }
 
 
 }
