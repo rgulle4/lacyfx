@@ -78,8 +78,8 @@ public class Layer {
             materials.remove(materials.size() - 1);
         return this;
     }
-    public Layer setMaterial(int materialNumber, Material material){
-        materials.set(materialNumber -1, material);
+    public Layer setMaterial(int materialIndex, Material material){
+        materials.set(materialIndex, material);
         return this;
     }
 

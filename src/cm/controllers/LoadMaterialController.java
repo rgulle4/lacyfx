@@ -153,16 +153,17 @@ public class LoadMaterialController {
 
         Material SelectedMat = MaterialTable.getSelectionModel().getSelectedItem();
         SelectedMaterialsList.add(SelectedMat);
-
         SelectedTable.setItems(SelectedMaterialsList);
+        currentLayer.addMaterial(new Material());       //add a new mix with null value
     }
 
     public void removeButton(){
         if (SelectedMaterialsList != null){
 
-            Material SelectedMat = SelectedTable.getSelectionModel().getSelectedItem();
-            SelectedMaterialsList.remove(SelectedMat);
+            int selectedIndex = SelectedTable.getSelectionModel().getSelectedIndex();
+            SelectedMaterialsList.remove(selectedIndex);
             SelectedTable.setItems(SelectedMaterialsList);
+            currentLayer.removeMaterial();      //remove a new mix with null value
 
         }
         else {
@@ -177,22 +178,40 @@ public class LoadMaterialController {
 
     public void nextButton() throws ParseException {
         System.out.println("Begin nextButton() method");
-        int i =0;
-        Material firstSelectedMaterial = SelectedMaterialsList.get(i);
-        currentLayer.addMaterial(firstSelectedMaterial);
+        // remove all the selectedMix first
+        System.out.println("All mix in the SelectedMaterialsList are removed!!");
+        // add all the selectedMix
+        for (int i =0; i < currentLayer.getNumberofMaterials();i ++){
+            Material newSelectedMix = SelectedMaterialsList.get(i);
+            currentLayer.setMaterial(i,newSelectedMix);
+        }
+        System.out.println(currentLayer.getNumberofMaterials()+ "  mix added!!");
         printMaterialInfo();
         System.out.println("END nextButton() method");
 
     }
 
+    private void removeAllMix(Layer currentLayer){
+        for (int i =0; i < currentLayer.getNumberofMaterials();i ++){
+            currentLayer.removeMaterial();
+        }
+    }
+
     private void printMaterialInfo() {
         System.out.println(
-                // print information of the first material
-              currentLayer.getMaterial(0).getCS()
-                    + "," + currentLayer.getMaterial(0).getCompany_Name()
-                    + " ," + currentLayer.getMaterial(0).getLocation()
-                    + " ," + currentLayer.getMaterial(0).getZipCode()
-                    + " ," + currentLayer.getMaterial(0).getMixNum());
+                        "CurrentLayer has "
+                        +currentLayer.getNumberofMaterials()
+                        + " SelectedMix");
+        for (int i = 0; i < currentLayer.getNumberofMaterials(); i++){
+            System.out.println(
+                    // print information of the first material
+                    currentLayer.getMaterial(i).getCS()
+                            + "," + currentLayer.getMaterial(i).getCompany_Name()
+                            + " ," + currentLayer.getMaterial(i).getLocation()
+                            + " ," + currentLayer.getMaterial(i).getZipCode()
+                            + " ," + currentLayer.getMaterial(i).getMixNum());
+        }
+
     }
 
     private double getRadius(){
