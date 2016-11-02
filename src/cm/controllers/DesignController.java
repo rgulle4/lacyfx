@@ -76,19 +76,23 @@ public class DesignController {
     @FXML private ComboBox designTypeComboBox;
     @FXML private ComboBox pavementTypeComboBox;
 
+    @FXML private TabPane layersTabPane;
+    @FXML private Tab newTabTab;
+
     // Design types
-    ObservableList<String> designTypes = FXCollections.observableArrayList(
+    private final ObservableList<String> designTypes
+          = FXCollections.observableArrayList(
           "New pavement",
           "Overlay");
 
     // Pavement types (when design is new pavement)
-    ObservableList<String> newPavementTypes
+    private final ObservableList<String> newPavementTypes
           = FXCollections.observableArrayList(
           "Flexible pavement",
           "Joint Reinforced concrete pavement");
 
     // Pavement types (when design is overlay)
-    ObservableList<String> overlayPavementTypes
+    private final ObservableList<String> overlayPavementTypes
           = FXCollections.observableArrayList(
           "AC over AC",
           "AC over JRCP");

@@ -28,24 +28,10 @@ public class LayerInformationController {
     /* -- "OLD" stuff ------------------------------------- */
 
 
-    // The allowed material types
-    ObservableList<String> layerTypes = FXCollections.observableArrayList(
-          "Asphalt Concrete",
-          "Portland Cement Concrete",
-          "Aggregate");
 
-    // The allowed thickness units
-    ObservableList<String> thicknessUnits = FXCollections.observableArrayList(
-          "inch",
-          "meter");
 
     //Save the zip code of location
     @FXML public TextField projectLocationTextField;
-
-    // Some layer specs
-    @FXML public ComboBox layerTypeComboBox;
-    @FXML public TextField thicknessTextField;
-    @FXML public ChoiceBox thicknessUnitChoiceBox;
 
     // The TabPanes
     @FXML public TabPane designsTabPane;
@@ -195,8 +181,8 @@ public class LayerInformationController {
     @FXML
     private void loadMaterialBtnAction() throws IOException {
         saveProjectLocation();
-        saveLayerType();
-        saveThickness();
+//        saveLayerType();
+//        saveThickness();
         printDebugMsg(currentLayer);
         App.showLoadMaterial(currentLayer);
     }
@@ -204,17 +190,7 @@ public class LayerInformationController {
         DESTINATION_ZIP_CODE_MUTABLE = projectLocationTextField.getText();
     }
 
-    private void saveLayerType() {
-        currentLayer.setLayerType(toString(layerTypeComboBox));
-    }
 
-    private void saveThickness() {
-        Double thicknessValue = toDouble(thicknessTextField);
-        String thicknessUnit = toString(thicknessUnitChoiceBox);
-        if (thicknessUnit == "inch")
-            thicknessValue /= 39.3701;
-        currentLayer.setThickness(thicknessValue);
-    }
 
     /* -- aliases for dealing with javafx components ------ */
 
