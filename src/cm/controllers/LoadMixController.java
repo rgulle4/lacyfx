@@ -17,7 +17,7 @@ import static cm.models.Model.DESTINATION_ZIP_CODE_MUTABLE;
 /**
  * Created by Administrator on 2016/9/28.
  */
-public class LoadMaterialController {
+public class LoadMixController {
 
     ObservableList<String> DistanceList = FXCollections.observableArrayList(
             "<10 miles","<25 miles","<50 miles","<100 miles");
@@ -72,7 +72,7 @@ public class LoadMaterialController {
      */
     public void initialize() throws SQLException {
         System.out.println("------------------------------------");
-        System.out.println("layer in LoadMaterialController...");
+        System.out.println("layer in LoadMixController...");
         System.out.println(currentLayer);
         System.out.println("------------------------------------");
 

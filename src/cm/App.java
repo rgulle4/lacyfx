@@ -1,6 +1,6 @@
 package cm;
 
-import cm.controllers.LoadMaterialController;
+import cm.controllers.LoadMixController;
 import cm.models.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -43,10 +43,10 @@ public class App extends Application {
         addDialogStage.initOwner(primaryStage);
 
         /* -- pass currentLayer --------- */
-        LoadMaterialController loadMaterialController
-              = fxmlLoader.<LoadMaterialController>getController();
+        LoadMixController loadMixController
+              = fxmlLoader.<LoadMixController>getController();
 
-        loadMaterialController.setCurrentLayer(currentLayer);
+        loadMixController.setCurrentLayer(currentLayer);
         /* ------------------------------ */
 
         Scene scene = new Scene(addNewMaterialAcnhorPane);
