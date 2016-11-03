@@ -141,7 +141,7 @@ public class EPDDatabase {
     }
     public List<String> getZipcode() throws SQLException {
         List<String> zipcodeList = new ArrayList<>();
-        String sql = "SELECT DISTINCT ZIP FROM EPD WHERE ZIP < '70920'";
+        String sql = "SELECT DISTINCT ZIP FROM EPD WHERE ZIP < '70840'";
         s = conn.createStatement();
         rs = s.executeQuery(sql);
         String zip;
