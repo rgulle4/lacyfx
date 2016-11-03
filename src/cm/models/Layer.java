@@ -23,11 +23,6 @@ public class Layer {
     private Double width = 12/3.28084;       // 12 ft
     private Double thickness;
 
-    @Override
-    public String toString() {
-        return ("layerType,l,w,t,v = " + getLayerType() + "," + length + "," + width + "," + thickness + "," + getVolume());
-    }
-
     // Layer type determines which material database to use.
     // Maybe we should enumerate these?
     //   - Asphalt Concrete

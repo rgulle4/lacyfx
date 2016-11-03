@@ -1,14 +1,18 @@
 package cm.controllers;
 
 import static cm.models.Model.*;
+
+import cm.App;
 import cm.models.Design;
-import cm.models.Model;
+import cm.models.Layer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 
+import java.io.IOException;
 import java.util.List;
 
 public class DesignController {
@@ -23,7 +27,7 @@ public class DesignController {
 
     public DesignController(Design design) {
         this();
-        this.design = design;
+        setCurrentDesign(design);
     }
 
     public Design getCurrentDesign() {
@@ -46,17 +50,68 @@ public class DesignController {
     }
 
     @FXML
-    private void debugDesign() {
-        printDebugMsg("++++++++++ debugDesign() +++++++++++++++");
-        printDebugMsg("Number of designs: " + DESIGNS.size());
-        printDebugMsg("Current design: ");
-        printDebugMsg(design);
-        printDebugMsg("---------- debugDesign() ---");
-    }
+    private void debugDesign() { }
 
     @FXML
     private void initialize() {
         setDesignOptionsToDefaults();
+
+        // set up first layer tab
+//        setUpFirstLayerTab();
+
+        // set up new tab functionality
+        newTabButton.getStyleClass().add("tab-button");
+        newTabButton.setOnAction(e -> { this.addLayer(); } );
+        newTabTab.setGraphic(newTabButton);
+
+        // set up tooltip debug info
+        setUpDebugCheatSheet();
+    }
+
+    public void setUpFirstLayerTab() {
+        setUpFirstLayerTab(addInitialLayer());
+    }
+
+    public void setUpFirstLayerTab(Layer firstLayer) {
+        layersTabsList = layersTabPane.getTabs();
+        Tab firstTab = layersTabsList.get(0);
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(App.class.getResource("views/layerView.fxml"));
+        Node node = null;
+        try { node = loader.load(); }
+        catch (IOException e) { e.printStackTrace(); }
+        LayerController firstTabController
+              = loader.<LayerController>getController();
+
+        firstTab.setContent(node);
+        firstTabController.setCurrentLayer(firstLayer);
+        printDebugMsg("firstTabController.getCurrentLayer() = ");
+        printDebugMsg(firstTabController.getCurrentLayer());
+    }
+
+    private Layer addInitialLayer() {
+        if (design == null) {
+            printDebugMsg("ERROR: Couldn't add initial layer! (Bc design == null)");
+            return null;
+        }
+        List<Layer> layers = design.getLayers();
+        if (layers == null) {
+            printDebugMsg("ERROR: Couldn't add initial layer! (Bc layers == null)");
+            return null;
+        } if (layers.isEmpty()) {
+            design.addLayer();
+            printDebugMsg("Added initial layer to design.");
+            return layers.get(0);
+        } else if (layers.size() == 1) {
+            printDebugMsg("WARNING: design already has an initial layer");
+            return layers.get(0);
+        } else if (layers.size() > 1) {
+            printDebugMsg("ERROR: Couldn't add initial layer! (Bc layers.size() > 1)");
+            return null;
+        } else {
+            printDebugMsg("ERROR: addInitialLayer() fell all the way through!");
+            return null;
+        }
     }
 
     private void setDesignOptionsToDefaults() {
@@ -79,15 +134,18 @@ public class DesignController {
 
     @FXML private TabPane layersTabPane;
     @FXML private Tab newTabTab;
+    private final Button newTabButton = new Button("+");
 
-    private List<Tab> layerTabsList;
+    private List<Tab> layersTabsList;
 
     private void addLayer() {
-        if (layerTabsList == null) return;
-        int numTabs = layerTabsList.size();
+        if (layersTabsList == null) return;
+        int numTabs = layersTabsList.size();
         int newTabPosition = numTabs - 1;
         int newLayerNumber = newTabPosition + 1;
         String newLayerId = "Layer " + newLayerNumber;
+
+        // TODO: finish this
     }
 
     // Design types
@@ -149,9 +207,17 @@ public class DesignController {
 
     /* -- helper methods for debugging ------------------------- */
 
+    @FXML private Tooltip debugCheatSheet;
     private final boolean DEBUG_MODE  = true;
     private void println() { System.out.println(); }
     private void println(Object o) { System.out.println(o); }
     private void printDebugMsg() { if (DEBUG_MODE) println(); }
     private void printDebugMsg(Object o) { if (DEBUG_MODE) println(o); }
+    private void setUpDebugCheatSheet() {
+        if (DEBUG_MODE == false) { return; }
+        debugCheatSheet.activatedProperty().addListener(
+              (observable, oldValue, newValue) -> {
+                  debugCheatSheet.setText(GSON_PP.toJson(design));
+              });
+    }
 }

@@ -42,6 +42,8 @@ public class Model {
     }
 
     /* -- debugging -------------------------------------------- */
+    public static final Gson GSON_PP
+          = new GsonBuilder().setPrettyPrinting().create();
 
     private static final boolean DEBUG_MODE = true;
     private static void printDebugMsg() { if (DEBUG_MODE) println(); }
@@ -50,7 +52,6 @@ public class Model {
     private static void println() { System.out.println(); }
     private static void println(Object o) { System.out.println(o);}
 
-    private static final Gson GSON_PP = new GsonBuilder().setPrettyPrinting().create();
     public static final void printDebugDesigns() {
         if (!DEBUG_MODE) return;
         printDebugMsg("=======================");

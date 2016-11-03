@@ -25,7 +25,13 @@
                             <children>
                                 <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="200.0" spacing="5.0">
                                     <children>
-                                        <Label maxWidth="1.7976931348623157E308" text="Design type:" />
+                                        <Label maxWidth="1.7976931348623157E308" text="Design type:">
+                                 <tooltip>
+                                    <Tooltip fx:id="debugCheatSheet" text="Empty Tooltip">
+                                       <font>
+                                          <Font name="Monospaced Regular" size="13.0" />
+                                       </font></Tooltip>
+                                 </tooltip></Label>
                                         <ComboBox fx:id="designTypeComboBox" maxWidth="1.7976931348623157E308" onAction="#populatePavementTypeComboBox" />
                                     </children>
                                     <padding>

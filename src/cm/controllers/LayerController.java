@@ -1,13 +1,11 @@
 package cm.controllers;
 
 import cm.models.Layer;
+import static cm.models.Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputControl;
+import javafx.scene.control.*;
 
 public class LayerController {
 
@@ -17,7 +15,7 @@ public class LayerController {
 
     public LayerController(Layer layer) {
         this();
-        this.layer = layer;
+        setCurrentLayer(layer);
     }
 
     public Layer getCurrentLayer() {
@@ -50,6 +48,7 @@ public class LayerController {
     @FXML
     private void initialize() {
         setDefaultOptions();
+        setUpDebugCheatSheet();
     }
 
     private void setDefaultOptions() {
@@ -79,6 +78,7 @@ public class LayerController {
     }
 
     /* -- aliases for dealing with javafx components ------ */
+
     private void select(ComboBox cbb, int index) {
         cbb.getSelectionModel().select(index);
     }
@@ -101,5 +101,21 @@ public class LayerController {
 
     private String toString(ChoiceBox chb) {
         return chb.getValue().toString();
+    }
+
+    /* -- helper methods for debugging ------------------------- */
+
+    @FXML private Tooltip debugCheatSheet;
+    private final boolean DEBUG_MODE  = true;
+    private void println() { System.out.println(); }
+    private void println(Object o) { System.out.println(o); }
+    private void printDebugMsg() { if (DEBUG_MODE) println(); }
+    private void printDebugMsg(Object o) { if (DEBUG_MODE) println(o); }
+    private void setUpDebugCheatSheet() {
+        if (DEBUG_MODE == false) { return; }
+        debugCheatSheet.activatedProperty().addListener(
+              (observable, oldValue, newValue) -> {
+                  debugCheatSheet.setText(GSON_PP.toJson(layer));
+              });
     }
 }

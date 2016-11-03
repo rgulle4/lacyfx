@@ -36,6 +36,12 @@
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </GridPane.margin>
+                           <tooltip>
+                              <Tooltip fx:id="debugCheatSheet" text="Empty Tooltip">
+                                 <font>
+                                    <Font name="Monospaced Regular" size="13.0" />
+                                 </font></Tooltip>
+                           </tooltip>
                         </Label>
                         <ComboBox fx:id="layerTypeComboBox" maxWidth="1.7976931348623157E308" prefWidth="300.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
                            <GridPane.margin>
