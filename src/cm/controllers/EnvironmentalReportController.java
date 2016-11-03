@@ -219,7 +219,7 @@ public class EnvironmentalReportController {
             int layernumber = DESIGNS.get(selectedDeisgnKey).getNumberOfLayers();
             if(layernumber>0){
                 StringBuilder sb = new StringBuilder("Layer ");
-                for (int i = 0; i<layernumber;i++){
+                for (int i = 1; i<= layernumber;i++){
                     String lnum= sb.append(i).toString();
                     layerNum.add(lnum);
                 }
