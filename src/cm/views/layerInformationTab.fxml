@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
@@ -10,441 +15,47 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.controllers.LayerInformationController">
-   <children>
-      <TabPane fx:id="designsTabPane" layoutY="85.0" prefHeight="517.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Design 1">
-            <content>
-              <AnchorPane maxHeight="500.0" maxWidth="600.0" minHeight="0.0" minWidth="0.0" prefHeight="488.0" prefWidth="140.0">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: &quot;ffeedd&quot;;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.controllers.LayerInformationController">
+    <children>
+        <TabPane fx:id="designsTabPane" layoutY="85.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+            <tabs>
+                <Tab text="Design 1">
+                    <content>
+                        <fx:include source="designView.fxml" />
+                    </content>
+                </Tab>
+            <Tab fx:id="newTabTab" disable="true">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TabPane fx:id="layersTabPane" layoutX="-5.0" layoutY="3.0" prefHeight="490.0" prefWidth="162.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="438.0" AnchorPane.topAnchor="0.0">
-                          <tabs>
-                            <Tab text="Layer 1">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" visible="false" />
-                              </content>
-                            </Tab>
-                            <Tab text="Layer 2">
-                              <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                              </content>
-                            </Tab>
-                              <Tab text="Layer 3">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 4">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 5">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 6">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 7">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 8">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                          </tabs>
-                        </TabPane>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="Design 2">
-               <content>
-                  <AnchorPane maxHeight="500.0" maxWidth="600.0" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="600.0">
-                     <children>
-                        <TabPane layoutX="-5.0" layoutY="3.0" prefHeight="488.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <tabs>
-                              <Tab text="Layer 1">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 2">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 3">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 4">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 5">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 6">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 7">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 8">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                           </tabs>
-                        </TabPane>
-                     </children>
-                  </AnchorPane>
-               </content>
+                          <Label layoutX="233.0" layoutY="195.0" text="Layer type:">
+                              <font>
+                                  <Font size="14.0" />
+                              </font>
+                          </Label>
+                          <Label layoutX="233.0" layoutY="249.0" text="Thickness:" />
+                          <TextField fx:id="thicknessTextField" depthTest="DISABLE" layoutX="376.0" layoutY="245.0" />
+                          <ChoiceBox fx:id="thicknessUnitChoiceBox" layoutX="547.0" layoutY="245.0" prefWidth="80.0" />
+                          <Label layoutX="519.0" layoutY="249.0" text="Unit:" />
+                          <ComboBox fx:id="layerTypeComboBox" layoutX="376.0" layoutY="193.0" prefHeight="23.0" prefWidth="219.0" />
+                     </children></AnchorPane>
+              </content>
             </Tab>
-            <Tab text="Design 3">
-               <content>
-                  <AnchorPane maxHeight="500.0" maxWidth="600.0" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="600.0">
-                     <children>
-                        <TabPane layoutX="-5.0" layoutY="3.0" prefHeight="488.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <tabs>
-                              <Tab text="Layer 1">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 2">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 3">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 4">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 5">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 6">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 7">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 8">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                           </tabs>
-                        </TabPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Design 4">
-               <content>
-                  <AnchorPane maxHeight="500.0" maxWidth="600.0" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="600.0">
-                     <children>
-                        <TabPane layoutX="-5.0" layoutY="3.0" prefHeight="488.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <tabs>
-                              <Tab text="Layer 1">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 2">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 3">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 4">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 5">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 6">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 7">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 8">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                           </tabs>
-                        </TabPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Design 5">
-               <content>
-                  <AnchorPane maxHeight="500.0" maxWidth="600.0" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="600.0">
-                     <children>
-                        <TabPane layoutX="-5.0" layoutY="3.0" prefHeight="488.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <tabs>
-                              <Tab text="Layer 1">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 2">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 3">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 4">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 5">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 6">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 7">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 8">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                           </tabs>
-                        </TabPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Design 6">
-               <content>
-                  <AnchorPane maxHeight="500.0" maxWidth="600.0" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="600.0">
-                     <children>
-                        <TabPane layoutX="-5.0" layoutY="3.0" prefHeight="488.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <tabs>
-                              <Tab text="Layer 1">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 2">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 3">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 4">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 5">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 6">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 7">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 8">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                           </tabs>
-                        </TabPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Design 7">
-               <content>
-                  <AnchorPane maxHeight="500.0" maxWidth="600.0" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="600.0">
-                     <children>
-                        <TabPane layoutX="-5.0" layoutY="3.0" prefHeight="488.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <tabs>
-                              <Tab text="Layer 1">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 2">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 3">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 4">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 5">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 6">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 7">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 8">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                           </tabs>
-                        </TabPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Design 8">
-               <content>
-                  <AnchorPane maxHeight="500.0" maxWidth="600.0" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="600.0">
-                     <children>
-                        <TabPane layoutX="-5.0" layoutY="3.0" prefHeight="488.0" prefWidth="600.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <tabs>
-                              <Tab text="Layer 1">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 2">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 3">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 4">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 5">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 6">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 7">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                              <Tab text="Layer 8">
-                                 <content>
-                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                           </tabs>
-                        </TabPane>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-      <Label layoutX="175.0" layoutY="251.0" text="Layer type:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="175.0" layoutY="305.0" text="Thickness:" />
-      <TextField fx:id="thicknessTextField" depthTest="DISABLE" layoutX="318.0" layoutY="301.0" />
-      <ChoiceBox fx:id="thicknessUnitChoiceBox" layoutX="489.0" layoutY="301.0" prefWidth="80.0" />
-      <Label layoutX="461.0" layoutY="305.0" text="Unit:" />
-      <Button layoutX="524.0" layoutY="422.0" mnemonicParsing="false" onAction="#printDebugStuff" text="Debug Material" />
-      <Button layoutX="624.0" layoutY="422.0" mnemonicParsing="false" onAction="#loadMaterialBtnAction" text="Load material" />
-      <ComboBox fx:id="layerTypeComboBox" layoutX="318.0" layoutY="249.0" prefHeight="23.0" prefWidth="219.0" />
-      <Label layoutX="183.0" layoutY="34.0" text="Project Location's Zip Code:" />
-      <TextField layoutX="358.0" layoutY="30.0" prefHeight="23.0" prefWidth="147.0" />
-   </children>
+            </tabs>
+        </TabPane>
+        <Button layoutX="524.0" layoutY="422.0" mnemonicParsing="false" onAction="#printDebugStuff" text="Debug Material" />
+        <Button layoutX="624.0" layoutY="422.0" mnemonicParsing="false" onAction="#loadMaterialBtnAction" text="Load material" />
+        <Label layoutX="183.0" layoutY="34.0" text="Project Location's Zip Code:" />
+        <TextField fx:id="projectLocationTextField" layoutX="358.0" layoutY="30.0" prefHeight="23.0" prefWidth="147.0" />
+      <Button fx:id="debugButton" layoutX="561.0" layoutY="37.0" mnemonicParsing="false" onAction="#debugButtonListener" text="debug" AnchorPane.leftAnchor="561.0" AnchorPane.rightAnchor="139.0">
+          <tooltip>
+              <Tooltip fx:id="debugCheatSheet" text="Empty Tooltip">
+                  <font>
+                      <Font name="Monospaced Regular" size="13.0" />
+                  </font></Tooltip>
+          </tooltip>
+
+      </Button>
+
+    </children>
 </AnchorPane>

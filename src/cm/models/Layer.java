@@ -1,28 +1,29 @@
 package cm.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static cm.models.Model.*;
+
 /**
  * A layer_temp has a thickness (inches) and a material.
  */
 public class Layer {
 
+    private int hasCode = this.hashCode();
+
     /* -- Fields -------------------------------------------------------- */
 
     // A layer_temp has one material
-    private Material material;
+    private List<Material> materials = new ArrayList<>();
 
     // A layerId is probably "layer1", "layer2", etc.
     private String layerId;
 
     // Dimensions... the user specifies thickness and thicknessUnit.
-    private double length = 1609.34;        // 1 mile
-    private double width = 12/3.28084;       // 12 ft
-    private double thickness;
-
-    @Override
-    public String toString() {
-        return ("layerType,l,w,t,v = " + getLayerType() + "," + length + "," + width + "," + thickness + "," + getVolume());
-    }
+    private Double length = 1609.34;        // 1 mile
+    private Double width = 12/3.28084;       // 12 ft
+    private Double thickness;
 
     // Layer type determines which material database to use.
     // Maybe we should enumerate these?
@@ -33,81 +34,119 @@ public class Layer {
     // Cement Concrete.
     private String layerType;
 
-    public Layer setMaterial(Material material) {
-        this.material = material;
+    public Layer setNumberofMaterials(int numberofMaterials){
+        int numberofMaterialsToAdd = numberofMaterials - getNumberofMaterials();
+        if(getNumberofMaterials() == 0 || numberofMaterialsToAdd > 0){
+            for (int i = 0; i < numberofMaterialsToAdd; i++){
+                this.addMaterial();
+            }
+        }else if (numberofMaterialsToAdd < 0){
+            for (int i = numberofMaterialsToAdd; i < 0; i++){
+                this.removeMaterial();
+            }
+        }else{
+            System.out.println("sadf");
+        }
         return this;
     }
 
-    public Material getMaterial() {
-        return material;
+    public List<Material> getMaterials(){
+        return materials;
+    }
+
+    public Layer addMaterial(Material material) {
+        this.materials.add(material);
+        return this;
+    }
+    public Layer addMaterial(){
+        materials.add(new Material());
+        return this;
+    }
+
+    public Material getMaterial(int materialNumber) {
+        return materials.get(materialNumber);
+    }
+
+    public int getNumberofMaterials(){
+        return materials.size();
+    }
+
+    public Layer removeMaterial(){
+        if (getNumberofMaterials() > 0)
+            materials.remove(materials.size() - 1);
+        return this;
+    }
+    public Layer setMaterial(int materialIndex, Material material){
+        materials.set(materialIndex, material);
+        return this;
     }
 
     /* == "Old" Stuff =================================================== */
 
     // Calculated values
-    private double EnvPerfAnalysis_TotalScore_Layer;
-    private double EnvPerfAnalysis_EPDScore_Layer;
-    private double EnvPerfAnalysis_TransportationScore_Layer;
+    private Double EnvPerfAnalysis_TotalScore_Layer;
+    private Double EnvPerfAnalysis_EPDScore_Layer;
+    private Double EnvPerfAnalysis_TransportationScore_Layer;
 
     // Subscores of EPD score for the different env impacts (before
     // NORMALIZATIONS). Each of these is calculated using the same basic
     // formula:
     //   GWP_EDP_Ctb = gwp (from material with epd.value per epd.unit)
     //                 * "Conversion Factor (volume with matching unit)"
-        private double GWP_EDP_Ctb;
-        private double ODP_EDP_Ctb;
-        private double AP_EDP_Ctb;
-        private double EP_EDP_Ctb;
-        private double POCP_EDP_Ctb;
-        private double TW_EDP_Ctb;      // Total Water Consumption
-        private double TPEC_EDP_Ctb;    // Total Primary Energy Consumption
+        private Double GWP_EDP_Ctb;
+        private Double ODP_EDP_Ctb;
+        private Double AP_EDP_Ctb;
+        private Double EP_EDP_Ctb;
+        private Double POCP_EDP_Ctb;
+        private Double TW_EDP_Ctb;      // Total Water Consumption
+        private Double TPEC_EDP_Ctb;    // Total Primary Energy Consumption
 
         // EPD raw value for the different env impacts (after NORMALIZATIONS)
-        private double GWP_EDP_NORM;
-        private double ODP_EDP_NORM;
-        private double AP_EDP_NORM;
-        private double EP_EDP_NORM;
-        private double POCP_EDP_NORM;
-        private double TW_EDP_NORM;      // Total Water Consumption
-        private double TPEC_EDP_NORM;    // Total Primary Energy Consumption
+        private Double GWP_EDP_NORM;
+        private Double ODP_EDP_NORM;
+        private Double AP_EDP_NORM;
+        private Double EP_EDP_NORM;
+        private Double POCP_EDP_NORM;
+        private Double TW_EDP_NORM;      // Total Water Consumption
+        private Double TPEC_EDP_NORM;    // Total Primary Energy Consumption
 
         // EPD's SubScore for the different env impacts (after WEIGHTS)
-        private double GWP_EDP_Subsore;
-        private double ODP_EDP_Subsore;
-        private double AP_EDP_Subsore;
-        private double EP_EDP_Subsore;
-        private double POCP_EDP_Subsore;
-        private double TW_EDP_Subsore;      // Total Water Consumption
-        private double TPEC_EDP_Subsore;    // Total Primary Energy Consumption
+        private Double GWP_EDP_Subsore;
+        private Double ODP_EDP_Subsore;
+        private Double AP_EDP_Subsore;
+        private Double EP_EDP_Subsore;
+        private Double POCP_EDP_Subsore;
+        private Double TW_EDP_Subsore;      // Total Water Consumption
+        private Double TPEC_EDP_Subsore;    // Total Primary Energy Consumption
 
     // Subscores of Transportation score for the different env
     // impacts (before NORMALIZATIONS). Each of these is calculated using:
     //   2 * distance * substance
-        private double GWP_Transportation_Ctb;
-        private double ODP_Transportation_Ctb;
-        private double AP_Transportation_Ctb;
-        private double EP_Transportation_Ctb;
-        private double POCP_Transportation_Ctb;
-        private double TW_Transportation_Ctb;      // Total Water Consumption
-        private double TPEC_Transportation_Ctb;    // Total Primary Energy Consumption
+        private Double GWP_Transportation_Ctb;
+        private Double ODP_Transportation_Ctb;
+        private Double AP_Transportation_Ctb;
+        private Double EP_Transportation_Ctb;
+        private Double POCP_Transportation_Ctb;
+        private Double TW_Transportation_Ctb;      // Total Water Consumption
+        private Double TPEC_Transportation_Ctb;    // Total Primary Energy Consumption
 
         // Transportation part's raw value for the different env impacts (after NORMALIZATIONS)
-        private double GWP_Transportation_NORM;
-        private double ODP_Transportation_NORM;
-        private double AP_Transportation_NORM;
-        private double EP_Transportation_NORM;
-        private double POCP_Transportation_NORM;
-        private double TW_Transportation_NORM;      // Total Water Consumption
-        private double TPEC_Transportation_NORM;    // Total Primary Energy Consumption
+        private Double GWP_Transportation_NORM;
+        private Double ODP_Transportation_NORM;
+        private Double AP_Transportation_NORM;
+        private Double EP_Transportation_NORM;
+        private Double POCP_Transportation_NORM;
+        private Double TW_Transportation_NORM;      // Total Water Consumption
+        private Double TPEC_Transportation_NORM;    // Total Primary Energy Consumption
 
         // Transportation part's SubScore for the different env impacts (after WEIGHTS)
-        private double GWP_Transportation_Subsore;
-        private double ODP_Transportation_Subsore;
-        private double AP_Transportation_Subsore;
-        private double EP_Transportation_Subsore;
-        private double POCP_Transportation_Subsore;
-        private double TW_Transportation_Subsore;      // Total Water Consumption
-        private double TPEC_Transportation_Subsore;    // Total Primary Energy Consumption
+        private Double GWP_Transportation_Subsore;
+        private Double ODP_Transportation_Subsore;
+        private Double AP_Transportation_Subsore;
+        private Double EP_Transportation_Subsore;
+        private Double POCP_Transportation_Subsore;
+        private Double TW_Transportation_Subsore;      // Total Water Consumption
+        private Double TPEC_Transportation_Subsore;    // Total Primary Energy Consumption
 
     public double getLength() {
         return length;

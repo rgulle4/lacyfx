@@ -14,11 +14,6 @@ import java.util.regex.Pattern;
 
 import static cm.models.Model.*;
 
-/*
- * STOPPING POINT: see tabs list in 00notes/TODO-urls.txt
- */
-
-
 /**
  * Provides methods for dealing with distances (meters) between zip codes.
  * Usage examples:
@@ -67,6 +62,14 @@ public class ZipCodeUtil {
     private static final String ZIPS_SEPARATOR = "|"; // multiple zips separated by "|"
 
     private static final Double ZERO = new Double(0);
+    private static final Gson gson = new Gson();
+
+    // print debug messages?
+    private static final boolean DEBUG_MODE = true;
+
+    private void printDebugMsg(Object o) {
+        if (DEBUG_MODE) System.out.println(o);
+    }
 
     /* -- constructor(s) ---------------------------------------------- */
 
@@ -75,10 +78,10 @@ public class ZipCodeUtil {
     /* -- methods) ---------------------------------------------------- */
 
     /**
-     * Distance (meters) from an origin zip code to project DESTINATION_ZIP_CODE;
-     * (0 if zips are bad).
-     * @param originZip The zip code of the origin.
-     * @return The distance in meters (0 if zips are bad).
+     * Works like {@link ZipCodeUtil#getDistance(String, String)}, but
+     * destinationZip defaults to Model.DESTINATION_ZIP_CODE_MUTABLE.
+     * @param originZip
+     * @return
      */
     public Double getDistance(String originZip) {
         if (Model.DESTINATION_ZIP_CODE_MUTABLE == null)
@@ -99,7 +102,6 @@ public class ZipCodeUtil {
     public Double getDistance(String originZip, String destinationZip) {
         if (!isValidZipCode(originZip) || !isValidZipCode(destinationZip))
             return ZERO;
-        Gson gson = new Gson();
         Response response1 = getResponse(originZip, destinationZip);
         long distance = response1.rows[0].elements[0].distance.value;
         return new Double(distance);
@@ -154,26 +156,47 @@ public class ZipCodeUtil {
             return null;
         Response response = getResponse(originZips, destinationZip);
 
-
         int sizeOfResponse = response.origin_addresses.length;
+        printDebugMsg("Size of originZips: " + originZips.size());
+        printDebugMsg("Size of response: " + sizeOfResponse);
         Map<String, Double> result = new LinkedHashMap<>();
         for (int i = 0; i < sizeOfResponse; i++) {
             Double distance = ZERO;
-            if (response.rows[i].elements[0].status.equals("OK")) {
+            String currentZip = originZips.get(i);
+            boolean currentZipIsValid = isValidZipCode(currentZip);
+            String responseStatus = response.rows[i].elements[0].status;
+            boolean responseIsOk = responseStatus.equals("OK");
+
+            if (responseIsOk && currentZipIsValid) {
                 distance = new Double(
                       response.rows[i].elements[0].distance.value);
+            } else {
+                String badZipCode = currentZip;
+                if (!currentZipIsValid)
+                    printDebugMsg("Bad zip: " + badZipCode + " (Invalid)");
+                else
+                    printDebugMsg("Bad zip: " + badZipCode +
+                          " (returns status \"" + responseStatus + "\")");
             }
-            if (distance <= radius) {
-                String address = response.origin_addresses[i];
-                String extractedZip = extractZipFromAddress(address);
+
+            if (currentZipIsValid && responseIsOk && distance <= radius) {
+                String extractedZip = originZips.get(i);
                 result.put(extractedZip, distance);
             }
         }
+        printDebugMsg("Size of zips within radius " +
+              radius + ": " + result.size());
+        for (String zip : result.keySet())
+            printDebugMsg(zip + " -> " + result.get(zip));
         return result;
     }
+
+    /**
+     * Works like {@link ZipCodeUtil#zipsWithinRadius(Double, List, String)},
+     * but destinationZip defaults to Model.DESTINATION_ZIP_CODE_MUTABLE.
+     */
     public Map<String, Double> zipsWithinRadius(Double radius,
-                                                List<String> originZips)
-    {
+                                                List<String> originZips) {
         return zipsWithinRadius(radius, originZips, Model.DESTINATION_ZIP_CODE_MUTABLE);
     }
 
@@ -187,7 +210,8 @@ public class ZipCodeUtil {
             return false;
         final String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
         final Pattern pattern = Pattern.compile(regex);
-        return pattern.matcher(zipCode).matches();
+        final Matcher matcher = pattern.matcher(zipCode);
+        return matcher.matches();
     }
 
     /**
@@ -264,7 +288,6 @@ public class ZipCodeUtil {
             rd.close();
             conn.disconnect();
             String responseString = sbResponse.toString();
-            Gson gson = new Gson();
             return gson.fromJson(responseString, Response.class);
         } catch (IOException e) {
             e.printStackTrace();
@@ -287,16 +310,16 @@ public class ZipCodeUtil {
         }
         class Element {
             Distance distance;
-            Duration duration;
+//            Duration duration;
             String status; // "Ok"
         }
         class Distance {
-            String text; // "83.2 mi"
+//            String text; // "83.2 mi"
             int value;   // 133917 (meters)
         }
-        class Duration {
-            String text; // "1 hour 27 mins"
-            int value;   // 5200 (seconds)
-        }
+//        class Duration {
+//            String text; // "1 hour 27 mins"
+//            int value;   // 5200 (seconds)
+//        }
     }
 }
