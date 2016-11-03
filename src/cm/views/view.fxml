@@ -24,9 +24,9 @@
                         <fx:include source="weightsTab.fxml" />
                     </content>
                 </Tab>
-                <Tab fx:id="transpEconTab" text="Transp/Econ">
+                <Tab fx:id="transpEnviTab" text="Transp/EnvAnalysis">
                     <content>
-                        <fx:include source="transpEconTab.fxml" />
+                        <fx:include source="transpEnvTab.fxml" />
                     </content>
                 </Tab>
                 <Tab fx:id="envImpactScoreTab" text="Env Impact Score">
