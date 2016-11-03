@@ -48,7 +48,46 @@ public class LayerController {
     @FXML
     private void initialize() {
         setDefaultOptions();
+        setUpAutoSaves();
         setUpDebugCheatSheet();
+        saveLayerOptions();
+    }
+
+    private void setUpAutoSaves() {
+
+        // listens for changes
+        layerTypeComboBox.setOnAction((event) -> {
+            saveLayerType();
+        });
+
+        /* for "more graceful" handling" */
+//        layerTypeComboBox.onActionProperty().addListener(
+//              (observable1, oldValue1, newValue1) -> {
+//                  saveLayerType();
+//              });
+
+        // listens for any changes to the text
+        thicknessTextField.textProperty().addListener(
+              (observable, oldValue, newValue) -> {
+                  saveThickness();
+              });
+
+        // listens for when user hits ENTER within the text field
+        thicknessTextField.setOnAction(
+              (event) -> {
+                  saveThickness();
+              });
+
+        // listens for changes
+        thicknessUnitChoiceBox.setOnAction((event -> {
+            saveThickness();
+        }));
+
+        /* for "more graceful" handling" */
+//        thicknessUnitChoiceBox.onActionProperty().addListener(
+//              (observable, oldValue, newValue) -> {
+//                  saveThickness();
+//              });
     }
 
     private void setDefaultOptions() {
@@ -60,16 +99,20 @@ public class LayerController {
         thicknessTextField.setText("10.0");
     }
 
-    private void saveLayerOptions() {
+    @FXML
+    public void saveLayerOptions() {
+        if (layer == null) { return ; }
         saveLayerType();
         saveThickness();
     }
 
     private void saveLayerType() {
+        if (layer == null) { return ; }
         layer.setLayerType(toString(layerTypeComboBox));
     }
 
     private void saveThickness() {
+        if (layer == null) { return ; }
         Double thicknessValue = toDouble(thicknessTextField);
         String thicknessUnit = toString(thicknessUnitChoiceBox);
         if (thicknessUnit == "inch")

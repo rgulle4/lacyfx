@@ -72,5 +72,6 @@
             </AnchorPane>
         </content>
       </ScrollPane>
+      <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveLayerOptions" text="s" />
    </children>
 </AnchorPane>

@@ -53,7 +53,7 @@ public class DesignController {
     private void debugDesign() { }
 
     @FXML
-    private void initialize() {
+    public void initialize() {
         setDesignOptionsToDefaults();
 
         // set up first layer tab
@@ -66,6 +66,7 @@ public class DesignController {
 
         // set up tooltip debug info
         setUpDebugCheatSheet();
+        saveDesignOptions();
     }
 
     public void setUpFirstLayerTab() {
@@ -122,7 +123,8 @@ public class DesignController {
     }
 
     @FXML
-    private void saveDesignOptions() {
+    public void saveDesignOptions() {
+        if (design == null) { return ; }
         design.setDesignType(toString(designTypeComboBox));
         design.setPavementType(toString(pavementTypeComboBox));
     }
@@ -159,8 +161,6 @@ public class DesignController {
         newLayerTab.setContent(node);
 
         layersTabPane.getTabs().add(newTabPosition, newLayerTab);
-
-        // TODO: finish this
     }
 
     // Design types
