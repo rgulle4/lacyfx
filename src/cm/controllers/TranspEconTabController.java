@@ -1,7 +1,6 @@
 package cm.controllers;
 
 import cm.App;
-import cm.models.EnvAnalysisCalc;
 import cm.models.EnvPerformanceCalc;
 import cm.models.Material;
 import javafx.collections.FXCollections;
@@ -132,24 +131,6 @@ public class TranspEconTabController {
         //Calculate
         EnvPerformanceCalc envPerformanceCalc = new EnvPerformanceCalc();
         envPerformanceCalc.EnvAnalysisCalc();
-
-
-        //step by step test
-//        System.out.println("Sub_GWP: "+EnvAnalysisCalc.getSub_GWP()+"\n"
-//                            +"Sub_ODP: "+EnvAnalysisCalc.getSub_ODP()+"\n"
-//                            +"Sub_AP: "+EnvAnalysisCalc.getSub_AP()+"\n"
-//                            +"Sub_EP: "+EnvAnalysisCalc.getSub_EP()+"\n"
-//                            +"Sub_POCP: "+EnvAnalysisCalc.getSub_POCP()+"\n"
-//                            +"Sub_TW: "+EnvAnalysisCalc.getSub_TW()+"\n"
-//                            +"Sub_: "+EnvAnalysisCalc.getSub_TPEC());
-        //EPD_score step by step
-//        System.out.println("EPD_GWP: "+EnvAnalysisCalc.getGWP_EDP_Ctb()+"\n"
-//                            +"EPD_OPD: "+EnvAnalysisCalc.getODP_EDP_Ctb()+"\n"+"EPD_AP: "+EnvAnalysisCalc.getAP_EDP_Ctb()+"\n"+"EPD_EP: "+EnvAnalysisCalc.getPOCP_EDP_Ctb()
-//                            +"\n"+"EPD_TW: "+EnvAnalysisCalc.getTotalWater_EDP_Ctb()+"\n"+"EPD_TPEC: "+EnvAnalysisCalc.getTotalPrimaryEnergyConsumption_EDP_Ctb());
-
-//                System.out.println("TSP_GWP: "+EnvAnalysisCalc.getGWP_Transportation_Ctb()+"\n"
-//                            +"TSP_OPD: "+EnvAnalysisCalc.getODP_Transportation_Ctb()+"\n"+"TSP_AP: "+EnvAnalysisCalc.getAP_Transportation_Ctb()+"\n"+"TSP_EP: "+EnvAnalysisCalc.getPOCP_Transportation_Ctb()
-//                            +"\n"+"TSP_TW: "+EnvAnalysisCalc.getTotalWater_Transportation_Ctb()+"\n");
    }
 
     public void showReport() throws IOException{

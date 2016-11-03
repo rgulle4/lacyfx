@@ -21,7 +21,6 @@ import static cm.models.Model.*;
  * Created by Administrator on 2016/10/6.
  */
 public class EnvironmentalReportController {
-//    final static String design1 = EnvAnalysisCalc.getProductId;
 
     @FXML
     private CategoryAxis xAxis = new CategoryAxis();
