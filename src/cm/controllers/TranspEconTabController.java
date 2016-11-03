@@ -2,7 +2,6 @@ package cm.controllers;
 
 import cm.App;
 import cm.models.EnvPerformanceCalc;
-import cm.models.Material;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,12 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import java.util.Set;
 
 import static cm.models.Model.*;
-import static cm.App.transportationParametersMap;
-
-import cm.models.TransportationParameters;
 
 /**
  * Created by royg59 on 9/21/16.

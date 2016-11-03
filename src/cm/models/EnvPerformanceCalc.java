@@ -126,7 +126,7 @@ public class EnvPerformanceCalc {
 
     Design design_temp;
     Layer layer_temp;
-    Material material_temp;
+    Mix mix_temp;
     public void EnvAnalysisCalc(){
 
         Set<String> design_keys = DESIGNS.keySet();
@@ -139,20 +139,20 @@ public class EnvPerformanceCalc {
                 // get material for this layer
                 double unitConvFactor = 0.0;
                 for (int index_k = 0; index_k < layer_temp.getNumberofMaterials(); index_k++) {
-                    material_temp = layer_temp.getMaterial(index_k);
+                    mix_temp = layer_temp.getMaterial(index_k);
 
                     // Environmental part
                     // set/ get UnitConversion_Factor
-                    material_temp.setUnitConversion_Factor();
-                    unitConvFactor = material_temp.getUnitConversion_Factor();
+                    mix_temp.setUnitConversion_Factor();
+                    unitConvFactor = mix_temp.getUnitConversion_Factor();
                     //get EPD value for this layer
-                    GWP_EDP = material_temp.getGWP();
-                    ODP_EDP = material_temp.getODP();
-                    AP_EDP = material_temp.getAP();
-                    EP_EDP = material_temp.getEP();
-                    POCP_EDP = material_temp.getPOCP();
-                    TWC_EDP = material_temp.getTotalWaterConsumption();
-                    TPEC_EDP = material_temp.getTotalPrimaryEnergyConsumption();
+                    GWP_EDP = mix_temp.getGWP();
+                    ODP_EDP = mix_temp.getODP();
+                    AP_EDP = mix_temp.getAP();
+                    EP_EDP = mix_temp.getEP();
+                    POCP_EDP = mix_temp.getPOCP();
+                    TWC_EDP = mix_temp.getTotalWaterConsumption();
+                    TPEC_EDP = mix_temp.getTotalPrimaryEnergyConsumption();
 
                     /* get EPD raw values by multiplying Conversion Factor
                     / Conversion Factor = unitConvFactor* layer's Volume
@@ -169,13 +169,13 @@ public class EnvPerformanceCalc {
 
                     //save distributed contribution in details for each layer_temp
                     //EPD part
-                    material_temp.setGWP_EDP_Ctb(GWP_EDP_Ctb);
-                    material_temp.setODP_EDP_Ctb(ODP_EDP_Ctb);
-                    material_temp.setAP_EDP_Ctb(AP_EDP_Ctb);
-                    material_temp.setEP_EDP_Ctb(EP_EDP_Ctb);
-                    material_temp.setPOCP_EDP_Ctb(POCP_EDP_Ctb);
-                    material_temp.setTW_EDP_Ctb(TWC_EDP);       //Total Water Consumption
-                    material_temp.setTPEC_EDP_Ctb(TPEC_EDP);    //Total Primary Energy Consumption
+                    mix_temp.setGWP_EDP_Ctb(GWP_EDP_Ctb);
+                    mix_temp.setODP_EDP_Ctb(ODP_EDP_Ctb);
+                    mix_temp.setAP_EDP_Ctb(AP_EDP_Ctb);
+                    mix_temp.setEP_EDP_Ctb(EP_EDP_Ctb);
+                    mix_temp.setPOCP_EDP_Ctb(POCP_EDP_Ctb);
+                    mix_temp.setTW_EDP_Ctb(TWC_EDP);       //Total Water Consumption
+                    mix_temp.setTPEC_EDP_Ctb(TPEC_EDP);    //Total Primary Energy Consumption
 
 
                         /* get and save normalized EPD values
@@ -190,13 +190,13 @@ public class EnvPerformanceCalc {
                     PrimaryTotalEnergyConsumption_EDP_NORM
                             = PrimaryTotalEnergyConsumption_EDP_Ctb / Norm_TPEC;
 
-                    material_temp.setGWP_EDP_NORM(GWP_EPD_NORM);
-                    material_temp.setODP_EDP_NORM(ODP_EPD_NORM);
-                    material_temp.setAP_EDP_NORM(AP_EPD_NORM);
-                    material_temp.setEP_EDP_NORM(EP_EPD_NORM);
-                    material_temp.setPOCP_EDP_NORM(POCP_EPD_NORM);
-                    material_temp.setTW_EDP_NORM(TotalWater_EPD_NORM);
-                    material_temp.setTPEC_EDP_NORM(PrimaryTotalEnergyConsumption_EDP_NORM);
+                    mix_temp.setGWP_EDP_NORM(GWP_EPD_NORM);
+                    mix_temp.setODP_EDP_NORM(ODP_EPD_NORM);
+                    mix_temp.setAP_EDP_NORM(AP_EPD_NORM);
+                    mix_temp.setEP_EDP_NORM(EP_EPD_NORM);
+                    mix_temp.setPOCP_EDP_NORM(POCP_EPD_NORM);
+                    mix_temp.setTW_EDP_NORM(TotalWater_EPD_NORM);
+                    mix_temp.setTPEC_EDP_NORM(PrimaryTotalEnergyConsumption_EDP_NORM);
 
                         /* get and save EPD_SubScore values
                         formula: EPDscore =EPD_NORM * WEIGHT  */
@@ -209,13 +209,13 @@ public class EnvPerformanceCalc {
                     PrimaryTotalEnergyConsumption_EDP_SubScore
                             = PrimaryTotalEnergyConsumption_EDP_NORM * W_TPEC;
 
-                    material_temp.setGWP_EDP_Subsore(GWP_EPD_SubScore);
-                    material_temp.setODP_EDP_Subsore(ODP_EPD_SubScore);
-                    material_temp.setAP_EDP_Subsore(AP_EPD_SubScore);
-                    material_temp.setEP_EDP_Subsore(EP_EPD_SubScore);
-                    material_temp.setPOCP_EDP_Subsore(POCP_EPD_SubScore);
-                    material_temp.setTW_EDP_Subsore(TotalWater_EPD_SubScore);
-                    material_temp.setTPEC_EDP_Subsore(PrimaryTotalEnergyConsumption_EDP_SubScore);
+                    mix_temp.setGWP_EDP_Subsore(GWP_EPD_SubScore);
+                    mix_temp.setODP_EDP_Subsore(ODP_EPD_SubScore);
+                    mix_temp.setAP_EDP_Subsore(AP_EPD_SubScore);
+                    mix_temp.setEP_EDP_Subsore(EP_EPD_SubScore);
+                    mix_temp.setPOCP_EDP_Subsore(POCP_EPD_SubScore);
+                    mix_temp.setTW_EDP_Subsore(TotalWater_EPD_SubScore);
+                    mix_temp.setTPEC_EDP_Subsore(PrimaryTotalEnergyConsumption_EDP_SubScore);
 
                     //Transportation part
                     //get Substance value
@@ -241,13 +241,13 @@ public class EnvPerformanceCalc {
                     TotalWater_TSP_Ctb = TWC_TSP * distance * 2;
                     PrimaryTotalEnergyConsumption_TSP_Ctb = TPEC_TSP * distance * 2;
 
-                    material_temp.setGWP_Transportation_Ctb(GWP_TSP_Ctb);
-                    material_temp.setODP_Transportation_Ctb(ODP_TSP_Ctb);
-                    material_temp.setAP_Transportation_Ctb(AP_TSP_Ctb);
-                    material_temp.setEP_Transportation_Ctb(EP_TSP_Ctb);
-                    material_temp.setPOCP_Transportation_Ctb(POCP_TSP_Ctb);
-                    material_temp.setTW_Transportation_Ctb(TotalWater_TSP_Ctb);
-                    material_temp.setTPEC_Transportation_Ctb(PrimaryTotalEnergyConsumption_TSP_Ctb);
+                    mix_temp.setGWP_Transportation_Ctb(GWP_TSP_Ctb);
+                    mix_temp.setODP_Transportation_Ctb(ODP_TSP_Ctb);
+                    mix_temp.setAP_Transportation_Ctb(AP_TSP_Ctb);
+                    mix_temp.setEP_Transportation_Ctb(EP_TSP_Ctb);
+                    mix_temp.setPOCP_Transportation_Ctb(POCP_TSP_Ctb);
+                    mix_temp.setTW_Transportation_Ctb(TotalWater_TSP_Ctb);
+                    mix_temp.setTPEC_Transportation_Ctb(PrimaryTotalEnergyConsumption_TSP_Ctb);
 
                     // get and save TSP_NORM
                     GWP_TSP_NORM = GWP_TSP_Ctb / Norm_GWP;
@@ -259,13 +259,13 @@ public class EnvPerformanceCalc {
                     PrimaryTotalEnergyConsumption_TSP_NORM
                             = PrimaryTotalEnergyConsumption_TSP_Ctb / Norm_TPEC;
 
-                    material_temp.setGWP_Transportation_NORM(GWP_TSP_NORM);
-                    material_temp.setODP_Transportation_NORM(ODP_TSP_NORM);
-                    material_temp.setAP_Transportation_NORM(AP_TSP_NORM);
-                    material_temp.setEP_Transportation_NORM(EP_TSP_NORM);
-                    material_temp.setPOCP_Transportation_NORM(POCP_TSP_NORM);
-                    material_temp.setTW_Transportation_NORM(TotalWater_TSP_NORM);
-                    material_temp.setTPEC_Transportation_NORM(PrimaryTotalEnergyConsumption_TSP_NORM);
+                    mix_temp.setGWP_Transportation_NORM(GWP_TSP_NORM);
+                    mix_temp.setODP_Transportation_NORM(ODP_TSP_NORM);
+                    mix_temp.setAP_Transportation_NORM(AP_TSP_NORM);
+                    mix_temp.setEP_Transportation_NORM(EP_TSP_NORM);
+                    mix_temp.setPOCP_Transportation_NORM(POCP_TSP_NORM);
+                    mix_temp.setTW_Transportation_NORM(TotalWater_TSP_NORM);
+                    mix_temp.setTPEC_Transportation_NORM(PrimaryTotalEnergyConsumption_TSP_NORM);
 
                     // get and save TSP_SubScore
                     GWP_TSP_SubScore = GWP_TSP_NORM * W_GWP;
@@ -277,13 +277,13 @@ public class EnvPerformanceCalc {
                     PrimaryTotalEnergyConsumption_TSP_SubScore
                             = PrimaryTotalEnergyConsumption_TSP_NORM * W_TPEC;
 
-                    material_temp.setGWP_Transportation_Subsore(GWP_TSP_SubScore);
-                    material_temp.setODP_Transportation_Subsore(ODP_TSP_SubScore);
-                    material_temp.setAP_Transportation_Subsore(AP_TSP_SubScore);
-                    material_temp.setEP_Transportation_Subsore(EP_TSP_SubScore);
-                    material_temp.setPOCP_Transportation_Subsore(POCP_TSP_SubScore);
-                    material_temp.setTW_Transportation_Subsore(TotalWater_TSP_SubScore);
-                    material_temp.setTPEC_Transportation_Subsore(PrimaryTotalEnergyConsumption_TSP_SubScore);
+                    mix_temp.setGWP_Transportation_Subsore(GWP_TSP_SubScore);
+                    mix_temp.setODP_Transportation_Subsore(ODP_TSP_SubScore);
+                    mix_temp.setAP_Transportation_Subsore(AP_TSP_SubScore);
+                    mix_temp.setEP_Transportation_Subsore(EP_TSP_SubScore);
+                    mix_temp.setPOCP_Transportation_Subsore(POCP_TSP_SubScore);
+                    mix_temp.setTW_Transportation_Subsore(TotalWater_TSP_SubScore);
+                    mix_temp.setTPEC_Transportation_Subsore(PrimaryTotalEnergyConsumption_TSP_SubScore);
 
 
                     // EPD_Score and TSP_Score for this layer
@@ -306,9 +306,9 @@ public class EnvPerformanceCalc {
                     envPerfScore_layer = envPerfScore_EDP_layer + enPerfScore_Transportation_layer;
 
                     //save layer_temp's score
-                    material_temp.setEnvPerfAnalysis_TotalScore_Material(envPerfScore_layer);
-                    material_temp.setEnvPerfAnalysis_EPDScore_Material(envPerfScore_EDP_layer);
-                    material_temp.setEnvPerfAnalysis_TransportationScore_Material(enPerfScore_Transportation_layer);
+                    mix_temp.setEnvPerfAnalysis_TotalScore_Material(envPerfScore_layer);
+                    mix_temp.setEnvPerfAnalysis_EPDScore_Material(envPerfScore_EDP_layer);
+                    mix_temp.setEnvPerfAnalysis_TransportationScore_Material(enPerfScore_Transportation_layer);
                 }
                 //accumulate Design_temp's score
                 //Calculate design_temp's score

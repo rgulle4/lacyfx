@@ -48,8 +48,8 @@ public class EPDDatabase {
 
     * */
     private  String sql;
-    public List<Material> getResultsFilteredBy(Map<String, Double> filteredZipcodeMap, String cs, String companyName) throws SQLException, ParseException {
-        List<Material> result = new ArrayList<Material>();
+    public List<Mix> getResultsFilteredBy(Map<String, Double> filteredZipcodeMap, String cs, String companyName) throws SQLException, ParseException {
+        List<Mix> result = new ArrayList<Mix>();
 
         StringBuilder sb = new StringBuilder(DEFAULT_SQL_QUERY);
         PreparedStatement ptmt = null;
@@ -94,9 +94,9 @@ public class EPDDatabase {
         }
         rs = ptmt.executeQuery();
 
-        Material g;
+        Mix g;
         while(rs.next()){
-            g = new Material();
+            g = new Mix();
 
             g.setCS(rs.getString("CS"));
             g.setCompany_Name(rs.getString("NAME"));
@@ -158,7 +158,7 @@ public class EPDDatabase {
      * @return A ResultSet of the entire EPD table.
      * @throws SQLException
      */
-    public List<Material> getResults(Map filteredZipcodeMap, String cs, String companyName) throws SQLException, ParseException {
+    public List<Mix> getResults(Map filteredZipcodeMap, String cs, String companyName) throws SQLException, ParseException {
         return getResultsFilteredBy(filteredZipcodeMap,cs,companyName);
     }
 
@@ -188,7 +188,7 @@ public class EPDDatabase {
         sb0.append(")");
         System.out.println(sb0.toString());
 
-        List<Material> result = new ArrayList<Material>();
+        List<Mix> result = new ArrayList<Mix>();
 
         String DEFAULT_DB_FILE_NAME = "rt.db";
         String DEFAULT_SQL_QUERY = "SELECT * FROM EPD WHERE 1";
@@ -204,9 +204,9 @@ public class EPDDatabase {
 
         ptmt = conn.prepareStatement(sql);
         rs = ptmt.executeQuery();
-        Material g;
+        Mix g;
         while(rs.next()) {
-            g = new Material();
+            g = new Mix();
 
             g.setCS(rs.getString("CS"));
             g.setCompany_Name(rs.getString("NAME"));

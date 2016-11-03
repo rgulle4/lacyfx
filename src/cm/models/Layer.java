@@ -3,8 +3,6 @@ package cm.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import static cm.models.Model.*;
-
 /**
  * A layer_temp has a thickness (inches) and a material.
  */
@@ -15,7 +13,7 @@ public class Layer {
     /* -- Fields -------------------------------------------------------- */
 
     // A layer_temp has one material
-    private List<Material> materials = new ArrayList<>();
+    private List<Mix> mixes = new ArrayList<>();
 
     // A layerId is probably "layer1", "layer2", etc.
     private String layerId;
@@ -50,34 +48,34 @@ public class Layer {
         return this;
     }
 
-    public List<Material> getMaterials(){
-        return materials;
+    public List<Mix> getMixes(){
+        return mixes;
     }
 
-    public Layer addMaterial(Material material) {
-        this.materials.add(material);
+    public Layer addMaterial(Mix mix) {
+        this.mixes.add(mix);
         return this;
     }
     public Layer addMaterial(){
-        materials.add(new Material());
+        mixes.add(new Mix());
         return this;
     }
 
-    public Material getMaterial(int materialNumber) {
-        return materials.get(materialNumber);
+    public Mix getMaterial(int materialNumber) {
+        return mixes.get(materialNumber);
     }
 
     public int getNumberofMaterials(){
-        return materials.size();
+        return mixes.size();
     }
 
     public Layer removeMaterial(){
         if (getNumberofMaterials() > 0)
-            materials.remove(materials.size() - 1);
+            mixes.remove(mixes.size() - 1);
         return this;
     }
-    public Layer setMaterial(int materialIndex, Material material){
-        materials.set(materialIndex, material);
+    public Layer setMaterial(int materialIndex, Mix mix){
+        mixes.set(materialIndex, mix);
         return this;
     }
 
