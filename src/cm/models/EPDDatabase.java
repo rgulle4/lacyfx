@@ -48,7 +48,7 @@ public class EPDDatabase {
 
     * */
     private  String sql;
-    public List<Material> getResultsFilteredBy(Map filteredZipcodeMap, String cs, String companyName) throws SQLException, ParseException {
+    public List<Material> getResultsFilteredBy(Map<String, Double> filteredZipcodeMap, String cs, String companyName) throws SQLException, ParseException {
         List<Material> result = new ArrayList<Material>();
 
         StringBuilder sb = new StringBuilder(DEFAULT_SQL_QUERY);
@@ -117,7 +117,11 @@ public class EPDDatabase {
             g.setNonRenewableEnergyUse(rs.getDouble("NRE"));
             g.setRenewableMaterialResourcesUse(rs.getDouble("RM"));
             g.setNonRenewableMaterialResource(rs.getDouble("NRM"));
-
+            //get distance from filterzips map
+            String zip = g.getZipCode();
+            Double distance = filteredZipcodeMap.get(zip);//return distance in meter
+            g.setDistance(distance/1000.0); // convert meter to kilometer
+            System.out.println("From "+zip+" to destination is "+distance/1000.0+ " Km");
             result.add(g);
         }
         return result;
@@ -135,9 +139,9 @@ public class EPDDatabase {
         }
         return zipcodeList;
     }
-    public List<String> get20Zipcode() throws SQLException {
+    public List<String> getZipcode() throws SQLException {
         List<String> zipcodeList = new ArrayList<>();
-        String sql = "SELECT DISTINCT ZIP FROM EPD WHERE ZIP < '70840'";
+        String sql = "SELECT DISTINCT ZIP FROM EPD WHERE ZIP < '70920'";
         s = conn.createStatement();
         rs = s.executeQuery(sql);
         String zip;
