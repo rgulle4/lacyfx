@@ -63,7 +63,7 @@ public class EnvironmentalReportController {
     @FXML
     private ComboBox layer_ComboBox;
     @FXML
-    private ComboBox alternative_ComboBox;
+    private ComboBox mix_ComboBox;
     @FXML
     private ComboBox impactCategory;
 
@@ -100,11 +100,8 @@ public class EnvironmentalReportController {
     ObservableList<String> layerNum = FXCollections
             .observableArrayList();
     // Number of layers in this design
-    ObservableList<String> alternativeNum = FXCollections
-            .observableArrayList(
-                    "Mix 1", "Mix 2", "Mix 3",
-                    "Mix 4", "Mix 5", "Mix 6",
-                    "Mix 7", "Mix 8","Overall");
+    ObservableList<String> mixNum = FXCollections
+            .observableArrayList();
     // Impact Category
     ObservableList<String> impacyCategoryName =FXCollections
             .observableArrayList(
@@ -119,22 +116,10 @@ public class EnvironmentalReportController {
         setupPerformanceType_ComboBox();
         setupEnvironmentalImpact_ComboBox();
         setupRawValue_ComboBox();
+        setupImpactCategory_ComboBox();
 
         //set up design number
         setupDesignNumber_ComboBox();
-        alternative_ComboBox.setItems(alternativeNum);
-        alternative_ComboBox.setValue(alternativeNum.get(0));
-        impactCategory.setItems(impacyCategoryName);
-        impactCategory.setValue(impacyCategoryName.get(0));
-
-
-//            serie_envPerf_EPDScore.setName("envPerf_EPDScore");
-//            serie_envPerf_TransportationScore.setName("envPerf_TransportationScore");
-//            //Stacked Chart for EPD_score and Transportation_score of Environmental analysis
-//
-//            serie_envPerf_EPDScore.getData().add(new XYChart.Data<>(design.getDesignId(), design.getEnvPerfAnalysis_EPDScore_Design()));
-//            serie_envPerf_TransportationScore.getData().add(new XYChart.Data<>(design.getDesignId(), design.getEnvPerfAnalysis_TransportationScore_Design()));
-//            sbc.getData().addAll(serie_envPerf_EPDScore,serie_envPerf_TransportationScore);
 
     }
 
@@ -147,7 +132,7 @@ public class EnvironmentalReportController {
         Design designTemp = DESIGNS.get(designID);
         int layerIndex = layer_ComboBox.getSelectionModel().getSelectedIndex();
         Layer layerTemp = designTemp.getLayer(layerIndex);
-        int materialIndex = alternative_ComboBox.getSelectionModel().getSelectedIndex();
+        int materialIndex = mix_ComboBox.getSelectionModel().getSelectedIndex();
         Material materialTemp = layerTemp.getMaterial(materialIndex);
 
         // setValue according to performanceType_ComboBox,
@@ -202,6 +187,11 @@ public class EnvironmentalReportController {
         rawValue_ComboBox.setValue(rawValueType.get(0));
     }
 
+    private void setupImpactCategory_ComboBox(){
+        impactCategory.setItems(impacyCategoryName);
+        impactCategory.setValue(impacyCategoryName.get(0));
+    }
+
     private void setupDesignNumber_ComboBox(){
         for (String dKey:DESIGNS.keySet()){
             designNum.add(dKey);
@@ -216,16 +206,15 @@ public class EnvironmentalReportController {
     public void setupLayerNumber_ComboBox(){
         if (!design_ComboBox.getSelectionModel().isEmpty()){
             String selectedDeisgnKey = design_ComboBox.getValue().toString();
-            int layernumber = DESIGNS.get(selectedDeisgnKey).getNumberOfLayers();
-            if(layernumber>0){
-                StringBuilder sb = new StringBuilder("Layer ");
-                for (int i = 1; i<= layernumber;i++){
-                    String lnum= sb.append(i).toString();
-                    layerNum.add(lnum);
+            int layerNumber = DESIGNS.get(selectedDeisgnKey).getNumberOfLayers();
+            if(layerNumber>0){
+                for (int i = 1; i<= layerNumber;i++){
+                    StringBuilder sb = new StringBuilder("Layer ");
+                    String layerName= sb.append(i).toString();
+                    layerNum.add(layerName);
                 }
                 layerNum.addAll("Overall");
                 layer_ComboBox.setItems(layerNum);
-                layer_ComboBox.setValue(layerNum.get(0));
             }
             else {
                 System.out.println("No layer was added for this design!!");
@@ -235,6 +224,33 @@ public class EnvironmentalReportController {
             System.out.println("Select a certain design first!!");
         }
 
+    }
+
+    public void setupMixNum_ComboBox(){
+        if(!design_ComboBox.getSelectionModel().isEmpty()){
+            String selectedDeisgnKey = design_ComboBox.getValue().toString();
+            if(!layer_ComboBox.getSelectionModel().isEmpty()){
+                int layerOfIndex = layer_ComboBox.getSelectionModel().getSelectedIndex();
+                int mixNumber = DESIGNS.get(selectedDeisgnKey)
+                                        .getLayer(layerOfIndex)
+                                        .getNumberofMaterials();
+                if(mixNumber > 0){
+                    for (int i = 1; i <= mixNumber;i ++){
+                        StringBuilder sb = new StringBuilder("Mix ");
+                        String mixName = sb.append(i).toString();
+                        mixNum.add(mixName);
+                    }
+                    mixNum.addAll("Overall");
+                    mix_ComboBox.setItems(mixNum);
+                }else{
+                    System.out.println("No mix was added!!");
+                }
+            }else{
+                System.out.println("Select a certain layer first!!");
+            }
+        }else{
+            System.out.println("Select a certain design first!!");
+        }
     }
 
     public static void main(String[] args) {
