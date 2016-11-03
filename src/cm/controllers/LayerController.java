@@ -115,7 +115,7 @@ public class LayerController {
         if (DEBUG_MODE == false) { return; }
         debugCheatSheet.activatedProperty().addListener(
               (observable, oldValue, newValue) -> {
-                  debugCheatSheet.setText(layer.hashCode() + ":" + GSON_PP.toJson(layer));
+                  debugCheatSheet.setText(GSON_PP.toJson(layer));
               });
     }
 }

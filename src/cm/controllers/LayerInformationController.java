@@ -39,10 +39,7 @@ public class LayerInformationController {
 
     @FXML
     private void debugButtonListener(ActionEvent actionEvent) {
-//        Model.printDebugDesigns();
-//        printDebugMsg("Current design key: " + currentDesignKey);
-//        printDebugMsg("Current design object: ");
-//        printDebugMsg(GSON_PP.toJson(currentDesign));
+        printDebugMsg(GSON_PP.toJson(DESIGNS));
     }
 
     private Tab getNewestTab() {

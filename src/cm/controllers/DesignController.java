@@ -145,6 +145,21 @@ public class DesignController {
         int newLayerNumber = newTabPosition + 1;
         String newLayerId = "Layer " + newLayerNumber;
 
+        Layer newLayer = design.addLayer();
+        Tab newLayerTab = new Tab(newLayerId);
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(
+              App.class.getResource("views/layerView.fxml"));
+        Node node = null;
+        try { node = loader.load(); }
+        catch (IOException e) { e.printStackTrace(); }
+        LayerController newLayerTabController
+              = loader.<LayerController>getController();
+        newLayerTabController.setCurrentLayer(newLayer);
+        newLayerTab.setContent(node);
+
+        layersTabPane.getTabs().add(newTabPosition, newLayerTab);
+
         // TODO: finish this
     }
 
