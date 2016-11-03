@@ -40,6 +40,7 @@ public class LayerInformationController {
     @FXML
     private void debugButtonListener(ActionEvent actionEvent) {
         printDebugMsg(GSON_PP.toJson(DESIGNS));
+        saveProjectLocation();
     }
 
     private Tab getNewestTab() {
@@ -170,17 +171,6 @@ public class LayerInformationController {
         setUpDebugCheatSheet();
     }
 
-
-
-    @FXML
-    private void loadMaterialBtnAction() throws IOException {
-        saveProjectLocation();
-//        saveLayerType();
-//        saveThickness();
-//        printDebugMsg(currentLayer);
-//        App.showLoadMaterial(currentLayer);
-        App.showLoadMaterial(null);
-    }
     private void saveProjectLocation() {
         DESTINATION_ZIP_CODE_MUTABLE = projectLocationTextField.getText();
     }

@@ -30,6 +30,7 @@
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label maxWidth="1.7976931348623157E308" text="Layer Type: ">
@@ -40,7 +41,8 @@
                               <Tooltip fx:id="debugCheatSheet" text="Empty Tooltip">
                                  <font>
                                     <Font name="Monospaced Regular" size="13.0" />
-                                 </font></Tooltip>
+                                 </font>
+                              </Tooltip>
                            </tooltip>
                         </Label>
                         <ComboBox fx:id="layerTypeComboBox" maxWidth="1.7976931348623157E308" prefWidth="300.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
@@ -63,6 +65,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </GridPane.margin>
                         </ChoiceBox>
+                        <Button fx:id="loadMaterialBtn" mnemonicParsing="false" onAction="#loadMaterialBtnAction" text="Load Material" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

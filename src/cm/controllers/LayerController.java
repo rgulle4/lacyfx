@@ -1,11 +1,14 @@
 package cm.controllers;
 
+import cm.App;
 import cm.models.Layer;
 import static cm.models.Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+import java.io.IOException;
 
 public class LayerController {
 
@@ -118,6 +121,17 @@ public class LayerController {
         if (thicknessUnit == "inch")
             thicknessValue /= 39.3701;
         layer.setThickness(thicknessValue);
+    }
+
+    @FXML Button loadMaterialBtn;
+    @FXML
+    private void loadMaterialBtnAction() throws IOException {
+//        saveProjectLocation();
+        saveLayerType();
+        saveThickness();
+//        printDebugMsg(currentLayer);
+        App.showLoadMaterial(layer);
+//        App.showLoadMaterial(null);
     }
 
     /* -- aliases for dealing with javafx components ------ */
