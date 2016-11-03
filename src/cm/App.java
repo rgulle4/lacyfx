@@ -34,7 +34,7 @@ public class App extends Application {
 
     public static void showLoadMaterial(Layer currentLayer) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(App.class.getResource("views/loadMaterial_window.fxml"));
+        fxmlLoader.setLocation(App.class.getResource("views/loadMix_window.fxml"));
         AnchorPane addNewMaterialAcnhorPane = fxmlLoader.load();
 
         Stage addDialogStage = new Stage();
