@@ -61,19 +61,27 @@ public class LayerInformationController {
         String newDesignId = "Design " + newDesignNumber;
 
         Design newDesign = Model.addNewDesign();
-        Tab newTab  = new Tab(newDesignId);
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(
+        Layer newFirstLayer = null;
+        if (newDesign.getLayers().isEmpty())
+            newFirstLayer = newDesign.addLayer();
+        else
+            newFirstLayer = newDesign.getLayer(0);
+
+        Tab newDesignTab  = new Tab(newDesignId);
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(
               App.class.getResource("views/designView.fxml"));
         Node node = null;
-        try { node = fxmlLoader.load(); }
+        try { node = loader.load(); }
         catch (IOException e) { e.printStackTrace(); }
         DesignController newDesignTabController
-              = fxmlLoader.<DesignController>getController();
+              = loader.<DesignController>getController();
         newDesignTabController.setCurrentDesign(newDesign);
-        newTab.setContent(node);
+        newDesignTab.setContent(node);
 
-        designsTabPane.getTabs().add(newTabPosition, newTab);
+        newDesignTabController.setUpFirstLayerTab(newFirstLayer);
+
+        designsTabPane.getTabs().add(newTabPosition, newDesignTab);
     }
 
     private final Button newTabButton = new Button("+");
@@ -125,12 +133,10 @@ public class LayerInformationController {
         // set up first design tab -------------------------
         Design firstDesign = Model.addNewDesign();
         Layer firstLayer = null;
-        if (firstDesign.getLayers().isEmpty()) {
+        if (firstDesign.getLayers().isEmpty())
             firstLayer = firstDesign.addLayer();
-        }
-        else {
+        else
             firstLayer = firstDesign.getLayer(0);
-        }
 
         designsTabsList = designsTabPane.getTabs();
         Tab firstDesignTab = designsTabsList.get(0);

@@ -10,6 +10,8 @@ import static cm.models.Model.*;
  */
 public class Layer {
 
+    private int hasCode = this.hashCode();
+
     /* -- Fields -------------------------------------------------------- */
 
     // A layer_temp has one material
