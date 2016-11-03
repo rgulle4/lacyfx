@@ -7,7 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.*;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 
@@ -96,16 +95,10 @@ public class EnvironmentalReportController {
 
     // Number of designs
     ObservableList<String> designNum = FXCollections.
-            observableArrayList(
-                    "Design 1", "Design 2", "Design 3", "Design 4",
-                    "Design 5", "Design 6", "Design 7", "Design 8",
-                    "Overall");
+            observableArrayList();
     // Number of layers in this design
     ObservableList<String> layerNum = FXCollections
-            .observableArrayList(
-                    "Layer 1", "Layer 2", "Layer 3", "Layer 4",
-                    "Layer 5", "Layer 6", "Layer 7", "Layer 8",
-                    "Overall");
+            .observableArrayList();
     // Number of layers in this design
     ObservableList<String> alternativeNum = FXCollections
             .observableArrayList(
@@ -123,17 +116,12 @@ public class EnvironmentalReportController {
     public void initialize() {
 
         //set up default elements
-        performanceType_ComboBox.setItems(performanceType);
-        performanceType_ComboBox.setValue(performanceType.get(0));
-        environmentalImpact_ComboBox.setItems(impactType);
-        environmentalImpact_ComboBox.setValue(impactType.get(0));
-        rawValue_ComboBox.setItems(rawValueType);
-        rawValue_ComboBox.setValue(rawValueType.get(0));
+        setupPerformanceType_ComboBox();
+        setupEnvironmentalImpact_ComboBox();
+        setupRawValue_ComboBox();
 
-        design_ComboBox.setItems(designNum);
-        design_ComboBox.setValue(designNum.get(0));
-        layer_ComboBox.setItems(layerNum);
-        layer_ComboBox.setValue(layerNum.get(0));
+        //set up design number
+        setupDesignNumber_ComboBox();
         alternative_ComboBox.setItems(alternativeNum);
         alternative_ComboBox.setValue(alternativeNum.get(0));
         impactCategory.setItems(impacyCategoryName);
@@ -197,6 +185,72 @@ public class EnvironmentalReportController {
                 }
             }
         }
+    }
+
+    private void setupPerformanceType_ComboBox(){
+        performanceType_ComboBox.setItems(performanceType);
+        performanceType_ComboBox.setValue(performanceType.get(0));
+    }
+
+    private void setupEnvironmentalImpact_ComboBox(){
+        environmentalImpact_ComboBox.setItems(impactType);
+        environmentalImpact_ComboBox.setValue(impactType.get(0));
+    }
+
+    private void setupRawValue_ComboBox(){
+        rawValue_ComboBox.setItems(rawValueType);
+        rawValue_ComboBox.setValue(rawValueType.get(0));
+    }
+
+    private void setupDesignNumber_ComboBox(){
+        for (String dKey:DESIGNS.keySet()){
+            designNum.add(dKey);
+        }
+        if (DESIGNS.size()>0){
+            designNum.addAll("Overall");
+        }
+        design_ComboBox.setItems(designNum);
+        design_ComboBox.setValue(designNum.get(0));
+    }
+
+    public void setupLayerNumber_ComboBox(){
+        if (!design_ComboBox.getSelectionModel().isEmpty()){
+            String selectedDeisgnKey = design_ComboBox.getValue().toString();
+            int layernumber = DESIGNS.get(selectedDeisgnKey).getNumberOfLayers();
+            if(layernumber>0){
+                StringBuilder sb = new StringBuilder("Layer ");
+                for (int i = 0; i<layernumber;i++){
+                    String lnum= sb.append(i).toString();
+                    layerNum.add(lnum);
+                }
+                layerNum.addAll("Overall");
+                layer_ComboBox.setItems(layerNum);
+                layer_ComboBox.setValue(layerNum.get(0));
+            }
+            else {
+                System.out.println("No layer was added for this design!!");
+            }
+        }
+        else{
+            System.out.println("Select a certain design first!!");
+        }
+
+    }
+
+    public static void main(String[] args) {
+        ObservableList<String> designNum = FXCollections.
+                observableArrayList();
+        DESIGNS.put("Design 1", new Design());
+        DESIGNS.put("Design 2", new Design());
+        DESIGNS.put("Design 3", new Design());
+        for (String dKey:DESIGNS.keySet()){
+            designNum.add(dKey);
+        }
+        if (DESIGNS.size()>0){
+            designNum.addAll("Overall");
+        }
+        System.out.println(designNum);
+
     }
 
     public void stackBarChart_EPD_Ctb_Alternative(String designID, Layer layerTemp){

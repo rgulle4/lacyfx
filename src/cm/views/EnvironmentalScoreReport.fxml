@@ -41,7 +41,7 @@
       <HBox layoutX="249.0" layoutY="81.0" prefHeight="32.0" prefWidth="739.0" spacing="50.0">
          <children>
             <ComboBox fx:id="design_ComboBox" prefWidth="150.0" />
-            <ComboBox fx:id="layer_ComboBox" prefWidth="150.0" />
+            <ComboBox fx:id="layer_ComboBox" onMouseClicked="#setupLayerNumber_ComboBox" prefWidth="150.0" />
             <ComboBox fx:id="alternative_ComboBox" prefWidth="150.0" />
          </children>
       </HBox>
