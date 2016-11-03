@@ -1,6 +1,6 @@
 package cm;
 
-import cm.controllers.LoadMaterialController;
+import cm.controllers.LoadMixController;
 import cm.models.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class App extends Application {
     private static Stage primaryStage;
-    private ObservableList<Material> MaterialData = FXCollections.observableArrayList();
+    private ObservableList<Mix> mixData = FXCollections.observableArrayList();
 
 
 
@@ -34,19 +34,19 @@ public class App extends Application {
 
     public static void showLoadMaterial(Layer currentLayer) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(App.class.getResource("views/loadMaterial_window.fxml"));
+        fxmlLoader.setLocation(App.class.getResource("views/loadMix_window.fxml"));
         AnchorPane addNewMaterialAcnhorPane = fxmlLoader.load();
 
         Stage addDialogStage = new Stage();
-        addDialogStage.setTitle("Add New Material");
+        addDialogStage.setTitle("Add New Mix");
         addDialogStage.initModality(Modality.WINDOW_MODAL);
         addDialogStage.initOwner(primaryStage);
 
         /* -- pass currentLayer --------- */
-        LoadMaterialController loadMaterialController
-              = fxmlLoader.<LoadMaterialController>getController();
+        LoadMixController loadMixController
+              = fxmlLoader.<LoadMixController>getController();
 
-        loadMaterialController.setCurrentLayer(currentLayer);
+        loadMixController.setCurrentLayer(currentLayer);
         /* ------------------------------ */
 
         Scene scene = new Scene(addNewMaterialAcnhorPane);
@@ -82,7 +82,7 @@ public class App extends Application {
     //create a static hashtable to store values for TransportationParameters step by step
     public static Map<String,Design> designMap = new Hashtable<String,Design>();
     public static Map<String,Layer> layerMap = new Hashtable<String,Layer>();
-    public static Map<String,Material> materialMap = new Hashtable<String,Material>();
+    public static Map<String,Mix> materialMap = new Hashtable<String,Mix>();
     public static Map<String,Weights> weightsMap = new Hashtable<String,Weights>();
     public static Map<String,TransportationParameters> transportationParametersMap = new Hashtable<String,TransportationParameters>();
 //    public static Map<String,>

@@ -17,7 +17,7 @@ import static cm.models.Model.DESTINATION_ZIP_CODE_MUTABLE;
 /**
  * Created by Administrator on 2016/9/28.
  */
-public class LoadMaterialController {
+public class LoadMixController {
 
     ObservableList<String> DistanceList = FXCollections.observableArrayList(
             "<10 miles","<25 miles","<50 miles","<100 miles");
@@ -31,29 +31,29 @@ public class LoadMaterialController {
     @FXML
     private TextField textField_ZipCode;
     @FXML
-    private TableView<Material> MaterialTable;
+    private TableView<Mix> MaterialTable;
     @FXML
-    private TableView<Material> SelectedTable;
+    private TableView<Mix> SelectedTable;
     @FXML
-    private TableColumn<Material, String> CS_Column;
+    private TableColumn<Mix, String> CS_Column;
     @FXML
-    private TableColumn<Material, String> CM_Name_Column;
+    private TableColumn<Mix, String> CM_Name_Column;
     @FXML
-    private TableColumn<Material, String> Location_Column;
+    private TableColumn<Mix, String> Location_Column;
     @FXML
-    private TableColumn<Material, String> MixNum_Column;
+    private TableColumn<Mix, String> MixNum_Column;
     @FXML
-    private TableColumn<Material,String> ZipCode_Column;
+    private TableColumn<Mix,String> ZipCode_Column;
     @FXML
-    private TableColumn<Material, String> CS_Column_selected;
+    private TableColumn<Mix, String> CS_Column_selected;
     @FXML
-    private TableColumn<Material, String> CM_Name_Column_selected;
+    private TableColumn<Mix, String> CM_Name_Column_selected;
     @FXML
-    private TableColumn<Material, String> Location_Column_selected;
+    private TableColumn<Mix, String> Location_Column_selected;
     @FXML
-    private TableColumn<Material, String> MixNum_Column_selected;
+    private TableColumn<Mix, String> MixNum_Column_selected;
     @FXML
-    private TableColumn<Material,String> ZipCode_Column_selected;
+    private TableColumn<Mix,String> ZipCode_Column_selected;
 
     // Constructor is called before the initialize method
 //    public LoadMaterialController() {
@@ -72,7 +72,7 @@ public class LoadMaterialController {
      */
     public void initialize() throws SQLException {
         System.out.println("------------------------------------");
-        System.out.println("layer in LoadMaterialController...");
+        System.out.println("layer in LoadMixController...");
         System.out.println(currentLayer);
         System.out.println("------------------------------------");
 
@@ -86,30 +86,26 @@ public class LoadMaterialController {
 
 
         //Alternative materials
-        CS_Column.setCellValueFactory(new PropertyValueFactory<Material, String>("CS"));
-        CM_Name_Column.setCellValueFactory(new PropertyValueFactory<Material, String>("CM_name"));
-        Location_Column.setCellValueFactory(new PropertyValueFactory<Material, String>("Location"));
-        MixNum_Column.setCellValueFactory(new PropertyValueFactory<Material, String>("MixNum"));
-        ZipCode_Column.setCellValueFactory(new PropertyValueFactory<Material, String>("ZipCode"));
+        CS_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("CS"));
+        CM_Name_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("CM_name"));
+        Location_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Location"));
+        MixNum_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("MixNum"));
+        ZipCode_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("ZipCode"));
 
         //Selected materials
-        CS_Column_selected.setCellValueFactory(new PropertyValueFactory<Material, String>("CS"));
-        CM_Name_Column_selected.setCellValueFactory(new PropertyValueFactory<Material, String>("CM_name"));
-        Location_Column_selected.setCellValueFactory(new PropertyValueFactory<Material, String>("Location"));
-        MixNum_Column_selected.setCellValueFactory(new PropertyValueFactory<Material, String>("MixNum"));
-        ZipCode_Column_selected.setCellValueFactory(new PropertyValueFactory<Material, String>("ZipCode"));
+        CS_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("CS"));
+        CM_Name_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("CM_name"));
+        Location_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("Location"));
+        MixNum_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("MixNum"));
+        ZipCode_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("ZipCode"));
 
     }
 
-    private ObservableList<Material> data;
+    private ObservableList<Mix> data;
 
     @FXML
 
     public void searchbutton() throws SQLException, ParseException {
-//        StringBuilder CS_field = new StringBuilder("CS >= ");
-//        String CS_Textfiled = CS_field.append(textField_CS.getText()).toString();
-//        List<Material> result = new EPDDatabase().getResultsFilteredBy(CS_Textfiled);
-
         String CS = textField_CS.getText();
         String cmName = textField_companyName.getText();
         // get a zip set within a certain radius to the location of project
@@ -121,14 +117,14 @@ public class LoadMaterialController {
         Map<String, Double> filteredZipcodeMap
                 = zcu.zipsWithinRadius(radius,origins,destinationZipcode);
         // get qualified material after searching
-        List<Material> result = new EPDDatabase()
+        List<Mix> result = new EPDDatabase()
                 .getResultsFilteredBy(filteredZipcodeMap,CS,cmName);
 
         data = FXCollections.observableArrayList();
 
         // get material properties from the column names.
         for (int i = 0; i < result.size(); i++){
-            Material m = new Material();
+            Mix m = new Mix();
             m = result.get(i);
             data.add(m);
         }
@@ -146,23 +142,23 @@ public class LoadMaterialController {
         MaterialTable.setItems(data);
     }
 
-    ObservableList<Material> SelectedMaterialsList = FXCollections.observableArrayList();
+    ObservableList<Mix> selectedMixesList = FXCollections.observableArrayList();
 
     @FXML
     public void selectButton(){
 
-        Material SelectedMat = MaterialTable.getSelectionModel().getSelectedItem();
-        SelectedMaterialsList.add(SelectedMat);
-        SelectedTable.setItems(SelectedMaterialsList);
-        currentLayer.addMaterial(new Material());       //add a new mix with null value
+        Mix SelectedMat = MaterialTable.getSelectionModel().getSelectedItem();
+        selectedMixesList.add(SelectedMat);
+        SelectedTable.setItems(selectedMixesList);
+        currentLayer.addMaterial(new Mix());       //add a new mix with null value
     }
 
     public void removeButton(){
-        if (SelectedMaterialsList != null){
+        if (selectedMixesList != null){
 
             int selectedIndex = SelectedTable.getSelectionModel().getSelectedIndex();
-            SelectedMaterialsList.remove(selectedIndex);
-            SelectedTable.setItems(SelectedMaterialsList);
+            selectedMixesList.remove(selectedIndex);
+            SelectedTable.setItems(selectedMixesList);
             currentLayer.removeMaterial();      //remove a new mix with null value
 
         }
@@ -179,10 +175,10 @@ public class LoadMaterialController {
     public void nextButton() throws ParseException {
         System.out.println("Begin nextButton() method");
         // remove all the selectedMix first
-        System.out.println("All mix in the SelectedMaterialsList are removed!!");
+        System.out.println("All mix in the SelectedMixesList are removed!!");
         // add all the selectedMix
         for (int i =0; i < currentLayer.getNumberofMaterials();i ++){
-            Material newSelectedMix = SelectedMaterialsList.get(i);
+            Mix newSelectedMix = selectedMixesList.get(i);
             currentLayer.setMaterial(i,newSelectedMix);
         }
         System.out.println(currentLayer.getNumberofMaterials()+ "  mix added!!");
