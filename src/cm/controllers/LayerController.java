@@ -11,7 +11,24 @@ import javafx.scene.control.TextInputControl;
 
 public class LayerController {
 
-    private Layer currentLayer;
+    private Layer layer;
+
+    public LayerController() { super(); }
+
+    public LayerController(Layer layer) {
+        this();
+        this.layer = layer;
+    }
+
+    public Layer getCurrentLayer() {
+        return layer;
+    }
+
+    public void setCurrentLayer(Layer layer) {
+        this.layer = layer;
+    }
+
+    /* -- Gui control ------------------------------------------ */
 
     @FXML private ComboBox<String> layerTypeComboBox;
     @FXML private TextField thicknessTextField;
@@ -31,7 +48,7 @@ public class LayerController {
           "meter");
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         setDefaultOptions();
     }
 
@@ -44,8 +61,13 @@ public class LayerController {
         thicknessTextField.setText("10.0");
     }
 
+    private void saveLayerOptions() {
+        saveLayerType();
+        saveThickness();
+    }
+
     private void saveLayerType() {
-        currentLayer.setLayerType(toString(layerTypeComboBox));
+        layer.setLayerType(toString(layerTypeComboBox));
     }
 
     private void saveThickness() {
@@ -53,7 +75,7 @@ public class LayerController {
         String thicknessUnit = toString(thicknessUnitChoiceBox);
         if (thicknessUnit == "inch")
             thicknessValue /= 39.3701;
-        currentLayer.setThickness(thicknessValue);
+        layer.setThickness(thicknessValue);
     }
 
     /* -- aliases for dealing with javafx components ------ */

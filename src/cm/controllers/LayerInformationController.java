@@ -25,17 +25,11 @@ public class LayerInformationController {
 
     private final ZipCodeUtil ZCU = new ZipCodeUtil();
 
-    /* -- "OLD" stuff ------------------------------------- */
-
-
-
-
     //Save the zip code of location
     @FXML public TextField projectLocationTextField;
 
     // The TabPanes
     @FXML public TabPane designsTabPane;
-//    @FXML TabPane layersTabPane;
 
     // vars we'll use for current design, current layer
     String currentDesignKey = "Design 1";

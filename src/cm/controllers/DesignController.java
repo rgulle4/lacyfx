@@ -9,6 +9,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.util.List;
+
 public class DesignController {
 
     /* -- Constructor(s) and init ----------------------------- */
@@ -55,7 +57,6 @@ public class DesignController {
     @FXML
     private void initialize() {
         setDesignOptionsToDefaults();
-//        saveDesignOptions();
     }
 
     private void setDesignOptionsToDefaults() {
@@ -78,6 +79,16 @@ public class DesignController {
 
     @FXML private TabPane layersTabPane;
     @FXML private Tab newTabTab;
+
+    private List<Tab> layerTabsList;
+
+    private void addLayer() {
+        if (layerTabsList == null) return;
+        int numTabs = layerTabsList.size();
+        int newTabPosition = numTabs - 1;
+        int newLayerNumber = newTabPosition + 1;
+        String newLayerId = "Layer " + newLayerNumber;
+    }
 
     // Design types
     private final ObservableList<String> designTypes
@@ -138,28 +149,9 @@ public class DesignController {
 
     /* -- helper methods for debugging ------------------------- */
 
+    private final boolean DEBUG_MODE  = true;
     private void println() { System.out.println(); }
     private void println(Object o) { System.out.println(o); }
-
-    private final boolean DEBUG_MODE  = true;
-
     private void printDebugMsg() { if (DEBUG_MODE) println(); }
     private void printDebugMsg(Object o) { if (DEBUG_MODE) println(o); }
-
-    private void printCurrentIndexes() {
-//        if (!DEBUG_MODE) return;
-//        printDebugMsg("-----------");
-//        printDebugMsg("Design Key = " + currentDesignKey);
-//        printDebugMsg("Layer index = " + currentLayerIndex);
-    }
-
-    @FXML
-    private void printDebugStuff(ActionEvent actionEvent) {
-//        if (!DEBUG_MODE) return;
-//        printDebugMsg(currentLayer.getMaterial().getCS() + ","
-//              + currentLayer.getMaterial().getCompany_Name() + " ,"
-//              + currentLayer.getMaterial().getLocation() + " ,"
-//              + currentLayer.getMaterial().getZipCode() + " ,"
-//              + currentLayer.getMaterial().getMixNum());
-    }
 }
