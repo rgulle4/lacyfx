@@ -277,13 +277,13 @@ public final class EnvPerformanceCalc {
                     PrimaryTotalEnergyConsumption_TSP_SubScore
                             = PrimaryTotalEnergyConsumption_TSP_NORM * W_TPEC;
 
-                    mix_temp.setGWP_Transportation_Subsore(GWP_TSP_SubScore);
-                    mix_temp.setODP_Transportation_Subsore(ODP_TSP_SubScore);
-                    mix_temp.setAP_Transportation_Subsore(AP_TSP_SubScore);
-                    mix_temp.setEP_Transportation_Subsore(EP_TSP_SubScore);
-                    mix_temp.setPOCP_Transportation_Subsore(POCP_TSP_SubScore);
-//                    mix_temp.setTW_Transportation_Subsore(TotalWater_TSP_SubScore);
-                    mix_temp.setTPEC_Transportation_Subsore(PrimaryTotalEnergyConsumption_TSP_SubScore);
+                    mix_temp.setGWP_Transportation_SubScore(GWP_TSP_SubScore);
+                    mix_temp.setODP_Transportation_SubScore(ODP_TSP_SubScore);
+                    mix_temp.setAP_Transportation_SubScore(AP_TSP_SubScore);
+                    mix_temp.setEP_Transportation_SubScore(EP_TSP_SubScore);
+                    mix_temp.setPOCP_Transportation_SubScore(POCP_TSP_SubScore);
+//                    mix_temp.setTW_Transportation_SubScore(TotalWater_TSP_SubScore);
+                    mix_temp.setTPEC_Transportation_SubScore(PrimaryTotalEnergyConsumption_TSP_SubScore);
 
 
                     // EPD_Score and TSP_Score for this layer

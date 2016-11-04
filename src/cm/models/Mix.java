@@ -91,13 +91,13 @@ public final class Mix {
     private Double TPEC_Transportation_NORM;    // Total Primary Energy Consumption
 
     // Transportation part's SubScore for the different env impacts (after WEIGHTS)
-    private Double GWP_Transportation_Subsore;
-    private Double ODP_Transportation_Subsore;
-    private Double AP_Transportation_Subsore;
-    private Double EP_Transportation_Subsore;
-    private Double POCP_Transportation_Subsore;
-    private Double TW_Transportation_Subsore;      // Total Water Consumption
-    private Double TPEC_Transportation_Subsore;    // Total Primary Energy Consumption
+    private Double GWP_Transportation_SubScore;
+    private Double ODP_Transportation_SubScore;
+    private Double AP_Transportation_SubScore;
+    private Double EP_Transportation_SubScore;
+    private Double POCP_Transportation_SubScore;
+    private Double TW_Transportation_SubScore;      // Total Water Consumption
+    private Double TPEC_Transportation_SubScore;    // Total Primary Energy Consumption
 
 
     public void setUnitConversion_Factor(){
@@ -312,7 +312,7 @@ public final class Mix {
         EnvPerfAnalysis_TransportationScore_Material = envPerfAnalysis_TransportationScore_Material;
     }
 
-    public Double getGWP_EDP_Ctb() {
+    public Double getGWP_EPD_Ctb() {
         return GWP_EDP_Ctb;
     }
 
@@ -320,7 +320,7 @@ public final class Mix {
         this.GWP_EDP_Ctb = GWP_EDP_Ctb;
     }
 
-    public Double getODP_EDP_Ctb() {
+    public Double getODP_EPD_Ctb() {
         return ODP_EDP_Ctb;
     }
 
@@ -328,7 +328,7 @@ public final class Mix {
         this.ODP_EDP_Ctb = ODP_EDP_Ctb;
     }
 
-    public Double getAP_EDP_Ctb() {
+    public Double getAP_EPD_Ctb() {
         return AP_EDP_Ctb;
     }
 
@@ -336,7 +336,7 @@ public final class Mix {
         this.AP_EDP_Ctb = AP_EDP_Ctb;
     }
 
-    public Double getEP_EDP_Ctb() {
+    public Double getEP_EPD_Ctb() {
         return EP_EDP_Ctb;
     }
 
@@ -344,7 +344,7 @@ public final class Mix {
         this.EP_EDP_Ctb = EP_EDP_Ctb;
     }
 
-    public Double getPOCP_EDP_Ctb() {
+    public Double getPOCP_EPD_Ctb() {
         return POCP_EDP_Ctb;
     }
 
@@ -352,7 +352,7 @@ public final class Mix {
         this.POCP_EDP_Ctb = POCP_EDP_Ctb;
     }
 
-    public Double getTW_EDP_Ctb() {
+    public Double getTW_EPD_Ctb() {
         return TW_EDP_Ctb;
     }
 
@@ -360,7 +360,7 @@ public final class Mix {
         this.TW_EDP_Ctb = TW_EDP_Ctb;
     }
 
-    public Double getTPEC_EDP_Ctb() {
+    public Double getTPEC_EPD_Ctb() {
         return TPEC_EDP_Ctb;
     }
 
@@ -368,7 +368,7 @@ public final class Mix {
         this.TPEC_EDP_Ctb = TPEC_EDP_Ctb;
     }
 
-    public Double getGWP_EDP_NORM() {
+    public Double getGWP_EPD_NORM() {
         return GWP_EDP_NORM;
     }
 
@@ -376,7 +376,7 @@ public final class Mix {
         this.GWP_EDP_NORM = GWP_EDP_NORM;
     }
 
-    public Double getODP_EDP_NORM() {
+    public Double getODP_EPD_NORM() {
         return ODP_EDP_NORM;
     }
 
@@ -384,7 +384,7 @@ public final class Mix {
         this.ODP_EDP_NORM = ODP_EDP_NORM;
     }
 
-    public Double getAP_EDP_NORM() {
+    public Double getAP_EPD_NORM() {
         return AP_EDP_NORM;
     }
 
@@ -392,7 +392,7 @@ public final class Mix {
         this.AP_EDP_NORM = AP_EDP_NORM;
     }
 
-    public Double getEP_EDP_NORM() {
+    public Double getEP_EPD_NORM() {
         return EP_EDP_NORM;
     }
 
@@ -400,7 +400,7 @@ public final class Mix {
         this.EP_EDP_NORM = EP_EDP_NORM;
     }
 
-    public Double getPOCP_EDP_NORM() {
+    public Double getPOCP_EPD_NORM() {
         return POCP_EDP_NORM;
     }
 
@@ -408,7 +408,7 @@ public final class Mix {
         this.POCP_EDP_NORM = POCP_EDP_NORM;
     }
 
-    public Double getTW_EDP_NORM() {
+    public Double getTW_EPD_NORM() {
         return TW_EDP_NORM;
     }
 
@@ -416,7 +416,7 @@ public final class Mix {
         this.TW_EDP_NORM = TW_EDP_NORM;
     }
 
-    public Double getTPEC_EDP_NORM() {
+    public Double getTPEC_EPD_NORM() {
         return TPEC_EDP_NORM;
     }
 
@@ -424,7 +424,7 @@ public final class Mix {
         this.TPEC_EDP_NORM = TPEC_EDP_NORM;
     }
 
-    public Double getGWP_EDP_Subsore() {
+    public Double getGWP_EPD_SubScore() {
         return GWP_EDP_Subsore;
     }
 
@@ -432,7 +432,7 @@ public final class Mix {
         this.GWP_EDP_Subsore = GWP_EDP_Subsore;
     }
 
-    public Double getODP_EDP_Subsore() {
+    public Double getODP_EPD_SubScore() {
         return ODP_EDP_Subsore;
     }
 
@@ -440,7 +440,7 @@ public final class Mix {
         this.ODP_EDP_Subsore = ODP_EDP_Subsore;
     }
 
-    public Double getAP_EDP_Subsore() {
+    public Double getAP_EPD_SubScore() {
         return AP_EDP_Subsore;
     }
 
@@ -448,7 +448,7 @@ public final class Mix {
         this.AP_EDP_Subsore = AP_EDP_Subsore;
     }
 
-    public Double getEP_EDP_Subsore() {
+    public Double getEP_EPD_SubScore() {
         return EP_EDP_Subsore;
     }
 
@@ -456,7 +456,7 @@ public final class Mix {
         this.EP_EDP_Subsore = EP_EDP_Subsore;
     }
 
-    public Double getPOCP_EDP_Subsore() {
+    public Double getPOCP_EPD_SubScore() {
         return POCP_EDP_Subsore;
     }
 
@@ -464,7 +464,7 @@ public final class Mix {
         this.POCP_EDP_Subsore = POCP_EDP_Subsore;
     }
 
-    public Double getTW_EDP_Subsore() {
+    public Double getTW_EPD_SubScore() {
         return TW_EDP_Subsore;
     }
 
@@ -472,7 +472,7 @@ public final class Mix {
         this.TW_EDP_Subsore = TW_EDP_Subsore;
     }
 
-    public Double getTPEC_EDP_Subsore() {
+    public Double getTPEC_EPD_SubScore() {
         return TPEC_EDP_Subsore;
     }
 
@@ -592,59 +592,59 @@ public final class Mix {
         this.TPEC_Transportation_NORM = TPEC_Transportation_NORM;
     }
 
-    public Double getGWP_Transportation_Subsore() {
-        return GWP_Transportation_Subsore;
+    public Double getGWP_Transportation_SubScore() {
+        return GWP_Transportation_SubScore;
     }
 
-    public void setGWP_Transportation_Subsore(Double GWP_Transportation_Subsore) {
-        this.GWP_Transportation_Subsore = GWP_Transportation_Subsore;
+    public void setGWP_Transportation_SubScore(Double GWP_Transportation_SubScore) {
+        this.GWP_Transportation_SubScore = GWP_Transportation_SubScore;
     }
 
-    public Double getODP_Transportation_Subsore() {
-        return ODP_Transportation_Subsore;
+    public Double getODP_Transportation_SubScore() {
+        return ODP_Transportation_SubScore;
     }
 
-    public void setODP_Transportation_Subsore(Double ODP_Transportation_Subsore) {
-        this.ODP_Transportation_Subsore = ODP_Transportation_Subsore;
+    public void setODP_Transportation_SubScore(Double ODP_Transportation_SubScore) {
+        this.ODP_Transportation_SubScore = ODP_Transportation_SubScore;
     }
 
-    public Double getAP_Transportation_Subsore() {
-        return AP_Transportation_Subsore;
+    public Double getAP_Transportation_SubScore() {
+        return AP_Transportation_SubScore;
     }
 
-    public void setAP_Transportation_Subsore(Double AP_Transportation_Subsore) {
-        this.AP_Transportation_Subsore = AP_Transportation_Subsore;
+    public void setAP_Transportation_SubScore(Double AP_Transportation_SubScore) {
+        this.AP_Transportation_SubScore = AP_Transportation_SubScore;
     }
 
-    public Double getEP_Transportation_Subsore() {
-        return EP_Transportation_Subsore;
+    public Double getEP_Transportation_SubScore() {
+        return EP_Transportation_SubScore;
     }
 
-    public void setEP_Transportation_Subsore(Double EP_Transportation_Subsore) {
-        this.EP_Transportation_Subsore = EP_Transportation_Subsore;
+    public void setEP_Transportation_SubScore(Double EP_Transportation_SubScore) {
+        this.EP_Transportation_SubScore = EP_Transportation_SubScore;
     }
 
-    public Double getPOCP_Transportation_Subsore() {
-        return POCP_Transportation_Subsore;
+    public Double getPOCP_Transportation_SubScore() {
+        return POCP_Transportation_SubScore;
     }
 
-    public void setPOCP_Transportation_Subsore(Double POCP_Transportation_Subsore) {
-        this.POCP_Transportation_Subsore = POCP_Transportation_Subsore;
+    public void setPOCP_Transportation_SubScore(Double POCP_Transportation_SubScore) {
+        this.POCP_Transportation_SubScore = POCP_Transportation_SubScore;
     }
 
-    public Double getTW_Transportation_Subsore() {
-        return TW_Transportation_Subsore;
+    public Double getTW_Transportation_SubScore() {
+        return TW_Transportation_SubScore;
     }
 
-    public void setTW_Transportation_Subsore(Double TW_Transportation_Subsore) {
-        this.TW_Transportation_Subsore = TW_Transportation_Subsore;
+    public void setTW_Transportation_SubScore(Double TW_Transportation_SubScore) {
+        this.TW_Transportation_SubScore = TW_Transportation_SubScore;
     }
 
-    public Double getTPEC_Transportation_Subsore() {
-        return TPEC_Transportation_Subsore;
+    public Double getTPEC_Transportation_SubScore() {
+        return TPEC_Transportation_SubScore;
     }
 
-    public void setTPEC_Transportation_Subsore(Double TPEC_Transportation_Subsore) {
-        this.TPEC_Transportation_Subsore = TPEC_Transportation_Subsore;
+    public void setTPEC_Transportation_SubScore(Double TPEC_Transportation_SubScore) {
+        this.TPEC_Transportation_SubScore = TPEC_Transportation_SubScore;
     }
 }

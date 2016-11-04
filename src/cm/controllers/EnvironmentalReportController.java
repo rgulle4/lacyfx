@@ -10,8 +10,6 @@ import javafx.scene.chart.*;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 
-import java.util.Arrays;
-
 import static cm.models.Model.*;
 
 //import static cm.App.designMap;
@@ -145,39 +143,65 @@ public final class EnvironmentalReportController {
                 if (materialIndex == overallIndex) {
                     if (rawValue_ComboBox.getSelectionModel().isSelected(0)) {
                         //ctb is selected
-                        barChart_EPD_Ctr_Alternative(designID, layerID, layerTemp);
+                        barChart_EPD_Ctb_Mix(designID, layerID, layerTemp);
                     }
-//                    if(rawValue_ComboBox.getSelectionModel().isSelected(1)){
-//                        //Norm is selected
-//                        barChart_EPD_Norm_Alternative(designID, mixTemp);
-//                    }
-//                    if(rawValue_ComboBox.getSelectionModel().isSelected(2)){
-//                        //SubScore is selected
-//                        barChart_EPD_SubScore_Alternative(designID, mixTemp);
-//                    }
+                    if(rawValue_ComboBox.getSelectionModel().isSelected(1)){
+                        //Norm is selected
+                        barChart_EPD_Norm_Mix(designID, layerID, layerTemp);
+                    }
+                    if(rawValue_ComboBox.getSelectionModel().isSelected(2)){
+                        //SubScore is selected
+                        barChart_EPD_SubScore_Mix(designID, layerID, layerTemp);
+                    }
                 } else {
                     Mix mixTemp = layerTemp.getMaterial(materialIndex);
                     if (rawValue_ComboBox.getSelectionModel().isSelected(0)) {
                         //ctb is selected
-                        barChart_EPD_Ctr_Alternative(designID, layerID, mixID, mixTemp);
+                        barChart_EPD_Ctb_Mix(designID, layerID, mixID, mixTemp);
+                    }
+                    if (rawValue_ComboBox.getSelectionModel().isSelected(1)) {
+                        //ctb is selected
+                        barChart_EPD_NORM_Mix(designID, layerID, mixID, mixTemp);
+                    }
+                    if (rawValue_ComboBox.getSelectionModel().isSelected(2)) {
+                        //ctb is selected
+                        barChart_EPD_SubScore_Mix(designID, layerID, mixID, mixTemp);
                     }
                 }
 
             }
             // TSP is selected
             else {
-//                if (rawValue_ComboBox.getSelectionModel().isSelected(0)) {
-//                    //ctb is selected
-//                    barChart_Transportation_Ctr_Alternative(designID, mixTemp);
-//                }
-//                if(rawValue_ComboBox.getSelectionModel().isSelected(1)){
-//                    //Norm is selected
-//                    barChart_Transportation_Norm_Alternative(designID, mixTemp);
-//                }
-//                if(rawValue_ComboBox.getSelectionModel().isSelected(2)){
-//                    //SubScore is selected
-//                    barChart_Transportation_SubScore_Alternative(designID, mixTemp);
-//                }
+                int overallIndex = layerTemp.getNumberofMaterials();
+                if (materialIndex == overallIndex) {
+                    if (rawValue_ComboBox.getSelectionModel().isSelected(0)) {
+                        //ctb is selected
+                        barChart_Transportation_Ctr_Mix(designID, layerID, layerTemp);
+                    }
+                    if(rawValue_ComboBox.getSelectionModel().isSelected(1)){
+                        //Norm is selected
+                        barChart_Transportation_Norm_Mix(designID, layerID, layerTemp);
+                    }
+                    if(rawValue_ComboBox.getSelectionModel().isSelected(2)){
+                        //SubScore is selected
+                        barChart_Transportation_SubScore_Mix(designID, layerID, layerTemp);
+                    }
+                } else {
+                    Mix mixTemp = layerTemp.getMaterial(materialIndex);
+                    if (rawValue_ComboBox.getSelectionModel().isSelected(0)) {
+                        //ctb is selected
+                        barChart_Transportation_Ctr_Mix(designID, layerID, mixID, mixTemp);
+                    }
+                    if(rawValue_ComboBox.getSelectionModel().isSelected(1)){
+                        //Norm is selected
+                        barChart_Transportation_NORM_Mix(designID, layerID, mixID, mixTemp);
+
+                    }
+                    if(rawValue_ComboBox.getSelectionModel().isSelected(2)){
+                        //SubScore is selected
+                        barChart_Transportation_SubScore_Mix(designID, layerID, mixID, mixTemp);
+                    }
+                }
             }
         }else{
             System.out.println("Don't worry, economical analysis is coming soon!");
@@ -281,55 +305,7 @@ public final class EnvironmentalReportController {
 
     }
 
-    public void stackBarChart_EPD_Ctb_Alternative(String designID, Layer layerTemp){
-        // clear old data
-        bc.getData().clear();
-        bc.setVisible(false);
-        bc.layout();
-        sbc.getData().clear();
-        sbc.setVisible(true);
-        sbc.layout();
-        // set up axis label
-        xAxis.setLabel("Alternative");
-        yAxis.setLabel("Score");
-        xAxis.setCategories(FXCollections.<String>observableArrayList(
-                Arrays.asList(
-                        "mix 1",
-                        "mix 2",
-                        "mix 3")));
-
-        serie_GWP.setName("GWP");
-        serie_GWP.getData().add(new XYChart.Data<>("mix 1", layerTemp.getGWP_EDP_Ctb()));
-        serie_GWP.getData().add(new XYChart.Data<>("mix 2", layerTemp.getGWP_EDP_Ctb()));
-        serie_GWP.getData().add(new XYChart.Data<>("mix 3", layerTemp.getGWP_EDP_Ctb()));
-        serie_ODP.setName("ODP");
-        serie_ODP.getData().add(new XYChart.Data<>("mix 1", layerTemp.getODP_EDP_Ctb()));
-        serie_ODP.getData().add(new XYChart.Data<>("mix 2", layerTemp.getODP_EDP_Ctb()));
-        serie_ODP.getData().add(new XYChart.Data<>("mix 3", layerTemp.getODP_EDP_Ctb()));
-        serie_AP.setName("AP");
-        serie_AP.getData().add(new XYChart.Data<>("mix 1", layerTemp.getAP_EDP_Ctb()));
-        serie_AP.getData().add(new XYChart.Data<>("mix 2", layerTemp.getAP_EDP_Ctb()));
-        serie_AP.getData().add(new XYChart.Data<>("mix 3", layerTemp.getAP_EDP_Ctb()));
-        serie_EP.setName("EP");
-        serie_EP.getData().add(new XYChart.Data<>("mix 1", layerTemp.getEP_EDP_Ctb()));
-        serie_EP.getData().add(new XYChart.Data<>("mix 2", layerTemp.getEP_EDP_Ctb()));
-        serie_EP.getData().add(new XYChart.Data<>("mix 3", layerTemp.getEP_EDP_Ctb()));
-        serie_POCP.setName("POCP");
-        serie_POCP.getData().add(new XYChart.Data<>("mix 1", layerTemp.getPOCP_EDP_Ctb()));
-        serie_POCP.getData().add(new XYChart.Data<>("mix 2", layerTemp.getPOCP_EDP_Ctb()));
-        serie_POCP.getData().add(new XYChart.Data<>("mix 3", layerTemp.getPOCP_EDP_Ctb()));
-        serie_TotalWater.setName("TotalWater");
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 1", layerTemp.getTW_EDP_Ctb()));
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 2", layerTemp.getTW_EDP_Ctb()));
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 3", layerTemp.getTW_EDP_Ctb()));
-        serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 1", layerTemp.getTPEC_EDP_Ctb()));
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 2", layerTemp.getTPEC_EDP_Ctb()));
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 3", layerTemp.getTPEC_EDP_Ctb()));
-        sbc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalWater,serie_TotalPrimaryEnergyConsumption);
-    }
-
-    public void barChart_EPD_Ctr_Alternative(String designID,String layerID, Layer layer){
+    public void barChart_EPD_Ctb_Mix(String designID, String layerID, Layer layer){
         // clear old data
         sbc.getData().clear();
         sbc.setVisible(false);
@@ -354,19 +330,19 @@ public final class EnvironmentalReportController {
             StringBuilder sb = new StringBuilder().append(designID).append(layerID).append("Mix "+i);
             final String mixID = sb.toString();
             Mix mix = layer.getMaterial(i-1);
-            serie_GWP.getData().add(new XYChart.Data<>(mixID, mix.getGWP_EDP_Ctb()));
-            serie_ODP.getData().add(new XYChart.Data<>(mixID, mix.getODP_EDP_Ctb()));
-            serie_AP.getData().add(new XYChart.Data<>(mixID, mix.getAP_EDP_Ctb()));
-            serie_EP.getData().add(new XYChart.Data<>(mixID, mix.getEP_EDP_Ctb()));
-            serie_POCP.getData().add(new XYChart.Data<>(mixID, mix.getPOCP_EDP_Ctb()));
-            serie_TotalWater.getData().add(new XYChart.Data<>(mixID, mix.getTW_EDP_Ctb()));
-            serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(mixID, mix.getTPEC_EDP_Ctb()));
+            serie_GWP.getData().add(new XYChart.Data<>(mixID, mix.getGWP_EPD_Ctb()));
+            serie_ODP.getData().add(new XYChart.Data<>(mixID, mix.getODP_EPD_Ctb()));
+            serie_AP.getData().add(new XYChart.Data<>(mixID, mix.getAP_EPD_Ctb()));
+            serie_EP.getData().add(new XYChart.Data<>(mixID, mix.getEP_EPD_Ctb()));
+            serie_POCP.getData().add(new XYChart.Data<>(mixID, mix.getPOCP_EPD_Ctb()));
+            serie_TotalWater.getData().add(new XYChart.Data<>(mixID, mix.getTW_EPD_Ctb()));
+            serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(mixID, mix.getTPEC_EPD_Ctb()));
         }
 
         bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalWater, serie_TotalPrimaryEnergyConsumption);
     }
 
-    public void barChart_EPD_Ctr_Alternative(String designID,String layerID, String mixID, Mix mix){
+    public void barChart_EPD_Ctb_Mix(String designID, String layerID, String mixID, Mix mix){
         // clear old data
         sbc.getData().clear();
         sbc.setVisible(false);
@@ -380,13 +356,13 @@ public final class EnvironmentalReportController {
 
             StringBuilder sb = new StringBuilder().append(designID).append(layerID).append(mixID);
             final String mixid = sb.toString();
-            serie_GWP.getData().add(new XYChart.Data<>(mixid, mix.getGWP_EDP_Ctb()));
-            serie_ODP.getData().add(new XYChart.Data<>(mixid, mix.getODP_EDP_Ctb()));
-            serie_AP.getData().add(new XYChart.Data<>(mixid, mix.getAP_EDP_Ctb()));
-            serie_EP.getData().add(new XYChart.Data<>(mixid, mix.getEP_EDP_Ctb()));
-            serie_POCP.getData().add(new XYChart.Data<>(mixid, mix.getPOCP_EDP_Ctb()));
-            serie_TotalWater.getData().add(new XYChart.Data<>(mixid, mix.getTW_EDP_Ctb()));
-            serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(mixid, mix.getTPEC_EDP_Ctb()));
+            serie_GWP.getData().add(new XYChart.Data<>(mixid, mix.getGWP_EPD_Ctb()));
+            serie_ODP.getData().add(new XYChart.Data<>(mixid, mix.getODP_EPD_Ctb()));
+            serie_AP.getData().add(new XYChart.Data<>(mixid, mix.getAP_EPD_Ctb()));
+            serie_EP.getData().add(new XYChart.Data<>(mixid, mix.getEP_EPD_Ctb()));
+            serie_POCP.getData().add(new XYChart.Data<>(mixid, mix.getPOCP_EPD_Ctb()));
+            serie_TotalWater.getData().add(new XYChart.Data<>(mixid, mix.getTW_EPD_Ctb()));
+            serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(mixid, mix.getTPEC_EPD_Ctb()));
 
         serie_GWP.setName("GWP");
         serie_ODP.setName("ODP");
@@ -398,7 +374,7 @@ public final class EnvironmentalReportController {
         bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalWater, serie_TotalPrimaryEnergyConsumption);
     }
 
-    public void barChart_EPD_Norm_Alternative(String designID, Mix mix){
+    public void barChart_EPD_Norm_Mix(String designID, String layerID, Layer layer){
         // clear old data
         sbc.getData().clear();
         sbc.setVisible(false);
@@ -407,41 +383,35 @@ public final class EnvironmentalReportController {
         bc.setVisible(true);
         bc.layout();
         // set up axis label
-        xAxis.setLabel("Alternative");
-        yAxis.setLabel("Score");
+        xAxis.setLabel("Mix");
+        yAxis.setLabel("Value");
 
+        int mixNum = layer.getNumberofMaterials();
         serie_GWP.setName("GWP");
-        serie_GWP.getData().add(new XYChart.Data<>("mix 1", mix.getGWP_EDP_NORM()));
-        serie_GWP.getData().add(new XYChart.Data<>("mix 2", mix.getGWP_EDP_NORM()));
-        serie_GWP.getData().add(new XYChart.Data<>("mix 3", mix.getGWP_EDP_NORM()));
         serie_ODP.setName("ODP");
-        serie_ODP.getData().add(new XYChart.Data<>("mix 1", mix.getODP_EDP_NORM()));
-        serie_ODP.getData().add(new XYChart.Data<>("mix 2", mix.getODP_EDP_NORM()));
-        serie_ODP.getData().add(new XYChart.Data<>("mix 3", mix.getODP_EDP_NORM()));
         serie_AP.setName("AP");
-        serie_AP.getData().add(new XYChart.Data<>("mix 1", mix.getAP_EDP_NORM()));
-        serie_AP.getData().add(new XYChart.Data<>("mix 2", mix.getAP_EDP_NORM()));
-        serie_AP.getData().add(new XYChart.Data<>("mix 3", mix.getAP_EDP_NORM()));
         serie_EP.setName("EP");
-        serie_EP.getData().add(new XYChart.Data<>("mix 1", mix.getEP_EDP_NORM()));
-        serie_EP.getData().add(new XYChart.Data<>("mix 2", mix.getEP_EDP_NORM()));
-        serie_EP.getData().add(new XYChart.Data<>("mix 3", mix.getEP_EDP_NORM()));
         serie_POCP.setName("POCP");
-        serie_POCP.getData().add(new XYChart.Data<>("mix 1", mix.getPOCP_EDP_NORM()));
-        serie_POCP.getData().add(new XYChart.Data<>("mix 2", mix.getPOCP_EDP_NORM()));
-        serie_POCP.getData().add(new XYChart.Data<>("mix 3", mix.getPOCP_EDP_NORM()));
         serie_TotalWater.setName("TotalWater");
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 1", mix.getTW_EDP_NORM()));
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 2", mix.getTW_EDP_NORM()));
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 3", mix.getTW_EDP_NORM()));
         serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 1", mix.getTPEC_EDP_NORM()));
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 2", mix.getTPEC_EDP_NORM()));
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 3", mix.getTPEC_EDP_NORM()));
+
+        for (int i = 1; i <= mixNum; i ++){
+            StringBuilder sb = new StringBuilder().append(designID).append(layerID).append("Mix "+i);
+            final String mixID = sb.toString();
+            Mix mix = layer.getMaterial(i-1);
+            serie_GWP.getData().add(new XYChart.Data<>(mixID, mix.getGWP_EPD_NORM()));
+            serie_ODP.getData().add(new XYChart.Data<>(mixID, mix.getODP_EPD_NORM()));
+            serie_AP.getData().add(new XYChart.Data<>(mixID, mix.getAP_EPD_NORM()));
+            serie_EP.getData().add(new XYChart.Data<>(mixID, mix.getEP_EPD_NORM()));
+            serie_POCP.getData().add(new XYChart.Data<>(mixID, mix.getPOCP_EPD_NORM()));
+            serie_TotalWater.getData().add(new XYChart.Data<>(mixID, mix.getTW_EPD_NORM()));
+            serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(mixID, mix.getTPEC_EPD_NORM()));
+        }
+
         bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalWater, serie_TotalPrimaryEnergyConsumption);
     }
 
-    public void barChart_EPD_SubScore_Alternative(String designID, Mix mix){
+    public void barChart_EPD_NORM_Mix(String designID, String layerID, String mixID, Mix mix){
         // clear old data
         sbc.getData().clear();
         sbc.setVisible(false);
@@ -450,87 +420,101 @@ public final class EnvironmentalReportController {
         bc.setVisible(true);
         bc.layout();
         // set up axis label
-        xAxis.setLabel("Alternative");
-        yAxis.setLabel("Score");
+        xAxis.setLabel("Mix");
+        yAxis.setLabel("Value");
+
+        StringBuilder sb = new StringBuilder().append(designID).append(layerID).append(mixID);
+        final String mixid = sb.toString();
+        serie_GWP.getData().add(new XYChart.Data<>(mixid, mix.getGWP_EPD_NORM()));
+        serie_ODP.getData().add(new XYChart.Data<>(mixid, mix.getODP_EPD_NORM()));
+        serie_AP.getData().add(new XYChart.Data<>(mixid, mix.getAP_EPD_NORM()));
+        serie_EP.getData().add(new XYChart.Data<>(mixid, mix.getEP_EPD_NORM()));
+        serie_POCP.getData().add(new XYChart.Data<>(mixid, mix.getPOCP_EPD_NORM()));
+        serie_TotalWater.getData().add(new XYChart.Data<>(mixid, mix.getTW_EPD_NORM()));
+        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(mixid, mix.getTPEC_EPD_NORM()));
 
         serie_GWP.setName("GWP");
-        serie_GWP.getData().add(new XYChart.Data<>("mix 1", mix.getGWP_EDP_Subsore()));
-        serie_GWP.getData().add(new XYChart.Data<>("mix 2", mix.getGWP_EDP_Subsore()));
-        serie_GWP.getData().add(new XYChart.Data<>("mix 3", mix.getGWP_EDP_Subsore()));
         serie_ODP.setName("ODP");
-        serie_ODP.getData().add(new XYChart.Data<>("mix 1", mix.getODP_EDP_Subsore()));
-        serie_ODP.getData().add(new XYChart.Data<>("mix 2", mix.getODP_EDP_Subsore()));
-        serie_ODP.getData().add(new XYChart.Data<>("mix 3", mix.getODP_EDP_Subsore()));
         serie_AP.setName("AP");
-        serie_AP.getData().add(new XYChart.Data<>("mix 1", mix.getAP_EDP_Subsore()));
-        serie_AP.getData().add(new XYChart.Data<>("mix 2", mix.getAP_EDP_Subsore()));
-        serie_AP.getData().add(new XYChart.Data<>("mix 3", mix.getAP_EDP_Subsore()));
         serie_EP.setName("EP");
-        serie_EP.getData().add(new XYChart.Data<>("mix 1", mix.getEP_EDP_Subsore()));
-        serie_EP.getData().add(new XYChart.Data<>("mix 2", mix.getEP_EDP_Subsore()));
-        serie_EP.getData().add(new XYChart.Data<>("mix 3", mix.getEP_EDP_Subsore()));
         serie_POCP.setName("POCP");
-        serie_POCP.getData().add(new XYChart.Data<>("mix 1", mix.getPOCP_EDP_Subsore()));
-        serie_POCP.getData().add(new XYChart.Data<>("mix 2", mix.getPOCP_EDP_Subsore()));
-        serie_POCP.getData().add(new XYChart.Data<>("mix 3", mix.getPOCP_EDP_Subsore()));
-
+        serie_TotalWater.setName("TotalWater");
         serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 1", mix.getTPEC_EDP_Subsore()));
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 2", mix.getTPEC_EDP_Subsore()));
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 3", mix.getTPEC_EDP_Subsore()));
+        bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalWater, serie_TotalPrimaryEnergyConsumption);
+    }
+
+    public void barChart_EPD_SubScore_Mix(String designID, String layerID, Layer layer){
+        // clear old data
+        sbc.getData().clear();
+        sbc.setVisible(false);
+        sbc.layout();
+        bc.getData().clear();
+        bc.setVisible(true);
+        bc.layout();
+        // set up axis label
+        xAxis.setLabel("Mix");
+        yAxis.setLabel("Value");
+
+        int mixNum = layer.getNumberofMaterials();
+        serie_GWP.setName("GWP");
+        serie_ODP.setName("ODP");
+        serie_AP.setName("AP");
+        serie_EP.setName("EP");
+        serie_POCP.setName("POCP");
+//        serie_TotalWater.setName("TotalWater");
+        serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
+
+        for (int i = 1; i <= mixNum; i ++){
+            StringBuilder sb = new StringBuilder().append(designID).append(layerID).append("Mix "+i);
+            final String mixID = sb.toString();
+            Mix mix = layer.getMaterial(i-1);
+            serie_GWP.getData().add(new XYChart.Data<>(mixID, mix.getGWP_EPD_SubScore()));
+            serie_ODP.getData().add(new XYChart.Data<>(mixID, mix.getODP_EPD_SubScore()));
+            serie_AP.getData().add(new XYChart.Data<>(mixID, mix.getAP_EPD_SubScore()));
+            serie_EP.getData().add(new XYChart.Data<>(mixID, mix.getEP_EPD_SubScore()));
+            serie_POCP.getData().add(new XYChart.Data<>(mixID, mix.getPOCP_EPD_SubScore()));
+//            serie_TotalWater.getData().add(new XYChart.Data<>(mixID, mix.getTW_EPD_SubScore()));
+            serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(mixID, mix.getTPEC_EPD_SubScore()));
+        }
+
+        bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalPrimaryEnergyConsumption);
+    }
+
+    public void barChart_EPD_SubScore_Mix(String designID, String layerID, String mixID, Mix mix){
+        // clear old data
+        sbc.getData().clear();
+        sbc.setVisible(false);
+        sbc.layout();
+        bc.getData().clear();
+        bc.setVisible(true);
+        bc.layout();
+        // set up axis label
+        xAxis.setLabel("Mix");
+        yAxis.setLabel("Value");
+
+        StringBuilder sb = new StringBuilder().append(designID).append(layerID).append(mixID);
+        final String mixid = sb.toString();
+        serie_GWP.getData().add(new XYChart.Data<>(mixid, mix.getGWP_EPD_SubScore()));
+        serie_ODP.getData().add(new XYChart.Data<>(mixid, mix.getODP_EPD_SubScore()));
+        serie_AP.getData().add(new XYChart.Data<>(mixid, mix.getAP_EPD_SubScore()));
+        serie_EP.getData().add(new XYChart.Data<>(mixid, mix.getEP_EPD_SubScore()));
+        serie_POCP.getData().add(new XYChart.Data<>(mixid, mix.getPOCP_EPD_SubScore()));
+//        serie_TotalWater.getData().add(new XYChart.Data<>(mixid, mix.getTW_EPD_SubScore()));
+        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(mixid, mix.getTPEC_EPD_SubScore()));
+
+        serie_GWP.setName("GWP");
+        serie_ODP.setName("ODP");
+        serie_AP.setName("AP");
+        serie_EP.setName("EP");
+        serie_POCP.setName("POCP");
+//        serie_TotalWater.setName("TotalWater");
+        serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
         bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalPrimaryEnergyConsumption);
     }
 
     //TSP PART
-    public void stackBarChart_Transportation_Ctb_Alternative(String designID, Layer layerTemp){
-        // clear old data
-        bc.getData().clear();
-        bc.setVisible(false);
-        bc.layout();
-        sbc.getData().clear();
-        sbc.setVisible(true);
-        sbc.layout();
-        // set up axis label
-        xAxis.setLabel("Alternative");
-        yAxis.setLabel("Score");
-        xAxis.setCategories(FXCollections.<String>observableArrayList(
-                Arrays.asList(
-                        "mix 1",
-                        "mix 2",
-                        "mix 3")));
 
-        serie_GWP.setName("GWP");
-        serie_GWP.getData().add(new XYChart.Data<>("mix 1", layerTemp.getGWP_Transportation_Ctb()));
-        serie_GWP.getData().add(new XYChart.Data<>("mix 2", layerTemp.getGWP_Transportation_Ctb()));
-        serie_GWP.getData().add(new XYChart.Data<>("mix 3", layerTemp.getGWP_Transportation_Ctb()));
-        serie_ODP.setName("ODP");
-        serie_ODP.getData().add(new XYChart.Data<>("mix 1", layerTemp.getODP_Transportation_Ctb()));
-        serie_ODP.getData().add(new XYChart.Data<>("mix 2", layerTemp.getODP_Transportation_Ctb()));
-        serie_ODP.getData().add(new XYChart.Data<>("mix 3", layerTemp.getODP_Transportation_Ctb()));
-        serie_AP.setName("AP");
-        serie_AP.getData().add(new XYChart.Data<>("mix 1", layerTemp.getAP_Transportation_Ctb()));
-        serie_AP.getData().add(new XYChart.Data<>("mix 2", layerTemp.getAP_Transportation_Ctb()));
-        serie_AP.getData().add(new XYChart.Data<>("mix 3", layerTemp.getAP_Transportation_Ctb()));
-        serie_EP.setName("EP");
-        serie_EP.getData().add(new XYChart.Data<>("mix 1", layerTemp.getEP_Transportation_Ctb()));
-        serie_EP.getData().add(new XYChart.Data<>("mix 2", layerTemp.getEP_Transportation_Ctb()));
-        serie_EP.getData().add(new XYChart.Data<>("mix 3", layerTemp.getEP_Transportation_Ctb()));
-        serie_POCP.setName("POCP");
-        serie_POCP.getData().add(new XYChart.Data<>("mix 1", layerTemp.getPOCP_Transportation_Ctb()));
-        serie_POCP.getData().add(new XYChart.Data<>("mix 2", layerTemp.getPOCP_Transportation_Ctb()));
-        serie_POCP.getData().add(new XYChart.Data<>("mix 3", layerTemp.getPOCP_Transportation_Ctb()));
-        serie_TotalWater.setName("TotalWater");
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 1", layerTemp.getTW_Transportation_Ctb()));
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 2", layerTemp.getTW_Transportation_Ctb()));
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 3", layerTemp.getTW_Transportation_Ctb()));
-        serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 1", layerTemp.getTPEC_Transportation_Ctb()));
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 2", layerTemp.getTPEC_Transportation_Ctb()));
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 3", layerTemp.getTPEC_Transportation_Ctb()));
-        sbc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalWater, serie_TotalPrimaryEnergyConsumption);
-    }
-
-    public void barChart_Transportation_Ctr_Alternative(String designID, Mix mix){
+    public void barChart_Transportation_Ctr_Mix(String designID, String layerID, Layer layer){
         // clear old data
         sbc.getData().clear();
         sbc.setVisible(false);
@@ -539,41 +523,35 @@ public final class EnvironmentalReportController {
         bc.setVisible(true);
         bc.layout();
         // set up axis label
-        xAxis.setLabel("Alternative");
-        yAxis.setLabel("Score");
+        xAxis.setLabel("Mix");
+        yAxis.setLabel("Value");
 
+        int mixNum = layer.getNumberofMaterials();
         serie_GWP.setName("GWP");
-        serie_GWP.getData().add(new XYChart.Data<>("mix 1", mix.getGWP_Transportation_Ctb()));
-        serie_GWP.getData().add(new XYChart.Data<>("mix 2", mix.getGWP_Transportation_Ctb()));
-        serie_GWP.getData().add(new XYChart.Data<>("mix 3", mix.getGWP_Transportation_Ctb()));
         serie_ODP.setName("ODP");
-        serie_ODP.getData().add(new XYChart.Data<>("mix 1", mix.getODP_Transportation_Ctb()));
-        serie_ODP.getData().add(new XYChart.Data<>("mix 2", mix.getODP_Transportation_Ctb()));
-        serie_ODP.getData().add(new XYChart.Data<>("mix 3", mix.getODP_Transportation_Ctb()));
         serie_AP.setName("AP");
-        serie_AP.getData().add(new XYChart.Data<>("mix 1", mix.getAP_Transportation_Ctb()));
-        serie_AP.getData().add(new XYChart.Data<>("mix 2", mix.getAP_Transportation_Ctb()));
-        serie_AP.getData().add(new XYChart.Data<>("mix 3", mix.getAP_Transportation_Ctb()));
         serie_EP.setName("EP");
-        serie_EP.getData().add(new XYChart.Data<>("mix 1", mix.getEP_Transportation_Ctb()));
-        serie_EP.getData().add(new XYChart.Data<>("mix 2", mix.getEP_Transportation_Ctb()));
-        serie_EP.getData().add(new XYChart.Data<>("mix 3", mix.getEP_Transportation_Ctb()));
         serie_POCP.setName("POCP");
-        serie_POCP.getData().add(new XYChart.Data<>("mix 1", mix.getPOCP_Transportation_Ctb()));
-        serie_POCP.getData().add(new XYChart.Data<>("mix 2", mix.getPOCP_Transportation_Ctb()));
-        serie_POCP.getData().add(new XYChart.Data<>("mix 3", mix.getPOCP_Transportation_Ctb()));
         serie_TotalWater.setName("TotalWater");
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 1", mix.getTW_Transportation_Ctb()));
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 2", mix.getTW_Transportation_Ctb()));
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 3", mix.getTW_Transportation_Ctb()));
         serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 1", mix.getTPEC_Transportation_Ctb()));
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 2", mix.getTPEC_Transportation_Ctb()));
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 3", mix.getTPEC_Transportation_Ctb()));
+
+        for (int i = 1; i <= mixNum; i ++){
+            StringBuilder sb = new StringBuilder().append(designID).append(layerID).append("Mix "+i);
+            final String mixID = sb.toString();
+            Mix mix = layer.getMaterial(i-1);
+            serie_GWP.getData().add(new XYChart.Data<>(mixID, mix.getGWP_Transportation_Ctb()));
+            serie_ODP.getData().add(new XYChart.Data<>(mixID, mix.getODP_Transportation_Ctb()));
+            serie_AP.getData().add(new XYChart.Data<>(mixID, mix.getAP_Transportation_Ctb()));
+            serie_EP.getData().add(new XYChart.Data<>(mixID, mix.getEP_Transportation_Ctb()));
+            serie_POCP.getData().add(new XYChart.Data<>(mixID, mix.getPOCP_Transportation_Ctb()));
+            serie_TotalWater.getData().add(new XYChart.Data<>(mixID, mix.getTW_Transportation_Ctb()));
+            serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(mixID, mix.getTPEC_Transportation_Ctb()));
+        }
+
         bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalWater, serie_TotalPrimaryEnergyConsumption);
     }
 
-    public void barChart_Transportation_Norm_Alternative(String designID, Mix mix){
+    public void barChart_Transportation_Ctr_Mix(String designID, String layerID, String mixID, Mix mix){
         // clear old data
         sbc.getData().clear();
         sbc.setVisible(false);
@@ -582,41 +560,30 @@ public final class EnvironmentalReportController {
         bc.setVisible(true);
         bc.layout();
         // set up axis label
-        xAxis.setLabel("Alternative");
-        yAxis.setLabel("Score");
+        xAxis.setLabel("Mix");
+        yAxis.setLabel("Value");
+
+        StringBuilder sb = new StringBuilder().append(designID).append(layerID).append(mixID);
+        final String mixid = sb.toString();
+        serie_GWP.getData().add(new XYChart.Data<>(mixid, mix.getGWP_Transportation_Ctb()));
+        serie_ODP.getData().add(new XYChart.Data<>(mixid, mix.getODP_Transportation_Ctb()));
+        serie_AP.getData().add(new XYChart.Data<>(mixid, mix.getAP_Transportation_Ctb()));
+        serie_EP.getData().add(new XYChart.Data<>(mixid, mix.getEP_Transportation_Ctb()));
+        serie_POCP.getData().add(new XYChart.Data<>(mixid, mix.getPOCP_Transportation_Ctb()));
+        serie_TotalWater.getData().add(new XYChart.Data<>(mixid, mix.getTW_Transportation_Ctb()));
+        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(mixid, mix.getTPEC_Transportation_Ctb()));
 
         serie_GWP.setName("GWP");
-        serie_GWP.getData().add(new XYChart.Data<>("mix 1", mix.getGWP_Transportation_NORM()));
-        serie_GWP.getData().add(new XYChart.Data<>("mix 2", mix.getGWP_Transportation_NORM()));
-        serie_GWP.getData().add(new XYChart.Data<>("mix 3", mix.getGWP_Transportation_NORM()));
         serie_ODP.setName("ODP");
-        serie_ODP.getData().add(new XYChart.Data<>("mix 1", mix.getODP_Transportation_NORM()));
-        serie_ODP.getData().add(new XYChart.Data<>("mix 2", mix.getODP_Transportation_NORM()));
-        serie_ODP.getData().add(new XYChart.Data<>("mix 3", mix.getODP_Transportation_NORM()));
         serie_AP.setName("AP");
-        serie_AP.getData().add(new XYChart.Data<>("mix 1", mix.getAP_Transportation_NORM()));
-        serie_AP.getData().add(new XYChart.Data<>("mix 2", mix.getAP_Transportation_NORM()));
-        serie_AP.getData().add(new XYChart.Data<>("mix 3", mix.getAP_Transportation_NORM()));
         serie_EP.setName("EP");
-        serie_EP.getData().add(new XYChart.Data<>("mix 1", mix.getEP_Transportation_NORM()));
-        serie_EP.getData().add(new XYChart.Data<>("mix 2", mix.getEP_Transportation_NORM()));
-        serie_EP.getData().add(new XYChart.Data<>("mix 3", mix.getEP_Transportation_NORM()));
         serie_POCP.setName("POCP");
-        serie_POCP.getData().add(new XYChart.Data<>("mix 1", mix.getPOCP_Transportation_NORM()));
-        serie_POCP.getData().add(new XYChart.Data<>("mix 2", mix.getPOCP_Transportation_NORM()));
-        serie_POCP.getData().add(new XYChart.Data<>("mix 3", mix.getPOCP_Transportation_NORM()));
         serie_TotalWater.setName("TotalWater");
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 1", mix.getTW_Transportation_NORM()));
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 2", mix.getTW_Transportation_NORM()));
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 3", mix.getTW_Transportation_NORM()));
         serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 1", mix.getTPEC_Transportation_NORM()));
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 2", mix.getTPEC_Transportation_NORM()));
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 3", mix.getTPEC_Transportation_NORM()));
         bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalWater, serie_TotalPrimaryEnergyConsumption);
     }
 
-    public void barChart_Transportation_SubScore_Alternative(String designID, Mix mix){
+    public void barChart_Transportation_Norm_Mix(String designID, String layerID, Layer layer){
         // clear old data
         sbc.getData().clear();
         sbc.setVisible(false);
@@ -625,39 +592,136 @@ public final class EnvironmentalReportController {
         bc.setVisible(true);
         bc.layout();
         // set up axis label
-        xAxis.setLabel("Alternative");
-        yAxis.setLabel("Score");
+        xAxis.setLabel("Mix");
+        yAxis.setLabel("Value");
+
+        int mixNum = layer.getNumberofMaterials();
+        serie_GWP.setName("GWP");
+        serie_ODP.setName("ODP");
+        serie_AP.setName("AP");
+        serie_EP.setName("EP");
+        serie_POCP.setName("POCP");
+        serie_TotalWater.setName("TotalWater");
+        serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
+
+        for (int i = 1; i <= mixNum; i ++){
+            StringBuilder sb = new StringBuilder().append(designID).append(layerID).append("Mix "+i);
+            final String mixID = sb.toString();
+            Mix mix = layer.getMaterial(i-1);
+            serie_GWP.getData().add(new XYChart.Data<>(mixID, mix.getGWP_Transportation_NORM()));
+            serie_ODP.getData().add(new XYChart.Data<>(mixID, mix.getODP_Transportation_NORM()));
+            serie_AP.getData().add(new XYChart.Data<>(mixID, mix.getAP_Transportation_NORM()));
+            serie_EP.getData().add(new XYChart.Data<>(mixID, mix.getEP_Transportation_NORM()));
+            serie_POCP.getData().add(new XYChart.Data<>(mixID, mix.getPOCP_Transportation_NORM()));
+            serie_TotalWater.getData().add(new XYChart.Data<>(mixID, mix.getTW_Transportation_NORM()));
+            serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(mixID, mix.getTPEC_Transportation_NORM()));
+        }
+
+        bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalWater, serie_TotalPrimaryEnergyConsumption);
+    }
+
+    public void barChart_Transportation_NORM_Mix(String designID, String layerID, String mixID, Mix mix){
+        // clear old data
+        sbc.getData().clear();
+        sbc.setVisible(false);
+        sbc.layout();
+        bc.getData().clear();
+        bc.setVisible(true);
+        bc.layout();
+        // set up axis label
+        xAxis.setLabel("Mix");
+        yAxis.setLabel("Value");
+
+        StringBuilder sb = new StringBuilder().append(designID).append(layerID).append(mixID);
+        final String mixid = sb.toString();
+        serie_GWP.getData().add(new XYChart.Data<>(mixid, mix.getGWP_Transportation_NORM()));
+        serie_ODP.getData().add(new XYChart.Data<>(mixid, mix.getODP_Transportation_NORM()));
+        serie_AP.getData().add(new XYChart.Data<>(mixid, mix.getAP_Transportation_NORM()));
+        serie_EP.getData().add(new XYChart.Data<>(mixid, mix.getEP_Transportation_NORM()));
+        serie_POCP.getData().add(new XYChart.Data<>(mixid, mix.getPOCP_Transportation_NORM()));
+        serie_TotalWater.getData().add(new XYChart.Data<>(mixid, mix.getTW_Transportation_NORM()));
+        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(mixid, mix.getTPEC_Transportation_NORM()));
 
         serie_GWP.setName("GWP");
-        serie_GWP.getData().add(new XYChart.Data<>("mix 1", mix.getGWP_Transportation_Subsore()));
-        serie_GWP.getData().add(new XYChart.Data<>("mix 2", mix.getGWP_Transportation_Subsore()));
-        serie_GWP.getData().add(new XYChart.Data<>("mix 3", mix.getGWP_Transportation_Subsore()));
         serie_ODP.setName("ODP");
-        serie_ODP.getData().add(new XYChart.Data<>("mix 1", mix.getODP_Transportation_Subsore()));
-        serie_ODP.getData().add(new XYChart.Data<>("mix 2", mix.getODP_Transportation_Subsore()));
-        serie_ODP.getData().add(new XYChart.Data<>("mix 3", mix.getODP_Transportation_Subsore()));
         serie_AP.setName("AP");
-        serie_AP.getData().add(new XYChart.Data<>("mix 1", mix.getAP_Transportation_Subsore()));
-        serie_AP.getData().add(new XYChart.Data<>("mix 2", mix.getAP_Transportation_Subsore()));
-        serie_AP.getData().add(new XYChart.Data<>("mix 3", mix.getAP_Transportation_Subsore()));
         serie_EP.setName("EP");
-        serie_EP.getData().add(new XYChart.Data<>("mix 1", mix.getEP_Transportation_Subsore()));
-        serie_EP.getData().add(new XYChart.Data<>("mix 2", mix.getEP_Transportation_Subsore()));
-        serie_EP.getData().add(new XYChart.Data<>("mix 3", mix.getEP_Transportation_Subsore()));
         serie_POCP.setName("POCP");
-        serie_POCP.getData().add(new XYChart.Data<>("mix 1", mix.getPOCP_Transportation_Subsore()));
-        serie_POCP.getData().add(new XYChart.Data<>("mix 2", mix.getPOCP_Transportation_Subsore()));
-        serie_POCP.getData().add(new XYChart.Data<>("mix 3", mix.getPOCP_Transportation_Subsore()));
+        serie_TotalWater.setName("TotalWater");
+        serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
+        bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalWater, serie_TotalPrimaryEnergyConsumption);
+    }
+
+    public void barChart_Transportation_SubScore_Mix(String designID, String layerID, Layer layer){
+        // clear old data
+        sbc.getData().clear();
+        sbc.setVisible(false);
+        sbc.layout();
+        bc.getData().clear();
+        bc.setVisible(true);
+        bc.layout();
+        // set up axis label
+        xAxis.setLabel("Mix");
+        yAxis.setLabel("Value");
+
+        int mixNum = layer.getNumberofMaterials();
+        serie_GWP.setName("GWP");
+        serie_ODP.setName("ODP");
+        serie_AP.setName("AP");
+        serie_EP.setName("EP");
+        serie_POCP.setName("POCP");
 //        serie_TotalWater.setName("TotalWater");
-//        serie_TotalWater.getData().add(new XYChart.Data<>("mix 1", mix.getTW_Transportation_Subsore()));
-//        serie_TotalWater.getData().add(new XYChart.Data<>("mix 2", mix.getTW_Transportation_Subsore()));
-//        serie_TotalWater.getData().add(new XYChart.Data<>("mix 3", mix.getTW_Transportation_Subsore()));
         serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 1", mix.getTPEC_Transportation_Subsore()));
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 2", mix.getTPEC_Transportation_Subsore()));
-        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 3", mix.getTPEC_Transportation_Subsore()));
+
+        for (int i = 1; i <= mixNum; i ++){
+            StringBuilder sb = new StringBuilder().append(designID).append(layerID).append("Mix "+i);
+            final String mixID = sb.toString();
+            Mix mix = layer.getMaterial(i-1);
+            serie_GWP.getData().add(new XYChart.Data<>(mixID, mix.getGWP_Transportation_SubScore()));
+            serie_ODP.getData().add(new XYChart.Data<>(mixID, mix.getODP_Transportation_SubScore()));
+            serie_AP.getData().add(new XYChart.Data<>(mixID, mix.getAP_Transportation_SubScore()));
+            serie_EP.getData().add(new XYChart.Data<>(mixID, mix.getEP_Transportation_SubScore()));
+            serie_POCP.getData().add(new XYChart.Data<>(mixID, mix.getPOCP_Transportation_SubScore()));
+//            serie_TotalWater.getData().add(new XYChart.Data<>(mixID, mix.getTW_Transportation_SubScore()));
+            serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(mixID, mix.getTPEC_Transportation_SubScore()));
+        }
+
         bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalPrimaryEnergyConsumption);
     }
+
+    public void barChart_Transportation_SubScore_Mix(String designID, String layerID, String mixID, Mix mix){
+        // clear old data
+        sbc.getData().clear();
+        sbc.setVisible(false);
+        sbc.layout();
+        bc.getData().clear();
+        bc.setVisible(true);
+        bc.layout();
+        // set up axis label
+        xAxis.setLabel("Mix");
+        yAxis.setLabel("Value");
+
+        StringBuilder sb = new StringBuilder().append(designID).append(layerID).append(mixID);
+        final String mixid = sb.toString();
+        serie_GWP.getData().add(new XYChart.Data<>(mixid, mix.getGWP_Transportation_SubScore()));
+        serie_ODP.getData().add(new XYChart.Data<>(mixid, mix.getODP_Transportation_SubScore()));
+        serie_AP.getData().add(new XYChart.Data<>(mixid, mix.getAP_Transportation_SubScore()));
+        serie_EP.getData().add(new XYChart.Data<>(mixid, mix.getEP_Transportation_SubScore()));
+        serie_POCP.getData().add(new XYChart.Data<>(mixid, mix.getPOCP_Transportation_SubScore()));
+//        serie_TotalWater.getData().add(new XYChart.Data<>(mixid, mix.getTW_Transportation_SubScore()));
+        serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(mixid, mix.getTPEC_Transportation_SubScore()));
+
+        serie_GWP.setName("GWP");
+        serie_ODP.setName("ODP");
+        serie_AP.setName("AP");
+        serie_EP.setName("EP");
+        serie_POCP.setName("POCP");
+//        serie_TotalWater.setName("TotalWater");
+        serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
+        bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalPrimaryEnergyConsumption);
+    }
+
+
 
     public void cleanChart(){
         // clear old data
