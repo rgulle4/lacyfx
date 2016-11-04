@@ -40,7 +40,7 @@ public final class EnvironmentalReportController {
     private XYChart.Series<String, Number> serie_EP = new XYChart.Series<>();
     @FXML
     private XYChart.Series<String, Number> serie_POCP = new XYChart.Series<>();
-    @FXML
+//    @FXML
     private XYChart.Series<String, Number> serie_TotalWater = new XYChart.Series<>();
     @FXML
     private XYChart.Series<String, Number> serie_TotalPrimaryEnergyConsumption = new XYChart.Series<>();
@@ -313,7 +313,7 @@ public final class EnvironmentalReportController {
         serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 1", layerTemp.getTPEC_EDP_Ctb()));
         serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 2", layerTemp.getTPEC_EDP_Ctb()));
         serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 3", layerTemp.getTPEC_EDP_Ctb()));
-        sbc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalWater, serie_TotalPrimaryEnergyConsumption);
+        sbc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalWater,serie_TotalPrimaryEnergyConsumption);
     }
 
     public void barChart_EPD_Ctr_Alternative(String designID, Mix mix){
@@ -434,15 +434,12 @@ public final class EnvironmentalReportController {
         serie_POCP.getData().add(new XYChart.Data<>("mix 1", mix.getPOCP_EDP_Subsore()));
         serie_POCP.getData().add(new XYChart.Data<>("mix 2", mix.getPOCP_EDP_Subsore()));
         serie_POCP.getData().add(new XYChart.Data<>("mix 3", mix.getPOCP_EDP_Subsore()));
-        serie_TotalWater.setName("TotalWater");
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 1", mix.getTW_EDP_Subsore()));
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 2", mix.getTW_EDP_Subsore()));
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 3", mix.getTW_EDP_Subsore()));
+
         serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
         serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 1", mix.getTPEC_EDP_Subsore()));
         serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 2", mix.getTPEC_EDP_Subsore()));
         serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 3", mix.getTPEC_EDP_Subsore()));
-        bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalWater, serie_TotalPrimaryEnergyConsumption);
+        bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalPrimaryEnergyConsumption);
     }
 
     //TSP PART
@@ -612,15 +609,15 @@ public final class EnvironmentalReportController {
         serie_POCP.getData().add(new XYChart.Data<>("mix 1", mix.getPOCP_Transportation_Subsore()));
         serie_POCP.getData().add(new XYChart.Data<>("mix 2", mix.getPOCP_Transportation_Subsore()));
         serie_POCP.getData().add(new XYChart.Data<>("mix 3", mix.getPOCP_Transportation_Subsore()));
-        serie_TotalWater.setName("TotalWater");
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 1", mix.getTW_Transportation_Subsore()));
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 2", mix.getTW_Transportation_Subsore()));
-        serie_TotalWater.getData().add(new XYChart.Data<>("mix 3", mix.getTW_Transportation_Subsore()));
+//        serie_TotalWater.setName("TotalWater");
+//        serie_TotalWater.getData().add(new XYChart.Data<>("mix 1", mix.getTW_Transportation_Subsore()));
+//        serie_TotalWater.getData().add(new XYChart.Data<>("mix 2", mix.getTW_Transportation_Subsore()));
+//        serie_TotalWater.getData().add(new XYChart.Data<>("mix 3", mix.getTW_Transportation_Subsore()));
         serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
         serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 1", mix.getTPEC_Transportation_Subsore()));
         serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 2", mix.getTPEC_Transportation_Subsore()));
         serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>("mix 3", mix.getTPEC_Transportation_Subsore()));
-        bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalWater, serie_TotalPrimaryEnergyConsumption);
+        bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalPrimaryEnergyConsumption);
     }
 
     public void cleanChart(){

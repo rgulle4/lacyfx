@@ -21,10 +21,7 @@ public final class WeightsTabController {
     @FXML public TextField apWeightTextField;
     @FXML public TextField epWeightTextField;
     @FXML public TextField pocpWeightTextField;
-    @FXML public TextField concreteWasteWeightTextField;
-    @FXML public TextField totWaterConsumptionWeightTextField;
     @FXML public TextField PrimaryEnergyUseWeightTextField;
-    @FXML public TextField MaterialResourceUseWeightTextField;
     @FXML public TextField SumWeightsTextField;
 
     ObservableList<String> preDefinedWeight = FXCollections.observableArrayList("Default","test1","BEES Stakeholder Pane","EPA Science Advisory Board-based","User_Defined");
@@ -53,22 +50,16 @@ public final class WeightsTabController {
             apWeightTextField.setText("10.0");
             epWeightTextField.setText("10.0");
             pocpWeightTextField.setText("10.0");
-            concreteWasteWeightTextField.setText("10.0");
-            totWaterConsumptionWeightTextField.setText("10.0");
             PrimaryEnergyUseWeightTextField.setText("15.0");
-            MaterialResourceUseWeightTextField.setText("10.0");
         }
         // equal predefined Weights
         if (predefinedweightComboBox.getSelectionModel().isSelected(1)){
-            gwpWeightTextField.setText("25.0");
+            gwpWeightTextField.setText("30.0");
             odpWeightTextField.setText("10.0");
             apWeightTextField.setText("10.0");
             epWeightTextField.setText("10.0");
             pocpWeightTextField.setText("10.0");
-            concreteWasteWeightTextField.setText("0.0");
-            totWaterConsumptionWeightTextField.setText("10.0");
-            PrimaryEnergyUseWeightTextField.setText("25.0");
-            MaterialResourceUseWeightTextField.setText("0.0");
+            PrimaryEnergyUseWeightTextField.setText("30.0");
         }
         // user_defined Weights
         if (predefinedweightComboBox.getSelectionModel().isSelected(2)){
@@ -77,10 +68,7 @@ public final class WeightsTabController {
             apWeightTextField.setText("3.0");
             epWeightTextField.setText("6.0");
             pocpWeightTextField.setText("4.0");
-            concreteWasteWeightTextField.setText("7.0");
-            totWaterConsumptionWeightTextField.setText("8.0");
             PrimaryEnergyUseWeightTextField.setText("10.0");
-            MaterialResourceUseWeightTextField.setText("0.0");
         }
         if (predefinedweightComboBox.getSelectionModel().isSelected(3)){
             gwpWeightTextField.setText("16.0");
@@ -88,10 +76,7 @@ public final class WeightsTabController {
             apWeightTextField.setText("5.0");
             epWeightTextField.setText("5.0");
             pocpWeightTextField.setText("6.0");
-            concreteWasteWeightTextField.setText("11.0");
-            totWaterConsumptionWeightTextField.setText("3.0");
             PrimaryEnergyUseWeightTextField.setText("5.0");
-            MaterialResourceUseWeightTextField.setText("0.0");
         }
         if (predefinedweightComboBox.getSelectionModel().isSelected(4)){
             gwpWeightTextField.setText("0.0");
@@ -99,10 +84,7 @@ public final class WeightsTabController {
             apWeightTextField.setText("0.0");
             epWeightTextField.setText("0.0");
             pocpWeightTextField.setText("0.0");
-            concreteWasteWeightTextField.setText("0.0");
-            totWaterConsumptionWeightTextField.setText("0.0");
             PrimaryEnergyUseWeightTextField.setText("0.0");
-            MaterialResourceUseWeightTextField.setText("0.0");
         }
         SumWeight();
     }
@@ -114,12 +96,9 @@ public final class WeightsTabController {
         double w_ap = Double.parseDouble(apWeightTextField.getText());
         double w_ep = Double.parseDouble(epWeightTextField.getText());
         double w_pocp = Double.parseDouble(pocpWeightTextField.getText());
-        double w_cw = Double.parseDouble(concreteWasteWeightTextField.getText());
-        double w_twc = Double.parseDouble(totWaterConsumptionWeightTextField.getText());
         double w_peu = Double.parseDouble(PrimaryEnergyUseWeightTextField.getText());
-        double w_mru = Double.parseDouble(MaterialResourceUseWeightTextField.getText());
 
-        double sum = w_gwp+ w_odp + w_ap+ w_ep+ w_pocp+ w_cw+ w_twc+ w_peu+ w_mru;
+        double sum = w_gwp+ w_odp + w_ap+ w_ep+ w_pocp+ w_peu;
         SumWeightsTextField.setText(Double.toString(sum));
     }
 
@@ -133,10 +112,7 @@ public final class WeightsTabController {
         double w_ap = Double.parseDouble(apWeightTextField.getText())/100.0;
         double w_ep = Double.parseDouble(epWeightTextField.getText())/100.0;
         double w_pocp = Double.parseDouble(pocpWeightTextField.getText())/100.0;
-        double w_cw = Double.parseDouble(concreteWasteWeightTextField.getText())/100.0;
-        double w_twc = Double.parseDouble(totWaterConsumptionWeightTextField.getText())/100.0;
         double w_peu = Double.parseDouble(PrimaryEnergyUseWeightTextField.getText())/100.0;
-        double w_mru = Double.parseDouble(MaterialResourceUseWeightTextField.getText())/100.0;
         // TO DO
         // A warning to information everyTextfield should be valued and there is a default value for everyTextfield
         //Weights W = new Weights(w_enp,w_ecp,w_gwp,w_odp,w_ap,w_ep,w_pocp,w_cw,w_cnhw,w_twc,w_ap,w_dner,w_mru,w_dnmr);
@@ -151,10 +127,7 @@ public final class WeightsTabController {
         WEIGHTS.setwAp(w_ap);
         WEIGHTS.setwEp(w_ep);
         WEIGHTS.setwPocp(w_pocp);
-        WEIGHTS.setwConcreteWaste(w_cw);
-        WEIGHTS.setwTotalWaterConsumption(w_twc);
         WEIGHTS.setwTotalPrimaryEnergyConsumption(w_peu);
-        WEIGHTS.setwMaterialResourceConsumption(w_mru);
 
 
         System.out.println("Set up Weights in the static method EnvAnalysis_Calc");

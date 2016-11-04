@@ -20,7 +20,7 @@ public final class EnvPerformanceCalc {
     double W_AP = WEIGHTS.getwAp();
     double W_EP = WEIGHTS.getwEp();
     double W_POCP = WEIGHTS.getwPocp();
-    double W_TWC = WEIGHTS.getwTotalWaterConsumption();
+//    double W_TWC = WEIGHTS.getwTotalWaterConsumption();
     double W_TPEC = WEIGHTS.getwTotalPrimaryEnergyConsumption();
 
     //Substance
@@ -103,7 +103,7 @@ public final class EnvPerformanceCalc {
     double AP_EPD_SubScore;
     double EP_EPD_SubScore;
     double POCP_EPD_SubScore;
-    double TotalWater_EPD_SubScore;
+//    double TotalWater_EPD_SubScore;
     double PrimaryTotalEnergyConsumption_EDP_SubScore;
     // SubScore_TSP
     double GWP_TSP_SubScore;
@@ -111,7 +111,7 @@ public final class EnvPerformanceCalc {
     double AP_TSP_SubScore;
     double EP_TSP_SubScore;
     double POCP_TSP_SubScore;
-    double TotalWater_TSP_SubScore;
+//    double TotalWater_TSP_SubScore;
     double PrimaryTotalEnergyConsumption_TSP_SubScore;
 
 
@@ -205,7 +205,7 @@ public final class EnvPerformanceCalc {
                     AP_EPD_SubScore = AP_EPD_NORM * W_AP;
                     EP_EPD_SubScore = EP_EPD_NORM * W_EP;
                     POCP_EPD_SubScore = POCP_EPD_NORM * W_POCP;
-                    TotalWater_EPD_SubScore = TotalWater_EPD_NORM * W_TWC;
+//                    TotalWater_EPD_SubScore = TotalWater_EPD_NORM * W_TWC;
                     PrimaryTotalEnergyConsumption_EDP_SubScore
                             = PrimaryTotalEnergyConsumption_EDP_NORM * W_TPEC;
 
@@ -214,7 +214,7 @@ public final class EnvPerformanceCalc {
                     mix_temp.setAP_EDP_Subsore(AP_EPD_SubScore);
                     mix_temp.setEP_EDP_Subsore(EP_EPD_SubScore);
                     mix_temp.setPOCP_EDP_Subsore(POCP_EPD_SubScore);
-                    mix_temp.setTW_EDP_Subsore(TotalWater_EPD_SubScore);
+//                    mix_temp.setTW_EDP_Subsore(TotalWater_EPD_SubScore);
                     mix_temp.setTPEC_EDP_Subsore(PrimaryTotalEnergyConsumption_EDP_SubScore);
 
                     //Transportation part
@@ -273,7 +273,7 @@ public final class EnvPerformanceCalc {
                     AP_TSP_SubScore = AP_TSP_NORM * W_AP;
                     EP_TSP_SubScore = EP_TSP_NORM * W_EP;
                     POCP_TSP_SubScore = POCP_TSP_NORM * W_POCP;
-                    TotalWater_TSP_SubScore = TotalWater_TSP_NORM * W_TWC;
+//                    TotalWater_TSP_SubScore = TotalWater_TSP_NORM * W_TWC;
                     PrimaryTotalEnergyConsumption_TSP_SubScore
                             = PrimaryTotalEnergyConsumption_TSP_NORM * W_TPEC;
 
@@ -282,7 +282,7 @@ public final class EnvPerformanceCalc {
                     mix_temp.setAP_Transportation_Subsore(AP_TSP_SubScore);
                     mix_temp.setEP_Transportation_Subsore(EP_TSP_SubScore);
                     mix_temp.setPOCP_Transportation_Subsore(POCP_TSP_SubScore);
-                    mix_temp.setTW_Transportation_Subsore(TotalWater_TSP_SubScore);
+//                    mix_temp.setTW_Transportation_Subsore(TotalWater_TSP_SubScore);
                     mix_temp.setTPEC_Transportation_Subsore(PrimaryTotalEnergyConsumption_TSP_SubScore);
 
 
@@ -292,7 +292,6 @@ public final class EnvPerformanceCalc {
                             + AP_EPD_SubScore
                             + EP_EPD_SubScore
                             + POCP_EPD_SubScore
-                            + TotalWater_EPD_SubScore
                             + PrimaryTotalEnergyConsumption_EDP_SubScore;
 
                     enPerfScore_Transportation_layer = GWP_TSP_SubScore
@@ -300,7 +299,6 @@ public final class EnvPerformanceCalc {
                             + AP_TSP_SubScore
                             + EP_TSP_SubScore
                             + POCP_TSP_SubScore
-                            + TotalWater_TSP_SubScore
                             + PrimaryTotalEnergyConsumption_TSP_SubScore;
                     // Final Score for this layer
                     envPerfScore_layer = envPerfScore_EDP_layer + enPerfScore_Transportation_layer;
