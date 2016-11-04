@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.*;
@@ -71,6 +70,10 @@ public class ZipCodeUtil {
         if (DEBUG_MODE) System.out.println(o);
     }
 
+    private void printError(Object o) {
+        System.err.println(o);
+    }
+
     /* -- constructor(s) ---------------------------------------------- */
 
     public ZipCodeUtil() { /* */ }
@@ -102,8 +105,10 @@ public class ZipCodeUtil {
     public Double getDistance(String originZip, String destinationZip) {
         if (!isValidZipCode(originZip) || !isValidZipCode(destinationZip))
             return ZERO;
-        Response response1 = getResponse(originZip, destinationZip);
-        long distance = response1.rows[0].elements[0].distance.value;
+        Response response = getResponse(originZip, destinationZip);
+        if (!responseIsOK(response))
+            return ZERO;
+        long distance = response.rows[0].elements[0].distance.value;
         return new Double(distance);
     }
 
@@ -120,6 +125,8 @@ public class ZipCodeUtil {
         if (!isValidZipCode(destinationZip))
             return null;
         Response response = getResponse(originZips, destinationZip);
+        if (!responseIsOK(response))
+            return null;
 
         int sizeOfOriginZips = originZips.size();
         int sizeOfResponse = response.origin_addresses.length;
@@ -155,7 +162,8 @@ public class ZipCodeUtil {
         if (!isValidZipCode(destinationZip))
             return null;
         Response response = getResponse(originZips, destinationZip);
-
+        if (!responseIsOK(response))
+            return null;
         int sizeOfResponse = response.origin_addresses.length;
         printDebugMsg("Size of originZips: " + originZips.size());
         printDebugMsg("Size of response: " + sizeOfResponse);
@@ -261,6 +269,13 @@ public class ZipCodeUtil {
     }
 
     /* -- methods for getting raw response ---------------------------- */
+
+    private boolean responseIsOK(Response response) {
+        boolean responseIsValid = response.status.equals("OK");
+        if (!responseIsValid)
+            printError("ERROR, Response status: " + response.status);
+        return responseIsValid;
+    }
 
     private Response getResponse(String originZip) {
         return getResponse(originZip, Model.DESTINATION_ZIP_CODE_MUTABLE);
