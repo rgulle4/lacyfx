@@ -17,8 +17,6 @@ import java.util.List;
 
 public class LayerInformationController {
 
-    /* -- new stuff --------------------------------------- */
-
     private final ZipCodeUtil ZCU = new ZipCodeUtil();
 
     //Save the zip code of location
@@ -26,18 +24,17 @@ public class LayerInformationController {
 
     // The TabPanes
     @FXML public TabPane designsTabPane;
+    private List<Tab> designsTabsList;
 
     @FXML
     Tab newTabTab;
-
+    private final Button newTabButton = new Button("+");
 
     private Tab getNewestTab() {
         if (designsTabsList == null) return null;
         int numTabs = designsTabsList.size();
         return designsTabPane.getTabs().get(numTabs - 1);
     }
-
-    private List<Tab> designsTabsList;
 
     private void addDesign() {
         if (designsTabsList == null) return;
@@ -69,8 +66,6 @@ public class LayerInformationController {
 
         designsTabPane.getTabs().add(newTabPosition, newDesignTab);
     }
-
-    private final Button newTabButton = new Button("+");
 
     @FXML
     private void initialize() {
@@ -111,8 +106,6 @@ public class LayerInformationController {
     private void saveProjectLocation() {
         DESTINATION_ZIP_CODE_MUTABLE = projectLocationTextField.getText();
     }
-
-
 
     /* -- aliases for dealing with javafx components ------ */
 
