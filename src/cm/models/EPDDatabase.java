@@ -127,6 +127,62 @@ public final class EPDDatabase {
         return result;
     }
 
+    public List<Mix> getResultsFilteredBy_Test(String cs, String companyName) throws SQLException, ParseException {
+        List<Mix> result = new ArrayList<Mix>();
+
+        StringBuilder sb = new StringBuilder(DEFAULT_SQL_QUERY);
+        PreparedStatement ptmt = null;
+
+        if (companyName.isEmpty() && cs.isEmpty()) {
+            ptmt = conn.prepareStatement(sb.toString());
+        }
+        else {
+            if (!companyName.isEmpty() && !cs.isEmpty()) {
+                sql = sb.append(" AND NAME like ? AND CS >= ? ").toString();
+                ptmt = conn.prepareStatement(sql);
+                ptmt.setString(1, "%"+companyName+"%");
+                ptmt.setString(2, cs);
+            }
+            else if (!cs.isEmpty()) {
+                sql = sb.append(" AND CS >= ?").toString();
+                ptmt = conn.prepareStatement(sql);
+                ptmt.setString(1, cs);
+            }
+            else {sql = sb.append(" AND NAME like ?").toString();
+                ptmt = conn.prepareStatement(sql);
+                ptmt.setString(1, "%"+companyName+"%");}
+        }
+        rs = ptmt.executeQuery();
+
+        Mix g;
+        while(rs.next()){
+            g = new Mix();
+
+            g.setCS(rs.getString("CS"));
+            g.setCompany_Name(rs.getString("NAME"));
+            g.setLocation(rs.getString("LOCATION"));
+            g.setMixNum(rs.getString("MIXNUMBER"));
+            g.setZipCode(rs.getString("ZIP"));
+            g.setGWP(rs.getDouble("GWP"));
+            g.setODP(rs.getDouble("ODP"));
+            g.setAP(rs.getDouble("AP"));
+            g.setEP(rs.getDouble("EP"));
+            g.setPOCP(rs.getDouble("POCP"));
+            g.setUnit(rs.getString("UNITS"));
+            g.setConcreteHazardousWaste(rs.getDouble("CHW"));
+            g.setConcreteNonHazardousWaste(rs.getDouble("CNHW"));
+            g.setTotalWaterConsumption(rs.getDouble("TW"));
+            g.setTotalPrimaryEnergyConsumption(rs.getString("PEC"));
+            g.setRenewablePrimaryEnergyUse(rs.getDouble("RE"));
+            g.setNonRenewableEnergyUse(rs.getDouble("NRE"));
+            g.setRenewableMaterialResourcesUse(rs.getDouble("RM"));
+            g.setNonRenewableMaterialResource(rs.getDouble("NRM"));
+
+            result.add(g);
+        }
+        return result;
+    }
+
     public List<String> getAllZipcode() throws SQLException {
         List<String> zipcodeList = new ArrayList<>();
         String sql = "SELECT DISTINCT ZIP FROM EPD";
