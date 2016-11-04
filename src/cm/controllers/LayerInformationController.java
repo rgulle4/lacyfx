@@ -27,21 +27,9 @@ public class LayerInformationController {
     // The TabPanes
     @FXML public TabPane designsTabPane;
 
-    // vars we'll use for current design, current layer
-//    String currentDesignKey = "Design 1";
-//    int currentLayerIndex = 0;
-
-//    Design currentDesign = null;
-//    Layer currentLayer = null;
-
     @FXML
     Tab newTabTab;
 
-    @FXML
-    private void debugButtonListener(ActionEvent actionEvent) {
-        printDebugMsg(GSON_PP.toJson(DESIGNS));
-        saveProjectLocation();
-    }
 
     private Tab getNewestTab() {
         if (designsTabsList == null) return null;
@@ -84,46 +72,6 @@ public class LayerInformationController {
 
     private final Button newTabButton = new Button("+");
 
-//    private void setCurrentDesign(String designKey) {
-//        if (DESIGNS.containsKey(designKey)) {
-//            currentDesign = DESIGNS.get(designKey);
-//            printDebugMsg("setCurrentDesign() success");
-//        } else {
-//            printDebugMsg("Couldn't set current design with key = " + designKey);
-//        }
-//    }
-
-//    private void addLayePropertyrsTabsListener() {
-//        layersTabPane.getSelectionModel().selectedIndexProperty()
-//              .addListener((observable1, oldValue1, newValue1) -> {
-//                  currentLayerIndex = getSelectedTabIndex(layersTabPane);
-//                  printCurrentIndexes();
-//                  setCurrentLayer(currentLayerIndex);
-//              });
-//    }
-
-//    private void setCurrentLayer(int layerIndex) {
-//        boolean designHasOurCurrentKey = DESIGNS.containsKey(currentDesignKey);
-//        boolean layerIndexIsValid = false;
-//        if (currentDesign != null) {
-//            layerIndexIsValid = currentDesign.hasLayerIndex(layerIndex);
-//        }
-//        if (designHasOurCurrentKey && layerIndexIsValid) {
-//            currentLayer = currentDesign.getLayer(layerIndex);
-//            printDebugMsg("setCurrentLayer() success");
-//        } else {
-//            printDebugMsg(
-//                  "Couldn't set current layer with index = " + layerIndex);
-//        }
-//    }
-
-//    private String getSelectedTabText(TabPane tabPane) {
-//        return tabPane.getSelectionModel().getSelectedItem().getText();
-//    }
-//    private int getSelectedTabIndex(TabPane tabPane) {
-//        return tabPane.getSelectionModel().getSelectedIndex();
-//    }
-
     @FXML
     private void initialize() {
         projectLocationTextField.setText("70820");
@@ -156,17 +104,6 @@ public class LayerInformationController {
         newTabButton.getStyleClass().add("tab-button");
         newTabButton.setOnAction(e -> { this.addDesign(); });
         newTabTab.setGraphic(newTabButton);
-
-        printCurrentIndexes();
-
-        /* add listeners so we know the current tabs */
-//        addLayersTabsListener();
-
-        /* figure out current design and current layer at initialize */
-//        currentDesignKey = getSelectedTabText(designsTabPane);
-//        setCurrentDesign(currentDesignKey);
-//        currentLayerIndex = getSelectedTabIndex(layersTabPane);
-//        setCurrentLayer(currentLayerIndex);
 
         setUpDebugCheatSheet();
     }
@@ -206,21 +143,15 @@ public class LayerInformationController {
     private void printDebugMsg() { if (DEBUG_MODE) println(); }
     private void printDebugMsg(Object o) { if (DEBUG_MODE) println(o); }
 
-    private void printCurrentIndexes() {
-//        if (!DEBUG_MODE) return;
-//        printDebugMsg("-----------");
-//        printDebugMsg("Design Key = " + currentDesignKey);
-//        printDebugMsg("Layer index = " + currentLayerIndex);
+    @FXML
+    private void debugButtonListener(ActionEvent actionEvent) {
+        printDebugStuff();
+        saveProjectLocation();
     }
 
     @FXML
-    public void printDebugStuff(ActionEvent actionEvent) {
-//        System.out.println(
-//              currentLayer.getMaterial(1).getCS()
-//                    + ","  + currentLayer.getMaterial(1).getCompany_Name()
-//                    + " ," + currentLayer.getMaterial(1).getLocation()
-//                    + " ," + currentLayer.getMaterial(1).getZipCode()
-//                    + " ," + currentLayer.getMaterial(1).getMixNum());
+    public void printDebugStuff() {
+        printDebugMsg(GSON_PP.toJson(DESIGNS));
     }
 
     private void setUpDebugCheatSheet() {
@@ -230,6 +161,4 @@ public class LayerInformationController {
                   debugCheatSheet.setText(GSON_PP.toJson(DESIGNS));
               });
     }
-
-
 }
