@@ -1,3 +1,6 @@
+# personal scripts
+00bin/
+
 # sqlite database
 *.db
 
