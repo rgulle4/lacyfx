@@ -120,7 +120,7 @@ public final class EPDDatabase {
             //get distance from filterzips map
             String zip = g.getZipCode();
             Double distance = filteredZipcodeMap.get(zip);//return distance in meter
-            g.setDistance(distance/1000.0); // convert meter to kilometer
+            g.setDistance(distance/1000.0/1.609344); // convert meter to mile
             System.out.println("From "+zip+" to destination is "+distance/1000.0+ " Km");
             result.add(g);
         }

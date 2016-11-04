@@ -109,19 +109,19 @@ public final class LoadMixController {
         String CS = textField_CS.getText();
         String cmName = textField_companyName.getText();
         // get a zip set within a certain radius to the location of project
-//        ZipCodeUtil zcu = new ZipCodeUtil();
-//        String destinationZipcode = DESTINATION_ZIP_CODE_MUTABLE;
-//        Double radius = getRadius();
-//        // TEST: Get 41 zip codes of original place from database;
-//        List<String> origins = new EPDDatabase().getZipcode();
-//        Map<String, Double> filteredZipcodeMap
-//                = zcu.zipsWithinRadius(radius,origins,destinationZipcode);
-        // get qualified material after searching
-//        List<Mix> result = new EPDDatabase()
-//                .getResultsFilteredBy(filteredZipcodeMap,CS,cmName);
-        // since Google API doesn't work, we use getResultsFilteredBy_Test to keep on coding
+        ZipCodeUtil zcu = new ZipCodeUtil();
+        String destinationZipcode = DESTINATION_ZIP_CODE_MUTABLE;
+        Double radius = getRadius();
+        // TEST: Get 41 zip codes of original place from database;
+        List<String> origins = new EPDDatabase().getZipcode();
+        Map<String, Double> filteredZipcodeMap
+                = zcu.zipsWithinRadius(radius,origins,destinationZipcode);
+//         get qualified material after searching
         List<Mix> result = new EPDDatabase()
-                .getResultsFilteredBy_Test(CS,cmName);
+                .getResultsFilteredBy(filteredZipcodeMap,CS,cmName);
+        // since Google API doesn't work, we use getResultsFilteredBy_Test to keep on coding
+//        List<Mix> result = new EPDDatabase()
+//                .getResultsFilteredBy_Test(CS,cmName);
         data = FXCollections.observableArrayList();
 
         // get material properties from the column names.
