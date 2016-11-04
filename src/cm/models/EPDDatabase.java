@@ -154,12 +154,35 @@ public final class EPDDatabase {
 
 
     /**
+     * TODO: add documentation... and also probably change this name?
+     */
+    public List<Mix> getResults(Map filteredZipcodeMap, String cs, String companyName) throws SQLException, ParseException {
+        return getResultsFilteredBy(filteredZipcodeMap,cs,companyName);
+    }
+
+    /**
+     * Returns an sql ResultSet, filtered.
+     * @param filterClause Example: 'GWP >= 10' has the effect of 'SELECT * FROM EPD WHERE GWP >= 10'.
+     * @return
+     */
+    public ResultSet getResultsFilteredBy(String filterClause) throws SQLException {
+        String str;
+        StringBuilder sb = new StringBuilder(DEFAULT_SQL_QUERY);
+        if (filterClause.isEmpty())
+            str = sb.toString();
+        else
+            str = sb.append(" WHERE ").append(filterClause).toString();
+        s = conn.createStatement();
+        return s.executeQuery(str);
+    }
+
+    /**
      * Return the entire EPD table.
      * @return A ResultSet of the entire EPD table.
      * @throws SQLException
      */
-    public List<Mix> getResults(Map filteredZipcodeMap, String cs, String companyName) throws SQLException, ParseException {
-        return getResultsFilteredBy(filteredZipcodeMap,cs,companyName);
+    public ResultSet getResults() throws SQLException {
+        return getResultsFilteredBy("");
     }
 
     /**
