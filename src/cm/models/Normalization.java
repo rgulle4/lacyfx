@@ -3,7 +3,7 @@ package cm.models;
 /**
  * Created by Administrator on 2016/10/2.
  */
-public class Normalization {
+public final class Normalization {
 
     double Norm_GWP;
     double Norm_ODP;

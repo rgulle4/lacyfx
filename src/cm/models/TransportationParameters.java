@@ -8,7 +8,7 @@ import java.util.Locale;
 /**
  * Created by Administrator on 2016/10/1.
  */
-public class TransportationParameters {
+public final class TransportationParameters {
 
 
     //variables for transportation part

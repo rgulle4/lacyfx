@@ -12,7 +12,7 @@ import static cm.models.Model.*;
 /**
  * Controller for the Weights tab.
  */
-public class WeightsTabController {
+public final class WeightsTabController {
 
     @FXML public TextField envPerWeightTextField;
     @FXML public TextField encPerWeightTextField;

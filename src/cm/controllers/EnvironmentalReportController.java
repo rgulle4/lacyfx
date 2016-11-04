@@ -20,7 +20,7 @@ import static cm.models.Model.*;
 /**
  * Created by Administrator on 2016/10/6.
  */
-public class EnvironmentalReportController {
+public final class EnvironmentalReportController {
 
     @FXML
     private CategoryAxis xAxis = new CategoryAxis();

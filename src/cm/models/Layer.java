@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * A layer_temp has a thickness (inches) and a material.
  */
-public class Layer {
+public final class Layer {
 
     private int hasCode = this.hashCode();
 

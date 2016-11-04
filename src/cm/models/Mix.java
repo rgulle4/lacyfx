@@ -8,7 +8,7 @@ import java.util.Locale;
  * A material is a component of a layer_temp (along with a defined thickness). A
  * material will also probably correspond to a row in the EPD database.
  */
-public class Mix {
+public final class Mix {
 
     //EPD
     private String Material_ID;

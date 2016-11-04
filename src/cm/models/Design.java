@@ -10,7 +10,7 @@ import java.util.List;
  * A design is a pavement design, consisting of a number of layers. Each layer
  * has a thickness, and a material.
  */
-public class Design {
+public final class Design {
 
     /* -- Fields -------------------------------------------------------- */
 

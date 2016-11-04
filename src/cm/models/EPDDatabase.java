@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * EPDs are "Environmental Product Declarations", and this class represents a database full of them.
  */
-public class EPDDatabase {
+public final class EPDDatabase {
 
     /* -- Fields ----------------------------------------------------- */
 

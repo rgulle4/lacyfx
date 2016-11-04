@@ -17,7 +17,7 @@ import static cm.models.Model.DESTINATION_ZIP_CODE_MUTABLE;
 /**
  * Created by Administrator on 2016/9/28.
  */
-public class LoadMixController {
+public final class LoadMixController {
 
     ObservableList<String> DistanceList = FXCollections.observableArrayList(
             "<10 miles","<25 miles","<50 miles","<100 miles");

@@ -3,7 +3,7 @@ package cm.models;
 /**
  * Created by Administrator on 2016/10/2.
  */
-public class Weights {
+public final class Weights {
 
     // Weights for scoring Env + Econ for total score.
     private double wEnvPerformance;

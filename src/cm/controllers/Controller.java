@@ -14,7 +14,7 @@ import static cm.models.Model.*;
 /**
  * The main controller.
  */
-public class Controller {
+public final class Controller {
 
     @FXML
     private TabPane mainTabPane;

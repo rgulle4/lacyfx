@@ -15,7 +15,7 @@ import javafx.scene.control.*;
 import java.io.IOException;
 import java.util.List;
 
-public class DesignController {
+public final class DesignController {
 
     /* -- Constructor(s) and init ----------------------------- */
 

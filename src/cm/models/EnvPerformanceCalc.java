@@ -9,7 +9,7 @@ import static cm.models.Model.*;
  * Created by Administrator on 2016/10/3.
  * This is meant for a whole design_temp (and also each layer_temp).
  */
-public class EnvPerformanceCalc {
+public final class EnvPerformanceCalc {
     //Initialization
     //Conversion Factor
     double ConvF;

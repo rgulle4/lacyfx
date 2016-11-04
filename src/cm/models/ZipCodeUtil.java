@@ -20,7 +20,7 @@ import static cm.models.Model.*;
  *     Double result1 = zcu.getDistance("70115", "70803"); // returns 133917
  *
  */
-public class ZipCodeUtil {
+public final class ZipCodeUtil {
 
     /* -- example usage ----------------------------------------------- */
 

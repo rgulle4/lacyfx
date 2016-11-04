@@ -15,7 +15,7 @@ import javafx.scene.control.*;
 import java.io.IOException;
 import java.util.List;
 
-public class LayerInformationController {
+public final class LayerInformationController {
 
     private final ZipCodeUtil ZCU = new ZipCodeUtil();
 

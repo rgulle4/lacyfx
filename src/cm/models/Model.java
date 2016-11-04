@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * The main model.
  */
-public class Model {
+public final class Model {
 
     // Instantiating a model isn't allowed, because it's a singleton.
     private Model() { /* */ }

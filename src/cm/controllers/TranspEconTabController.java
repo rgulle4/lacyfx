@@ -16,7 +16,7 @@ import static cm.models.Model.*;
 /**
  * Created by royg59 on 9/21/16.
  */
-public class TranspEconTabController {
+public final class TranspEconTabController {
     ObservableList<String> VehicleList = FXCollections.observableArrayList(
           "Light-Duty Trucks",
           "Medium-Duty Trucks",

@@ -10,7 +10,7 @@ import javafx.scene.control.*;
 
 import java.io.IOException;
 
-public class LayerController {
+public final class LayerController {
 
     private Layer layer;
 
