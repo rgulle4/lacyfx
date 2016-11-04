@@ -25,10 +25,24 @@ public class EPDDatabaseTest {
 
     @Test
     public void testGetZipcode() throws SQLException {
-        List<String> distinctOriginZips = (new EPDDatabase()).getZipcode();
-        System.out.println("Number of distinct origin zip codes: "
-                    + distinctOriginZips.size());
-        Assert.assertTrue(distinctOriginZips.size() > 0);
+        // list should have at least 1 distinct zip code
+        List<String> result = (new EPDDatabase()).getZipcode();
+
+        Assert.assertTrue((result.size() > 0));
+
+        // all list elements should be unique
+        boolean allAreUnique = true;
+        for (String zip1 : result) {
+            int count = 0;
+            for (String zip2 : result) {
+                if (zip2.equals(zip1))
+                    count++;
+            }
+            if (count > 1)
+                allAreUnique = false;
+        }
+
+        Assert.assertTrue(allAreUnique);
     }
 
 //    @Test

@@ -139,6 +139,12 @@ public final class EPDDatabase {
         }
         return zipcodeList;
     }
+
+    /**
+     * Returns the list of distinct zip codes in the epd database.
+     * @return List of distinct zip codes.
+     * @throws SQLException
+     */
     public List<String> getZipcode() throws SQLException {
         List<String> zipcodeList = new ArrayList<>();
         String sql = "SELECT DISTINCT ZIP FROM EPD WHERE ZIP < '70840'";
