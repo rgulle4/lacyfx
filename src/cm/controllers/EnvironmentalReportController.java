@@ -233,13 +233,15 @@ public final class EnvironmentalReportController {
             designNum.add(dKey);
         }
         if (DESIGNS.size()>0){
-            designNum.addAll("Overall");
+            designNum.addAll("All designs");
         }
         design_ComboBox.setItems(designNum);
         design_ComboBox.setValue(designNum.get(0));
     }
 
     public void setupLayerNumber_ComboBox(){
+        // clean items in the layerNumber_ComboBox
+        layerNum.clear();
         if (!design_ComboBox.getSelectionModel().isEmpty()){
             String selectedDeisgnKey = design_ComboBox.getValue().toString();
             int layerNumber = DESIGNS.get(selectedDeisgnKey).getNumberOfLayers();
@@ -249,7 +251,7 @@ public final class EnvironmentalReportController {
                     String layerName= sb.append(i).toString();
                     layerNum.add(layerName);
                 }
-                layerNum.addAll("Overall");
+                layerNum.addAll("All layers");
                 layer_ComboBox.setItems(layerNum);
             }
             else {
@@ -263,6 +265,8 @@ public final class EnvironmentalReportController {
     }
 
     public void setupMixNum_ComboBox(){
+        // clean MixNum_ComBox first
+        mixNum.clear();
         if(!design_ComboBox.getSelectionModel().isEmpty()){
             String selectedDeisgnKey = design_ComboBox.getValue().toString();
             if(!layer_ComboBox.getSelectionModel().isEmpty()){
@@ -276,7 +280,7 @@ public final class EnvironmentalReportController {
                         String mixName = sb.append(i).toString();
                         mixNum.add(mixName);
                     }
-                    mixNum.addAll("Overall");
+                    mixNum.addAll("All Mixes");
                     mix_ComboBox.setItems(mixNum);
                 }else{
                     System.out.println("No mix was added!!");
