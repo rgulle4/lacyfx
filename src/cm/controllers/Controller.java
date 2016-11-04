@@ -16,21 +16,10 @@ import static cm.models.Model.*;
  */
 public class Controller {
 
-    /* -- Fields -------------------------------------------------------- */
-
-    // we need to know about the model... probably just need
-    // one, but just in case...
-//    Model model = new cm.models.Model();
-
     @FXML
     private TabPane mainTabPane;
 
     public void NextButton() {
         mainTabPane.getSelectionModel().select(mainTabPane.getSelectionModel().getSelectedIndex()+1);
-    }
-
-    @FXML
-    private void initialize() {
-        mainTabPane.getSelectionModel().select(1);
     }
 }

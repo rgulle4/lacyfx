@@ -12,11 +12,6 @@
     <children>
         <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <tabs>
-                <Tab fx:id="importTab" text="Import">
-                    <content>
-                        <fx:include source="importTab.fxml" />
-                    </content>
-                </Tab>
                 <Tab fx:id="layerInformation" text="Layer Information">
                     <content>
                         <fx:include source="layerInformationTab.fxml" />
