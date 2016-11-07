@@ -46,6 +46,8 @@ public final class EnvironmentalReportController {
     private XYChart.Series<String, Number> serie_TotalWater = new XYChart.Series<>();
     @FXML
     private XYChart.Series<String, Number> serie_TotalPrimaryEnergyConsumption = new XYChart.Series<>();
+    @FXML
+    private XYChart.Series<String, Number> serie_Overall = new XYChart.Series<>();
 //
 //    //summary chart
 //    @FXML
@@ -171,6 +173,7 @@ public final class EnvironmentalReportController {
         serie_POCP.setName("POCP");
         serie_TotalWater.setName("TotalWater");
         serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
+        serie_Overall.setName("Overall");
         for (Mix aMix:mixs){
             String mix_ID = aMix.getMixNum();
             StringBuilder sb = new StringBuilder(incompletedAlternative_ID).append(mix_ID);
@@ -196,6 +199,9 @@ public final class EnvironmentalReportController {
             if (impactCategory == "PrimaryEnergyConsumption"){
                 serie_TotalWater.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
             }
+            if (impactCategory == "Overall"){
+                serie_Overall.getData().add(new XYChart.Data<>(alternative_ID,getDataValue(aMix)));
+            }
         }
         if(impactCategory == "GWP"){
             bc.getData().add(serie_GWP);
@@ -217,6 +223,9 @@ public final class EnvironmentalReportController {
         }
         if (impactCategory == "PrimaryEnergyConsumption"){
             bc.getData().add(serie_TotalPrimaryEnergyConsumption);
+        }
+        if (impactCategory == "Overall"){
+            bc.getData().add(serie_Overall);
         }
     }
 
@@ -251,6 +260,9 @@ public final class EnvironmentalReportController {
                         dataTemp = mix.getTPEC_EPD_Ctb();
                     }else if (impactCategory == "Overall"){
                         System.out.println("Presenting raw value of all impactCategory");
+                        dataTemp = mix.getGWP_EPD_Ctb()+mix.getODP_EPD_Ctb()
+                                +mix.getAP_EPD_Ctb() +mix.getEP_EPD_Ctb()+mix.getPOCP_EPD_Ctb()
+                                +mix.getTW_EPD_Ctb() +mix.getTPEC_EPD_Ctb();
                     }else{
                         System.out.println("Can not identify an impactCategory");
                     }
@@ -279,6 +291,9 @@ public final class EnvironmentalReportController {
                         dataTemp = mix.getTPEC_EPD_NORM();
                     }else if(impactCategory == "Overall"){
                         System.out.println("Presenting Normalized value of all impactCategory");
+                        dataTemp = mix.getGWP_EPD_NORM()+mix.getODP_EPD_NORM()
+                                +mix.getAP_EPD_NORM() +mix.getEP_EPD_NORM()+mix.getPOCP_EPD_NORM()
+                                +mix.getTW_EPD_NORM() +mix.getTPEC_EPD_NORM();
                     }else{
                         System.out.println("Can not identify an impactCategory");
                     }
@@ -307,6 +322,9 @@ public final class EnvironmentalReportController {
                         dataTemp = mix.getTPEC_EPD_SubScore();
                     }else if (impactCategory == "Overall"){
                         System.out.println("Presenting Weighted value of all impactCategory");
+                        dataTemp = mix.getGWP_EPD_SubScore()+mix.getODP_EPD_SubScore()
+                                +mix.getAP_EPD_SubScore() +mix.getEP_EPD_SubScore()+mix.getPOCP_EPD_SubScore()
+                                +mix.getTW_EPD_SubScore() +mix.getTPEC_EPD_SubScore();
                     }else{
                         System.out.println("Can not identify an impactCategory");
                     }
