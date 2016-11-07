@@ -172,22 +172,51 @@ public final class EnvironmentalReportController {
         serie_TotalWater.setName("TotalWater");
         serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
         for (Mix aMix:mixs){
-            String mix_ID = aMix.getMaterial_ID();
+            String mix_ID = aMix.getMixNum();
             StringBuilder sb = new StringBuilder(incompletedAlternative_ID).append(mix_ID);
             String alternative_ID = sb.toString();
-            serie_GWP.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
-            serie_ODP.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
-            serie_AP.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
-            serie_EP.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
-            serie_POCP.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
-            serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
-            serie_TotalWater.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
+            if(impactCategory == "GWP"){
+                serie_GWP.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
+            }
+            if(impactCategory == "ODP"){
+                serie_ODP.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
+            }
+            if(impactCategory == "AP"){
+                serie_AP.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
+            }
+            if(impactCategory == "EP"){
+                serie_EP.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
+            }
+            if(impactCategory == "POCP"){
+                serie_POCP.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
+            }
+            if(impactCategory == "TotalWater"){
+                serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
+            }
+            if (impactCategory == "PrimaryEnergyConsumption"){
+                serie_TotalWater.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
+            }
         }
-        if(valueType != "Weighted impact per functional unit"){
-            bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP, serie_TotalWater, serie_TotalPrimaryEnergyConsumption);
+        if(impactCategory == "GWP"){
+            bc.getData().add(serie_GWP);
         }
-        else {
-            bc.getData().addAll(serie_GWP, serie_ODP, serie_AP, serie_EP, serie_POCP,serie_TotalPrimaryEnergyConsumption);
+        if(impactCategory == "ODP"){
+            bc.getData().add(serie_ODP);
+        }
+        if(impactCategory == "AP"){
+            bc.getData().add(serie_AP);
+        }
+        if(impactCategory == "EP"){
+            bc.getData().add(serie_EP);
+        }
+        if(impactCategory == "POCP"){
+            bc.getData().add(serie_POCP);
+        }
+        if(impactCategory == "TotalWater"){
+            bc.getData().add(serie_TotalWater);
+        }
+        if (impactCategory == "PrimaryEnergyConsumption"){
+            bc.getData().add(serie_TotalPrimaryEnergyConsumption);
         }
     }
 
