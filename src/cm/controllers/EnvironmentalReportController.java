@@ -195,6 +195,9 @@ public final class EnvironmentalReportController {
                 Double averageScore = getSingleDataValue(aMix)/Sum_SubScore;
                 serie_allAlternatives.getData().add(new XYChart.Data<>(alternative_ID,averageScore));
             }
+            if (impactCategory == "Impact Analysis per Alternative"){
+                setupSerieForImpactAnalysisPerAlternative(alternative_ID,aMix);
+            }
         }
         if(impactCategory == "GWP"){
             bc.getData().add(serie_GWP);
@@ -216,6 +219,60 @@ public final class EnvironmentalReportController {
         }
         if (impactCategory == "Impact Analysis Comparison of All Alternatives"){
             bc.getData().add(serie_allAlternatives);
+        }
+        if (impactCategory == "Impact Analysis per Alternative"){
+            bc.getData().addAll(serie_GWP,serie_ODP,serie_AP,serie_EP,serie_POCP,serie_TotalPrimaryEnergyConsumption);
+        }
+    }
+    public void setupSerieForImpactAnalysisPerAlternative(String alternative_ID, Mix aMix){
+        if(envImpactType =="EPD"){
+            if(valueType == "Raw impact per functional unit") {
+                serie_GWP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getGWP_EPD_Ctb()));
+                serie_ODP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getODP_EPD_Ctb()));
+                serie_AP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getAP_EPD_Ctb()));
+                serie_EP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getEP_EPD_Ctb()));
+                serie_POCP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getPOCP_EPD_Ctb()));
+                serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(alternative_ID, aMix.getTPEC_EPD_Ctb()));
+            }else if(valueType == "Normalized impact per functional unit"){
+                serie_GWP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getGWP_EPD_NORM()));
+                serie_ODP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getODP_EPD_NORM()));
+                serie_AP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getAP_EPD_NORM()));
+                serie_EP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getEP_EPD_NORM()));
+                serie_POCP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getPOCP_EPD_NORM()));
+                serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(alternative_ID, aMix.getTPEC_EPD_NORM()));
+            }else{
+                serie_GWP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getGWP_EPD_SubScore()));
+                serie_ODP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getODP_EPD_SubScore()));
+                serie_AP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getAP_EPD_SubScore()));
+                serie_EP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getEP_EPD_SubScore()));
+                serie_POCP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getPOCP_EPD_SubScore()));
+                serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(alternative_ID, aMix.getTPEC_EPD_SubScore()));
+            }
+        }else if(envImpactType == "TSP"){
+            if(valueType == "Raw impact per functional unit") {
+                serie_GWP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getGWP_Transportation_Ctb()));
+                serie_ODP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getODP_Transportation_Ctb()));
+                serie_AP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getAP_Transportation_Ctb()));
+                serie_EP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getEP_Transportation_Ctb()));
+                serie_POCP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getPOCP_Transportation_Ctb()));
+                serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(alternative_ID, aMix.getTPEC_Transportation_Ctb()));
+            }else if(valueType == "Normalized impact per functional unit"){
+                serie_GWP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getGWP_Transportation_NORM()));
+                serie_ODP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getODP_Transportation_NORM()));
+                serie_AP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getAP_Transportation_NORM()));
+                serie_EP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getEP_Transportation_NORM()));
+                serie_POCP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getPOCP_Transportation_NORM()));
+                serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(alternative_ID, aMix.getTPEC_Transportation_NORM()));
+            }else{
+                serie_GWP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getGWP_Transportation_SubScore()));
+                serie_ODP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getODP_Transportation_SubScore()));
+                serie_AP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getAP_Transportation_SubScore()));
+                serie_EP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getEP_Transportation_SubScore()));
+                serie_POCP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getPOCP_Transportation_SubScore()));
+                serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(alternative_ID, aMix.getTPEC_Transportation_SubScore()));
+            }
+        }else{
+            //update stack bar chart here!!
         }
     }
     public double getSingleDataValue(Mix aMix){
