@@ -94,14 +94,14 @@ public final class EnvironmentalReportController {
     // Number of layers in this design
     ObservableList<String> mixNum = FXCollections
             .observableArrayList();
-    // Impact Category
-    ObservableList<String> impacyCategoryName =FXCollections
-            .observableArrayList(
-                    "Impact Analysis Comparison of All Alternatives",
-                    "Impact Analysis per Alternative",
-                    "GWP","ODP","AP","EP", "POCP",
-                    "PrimaryEnergyConsumption"
-            );
+//    // Impact Category
+//    ObservableList<String> impacyCategoryName =FXCollections
+//            .observableArrayList(
+//                    "Impact Analysis Comparison of All Alternatives",
+//                    "Impact Analysis per Alternative",
+//                    "GWP","ODP","AP","EP", "POCP",
+//                    "PrimaryEnergyConsumption"
+//            );
 
     @FXML
     public void initialize() {
@@ -163,6 +163,12 @@ public final class EnvironmentalReportController {
         serie_POCP.setName("POCP");
         serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
         serie_allAlternatives.setName("Impact Analysis of All Alternatives");
+        Double Sum_SubScore=0.0;
+        for (Mix mix:mixs){
+            if (impactCategory == "Impact Analysis Comparison of All Alternatives"){
+                Sum_SubScore = Sum_SubScore + getSingleDataValue(mix);
+            }
+        }
         for (Mix aMix:mixs){
             String mix_ID = aMix.getMixNum();
             StringBuilder sb = new StringBuilder(incompletedAlternative_ID).append(mix_ID);
@@ -186,7 +192,8 @@ public final class EnvironmentalReportController {
                 serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(aMix)));
             }
             if (impactCategory == "Impact Analysis Comparison of All Alternatives"){
-                serie_allAlternatives.getData().add(new XYChart.Data<>(alternative_ID,getSingleDataValue(aMix)));
+                Double averageScore = getSingleDataValue(aMix)/Sum_SubScore;
+                serie_allAlternatives.getData().add(new XYChart.Data<>(alternative_ID,averageScore));
             }
         }
         if(impactCategory == "GWP"){
@@ -543,9 +550,23 @@ public final class EnvironmentalReportController {
         rawValue_ComboBox.setValue(rawValueType.get(0));
     }
 
-    private void setupImpactCategory_ComboBox(){
-        impactCategory_ComboBox.setItems(impacyCategoryName);
-        impactCategory_ComboBox.setValue(impacyCategoryName.get(0));
+    public void setupImpactCategory_ComboBox(){
+        valueType = rawValue_ComboBox.getSelectionModel().getSelectedItem().toString();
+        // Impact Category
+        ObservableList<String> impactCategoryName =FXCollections
+                .observableArrayList(
+                        "Impact Analysis Comparison of All Alternatives",
+                        "Impact Analysis per Alternative",
+                        "GWP","ODP","AP","EP", "POCP",
+                        "PrimaryEnergyConsumption"
+                );
+        if(valueType == "Weighted impact per functional unit"){
+            impactCategory_ComboBox.setItems(impactCategoryName);
+        }else{
+            impactCategoryName.remove(0);
+            impactCategory_ComboBox.setItems(impactCategoryName);
+        }
+
     }
 
     private void setupDesignNumber_ComboBox(){
