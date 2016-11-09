@@ -68,8 +68,7 @@ public final class Mix {
     private Double EP_EDP_Subsore;
     private Double POCP_EDP_Subsore;
     private Double TW_EDP_Subsore;      // Total Water Consumption
-    private Double TPEC_EDP_Subsore;    // Total Primary Energy Consumption
-
+    private Double TPEC_EPD_Subsore;    // Total Primary Energy Consumption
     // Subscores of Transportation score for the different env
     // impacts (before NORMALIZATIONS). Each of these is calculated using:
     //   2 * distance * substance
@@ -473,11 +472,11 @@ public final class Mix {
     }
 
     public Double getTPEC_EPD_SubScore() {
-        return TPEC_EDP_Subsore;
+        return TPEC_EPD_Subsore;
     }
 
     public void setTPEC_EDP_Subsore(Double TPEC_EDP_Subsore) {
-        this.TPEC_EDP_Subsore = TPEC_EDP_Subsore;
+        this.TPEC_EPD_Subsore = TPEC_EDP_Subsore;
     }
 
     public Double getGWP_Transportation_Ctb() {
@@ -646,5 +645,16 @@ public final class Mix {
 
     public void setTPEC_Transportation_SubScore(Double TPEC_Transportation_SubScore) {
         this.TPEC_Transportation_SubScore = TPEC_Transportation_SubScore;
+    }
+
+    public Double getSum_EPD_SubScore() {
+        return this.GWP_EDP_Subsore+this.ODP_EDP_Subsore+this.AP_EDP_Subsore
+                +this.EP_EDP_Subsore+this.POCP_EDP_Subsore+this.TPEC_EPD_Subsore;}
+
+
+    public Double getSum_Transportation_SubScore() {
+        return this.GWP_Transportation_SubScore+this.ODP_Transportation_SubScore
+                +this.AP_Transportation_SubScore+this.EP_Transportation_SubScore
+                +this.POCP_Transportation_SubScore+this.TPEC_Transportation_SubScore;
     }
 }

@@ -3,7 +3,6 @@ package cm.controllers;
 import cm.models.Design;
 import cm.models.Layer;
 import cm.models.Mix;
-import cm.models.ShowChartData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -43,18 +42,9 @@ public final class EnvironmentalReportController {
     @FXML
     private XYChart.Series<String, Number> serie_POCP = new XYChart.Series<>();
     @FXML
-    private XYChart.Series<String, Number> serie_TotalWater = new XYChart.Series<>();
-    @FXML
     private XYChart.Series<String, Number> serie_TotalPrimaryEnergyConsumption = new XYChart.Series<>();
     @FXML
-    private XYChart.Series<String, Number> serie_Overall = new XYChart.Series<>();
-//
-//    //summary chart
-//    @FXML
-//    private XYChart.Series<String, Number> serie_envPerf_EPDScore = new XYChart.Series<>();
-//    @FXML
-//    private XYChart.Series<String, Number> serie_envPerf_TransportationScore = new XYChart.Series<>();
-
+    private XYChart.Series<String, Number> serie_allAlternatives = new XYChart.Series<>();
     @FXML
     private ComboBox performanceType_ComboBox;
     @FXML
@@ -69,7 +59,6 @@ public final class EnvironmentalReportController {
     private ComboBox mix_ComboBox;
     @FXML
     private ComboBox impactCategory_ComboBox;
-
     @FXML
     private RadioButton sumGraph_RadioButton;
     @FXML
@@ -108,13 +97,14 @@ public final class EnvironmentalReportController {
     // Impact Category
     ObservableList<String> impacyCategoryName =FXCollections
             .observableArrayList(
-                    "Overall","GWP","ODP","AP","EP",
-                    "POCP","TotalWater","PrimaryEnergyConsumption"
+                    "Impact Analysis Comparison of All Alternatives",
+                    "Impact Analysis per Alternative",
+                    "GWP","ODP","AP","EP", "POCP",
+                    "PrimaryEnergyConsumption"
             );
 
     @FXML
     public void initialize() {
-
         //set up default elements
         setupPerformanceType_ComboBox();
         setupEnvironmentalImpact_ComboBox();
@@ -126,14 +116,11 @@ public final class EnvironmentalReportController {
         //hide bar chart and stack chart
         bc.setVisible(false);
         sbc.setVisible(false);
-
     }
-
     private String perfType;
     private String envImpactType;
     private String valueType;
     private String impactCategory;      //GWP, ODP, AP, EP, POCP, Energy Consumption...
-
     public void showOutputChart() {
         //Environmental analysis in details
         // get design key which is same as design
@@ -144,8 +131,7 @@ public final class EnvironmentalReportController {
         int layerIndex = layer_ComboBox.getSelectionModel().getSelectedIndex();
         Layer layerTemp = designTemp.getLayer(layerIndex);
         int mixIndex = mix_ComboBox.getSelectionModel().getSelectedIndex();
-//        Mix mixTemp = layerTemp.getMaterial(mixIndex);
-
+        //Get the whole selected Mix lists
         List<Mix> mixsTemp = new ArrayList<Mix>();
         String selectedMixItem = mix_ComboBox.getValue().toString();
         if(selectedMixItem == "All Mixes"){
@@ -161,46 +147,46 @@ public final class EnvironmentalReportController {
         String alternative_ID = new StringBuilder(designID).append(layerID).toString();
         this.showBarChart("Alternatives","Value","Environmental Analysis",alternative_ID, mixsTemp);
     }
+
     public void showBarChart(String xLabel, String yLabel, String chartTitle, String incompletedAlternative_ID, List<Mix> mixs){
         bc.getData().clear();
         bc.layout();
         bc.setVisible(true);
         // set up bar chart
+        bc.setTitle(chartTitle);
+        xAxis.setLabel(xLabel);
+        yAxis.setLabel(yLabel);
         serie_GWP.setName("GWP");
         serie_ODP.setName("ODP");
         serie_AP.setName("AP");
         serie_EP.setName("EP");
         serie_POCP.setName("POCP");
-        serie_TotalWater.setName("TotalWater");
         serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
-        serie_Overall.setName("Overall");
+        serie_allAlternatives.setName("Impact Analysis of All Alternatives");
         for (Mix aMix:mixs){
             String mix_ID = aMix.getMixNum();
             StringBuilder sb = new StringBuilder(incompletedAlternative_ID).append(mix_ID);
             String alternative_ID = sb.toString();
             if(impactCategory == "GWP"){
-                serie_GWP.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
+                serie_GWP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(aMix)));
             }
             if(impactCategory == "ODP"){
-                serie_ODP.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
+                serie_ODP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(aMix)));
             }
             if(impactCategory == "AP"){
-                serie_AP.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
+                serie_AP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(aMix)));
             }
             if(impactCategory == "EP"){
-                serie_EP.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
+                serie_EP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(aMix)));
             }
             if(impactCategory == "POCP"){
-                serie_POCP.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
-            }
-            if(impactCategory == "TotalWater"){
-                serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
+                serie_POCP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(aMix)));
             }
             if (impactCategory == "PrimaryEnergyConsumption"){
-                serie_TotalWater.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));
+                serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(aMix)));
             }
-            if (impactCategory == "Overall"){
-                serie_Overall.getData().add(new XYChart.Data<>(alternative_ID,getDataValue(aMix)));
+            if (impactCategory == "Impact Analysis Comparison of All Alternatives"){
+                serie_allAlternatives.getData().add(new XYChart.Data<>(alternative_ID,getSingleDataValue(aMix)));
             }
         }
         if(impactCategory == "GWP"){
@@ -218,227 +204,329 @@ public final class EnvironmentalReportController {
         if(impactCategory == "POCP"){
             bc.getData().add(serie_POCP);
         }
-        if(impactCategory == "TotalWater"){
-            bc.getData().add(serie_TotalWater);
-        }
         if (impactCategory == "PrimaryEnergyConsumption"){
             bc.getData().add(serie_TotalPrimaryEnergyConsumption);
         }
-        if (impactCategory == "Overall"){
-            bc.getData().add(serie_Overall);
+        if (impactCategory == "Impact Analysis Comparison of All Alternatives"){
+            bc.getData().add(serie_allAlternatives);
         }
     }
-
-    public double getDataValue(Mix mix){
-        double dataTemp = 0.0;
+    public double getSingleDataValue(Mix aMix){
         if (perfType == "Environmental Performance"){
             System.out.println("Accessing environmental performance data");
-            if(envImpactType == "EPD"){
-                System.out.println("Accessing EPD data");
-                if(valueType == "Raw impact per functional unit"){
-                    System.out.println("Accessing data of raw impact per functional unit");
-                    if(impactCategory == "GWP"){
-                        System.out.println("Accessing data of GWP");
-                        dataTemp = mix.getGWP_EPD_Ctb();
-                    }else if(impactCategory == "ODP"){
-                        System.out.println("Accessing data of ODP");
-                        dataTemp = mix.getODP_EPD_Ctb();
-                    }else if(impactCategory == "AP"){
-                        System.out.println("Accessing data of AP");
-                        dataTemp = mix.getAP_EPD_Ctb();
-                    }else if(impactCategory == "EP"){
-                        System.out.println("Accessing data of EP");
-                        dataTemp = mix.getEP_EPD_Ctb();
-                    }else if(impactCategory == "POCP"){
-                        System.out.println("Accessing data of POCP");
-                        dataTemp = mix.getPOCP_EPD_Ctb();
-                    }else if(impactCategory == "TotalWater"){
-                        System.out.println("Accessing data of TotalWater");
-                        dataTemp = mix.getTW_EPD_Ctb();
-                    }else if (impactCategory == "PrimaryEnergyConsumption"){
-                        System.out.println("Accessing data of PrimaryEnergyConsumption");
-                        dataTemp = mix.getTPEC_EPD_Ctb();
-                    }else if (impactCategory == "Overall"){
-                        System.out.println("Presenting raw value of all impactCategory");
-                        dataTemp = mix.getGWP_EPD_Ctb()+mix.getODP_EPD_Ctb()
-                                +mix.getAP_EPD_Ctb() +mix.getEP_EPD_Ctb()+mix.getPOCP_EPD_Ctb()
-                                +mix.getTW_EPD_Ctb() +mix.getTPEC_EPD_Ctb();
-                    }else{
-                        System.out.println("Can not identify an impactCategory");
-                    }
-                }else if(valueType == "Normalized impact per functional unit"){
-                    System.out.println("Accessing data of normalized impact per functional unit");
-                    if(impactCategory == "GWP"){
-                        System.out.println("Accessing data of GWP");
-                        dataTemp = mix.getGWP_EPD_NORM();
-                    }else if(impactCategory == "ODP"){
-                        System.out.println("Accessing data of ODP");
-                        dataTemp = mix.getODP_EPD_NORM();
-                    }else if(impactCategory == "AP"){
-                        System.out.println("Accessing data of AP");
-                        dataTemp = mix.getAP_EPD_NORM();
-                    }else if(impactCategory == "EP"){
-                        System.out.println("Accessing data of EP");
-                        dataTemp = mix.getEP_EPD_NORM();
-                    }else if(impactCategory == "POCP"){
-                        System.out.println("Accessing data of POCP");
-                        dataTemp = mix.getPOCP_EPD_NORM();
-                    }else if(impactCategory == "TotalWater"){
-                        System.out.println("Accessing data of TotalWater");
-                        dataTemp = mix.getTW_EPD_NORM();
-                    }else if (impactCategory == "PrimaryEnergyConsumption"){
-                        System.out.println("Accessing data of PrimaryEnergyConsumption");
-                        dataTemp = mix.getTPEC_EPD_NORM();
-                    }else if(impactCategory == "Overall"){
-                        System.out.println("Presenting Normalized value of all impactCategory");
-                        dataTemp = mix.getGWP_EPD_NORM()+mix.getODP_EPD_NORM()
-                                +mix.getAP_EPD_NORM() +mix.getEP_EPD_NORM()+mix.getPOCP_EPD_NORM()
-                                +mix.getTW_EPD_NORM() +mix.getTPEC_EPD_NORM();
-                    }else{
-                        System.out.println("Can not identify an impactCategory");
-                    }
-                }else if (valueType == "Weighted impact per functional unit"){
-                    System.out.println("Accessing data of weighted impact per functional unit");
-                    if(impactCategory == "GWP"){
-                        System.out.println("Accessing data of GWP");
-                        dataTemp = mix.getGWP_EPD_SubScore();
-                    }else if(impactCategory == "ODP"){
-                        System.out.println("Accessing data of ODP");
-                        dataTemp = mix.getODP_EPD_SubScore();
-                    }else if(impactCategory == "AP"){
-                        System.out.println("Accessing data of AP");
-                        dataTemp = mix.getAP_EPD_SubScore();
-                    }else if(impactCategory == "EP"){
-                        System.out.println("Accessing data of EP");
-                        dataTemp = mix.getEP_EPD_SubScore();
-                    }else if(impactCategory == "POCP"){
-                        System.out.println("Accessing data of POCP");
-                        dataTemp = mix.getPOCP_EPD_SubScore();
-                    }else if(impactCategory == "TotalWater"){
-                        System.out.println("Accessing data of TotalWater");
-                        dataTemp = mix.getTW_EPD_SubScore();
-                    }else if (impactCategory == "PrimaryEnergyConsumption"){
-                        System.out.println("Accessing data of PrimaryEnergyConsumption");
-                        dataTemp = mix.getTPEC_EPD_SubScore();
-                    }else if (impactCategory == "Overall"){
-                        System.out.println("Presenting Weighted value of all impactCategory");
-                        dataTemp = mix.getGWP_EPD_SubScore()+mix.getODP_EPD_SubScore()
-                                +mix.getAP_EPD_SubScore() +mix.getEP_EPD_SubScore()+mix.getPOCP_EPD_SubScore()
-                                +mix.getTW_EPD_SubScore() +mix.getTPEC_EPD_SubScore();
-                    }else{
-                        System.out.println("Can not identify an impactCategory");
-                    }
-                }else{
-                    System.out.println("Can not identify an valueType");
-                }
-
-            }else if(envImpactType == "TSP"){
-                System.out.println("Accessing TSP data");
-                if(valueType == "Raw impact per functional unit"){
-                    System.out.println("Accessing data of raw impact per functional unit");
-                    if(impactCategory == "GWP"){
-                        System.out.println("Accessing data of GWP");
-                        dataTemp = mix.getGWP_Transportation_Ctb();
-                    }else if(impactCategory == "ODP"){
-                        System.out.println("Accessing data of ODP");
-                        dataTemp = mix.getODP_Transportation_Ctb();
-                    }else if(impactCategory == "AP"){
-                        System.out.println("Accessing data of AP");
-                        dataTemp = mix.getAP_Transportation_Ctb();
-                    }else if(impactCategory == "EP"){
-                        System.out.println("Accessing data of EP");
-                        dataTemp = mix.getEP_Transportation_Ctb();
-                    }else if(impactCategory == "POCP"){
-                        System.out.println("Accessing data of POCP");
-                        dataTemp = mix.getPOCP_Transportation_Ctb();
-                    }else if(impactCategory == "TotalWater"){
-                        System.out.println("Accessing data of TotalWater");
-                        dataTemp = mix.getTW_Transportation_Ctb();
-                    }else if (impactCategory == "PrimaryEnergyConsumption"){
-                        System.out.println("Accessing data of PrimaryEnergyConsumption");
-                        dataTemp = mix.getTPEC_Transportation_Ctb();
-                    }else if (impactCategory == "Overall"){
-                        System.out.println("Presenting raw value of all impactCategory");
-                    }else{
-                        System.out.println("Can not identify an impactCategory");
-                    }
-                }else if(valueType == "Normalized impact per functional unit"){
-                    System.out.println("Accessing data of normalized impact per functional unit");
-                    if(impactCategory == "GWP"){
-                        System.out.println("Accessing data of GWP");
-                        dataTemp = mix.getGWP_Transportation_NORM();
-                    }else if(impactCategory == "ODP"){
-                        System.out.println("Accessing data of ODP");
-                        dataTemp = mix.getODP_Transportation_NORM();
-                    }else if(impactCategory == "AP"){
-                        System.out.println("Accessing data of AP");
-                        dataTemp = mix.getAP_Transportation_NORM();
-                    }else if(impactCategory == "EP"){
-                        System.out.println("Accessing data of EP");
-                        dataTemp = mix.getEP_Transportation_NORM();
-                    }else if(impactCategory == "POCP"){
-                        System.out.println("Accessing data of POCP");
-                        dataTemp = mix.getPOCP_Transportation_NORM();
-                    }else if(impactCategory == "TotalWater"){
-                        System.out.println("Accessing data of TotalWater");
-                        dataTemp = mix.getTW_Transportation_NORM();
-                    }else if (impactCategory == "PrimaryEnergyConsumption"){
-                        System.out.println("Accessing data of PrimaryEnergyConsumption");
-                        dataTemp = mix.getTPEC_Transportation_NORM();
-                    }else if(impactCategory == "Overall"){
-                        System.out.println("Presenting Normalized value of all impactCategory");
-                    }else{
-                        System.out.println("Can not identify an impactCategory");
-                    }
-                }else if (valueType == "Weighted impact per functional unit"){
-                    System.out.println("Accessing data of weighted impact per functional unit");
-                    if(impactCategory == "GWP"){
-                        System.out.println("Accessing data of GWP");
-                        dataTemp = mix.getGWP_Transportation_SubScore();
-                    }else if(impactCategory == "ODP"){
-                        System.out.println("Accessing data of ODP");
-                        dataTemp = mix.getODP_Transportation_SubScore();
-                    }else if(impactCategory == "AP"){
-                        System.out.println("Accessing data of AP");
-                        dataTemp = mix.getAP_Transportation_SubScore();
-                    }else if(impactCategory == "EP"){
-                        System.out.println("Accessing data of EP");
-                        dataTemp = mix.getEP_Transportation_SubScore();
-                    }else if(impactCategory == "POCP"){
-                        System.out.println("Accessing data of POCP");
-                        dataTemp = mix.getPOCP_Transportation_SubScore();
-                    }else if(impactCategory == "TotalWater"){
-                        System.out.println("Accessing data of TotalWater");
-                        dataTemp = mix.getTW_Transportation_SubScore();
-                    }else if (impactCategory == "PrimaryEnergyConsumption"){
-                        System.out.println("Accessing data of PrimaryEnergyConsumption");
-                        dataTemp = mix.getTPEC_Transportation_SubScore();
-                    }else if (impactCategory == "Overall"){
-                        System.out.println("Presenting Weighted value of all impactCategory");
-                    }else{
-                        System.out.println("Can not identify an impactCategory");
-                    }
-                }else{
-                    System.out.println("Can not identify an valueType");
-                }
-            }else if(envImpactType == "Overall"){
-                System.out.println("Accessing OVERALL Data_envImpact");
-
-            }else {
-                System.out.println("Can not identify an envImpactType");
-            }
-        }else if (perfType == "Economical Performance"){
-
+            return getSingleEnvPerfValue(aMix);
         }
-        else if (perfType == "Overall"){
-
+        else if(perfType == "Economical Performance"){
+            System.out.println("Accessing economical performance data");
+            return getSingleEncPerfValue(aMix);
+        }else {
+            System.out.println("Accessing overall performance data");
+            return getSingleOverallPerfValue(aMix);
+        }
+    }
+    public double getSingleEnvPerfValue(Mix aMix){
+        if(envImpactType == "EPD"){
+            System.out.println("Accessing EPD data");
+            return getSingleEPDValue(aMix);
+        }else if (envImpactType == "TSP"){
+            System.out.println("Accessing TSP data");
+            return getSingleTSPValue(aMix);
+        }else {
+            System.out.println("Accessing overall environmental impact data");
+            return getOverallSingleEnvImpactValue(aMix);
+        }
+    }
+    public double getSingleEPDValue(Mix aMix) {
+        if (valueType == "Raw impact per functional unit") {
+            System.out.println("Accessing data of raw impact per functional unit");
+            return getSingleRawFunctionalUnitValue_EPD(aMix);
+        } else if (valueType == "Normalized impact per functional unit") {
+            System.out.println("Accessing data of normalized impact per functional unit");
+            return getSingleNormFunctionalUnitValue_EPD(aMix);
+        }else{
+            System.out.println("Accessing data of weighted impact per functional unit");
+            return getSingleWeightedFunctionUnitValue_EPD(aMix);
+        }
+    }
+    public double getSingleTSPValue(Mix aMix) {
+        if (valueType == "Raw impact per functional unit") {
+            System.out.println("Accessing data of raw impact per functional unit");
+            return getSingleRawFunctionalUnitValue_TSP(aMix);
+        } else if (valueType == "Normalized impact per functional unit") {
+            System.out.println("Accessing data of normalized impact per functional unit");
+            return getSingleNormFunctionalUnitValue_TSP(aMix);
+        }else{
+            System.out.println("Accessing data of weighted impact per functional unit");
+            return getSingleWeightedFunctionUnitValue_TSP(aMix);
+        }
+    }
+    public double getOverallSingleEnvImpactValue(Mix aMix) {
+        if (valueType == "Raw impact per functional unit") {
+            System.out.println("Accessing data of raw impact per functional unit");
+            return getSingleRawFunctionalUnitValue_Overall(aMix);
+        } else if (valueType == "Normalized impact per functional unit") {
+            System.out.println("Accessing data of normalized impact per functional unit");
+            return getSingleNormFunctionalUnitValue_Overall(aMix);
+        }else{
+            System.out.println("Accessing data of weighted impact per functional unit");
+            return getSingleWeightedFunctionUnitValue_Overall(aMix);
+        }
+    }
+    public double getSingleRawFunctionalUnitValue_EPD(Mix mix) {
+        if (impactCategory == "GWP") {
+            System.out.println("Accessing data of GWP");
+            return mix.getGWP_EPD_Ctb();
+        } else if (impactCategory == "ODP") {
+            System.out.println("Accessing data of ODP");
+            return mix.getODP_EPD_Ctb();
+        } else if (impactCategory == "AP") {
+            System.out.println("Accessing data of AP");
+            return mix.getAP_EPD_Ctb();
+        } else if (impactCategory == "EP") {
+            System.out.println("Accessing data of EP");
+            return mix.getEP_EPD_Ctb();
+        } else if (impactCategory == "POCP") {
+            System.out.println("Accessing data of POCP");
+            return mix.getPOCP_EPD_Ctb();
+        } else if (impactCategory == "TotalWater") {
+            System.out.println("Accessing data of TotalWater");
+            return mix.getTW_EPD_Ctb();
+        } else if (impactCategory == "PrimaryEnergyConsumption") {
+            System.out.println("Accessing data of PrimaryEnergyConsumption");
+            return mix.getTPEC_EPD_Ctb();
         } else {
-            System.out.println("Can not identify a performanceType");
+            System.out.println("Can not identify an impactCategory");
             return 0.0;
         }
-        // return data value
-        return dataTemp;
     }
+    public double getSingleNormFunctionalUnitValue_EPD(Mix mix) {
+        if (impactCategory == "GWP") {
+            System.out.println("Accessing data of GWP");
+            return mix.getGWP_EPD_NORM();
+        } else if (impactCategory == "ODP") {
+            System.out.println("Accessing data of ODP");
+            return mix.getODP_EPD_NORM();
+        } else if (impactCategory == "AP") {
+            System.out.println("Accessing data of AP");
+            return mix.getAP_EPD_NORM();
+        } else if (impactCategory == "EP") {
+            System.out.println("Accessing data of EP");
+            return mix.getEP_EPD_NORM();
+        } else if (impactCategory == "POCP") {
+            System.out.println("Accessing data of POCP");
+            return mix.getPOCP_EPD_NORM();
+        } else if (impactCategory == "TotalWater") {
+            System.out.println("Accessing data of TotalWater");
+            return mix.getTW_EPD_NORM();
+        } else if (impactCategory == "PrimaryEnergyConsumption") {
+            System.out.println("Accessing data of PrimaryEnergyConsumption");
+            return mix.getTPEC_EPD_NORM();
+        } else {
+            System.out.println("Can not identify an impactCategory");
+            return 0.0;
+        }
+    }
+    public double getSingleWeightedFunctionUnitValue_EPD(Mix mix) {
+        if (impactCategory == "GWP") {
+            System.out.println("Accessing data of GWP");
+            return mix.getGWP_EPD_SubScore();
+        } else if (impactCategory == "ODP") {
+            System.out.println("Accessing data of ODP");
+            return mix.getODP_EPD_SubScore();
+        } else if (impactCategory == "AP") {
+            System.out.println("Accessing data of AP");
+            return mix.getAP_EPD_SubScore();
+        } else if (impactCategory == "EP") {
+            System.out.println("Accessing data of EP");
+            return mix.getEP_EPD_SubScore();
+        } else if (impactCategory == "POCP") {
+            System.out.println("Accessing data of POCP");
+            return mix.getPOCP_EPD_SubScore();
+        } else if (impactCategory == "TotalWater") {
+            System.out.println("Accessing data of TotalWater");
+            return mix.getTW_EPD_SubScore();
+        } else if (impactCategory == "PrimaryEnergyConsumption") {
+            System.out.println("Accessing data of PrimaryEnergyConsumption");
+            return mix.getTPEC_EPD_SubScore();
+        }else if (impactCategory == "Impact Analysis Comparison of All Alternatives"){
+            System.out.println("Comparison of All Alternatives");
+            return mix.getSum_EPD_SubScore();
+        } else {
+            System.out.println("Can not identify an impactCategory");
+            return 0.0;
+        }
+    }
+    public double getSingleRawFunctionalUnitValue_TSP(Mix mix) {
+        if (impactCategory == "GWP") {
+            System.out.println("Accessing data of GWP");
+            return mix.getGWP_Transportation_Ctb();
+        } else if (impactCategory == "ODP") {
+            System.out.println("Accessing data of ODP");
+            return mix.getODP_Transportation_Ctb();
+        } else if (impactCategory == "AP") {
+            System.out.println("Accessing data of AP");
+            return mix.getAP_Transportation_Ctb();
+        } else if (impactCategory == "EP") {
+            System.out.println("Accessing data of EP");
+            return mix.getEP_Transportation_Ctb();
+        } else if (impactCategory == "POCP") {
+            System.out.println("Accessing data of POCP");
+            return mix.getPOCP_Transportation_Ctb();
+        } else if (impactCategory == "TotalWater") {
+            System.out.println("Accessing data of TotalWater");
+            return mix.getTW_Transportation_Ctb();
+        } else if (impactCategory == "PrimaryEnergyConsumption") {
+            System.out.println("Accessing data of PrimaryEnergyConsumption");
+            return mix.getTPEC_Transportation_Ctb();
+        }else {
+            System.out.println("Can not identify an impactCategory");
+            return 0.0;
+        }
+    }
+    public double getSingleNormFunctionalUnitValue_TSP(Mix mix) {
+        if (impactCategory == "GWP") {
+            System.out.println("Accessing data of GWP");
+            return mix.getGWP_Transportation_NORM();
+        } else if (impactCategory == "ODP") {
+            System.out.println("Accessing data of ODP");
+            return mix.getODP_Transportation_NORM();
+        } else if (impactCategory == "AP") {
+            System.out.println("Accessing data of AP");
+            return mix.getAP_Transportation_NORM();
+        } else if (impactCategory == "EP") {
+            System.out.println("Accessing data of EP");
+            return mix.getEP_Transportation_NORM();
+        } else if (impactCategory == "POCP") {
+            System.out.println("Accessing data of POCP");
+            return mix.getPOCP_Transportation_NORM();
+        } else if (impactCategory == "TotalWater") {
+            System.out.println("Accessing data of TotalWater");
+            return mix.getTW_Transportation_NORM();
+        } else if (impactCategory == "PrimaryEnergyConsumption") {
+            System.out.println("Accessing data of PrimaryEnergyConsumption");
+            return mix.getTPEC_Transportation_NORM();
+        }else {
+            System.out.println("Can not identify an impactCategory");
+            return 0.0;
+        }
+    }
+    public double getSingleWeightedFunctionUnitValue_TSP(Mix mix) {
+        if (impactCategory == "GWP") {
+            System.out.println("Accessing data of GWP");
+            return mix.getGWP_Transportation_SubScore();
+        } else if (impactCategory == "ODP") {
+            System.out.println("Accessing data of ODP");
+            return mix.getODP_Transportation_SubScore();
+        } else if (impactCategory == "AP") {
+            System.out.println("Accessing data of AP");
+            return mix.getAP_Transportation_SubScore();
+        } else if (impactCategory == "EP") {
+            System.out.println("Accessing data of EP");
+            return mix.getEP_Transportation_SubScore();
+        } else if (impactCategory == "POCP") {
+            System.out.println("Accessing data of POCP");
+            return mix.getPOCP_Transportation_SubScore();
+        } else if (impactCategory == "TotalWater") {
+            System.out.println("Accessing data of TotalWater");
+            return mix.getTW_Transportation_SubScore();
+        } else if (impactCategory == "PrimaryEnergyConsumption") {
+            System.out.println("Accessing data of PrimaryEnergyConsumption");
+            return mix.getTPEC_Transportation_SubScore();
+        }else if (impactCategory == "Impact Analysis Comparison of All Alternatives") {
+            System.out.println("Comparison of All Alternatives");
+            return mix.getSum_Transportation_SubScore();
+        }else {
+            System.out.println("Can not identify an impactCategory");
+            return 0.0;
+        }
+    }
+    public double getSingleRawFunctionalUnitValue_Overall(Mix mix) {
+        if (impactCategory == "GWP") {
+            System.out.println("Accessing data of GWP");
+            return mix.getGWP_EPD_Ctb()+mix.getGWP_Transportation_Ctb();
+        } else if (impactCategory == "ODP") {
+            System.out.println("Accessing data of ODP");
+            return mix.getODP_EPD_Ctb()+mix.getODP_Transportation_Ctb();
+        } else if (impactCategory == "AP") {
+            System.out.println("Accessing data of AP");
+            return mix.getAP_EPD_Ctb()+mix.getAP_Transportation_Ctb();
+        } else if (impactCategory == "EP") {
+            System.out.println("Accessing data of EP");
+            return  mix.getEP_EPD_Ctb()+mix.getEP_Transportation_Ctb();
+        } else if (impactCategory == "POCP") {
+            System.out.println("Accessing data of POCP");
+            return mix.getPOCP_EPD_Ctb()+mix.getPOCP_Transportation_Ctb();
+        } else if (impactCategory == "TotalWater") {
+            System.out.println("Accessing data of TotalWater");
+            return mix.getTW_EPD_Ctb()+mix.getTW_Transportation_Ctb();
+        } else if (impactCategory == "PrimaryEnergyConsumption") {
+            System.out.println("Accessing data of PrimaryEnergyConsumption");
+            return mix.getTPEC_EPD_Ctb()+mix.getTPEC_Transportation_Ctb();
+        }else {
+            System.out.println("Can not identify an impactCategory");
+            return 0.0;
+        }
+    }
+    public double getSingleNormFunctionalUnitValue_Overall(Mix mix) {
+        if (impactCategory == "GWP") {
+            System.out.println("Accessing data of GWP");
+            return mix.getGWP_EPD_NORM()+mix.getGWP_Transportation_NORM();
+        } else if (impactCategory == "ODP") {
+            System.out.println("Accessing data of ODP");
+            return mix.getODP_EPD_NORM()+mix.getODP_Transportation_NORM();
+        } else if (impactCategory == "AP") {
+            System.out.println("Accessing data of AP");
+            return mix.getAP_EPD_NORM()+mix.getAP_Transportation_NORM();
+        } else if (impactCategory == "EP") {
+            System.out.println("Accessing data of EP");
+            return  mix.getEP_EPD_NORM()+mix.getEP_Transportation_NORM();
+        } else if (impactCategory == "POCP") {
+            System.out.println("Accessing data of POCP");
+            return mix.getPOCP_EPD_NORM()+mix.getPOCP_Transportation_NORM();
+        } else if (impactCategory == "TotalWater") {
+            System.out.println("Accessing data of TotalWater");
+            return mix.getTW_EPD_NORM()+mix.getTW_Transportation_NORM();
+        } else if (impactCategory == "PrimaryEnergyConsumption") {
+            System.out.println("Accessing data of PrimaryEnergyConsumption");
+            return mix.getTPEC_EPD_NORM() + mix.getTPEC_Transportation_NORM();
+        }else {
+            System.out.println("Can not identify an impactCategory");
+            return 0.0;
+        }
+    }
+    public double getSingleWeightedFunctionUnitValue_Overall(Mix mix) {
+        if (impactCategory == "GWP") {
+            System.out.println("Accessing data of GWP");
+            return mix.getGWP_EPD_SubScore()+mix.getGWP_Transportation_SubScore();
+        } else if (impactCategory == "ODP") {
+            System.out.println("Accessing data of ODP");
+            return mix.getODP_EPD_SubScore()+mix.getODP_Transportation_SubScore();
+        } else if (impactCategory == "AP") {
+            System.out.println("Accessing data of AP");
+            return mix.getAP_EPD_SubScore()+mix.getAP_Transportation_SubScore();
+        } else if (impactCategory == "EP") {
+            System.out.println("Accessing data of EP");
+            return  mix.getEP_EPD_SubScore()+mix.getEP_Transportation_SubScore();
+        } else if (impactCategory == "POCP") {
+            System.out.println("Accessing data of POCP");
+            return mix.getPOCP_EPD_SubScore()+mix.getPOCP_Transportation_SubScore();
+        } else if (impactCategory == "TotalWater") {
+            System.out.println("Accessing data of TotalWater");
+            return mix.getTW_EPD_SubScore()+mix.getTW_Transportation_SubScore();
+        } else if (impactCategory == "PrimaryEnergyConsumption") {
+            System.out.println("Accessing data of PrimaryEnergyConsumption");
+            return mix.getTPEC_EPD_SubScore()+mix.getTPEC_Transportation_SubScore();
+        }else if (impactCategory == "Impact Analysis Comparison of All Alternatives") {
+            System.out.println("Comparison of All Alternatives");
+            return mix.getSum_EPD_SubScore()+mix.getSum_Transportation_SubScore();
+        }else {
+            System.out.println("Can not identify an impactCategory");
+            return 0.0;
+        }
+    }
+
+    public double getSingleEncPerfValue(Mix aMix){return 0.0;}
+    public double getSingleOverallPerfValue(Mix aMix){return 0.0;}
 
     private void setupPerformanceType_ComboBox(){
         performanceType_ComboBox.setItems(performanceType);
@@ -530,9 +618,15 @@ public final class EnvironmentalReportController {
     }
     public void cleanChart(){
         // clear old data
-//        sbc.getData().clear();
-//        sbc.layout();
-//        bc.getData().clear();
-//        bc.layout();
+        sbc.getData().clear();
+        sbc.layout();
+        bc.getData().clear();
+        bc.layout();
+        serie_GWP.getData().clear();
+        serie_ODP.getData().clear();
+        serie_AP.getData().clear();
+        serie_EP.getData().clear();
+        serie_POCP.getData().clear();
+        serie_TotalPrimaryEnergyConsumption.getData().clear();
     }
 }
