@@ -87,14 +87,14 @@ public final class LoadMixController {
 
         //Alternative materials
         CS_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("CS"));
-        CM_Name_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("CM_name"));
+        CM_Name_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Company_Name"));
         Location_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Location"));
         MixNum_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("MixNum"));
         ZipCode_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("ZipCode"));
 
         //Selected materials
         CS_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("CS"));
-        CM_Name_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("CM_name"));
+        CM_Name_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("Company_Name"));
         Location_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("Location"));
         MixNum_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("MixNum"));
         ZipCode_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("ZipCode"));

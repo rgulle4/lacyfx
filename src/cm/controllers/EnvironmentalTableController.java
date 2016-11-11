@@ -14,9 +14,21 @@ public class EnvironmentalTableController {
 
 
     public void showData(){
-        TableColumn designColumn = new TableColumn("Design");
-        dataTable.getColumns().add(designColumn);
+        addCertainNumTableColumns();
+        insertValueToTableView();
     }
+    private void addCertainNumTableColumns(){
+        TableColumn designColumn1 = new TableColumn("Design1");
+        dataTable.getColumns().add(designColumn1);
+        TableColumn layerColumn1 = new TableColumn("Layer1");
+        designColumn1.getColumns().add(layerColumn1);
+        TableColumn mixColunmn = new TableColumn("Mix_Name");
+        layerColumn1.getColumns().add(mixColunmn);
+    }
+    private void insertValueToTableView(){
+        insertValueToColumns();
+    }
+    private void insertValueToColumns(){
 
-
+    }
 }

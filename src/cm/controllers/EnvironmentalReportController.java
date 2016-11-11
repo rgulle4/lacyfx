@@ -172,7 +172,7 @@ public final class EnvironmentalReportController {
             }
         }
         for (Mix aMix:mixs){
-            String mix_ID = aMix.getMixNum();
+            String mix_ID = aMix.getZipCode();
             StringBuilder sb = new StringBuilder(incompletedAlternative_ID).append(mix_ID);
             String alternative_ID = sb.toString();
             if(impactCategory == "GWP"){
