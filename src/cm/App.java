@@ -69,6 +69,21 @@ public final class App extends Application {
         addDialogStage.showAndWait();
     }
 
+    public static void showEnvironmentalDataTable() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(App.class.getResource("views/EnvironmentalDataTable.fxml"));
+        AnchorPane showTable = loader.load();
+
+        Stage addDialogStage = new Stage();
+        addDialogStage.setTitle("Environmental Performance");
+        addDialogStage.initModality(Modality.WINDOW_MODAL);
+        addDialogStage.initOwner(primaryStage);
+
+        Scene scene = new Scene(showTable);
+        addDialogStage.setScene(scene);
+        addDialogStage.showAndWait();
+    }
+
     public static void main(String[] args) {
         launch(args);
     }

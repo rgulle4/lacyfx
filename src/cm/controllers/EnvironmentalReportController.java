@@ -9,12 +9,14 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.*;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
+import sun.java2d.pipe.AlphaPaintPipe;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static cm.models.Model.*;
-
+import cm.App;
 //import static cm.App.designMap;
 
 
@@ -145,7 +147,7 @@ public final class EnvironmentalReportController {
         valueType = rawValue_ComboBox.getSelectionModel().getSelectedItem().toString();
         impactCategory = impactCategory_ComboBox.getSelectionModel().getSelectedItem().toString();
         String alternative_ID = new StringBuilder(designID).append(layerID).toString();
-        this.showBarChart("Alternatives","Value","Environmental Analysis",alternative_ID, mixsTemp);
+        showBarChart("Alternatives","Value","Environmental Analysis",alternative_ID, mixsTemp);
     }
 
     public void showBarChart(String xLabel, String yLabel, String chartTitle, String incompletedAlternative_ID, List<Mix> mixs){
@@ -706,5 +708,9 @@ public final class EnvironmentalReportController {
         serie_EP.getData().clear();
         serie_POCP.getData().clear();
         serie_TotalPrimaryEnergyConsumption.getData().clear();
+    }
+    App main;
+    public void showTable() throws IOException {
+        main.showEnvironmentalDataTable();
     }
 }

@@ -274,34 +274,29 @@ public final class EPDDatabase {
         System.out.println(sb0.toString());
 
         List<Mix> result = new ArrayList<Mix>();
-
-        String DEFAULT_DB_FILE_NAME = "rt.db";
-        String DEFAULT_SQL_QUERY = "SELECT * FROM EPD WHERE 1";
-
         String dbFileName = "rt.db";
         Connection conn;
         Statement s;
         ResultSet rs;
         conn = DriverManager.getConnection("jdbc:sqlite:" + dbFileName);
-        StringBuilder sb = new StringBuilder("SELECT * FROM EPD WHERE 1");
+        StringBuilder sb = new StringBuilder("SELECT * FROM CONCRETE_EPD WHERE 1");
         PreparedStatement ptmt;
-        String sql = sb.append(" AND ZIP in ").append(sb0.toString()).toString();
-
+        String sql = sb.toString();
         ptmt = conn.prepareStatement(sql);
         rs = ptmt.executeQuery();
         Mix g;
         while(rs.next()) {
             g = new Mix();
 
-            g.setCS(rs.getString("CS"));
+            g.setCS(rs.getString("Compressive Strength"));
             g.setCompany_Name(rs.getString("NAME"));
             g.setLocation(rs.getString("LOCATION"));
-            g.setMixNum(rs.getString("MIXNUMBER"));
-            g.setZipCode(rs.getString("ZIP"));
-            g.setGWP(rs.getDouble("GWP"));
-            g.setODP(rs.getDouble("ODP"));
-            g.setAP(rs.getDouble("AP"));
-            g.setEP(rs.getDouble("EP"));
+            g.setMixNum(rs.getString("MIX NUMBER"));
+            g.setZipCode(rs.getString("ZIP CODE"));
+            g.setGWP(rs.getDouble("Global   Warming Potential"));
+            g.setODP(rs.getDouble("Ozone    Depletion Potential"));
+            g.setAP(rs.getDouble("Acidification potential"));
+            g.setEP(rs.getDouble("Eutrophication potential"));
             g.setPOCP(rs.getDouble("POCP"));
             g.setUnit(rs.getString("UNITS"));
             g.setConcreteHazardousWaste(rs.getDouble("CHW"));
