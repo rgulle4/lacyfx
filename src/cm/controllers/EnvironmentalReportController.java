@@ -96,14 +96,6 @@ public final class EnvironmentalReportController {
     // Number of layers in this design
     ObservableList<String> mixNum = FXCollections
             .observableArrayList();
-//    // Impact Category
-//    ObservableList<String> impacyCategoryName =FXCollections
-//            .observableArrayList(
-//                    "Impact Analysis Comparison of All Alternatives",
-//                    "Impact Analysis per Alternative",
-//                    "GWP","ODP","AP","EP", "POCP",
-//                    "PrimaryEnergyConsumption"
-//            );
 
     @FXML
     public void initialize() {

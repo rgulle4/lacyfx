@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +74,7 @@ public class EnvironmentalTableController {
         setupImpactCategory_ComboBox();
         //set up design number
         setupDesignNumber_ComboBox();
+        dataTable.setVisible(false);
     }
     private String perfType;
     private String envImpactType;
@@ -98,26 +100,104 @@ public class EnvironmentalTableController {
         envImpactType = environmentalImpact_ComboBox.getSelectionModel().getSelectedItem().toString();
         valueType = rawValue_ComboBox.getSelectionModel().getSelectedItem().toString();
         impactCategory = impactCategory_ComboBox.getSelectionModel().getSelectedItem().toString();
-        String alternative_ID = new StringBuilder(designID).append(layerID).toString();
-        showData(alternative_ID,mixsTemp);
+        showData(mixsTemp);
     }
-    public void showData(String alternative_id,List<Mix> mixes){
-        addCertainNumTableColumns();
-        insertValueToTableView();
-    }
-    private void addCertainNumTableColumns(){
+    public void showData(List<Mix> mixes){
+        dataTable.getColumns().clear();
+        dataTable.layout();
+        dataTable.setVisible(true);
+        //Obtain data from mixes
+        ObservableList<propertyMix> data = FXCollections.observableArrayList();
+        for(Mix amix:mixes){
+            propertyMix pmix = new propertyMix();
+            pmix.setID(amix.getMaterial_ID()+amix.getZipCode());
+            if(impactCategory == "GWP") pmix.setGWP(getSingleDataValue(amix));
+            if(impactCategory == "ODP") pmix.setODP(getSingleDataValue(amix));
+            if(impactCategory == "AP") pmix.setAP(getSingleDataValue(amix));
+            if(impactCategory == "EP") pmix.setEP(getSingleDataValue(amix));
+            if(impactCategory == "POCP") pmix.setPOCP(getSingleDataValue(amix));
+            if(impactCategory == "PrimaryEnergyConsumption")
+                pmix.setTotalPrimaryEnergyConsumption(getSingleDataValue(amix));
+            if(impactCategory == "Impact Analysis Comparison of All Alternatives"){}
+            if(impactCategory == "Impact Analysis per Alternative"){}
+            data.add(pmix);
+        }
         TableColumn designColumn1 = new TableColumn("Design1");
         dataTable.getColumns().add(designColumn1);
         TableColumn layerColumn1 = new TableColumn("Layer1");
         designColumn1.getColumns().add(layerColumn1);
         TableColumn mixColunmn = new TableColumn("Mix_Name");
         layerColumn1.getColumns().add(mixColunmn);
+        TableColumn gwpColumn = new TableColumn("GWP");
+        TableColumn odpColumn = new TableColumn("ODP");
+        TableColumn apColumn = new TableColumn("AP");
+        TableColumn epColumn = new TableColumn("EP");
+        TableColumn pocpColumn = new TableColumn("POCP");
+
+        if(impactCategory == "Impact Analysis per Alternative"){
+            layerColumn1.getColumns().add(gwpColumn);
+            layerColumn1.getColumns().add(odpColumn);
+            layerColumn1.getColumns().add(apColumn);
+            layerColumn1.getColumns().add(epColumn);
+            layerColumn1.getColumns().add(pocpColumn);
+        }else{
+            if(impactCategory == "GWP"){layerColumn1.getColumns().add(gwpColumn);}
+            if(impactCategory == "ODP"){layerColumn1.getColumns().add(odpColumn);}
+            if(impactCategory == "AP"){layerColumn1.getColumns().add(apColumn);}
+            if(impactCategory == "EP"){layerColumn1.getColumns().add(epColumn);}
+            if(impactCategory == "POCP"){layerColumn1.getColumns().add(pocpColumn);}
+        }
+        mixColunmn.setCellFactory(new PropertyValueFactory<propertyMix,String>("ID"));
+        gwpColumn.setCellValueFactory(new PropertyValueFactory<propertyMix,String>("GWP"));
+        odpColumn.setCellValueFactory(new PropertyValueFactory<propertyMix,String>("ODP"));
+        apColumn.setCellValueFactory(new PropertyValueFactory<propertyMix,String>("AP"));
+        epColumn.setCellValueFactory(new PropertyValueFactory<propertyMix,String>("EP"));
+        pocpColumn.setCellValueFactory(new PropertyValueFactory<propertyMix,String>("POCP"));
+        //Insert value to table
+        System.out.println("propertyMix size is: "+data.size());
+//        dataTable.setItems(data);
     }
-    private void insertValueToTableView(){
-        insertValueToColumns();
+    public double getSingleDataValue(Mix mix){
+        //obtain key for CalcResult
+        String s1=getKey1(impactCategory);
+        String s2=getKey2(envImpactType);
+        String s3=getKey3(valueType);
+        String tot_Key = new StringBuilder().
+                append(s1).append("_").
+                append(s2).append("_").
+                append(s3).toString();      //format should be like GWP_EPD_Ctb
+        return mix.CalcResult.get(tot_Key);
     }
-    private void insertValueToColumns(){
+    private String getKey1(String impactCategory){
+        String s1=null;
+        if (impactCategory.equals("GWP")){s1 = "GWP";}
+        else if (impactCategory.equals("ODP")){s1 = "ODP";}
+        else if (impactCategory.equals("AP")){s1 = "AP";}
+        else if (impactCategory.equals("EP")){s1 = "EP";}
+        else if (impactCategory.equals("POCP")){s1 = "POCP";}
+        else if(impactCategory.equals("TotalPrimaryEnergyConsumption")){s1 = "TPEC";}
+        else System.out.println("Can not identify an impact category");
+        return s1;
     }
+    private String getKey2(String envImpactType){
+        String s2=null;
+        if (envImpactType.equals("EPD")){s2 = "EPD";}
+        else if (envImpactType.equals("TSP")){s2 ="TSP";}
+        else if (envImpactType.equals("Overall")){
+            System.out.println("Environmental Impact Type is selected as OVERALL");
+        }
+        else System.out.println("Can not identify an envImpact type");
+        return s2;
+    }
+    private String getKey3(String valueType){
+        String s3=null;
+        if(valueType.equals("Raw impact per functional unit")){s3 ="Ctb";}
+        else if(valueType.equals("Normalized impact per functional unit")){s3 ="NORM";}
+        else if(valueType.equals("Weighted impact per functional unit")){s3 ="SubScore";}
+        else System.out.println("Can not identify an value type");
+        return s3;
+    }
+
     private void setupPerformanceType_ComboBox(){
         performanceType_ComboBox.setItems(performanceType);
         performanceType_ComboBox.setValue(performanceType.get(0));
@@ -214,6 +294,157 @@ public class EnvironmentalTableController {
             }
         }else{
             System.out.println("Select a certain design first!!");
+        }
+    }
+    public void cleanChart(){
+        // clear old data
+        dataTable.getColumns().clear();
+        dataTable.layout();
+    }
+    public class propertyMix{
+        private Double GWP;
+        private Double ODP;
+        private Double AP;
+        private Double EP;
+        private Double POCP;
+        private Double ConcreteHazardousWaste;
+        private Double ConcreteNonHazardousWaste;
+        private Double TotalWaterConsumption;
+        private Double BatchingWaterConsumption;
+        private Double WashingWaterConsumption;
+        private Double TotalPrimaryEnergyConsumption;
+        private Double RenewablePrimaryEnergyUse;
+        private Double NonRenewableEnergyUse;
+        private Double RenewableMaterialResourcesUse;
+        private Double NonRenewableMaterialResource;
+        private String ID;
+
+        public Double getGWP() {
+            return GWP;
+        }
+
+        public void setGWP(Double GWP) {
+            this.GWP = GWP;
+        }
+
+        public Double getODP() {
+            return ODP;
+        }
+
+        public void setODP(Double ODP) {
+            this.ODP = ODP;
+        }
+
+        public Double getAP() {
+            return AP;
+        }
+
+        public void setAP(Double AP) {
+            this.AP = AP;
+        }
+
+        public Double getEP() {
+            return EP;
+        }
+
+        public void setEP(Double EP) {
+            this.EP = EP;
+        }
+
+        public Double getPOCP() {
+            return POCP;
+        }
+
+        public void setPOCP(Double POCP) {
+            this.POCP = POCP;
+        }
+
+        public Double getConcreteHazardousWaste() {
+            return ConcreteHazardousWaste;
+        }
+
+        public void setConcreteHazardousWaste(Double concreteHazardousWaste) {
+            ConcreteHazardousWaste = concreteHazardousWaste;
+        }
+
+        public Double getConcreteNonHazardousWaste() {
+            return ConcreteNonHazardousWaste;
+        }
+
+        public void setConcreteNonHazardousWaste(Double concreteNonHazardousWaste) {
+            ConcreteNonHazardousWaste = concreteNonHazardousWaste;
+        }
+
+        public Double getTotalWaterConsumption() {
+            return TotalWaterConsumption;
+        }
+
+        public void setTotalWaterConsumption(Double totalWaterConsumption) {
+            TotalWaterConsumption = totalWaterConsumption;
+        }
+
+        public Double getBatchingWaterConsumption() {
+            return BatchingWaterConsumption;
+        }
+
+        public void setBatchingWaterConsumption(Double batchingWaterConsumption) {
+            BatchingWaterConsumption = batchingWaterConsumption;
+        }
+
+        public Double getWashingWaterConsumption() {
+            return WashingWaterConsumption;
+        }
+
+        public void setWashingWaterConsumption(Double washingWaterConsumption) {
+            WashingWaterConsumption = washingWaterConsumption;
+        }
+
+        public Double getTotalPrimaryEnergyConsumption() {
+            return TotalPrimaryEnergyConsumption;
+        }
+
+        public void setTotalPrimaryEnergyConsumption(Double totalPrimaryEnergyConsumption) {
+            TotalPrimaryEnergyConsumption = totalPrimaryEnergyConsumption;
+        }
+
+        public Double getRenewablePrimaryEnergyUse() {
+            return RenewablePrimaryEnergyUse;
+        }
+
+        public void setRenewablePrimaryEnergyUse(Double renewablePrimaryEnergyUse) {
+            RenewablePrimaryEnergyUse = renewablePrimaryEnergyUse;
+        }
+
+        public Double getNonRenewableEnergyUse() {
+            return NonRenewableEnergyUse;
+        }
+
+        public void setNonRenewableEnergyUse(Double nonRenewableEnergyUse) {
+            NonRenewableEnergyUse = nonRenewableEnergyUse;
+        }
+
+        public Double getRenewableMaterialResourcesUse() {
+            return RenewableMaterialResourcesUse;
+        }
+
+        public void setRenewableMaterialResourcesUse(Double renewableMaterialResourcesUse) {
+            RenewableMaterialResourcesUse = renewableMaterialResourcesUse;
+        }
+
+        public Double getNonRenewableMaterialResource() {
+            return NonRenewableMaterialResource;
+        }
+
+        public void setNonRenewableMaterialResource(Double nonRenewableMaterialResource) {
+            NonRenewableMaterialResource = nonRenewableMaterialResource;
+        }
+
+        public String getID() {
+            return ID;
+        }
+
+        public void setID(String ID) {
+            this.ID = ID;
         }
     }
 }

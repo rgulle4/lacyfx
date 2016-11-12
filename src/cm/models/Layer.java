@@ -89,7 +89,7 @@ public final class Layer {
     // Subscores of EPD score for the different env impacts (before
     // NORMALIZATIONS). Each of these is calculated using the same basic
     // formula:
-    //   GWP_EDP_Ctb = gwp (from material with epd.value per epd.unit)
+    //   GWP_EPD_Ctb = gwp (from material with epd.value per epd.unit)
     //                 * "Conversion Factor (volume with matching unit)"
         private Double GWP_EDP_Ctb;
         private Double ODP_EDP_Ctb;
