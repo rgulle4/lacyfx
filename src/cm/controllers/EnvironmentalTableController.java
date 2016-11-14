@@ -21,7 +21,7 @@ import static cm.models.Model.DESIGNS;
  */
 public class EnvironmentalTableController {
     @FXML
-    private TableView dataTable;
+    private TableView<propertyMix> dataTable;
     @FXML
     private ComboBox performanceType_ComboBox;
     @FXML
@@ -100,9 +100,9 @@ public class EnvironmentalTableController {
         envImpactType = environmentalImpact_ComboBox.getSelectionModel().getSelectedItem().toString();
         valueType = rawValue_ComboBox.getSelectionModel().getSelectedItem().toString();
         impactCategory = impactCategory_ComboBox.getSelectionModel().getSelectedItem().toString();
-        showData(mixsTemp);
+        showData(mixsTemp,designID,layerID);
     }
-    public void showData(List<Mix> mixes){
+    public void showData(List<Mix> mixes,String design_ID,String layer_ID){
         dataTable.getColumns().clear();
         dataTable.layout();
         dataTable.setVisible(true);
@@ -110,52 +110,81 @@ public class EnvironmentalTableController {
         ObservableList<propertyMix> data = FXCollections.observableArrayList();
         for(Mix amix:mixes){
             propertyMix pmix = new propertyMix();
-            pmix.setID(amix.getProduct_ID()+amix.getZipCode());
-            if(impactCategory == "GWP") pmix.setGWP(getSingleDataValue(amix));
-            if(impactCategory == "ODP") pmix.setODP(getSingleDataValue(amix));
-            if(impactCategory == "AP") pmix.setAP(getSingleDataValue(amix));
-            if(impactCategory == "EP") pmix.setEP(getSingleDataValue(amix));
-            if(impactCategory == "POCP") pmix.setPOCP(getSingleDataValue(amix));
-            if(impactCategory == "PrimaryEnergyConsumption")
+            pmix.setDesign_ID(design_ID);
+            pmix.setLayer_ID(layer_ID);
+            pmix.setProduct_ID(amix.getProduct_ID()+amix.getZipCode());
+            if(impactCategory == "GWP") {
+                pmix.setGWP(getSingleDataValue(amix));
+            }
+            if(impactCategory == "ODP") {
+                pmix.setODP(getSingleDataValue(amix));
+            }
+            if(impactCategory == "AP") {
+                pmix.setAP(getSingleDataValue(amix));
+            }
+            if(impactCategory == "EP") {
+                pmix.setEP(getSingleDataValue(amix));
+            }
+            if(impactCategory == "POCP") {
+                pmix.setPOCP(getSingleDataValue(amix));
+            }
+            if(impactCategory == "PrimaryEnergyConsumption") {
                 pmix.setTotalPrimaryEnergyConsumption(getSingleDataValue(amix));
+            }
             if(impactCategory == "Impact Analysis Comparison of All Alternatives"){}
             if(impactCategory == "Impact Analysis per Alternative"){}
             data.add(pmix);
         }
-        TableColumn designColumn1 = new TableColumn("Design1");
-        dataTable.getColumns().add(designColumn1);
-        TableColumn layerColumn1 = new TableColumn("Layer1");
-        designColumn1.getColumns().add(layerColumn1);
-        TableColumn mixColunmn = new TableColumn("Mix_Name");
-        layerColumn1.getColumns().add(mixColunmn);
-        TableColumn gwpColumn = new TableColumn("GWP");
-        TableColumn odpColumn = new TableColumn("ODP");
-        TableColumn apColumn = new TableColumn("AP");
-        TableColumn epColumn = new TableColumn("EP");
-        TableColumn pocpColumn = new TableColumn("POCP");
+        TableColumn<propertyMix,String> designColumn = new TableColumn("Design_ID");
+        TableColumn<propertyMix,String> layerColumn = new TableColumn("Layer_ID");
+        TableColumn<propertyMix,String> productIDColumn = new TableColumn("Product_ID");
+        TableColumn<propertyMix,Double> gwpColumn = new TableColumn("GWP");
+        TableColumn<propertyMix,Double> odpColumn = new TableColumn("ODP");
+        TableColumn<propertyMix,Double> apColumn = new TableColumn("AP");
+        TableColumn<propertyMix,Double> epColumn = new TableColumn("EP");
+        TableColumn<propertyMix,Double> pocpColumn = new TableColumn("POCP");
 
         if(impactCategory == "Impact Analysis per Alternative"){
-            layerColumn1.getColumns().add(gwpColumn);
-            layerColumn1.getColumns().add(odpColumn);
-            layerColumn1.getColumns().add(apColumn);
-            layerColumn1.getColumns().add(epColumn);
-            layerColumn1.getColumns().add(pocpColumn);
+            dataTable.getColumns().add(designColumn);
+            dataTable.getColumns().add(layerColumn);
+            dataTable.getColumns().add(productIDColumn);
+            dataTable.getColumns().add(gwpColumn);
+            dataTable.getColumns().add(odpColumn);
+            dataTable.getColumns().add(apColumn);
+            dataTable.getColumns().add(epColumn);
+            dataTable.getColumns().add(pocpColumn);
         }else{
-            if(impactCategory == "GWP"){layerColumn1.getColumns().add(gwpColumn);}
-            if(impactCategory == "ODP"){layerColumn1.getColumns().add(odpColumn);}
-            if(impactCategory == "AP"){layerColumn1.getColumns().add(apColumn);}
-            if(impactCategory == "EP"){layerColumn1.getColumns().add(epColumn);}
-            if(impactCategory == "POCP"){layerColumn1.getColumns().add(pocpColumn);}
+            dataTable.getColumns().add(designColumn);
+            designColumn.setCellValueFactory(new PropertyValueFactory<>("Design_ID"));
+            dataTable.getColumns().add(layerColumn);
+            layerColumn.setCellValueFactory(new PropertyValueFactory<>("Layer_ID"));
+            dataTable.getColumns().add(productIDColumn);
+            productIDColumn.setCellValueFactory(new PropertyValueFactory<>("Product_ID"));
+            if(impactCategory == "GWP"){
+                dataTable.getColumns().add(gwpColumn);
+                gwpColumn.setCellValueFactory(new PropertyValueFactory<>("GWP"));
+            }
+            if(impactCategory == "ODP"){
+                dataTable.getColumns().add(odpColumn);
+                odpColumn.setCellValueFactory(new PropertyValueFactory<>("ODP"));
+            }
+            if(impactCategory == "AP"){
+                dataTable.getColumns().add(apColumn);
+                apColumn.setCellValueFactory(new PropertyValueFactory<>("AP"));
+            }
+
+            if(impactCategory == "EP"){
+                dataTable.getColumns().add(epColumn);
+                epColumn.setCellValueFactory(new PropertyValueFactory<>("EP"));
+            }
+            if(impactCategory == "POCP"){
+                dataTable.getColumns().add(pocpColumn);
+                pocpColumn.setCellValueFactory(new PropertyValueFactory<>("POCP"));
+            }
         }
-        mixColunmn.setCellFactory(new PropertyValueFactory<propertyMix,String>("ID"));
-        gwpColumn.setCellValueFactory(new PropertyValueFactory<propertyMix,String>("GWP"));
-        odpColumn.setCellValueFactory(new PropertyValueFactory<propertyMix,String>("ODP"));
-        apColumn.setCellValueFactory(new PropertyValueFactory<propertyMix,String>("AP"));
-        epColumn.setCellValueFactory(new PropertyValueFactory<propertyMix,String>("EP"));
-        pocpColumn.setCellValueFactory(new PropertyValueFactory<propertyMix,String>("POCP"));
         //Insert value to table
         System.out.println("propertyMix size is: "+data.size());
-//        dataTable.setItems(data);
+        dataTable.setItems(data);
     }
     public double getSingleDataValue(Mix mix){
         //obtain key for CalcResult
@@ -302,6 +331,8 @@ public class EnvironmentalTableController {
         dataTable.layout();
     }
     public class propertyMix{
+        private String Design_ID;
+        private String Layer_ID;
         private Double GWP;
         private Double ODP;
         private Double AP;
@@ -317,7 +348,7 @@ public class EnvironmentalTableController {
         private Double NonRenewableEnergyUse;
         private Double RenewableMaterialResourcesUse;
         private Double NonRenewableMaterialResource;
-        private String ID;
+        private String Product_ID;
 
         public Double getGWP() {
             return GWP;
@@ -439,12 +470,28 @@ public class EnvironmentalTableController {
             NonRenewableMaterialResource = nonRenewableMaterialResource;
         }
 
-        public String getID() {
-            return ID;
+        public String getProduct_ID() {
+            return Product_ID;
         }
 
-        public void setID(String ID) {
-            this.ID = ID;
+        public void setProduct_ID(String product_ID) {
+            this.Product_ID = product_ID;
+        }
+
+        public String getDesign_ID() {
+            return Design_ID;
+        }
+
+        public void setDesign_ID(String design_ID) {
+            Design_ID = design_ID;
+        }
+
+        public String getLayer_ID() {
+            return Layer_ID;
+        }
+
+        public void setLayer_ID(String layer_ID) {
+            Layer_ID = layer_ID;
         }
     }
 }
