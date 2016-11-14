@@ -165,7 +165,8 @@ public final class EnvironmentalReportController {
         }
         for (Mix aMix:mixs){
             String mix_ID = aMix.getZipCode();
-            StringBuilder sb = new StringBuilder(incompletedAlternative_ID).append(mix_ID);
+            String product_ID =aMix.getProduct_ID();
+            StringBuilder sb = new StringBuilder(incompletedAlternative_ID).append(mix_ID).append(product_ID);
             String alternative_ID = sb.toString();
             if(impactCategory == "GWP"){
                 serie_GWP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(aMix)));
