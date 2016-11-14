@@ -11,8 +11,8 @@ public final class EPDDatabase {
 
     /* -- Fields ----------------------------------------------------- */
 
-    private String DEFAULT_DB_FILE_NAME = "rt.db";
-    private String DEFAULT_SQL_QUERY = "SELECT * FROM EPD WHERE 1";
+    private String DEFAULT_DB_FILE_NAME = "1113rt.db";
+    private String DEFAULT_SQL_QUERY = "SELECT * FROM CONCRETE_EPD WHERE 1";
 
     private String dbFileName;
     private Connection conn;
@@ -73,22 +73,22 @@ public final class EPDDatabase {
             sb_ContentofIn.append(")");
 
             if (!filteredZipcodeMap.isEmpty()) {
-                sql = sb.append(" AND ZIP in").append(sb_ContentofIn).toString();
+                sql = sb.append(" AND ZIPCODE in").append(sb_ContentofIn).toString();
                 ptmt = conn.prepareStatement(sql);
 
             }
             if (!companyName.isEmpty() && !cs.isEmpty()) {
-                sql = sb.append(" AND NAME =? AND CS >= ? ").toString();
+                sql = sb.append(" AND COMPANY_NAME =? AND CS >= ? ").toString();
                 ptmt = conn.prepareStatement(sql);
                 ptmt.setString(1, companyName);
                 ptmt.setString(2, cs);
             }
             else if (!cs.isEmpty()) {
-                sql = sb.append(" AND CS >= ?").toString();
+                sql = sb.append(" AND COMPRESSIVE_STRENGTH >= ?").toString();
                 ptmt = conn.prepareStatement(sql);
                 ptmt.setString(1, cs);
             }
-            else {sql = sb.append(" AND NAME =?").toString();
+            else {sql = sb.append(" AND COMPANY_NAME =?").toString();
                 ptmt = conn.prepareStatement(sql);
                 ptmt.setString(1, companyName);}
         }
@@ -98,11 +98,11 @@ public final class EPDDatabase {
         while(rs.next()){
             g = new Mix();
 
-            g.setCS(rs.getString("CS"));
-            g.setCompany_Name(rs.getString("NAME"));
+            g.setCS(rs.getString("COMPRESSIVE_STRENGTH"));
+            g.setCompany_Name(rs.getString("COMPANY_NAME"));
             g.setLocation(rs.getString("LOCATION"));
-            g.setMixNum(rs.getString("MIXNUMBER"));
-            g.setZipCode(rs.getString("ZIP"));
+            g.setMixNum(rs.getString("MIX_NUMBER"));
+            g.setZipCode(rs.getString("ZIPCODE"));
             g.setGWP(rs.getDouble("GWP"));
             g.setODP(rs.getDouble("ODP"));
             g.setAP(rs.getDouble("AP"));
@@ -111,12 +111,14 @@ public final class EPDDatabase {
             g.setUnit(rs.getString("UNITS"));
             g.setConcreteHazardousWaste(rs.getDouble("CHW"));
             g.setConcreteNonHazardousWaste(rs.getDouble("CNHW"));
-            g.setTotalWaterConsumption(rs.getDouble("TW"));
-            g.setTotalPrimaryEnergyConsumption(rs.getString("PEC"));
-            g.setRenewablePrimaryEnergyUse(rs.getDouble("RE"));
-            g.setNonRenewableEnergyUse(rs.getDouble("NRE"));
-            g.setRenewableMaterialResourcesUse(rs.getDouble("RM"));
-            g.setNonRenewableMaterialResource(rs.getDouble("NRM"));
+            g.setTotalWaterConsumption(rs.getDouble("TWC"));
+            g.setConcreteBatchingWaterConsumption(rs.getDouble("CBWC"));
+            g.setConcreteBatchingWaterConsumption(rs.getDouble("CWWC"));
+            g.setTotalPrimaryEnergyConsumption(rs.getString("TPEC"));
+            g.setRenewablePrimaryEnergyUse(rs.getDouble("DREC"));
+            g.setNonRenewableEnergyUse(rs.getDouble("DNEC"));
+            g.setRenewableMaterialResourcesUse(rs.getDouble("DNMR"));
+            g.setNonRenewableMaterialResource(rs.getDouble("DRMR"));
             //get distance from filterzips map
             String zip = g.getZipCode();
             Double distance = filteredZipcodeMap.get(zip);//return distance in meter
@@ -185,12 +187,12 @@ public final class EPDDatabase {
 
     public List<String> getAllZipcode() throws SQLException {
         List<String> zipcodeList = new ArrayList<>();
-        String sql = "SELECT DISTINCT ZIP FROM EPD";
+        String sql = "SELECT DISTINCT ZIPCODE FROM CONCRETE_EPD";
         s = conn.createStatement();
         rs = s.executeQuery(sql);
         String zip;
         while (rs.next()){
-            zip = rs.getString("ZIP");
+            zip = rs.getString("ZIPCODE");
             zipcodeList.add(zip);
         }
         return zipcodeList;
@@ -203,12 +205,12 @@ public final class EPDDatabase {
      */
     public List<String> getZipcode() throws SQLException {
         List<String> zipcodeList = new ArrayList<>();
-        String sql = "SELECT DISTINCT ZIP FROM EPD WHERE ZIP < '70840'";
+        String sql = "SELECT DISTINCT ZIPCODE FROM CONCRETE_EPD";
         s = conn.createStatement();
         rs = s.executeQuery(sql);
         String zip;
         while (rs.next()){
-            zip = rs.getString("ZIP");
+            zip = rs.getString("ZIPCODE");
             zipcodeList.add(zip);
         }
         return zipcodeList;

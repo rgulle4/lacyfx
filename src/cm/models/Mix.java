@@ -28,6 +28,8 @@ public final class Mix {
     private Double ConcreteHazardousWaste;
     private Double ConcreteNonHazardousWaste;
     private Double TotalWaterConsumption;
+    private Double ConcreteWashingWaterConsumption;
+    private Double ConcreteBatchingWaterConsumption;
     private Double TotalPrimaryEnergyConsumption;
     private Double RenewablePrimaryEnergyUse;
     private Double NonRenewableEnergyUse;
@@ -229,6 +231,22 @@ public final class Mix {
 
     public void setTotalWaterConsumption(Double totalWaterConsumption) {
         TotalWaterConsumption = totalWaterConsumption;
+    }
+
+    public Double getConcreteWashingWaterConsumption() {
+        return ConcreteWashingWaterConsumption;
+    }
+
+    public void setConcreteWashingWaterConsumption(Double concreteWashingWaterConsumption) {
+        ConcreteWashingWaterConsumption = concreteWashingWaterConsumption;
+    }
+
+    public Double getConcreteBatchingWaterConsumption() {
+        return ConcreteBatchingWaterConsumption;
+    }
+
+    public void setConcreteBatchingWaterConsumption(Double concreteBatchingWaterConsumption) {
+        ConcreteBatchingWaterConsumption = concreteBatchingWaterConsumption;
     }
 
     public Double getTotalPrimaryEnergyConsumption() {
