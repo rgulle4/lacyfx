@@ -65,7 +65,7 @@ public class ShowChartData {
         serie_TotalWater.setName("TotalWater");
         serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
         for (Mix aMix:mixs){
-            String mix_ID = aMix.getMaterial_ID();
+            String mix_ID = aMix.getProduct_ID();
             StringBuilder sb = new StringBuilder(incompletedAlternative_ID).append(mix_ID);
             String alternative_ID = sb.toString();
             serie_GWP.getData().add(new XYChart.Data<>(alternative_ID, getDataValue(aMix)));

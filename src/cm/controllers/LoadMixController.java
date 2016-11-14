@@ -41,7 +41,7 @@ public final class LoadMixController {
     @FXML
     private TableColumn<Mix, String> Location_Column;
     @FXML
-    private TableColumn<Mix, String> MixNum_Column;
+    private TableColumn<Mix, String> Product_ID_Column;
     @FXML
     private TableColumn<Mix,String> ZipCode_Column;
     @FXML
@@ -51,7 +51,7 @@ public final class LoadMixController {
     @FXML
     private TableColumn<Mix, String> Location_Column_selected;
     @FXML
-    private TableColumn<Mix, String> MixNum_Column_selected;
+    private TableColumn<Mix, String> Product_ID_Column_selected;
     @FXML
     private TableColumn<Mix,String> ZipCode_Column_selected;
 
@@ -89,14 +89,14 @@ public final class LoadMixController {
         CS_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("CS"));
         CM_Name_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Company_Name"));
         Location_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Location"));
-        MixNum_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("MixNum"));
+        Product_ID_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Product_ID"));
         ZipCode_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("ZipCode"));
 
         //Selected materials
         CS_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("CS"));
         CM_Name_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("Company_Name"));
         Location_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("Location"));
-        MixNum_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("MixNum"));
+        Product_ID_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("Product_ID"));
         ZipCode_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("ZipCode"));
 
     }

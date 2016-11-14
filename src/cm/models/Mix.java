@@ -13,7 +13,7 @@ import java.util.Map;
 public final class Mix {
 
     //EPD
-    private String Material_ID;
+    private String Product_ID;
     private String CS;
     private String Company_Name;
     private String Location;
@@ -113,12 +113,12 @@ public final class Mix {
         return unitConversion_Factor;
     }
 
-    public String getMaterial_ID() {
-        return Material_ID;
+    public String getProduct_ID() {
+        return Product_ID;
     }
 
-    public void setMaterial_ID(String material_ID) {
-        Material_ID = material_ID;
+    public void setProduct_ID(String product_ID) {
+        Product_ID = product_ID;
     }
 
     public String  getCS() {

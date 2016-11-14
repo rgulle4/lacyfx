@@ -110,7 +110,7 @@ public class EnvironmentalTableController {
         ObservableList<propertyMix> data = FXCollections.observableArrayList();
         for(Mix amix:mixes){
             propertyMix pmix = new propertyMix();
-            pmix.setID(amix.getMaterial_ID()+amix.getZipCode());
+            pmix.setID(amix.getProduct_ID()+amix.getZipCode());
             if(impactCategory == "GWP") pmix.setGWP(getSingleDataValue(amix));
             if(impactCategory == "ODP") pmix.setODP(getSingleDataValue(amix));
             if(impactCategory == "AP") pmix.setAP(getSingleDataValue(amix));

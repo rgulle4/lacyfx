@@ -62,7 +62,7 @@
                       <TableColumn fx:id="CS_Column" prefWidth="58.0" text="CS" />
                       <TableColumn fx:id="CM_Name_Column" prefWidth="79.0" text="Name" />
                         <TableColumn fx:id="Location_Column" prefWidth="67.0" text="Location" />
-                        <TableColumn fx:id="MixNum_Column" prefWidth="44.0" text="MIX#" />
+                        <TableColumn fx:id="Product_ID_Column" prefWidth="44.0" text="Product_ID#" />
                         <TableColumn fx:id="ZipCode_Column" prefWidth="71.0" text="Zip" />
                     </columns>
                      <columnResizePolicy>
@@ -74,7 +74,7 @@
                         <TableColumn fx:id="CS_Column_selected" prefWidth="58.0" text="CS" />
                         <TableColumn fx:id="CM_Name_Column_selected" prefWidth="79.0" text="Name" />
                         <TableColumn fx:id="Location_Column_selected" prefWidth="67.0" text="Location" />
-                        <TableColumn fx:id="MixNum_Column_selected" prefWidth="44.0" text="MIX#" />
+                        <TableColumn fx:id="Product_ID_Column_selected" prefWidth="44.0" text="Product_ID#" />
                         <TableColumn fx:id="ZipCode_Column_selected" prefWidth="71.0" text="Zip" />
                      </columns>
                      <columnResizePolicy>

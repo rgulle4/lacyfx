@@ -97,7 +97,7 @@ public final class EPDDatabase {
         Mix g;
         while(rs.next()){
             g = new Mix();
-
+            g.setProduct_ID(rs.getString("Product_ID"));
             g.setCS(rs.getString("COMPRESSIVE_STRENGTH"));
             g.setCompany_Name(rs.getString("COMPANY_NAME"));
             g.setLocation(rs.getString("LOCATION"));
@@ -140,17 +140,17 @@ public final class EPDDatabase {
         }
         else {
             if (!companyName.isEmpty() && !cs.isEmpty()) {
-                sql = sb.append(" AND NAME like ? AND CS >= ? ").toString();
+                sql = sb.append(" AND Company_Name like ? AND Compressive_Strength >= ? ").toString();
                 ptmt = conn.prepareStatement(sql);
                 ptmt.setString(1, "%"+companyName+"%");
                 ptmt.setString(2, cs);
             }
             else if (!cs.isEmpty()) {
-                sql = sb.append(" AND CS >= ?").toString();
+                sql = sb.append(" AND Compressive_Strength >= ?").toString();
                 ptmt = conn.prepareStatement(sql);
                 ptmt.setString(1, cs);
             }
-            else {sql = sb.append(" AND NAME like ?").toString();
+            else {sql = sb.append(" AND Company_Name like ?").toString();
                 ptmt = conn.prepareStatement(sql);
                 ptmt.setString(1, "%"+companyName+"%");}
         }
@@ -159,12 +159,12 @@ public final class EPDDatabase {
         Mix g;
         while(rs.next()){
             g = new Mix();
-
-            g.setCS(rs.getString("CS"));
-            g.setCompany_Name(rs.getString("NAME"));
+            g.setProduct_ID(rs.getString("Product_ID"));
+            g.setCS(rs.getString("COMPRESSIVE_STRENGTH"));
+            g.setCompany_Name(rs.getString("COMPANY_NAME"));
             g.setLocation(rs.getString("LOCATION"));
-            g.setMixNum(rs.getString("MIXNUMBER"));
-            g.setZipCode(rs.getString("ZIP"));
+            g.setMixNum(rs.getString("MIX_NUMBER"));
+            g.setZipCode(rs.getString("ZIPCODE"));
             g.setGWP(rs.getDouble("GWP"));
             g.setODP(rs.getDouble("ODP"));
             g.setAP(rs.getDouble("AP"));
@@ -173,13 +173,14 @@ public final class EPDDatabase {
             g.setUnit(rs.getString("UNITS"));
             g.setConcreteHazardousWaste(rs.getDouble("CHW"));
             g.setConcreteNonHazardousWaste(rs.getDouble("CNHW"));
-            g.setTotalWaterConsumption(rs.getDouble("TW"));
-            g.setTotalPrimaryEnergyConsumption(rs.getString("PEC"));
-            g.setRenewablePrimaryEnergyUse(rs.getDouble("RE"));
-            g.setNonRenewableEnergyUse(rs.getDouble("NRE"));
-            g.setRenewableMaterialResourcesUse(rs.getDouble("RM"));
-            g.setNonRenewableMaterialResource(rs.getDouble("NRM"));
-
+            g.setTotalWaterConsumption(rs.getDouble("TWC"));
+            g.setConcreteBatchingWaterConsumption(rs.getDouble("CBWC"));
+            g.setConcreteBatchingWaterConsumption(rs.getDouble("CWWC"));
+            g.setTotalPrimaryEnergyConsumption(rs.getString("TPEC"));
+            g.setRenewablePrimaryEnergyUse(rs.getDouble("DREC"));
+            g.setNonRenewableEnergyUse(rs.getDouble("DNEC"));
+            g.setRenewableMaterialResourcesUse(rs.getDouble("DNMR"));
+            g.setNonRenewableMaterialResource(rs.getDouble("DRMR"));
             result.add(g);
         }
         return result;
