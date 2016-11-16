@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="lacyfx:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/lacyfx_jar</output-path>
+    <root id="archive" name="lacyfx.jar">
+      <element id="module-output" name="lacyfx" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/sqlite-jdbc-3.8.11.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/gson-2.3.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
