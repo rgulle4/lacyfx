@@ -11,6 +11,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -195,7 +197,11 @@ public class EnvironmentalTableController {
                 append(s1).append("_").
                 append(s2).append("_").
                 append(s3).toString();      //format should be like GWP_EPD_Ctb
-        return mix.CalcResult.get(tot_Key);
+        Double result = mix.CalcResult.get(tot_Key);
+        //Double decimal formatting
+        NumberFormat numberFormat = new DecimalFormat("#0.000");
+        Double formattedResult = Double.valueOf(numberFormat.format(result));
+        return formattedResult;
     }
     private String getKey1(String impactCategory){
         String s1=null;

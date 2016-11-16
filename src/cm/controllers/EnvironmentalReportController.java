@@ -138,7 +138,7 @@ public final class EnvironmentalReportController {
         envImpactType = environmentalImpact_ComboBox.getSelectionModel().getSelectedItem().toString();
         valueType = rawValue_ComboBox.getSelectionModel().getSelectedItem().toString();
         impactCategory = impactCategory_ComboBox.getSelectionModel().getSelectedItem().toString();
-        String alternative_ID = new StringBuilder(designID).append(layerID).toString();
+        String alternative_ID = new StringBuilder(designID).append("/").append(layerID).toString();
         showBarChart("Alternatives","Value","Environmental Analysis",alternative_ID, mixsTemp);
     }
 
@@ -166,7 +166,7 @@ public final class EnvironmentalReportController {
         for (Mix aMix:mixs){
             String mix_ID = aMix.getZipCode();
             String product_ID =aMix.getProduct_ID();
-            StringBuilder sb = new StringBuilder(incompletedAlternative_ID).append(mix_ID).append(product_ID);
+            StringBuilder sb = new StringBuilder(incompletedAlternative_ID).append("/").append(mix_ID).append("/").append(product_ID);
             String alternative_ID = sb.toString();
             if(impactCategory == "GWP"){
                 serie_GWP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(aMix)));
