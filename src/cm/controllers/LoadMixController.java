@@ -106,7 +106,10 @@ public final class LoadMixController {
     @FXML
 
     public void searchbutton() throws SQLException, ParseException {
-        String CS = textField_CS.getText();
+        Double CS;
+        if(!textField_CS.getText().isEmpty()){
+            CS = Double.parseDouble(textField_CS.getText());
+        } else CS = 0.0;
         String cmName = textField_companyName.getText();
         // get a zip set within a certain radius to the location of project
         ZipCodeUtil zcu = new ZipCodeUtil();

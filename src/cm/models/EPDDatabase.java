@@ -48,13 +48,13 @@ public final class EPDDatabase {
 
     * */
     private  String sql;
-    public List<Mix> getResultsFilteredBy(Map<String, Double> filteredZipcodeMap, String cs, String companyName) throws SQLException, ParseException {
+    public List<Mix> getResultsFilteredBy(Map<String, Double> filteredZipcodeMap, Double cs, String companyName) throws SQLException, ParseException {
         List<Mix> result = new ArrayList<Mix>();
 
         StringBuilder sb = new StringBuilder(DEFAULT_SQL_QUERY);
         PreparedStatement ptmt = null;
 
-        if (filteredZipcodeMap.isEmpty() && companyName.isEmpty() && cs.isEmpty()) {
+        if (filteredZipcodeMap.isEmpty() && companyName.isEmpty() && cs !=0.0){
             ptmt = conn.prepareStatement(sb.toString());
         }
         else {
@@ -75,22 +75,25 @@ public final class EPDDatabase {
             if (!filteredZipcodeMap.isEmpty()) {
                 sql = sb.append(" AND ZIPCODE in").append(sb_ContentofIn).toString();
                 ptmt = conn.prepareStatement(sql);
+                if (cs !=0.0){
+                    sql = sb.append(" AND COMPRESSIVE_STRENGTH >= ?").toString();
+                    ptmt = conn.prepareStatement(sql);
+                    ptmt.setString(1, cs.toString());
+                }
+            }
 
-            }
-            if (!companyName.isEmpty() && !cs.isEmpty()) {
-                sql = sb.append(" AND COMPANY_NAME =? AND CS >= ? ").toString();
-                ptmt = conn.prepareStatement(sql);
-                ptmt.setString(1, companyName);
-                ptmt.setString(2, cs);
-            }
-            else if (!cs.isEmpty()) {
-                sql = sb.append(" AND COMPRESSIVE_STRENGTH >= ?").toString();
-                ptmt = conn.prepareStatement(sql);
-                ptmt.setString(1, cs);
-            }
-            else {sql = sb.append(" AND COMPANY_NAME =?").toString();
-                ptmt = conn.prepareStatement(sql);
-                ptmt.setString(1, companyName);}
+//            if (!companyName.isEmpty() && !cs.isEmpty()) {
+//                sql = sb.append(" AND COMPANY_NAME =? AND CS >= ? ").toString();
+//                ptmt = conn.prepareStatement(sql);
+//                ptmt.setString(1, companyName);
+//                ptmt.setString(2, cs);
+//            }else if (!cs.isEmpty()) {
+//                sql = sb.append(" AND COMPRESSIVE_STRENGTH >= ?").toString();
+//                ptmt = conn.prepareStatement(sql);
+//                ptmt.setString(1, cs);
+//            }else {sql = sb.append(" AND COMPANY_NAME =?").toString();
+//                ptmt = conn.prepareStatement(sql);
+//                ptmt.setString(1, companyName);}
         }
         rs = ptmt.executeQuery();
 
@@ -221,7 +224,7 @@ public final class EPDDatabase {
     /**
      * TODO: add documentation... and also probably change this name?
      */
-    public List<Mix> getResults(Map filteredZipcodeMap, String cs, String companyName) throws SQLException, ParseException {
+    public List<Mix> getResults(Map filteredZipcodeMap, Double cs, String companyName) throws SQLException, ParseException {
         return getResultsFilteredBy(filteredZipcodeMap,cs,companyName);
     }
 
