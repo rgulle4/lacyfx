@@ -11,8 +11,8 @@ public final class EPDDatabase {
 
     /* -- Fields ----------------------------------------------------- */
 
-    private String DEFAULT_DB_FILE_NAME = "1113rt.db";
-    private String DEFAULT_SQL_QUERY = "SELECT * FROM CONCRETE_EPD WHERE 1";
+    private String DEFAULT_DB_FILE_NAME = "epds.db";
+    private String DEFAULT_SQL_QUERY = "SELECT * FROM concrete_epds WHERE 1";
 
     private String dbFileName;
     private Connection conn;
@@ -73,7 +73,7 @@ public final class EPDDatabase {
             sb_ContentofIn.append(")");
 
             if (!filteredZipcodeMap.isEmpty()) {
-                sql = sb.append(" AND ZIPCODE in").append(sb_ContentofIn).toString();
+                sql = sb.append(" AND ZIP_CODE in").append(sb_ContentofIn).toString();
                 ptmt = conn.prepareStatement(sql);
                 if (cs !=0.0){
                     sql = sb.append(" AND COMPRESSIVE_STRENGTH >= ?").toString();
@@ -105,23 +105,23 @@ public final class EPDDatabase {
             g.setCompany_Name(rs.getString("COMPANY_NAME"));
             g.setLocation(rs.getString("LOCATION"));
             g.setMixNum(rs.getString("MIX_NUMBER"));
-            g.setZipCode(rs.getString("ZIPCODE"));
-            g.setGWP(rs.getDouble("GWP"));
+            g.setZipCode(rs.getString("ZIP_CODE"));
+            g.setGWP(rs.getDouble("GLOBAL_WARMING_POTENTIAL"));
             g.setODP(rs.getDouble("ODP"));
             g.setAP(rs.getDouble("AP"));
             g.setEP(rs.getDouble("EP"));
             g.setPOCP(rs.getDouble("POCP"));
-            g.setUnit(rs.getString("UNITS"));
-            g.setConcreteHazardousWaste(rs.getDouble("CHW"));
-            g.setConcreteNonHazardousWaste(rs.getDouble("CNHW"));
-            g.setTotalWaterConsumption(rs.getDouble("TWC"));
-            g.setConcreteBatchingWaterConsumption(rs.getDouble("CBWC"));
-            g.setConcreteBatchingWaterConsumption(rs.getDouble("CWWC"));
-            g.setTotalPrimaryEnergyConsumption(rs.getString("TPEC"));
-            g.setRenewablePrimaryEnergyUse(rs.getDouble("DREC"));
-            g.setNonRenewableEnergyUse(rs.getDouble("DNEC"));
-            g.setRenewableMaterialResourcesUse(rs.getDouble("DNMR"));
-            g.setNonRenewableMaterialResource(rs.getDouble("DRMR"));
+            g.setUnit(rs.getString("UNITS_OF_VOLUME"));
+            g.setConcreteHazardousWaste(rs.getDouble("CONCRETE_HAZARDOUS_WASTE"));
+            g.setConcreteNonHazardousWaste(rs.getDouble("CONCRETE_NON_HAZARDOUS_WASTE"));
+            g.setTotalWaterConsumption(rs.getDouble("TOTAL_WATER_CONSUMPTION"));
+            g.setConcreteBatchingWaterConsumption(rs.getDouble("CONCRETE_BATCHING_WATER_CONSUMPTION"));
+            g.setConcreteBatchingWaterConsumption(rs.getDouble("CONCRETE_WASHING_WATER_CONSUMPTION"));
+            g.setTotalPrimaryEnergyConsumption(rs.getString("TOTAL_PRIMARY_ENERGY_CONSUMPTION"));
+            g.setRenewablePrimaryEnergyUse(rs.getDouble("RENEWABLE_PRIMARY_ENERGY_USE"));
+            g.setNonRenewableEnergyUse(rs.getDouble("NON_RENWABLE_ENERGY_CONSUMPTION"));
+            g.setRenewableMaterialResourcesUse(rs.getDouble("RENEWABLE_MIX_RESOURCES_USE"));
+            g.setNonRenewableMaterialResource(rs.getDouble("NON_RENEWABLE_MIX_RESOURCES"));
             //get distance from filterzips map
             String zip = g.getZipCode();
             Double distance = filteredZipcodeMap.get(zip);//return distance in meter
@@ -167,23 +167,23 @@ public final class EPDDatabase {
             g.setCompany_Name(rs.getString("COMPANY_NAME"));
             g.setLocation(rs.getString("LOCATION"));
             g.setMixNum(rs.getString("MIX_NUMBER"));
-            g.setZipCode(rs.getString("ZIPCODE"));
+            g.setZipCode(rs.getString("ZIP_CODE"));
             g.setGWP(rs.getDouble("GWP"));
             g.setODP(rs.getDouble("ODP"));
             g.setAP(rs.getDouble("AP"));
             g.setEP(rs.getDouble("EP"));
             g.setPOCP(rs.getDouble("POCP"));
-            g.setUnit(rs.getString("UNITS"));
-            g.setConcreteHazardousWaste(rs.getDouble("CHW"));
-            g.setConcreteNonHazardousWaste(rs.getDouble("CNHW"));
-            g.setTotalWaterConsumption(rs.getDouble("TWC"));
-            g.setConcreteBatchingWaterConsumption(rs.getDouble("CBWC"));
-            g.setConcreteBatchingWaterConsumption(rs.getDouble("CWWC"));
-            g.setTotalPrimaryEnergyConsumption(rs.getString("TPEC"));
-            g.setRenewablePrimaryEnergyUse(rs.getDouble("DREC"));
-            g.setNonRenewableEnergyUse(rs.getDouble("DNEC"));
-            g.setRenewableMaterialResourcesUse(rs.getDouble("DNMR"));
-            g.setNonRenewableMaterialResource(rs.getDouble("DRMR"));
+            g.setUnit(rs.getString("UNITS_OF_VOLUME"));
+            g.setConcreteHazardousWaste(rs.getDouble("CONCRETE_HAZARDOUS_WASTE"));
+            g.setConcreteNonHazardousWaste(rs.getDouble("CONCRETE_NON_HAZARDOUS_WASTE"));
+            g.setTotalWaterConsumption(rs.getDouble("TOTAL_WATER_CONSUMPTION"));
+            g.setConcreteBatchingWaterConsumption(rs.getDouble("CONCRETE_BATCHING_WATER_CONSUMPTION"));
+            g.setConcreteBatchingWaterConsumption(rs.getDouble("CONCRETE_WASHING_WATER_CONSUMPTION"));
+            g.setTotalPrimaryEnergyConsumption(rs.getString("TOTAL_PRIMARY_ENERGY_CONSUMPTION"));
+            g.setRenewablePrimaryEnergyUse(rs.getDouble("RENEWABLE_PRIMARY_ENERGY_CONSUMPTION"));
+            g.setNonRenewableEnergyUse(rs.getDouble("NON_RENEWABLE_ENERGY_CONSUMPTION"));
+            g.setRenewableMaterialResourcesUse(rs.getDouble("RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
+            g.setNonRenewableMaterialResource(rs.getDouble("NON_RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
             result.add(g);
         }
         return result;
@@ -191,12 +191,12 @@ public final class EPDDatabase {
 
     public List<String> getAllZipcode() throws SQLException {
         List<String> zipcodeList = new ArrayList<>();
-        String sql = "SELECT DISTINCT ZIPCODE FROM CONCRETE_EPD";
+        String sql = "SELECT DISTINCT ZIP_CODE FROM CONCRETE_EPDS";
         s = conn.createStatement();
         rs = s.executeQuery(sql);
         String zip;
         while (rs.next()){
-            zip = rs.getString("ZIPCODE");
+            zip = rs.getString("ZIP_CODE");
             zipcodeList.add(zip);
         }
         return zipcodeList;
@@ -209,12 +209,12 @@ public final class EPDDatabase {
      */
     public List<String> getZipcode() throws SQLException {
         List<String> zipcodeList = new ArrayList<>();
-        String sql = "SELECT DISTINCT ZIPCODE FROM CONCRETE_EPD";
+        String sql = "SELECT DISTINCT ZIP_CODE FROM CONCRETE_EPDS";
         s = conn.createStatement();
         rs = s.executeQuery(sql);
         String zip;
         while (rs.next()){
-            zip = rs.getString("ZIPCODE");
+            zip = rs.getString("ZIP_CODE");
             zipcodeList.add(zip);
         }
         return zipcodeList;
