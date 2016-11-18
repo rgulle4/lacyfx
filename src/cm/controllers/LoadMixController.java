@@ -116,7 +116,7 @@ public final class LoadMixController {
         String destinationZipcode = DESTINATION_ZIP_CODE_MUTABLE;
         Double radius = getRadius();
         // TEST: Get 41 zip codes of original place from database;
-        List<String> origins = new EPDDatabase().getZipcode();
+        List<String> origins = new EPDDatabase().getDistinctZipCodes();
         Map<String, Double> filteredZipcodeMap
                 = zcu.zipsWithinRadius(radius,origins,destinationZipcode);
 //         get qualified material after searching
@@ -135,7 +135,7 @@ public final class LoadMixController {
         }
 
         // get a zipCode list
-        List<String> zipCode_result = new EPDDatabase().getAllZipcode();
+        List<String> zipCode_result = new EPDDatabase().getDistinctZipCodes();
         System.out.println("show results of all distinct zip code in the database");
         for (int j = 0; j< zipCode_result.size();j++){
             String zip_code = zipCode_result.get(j);

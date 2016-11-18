@@ -188,26 +188,12 @@ public final class EPDDatabase {
         }
         return result;
     }
-
-    public List<String> getAllZipcode() throws SQLException {
-        List<String> zipcodeList = new ArrayList<>();
-        String sql = "SELECT DISTINCT ZIP_CODE FROM CONCRETE_EPDS";
-        s = conn.createStatement();
-        rs = s.executeQuery(sql);
-        String zip;
-        while (rs.next()){
-            zip = rs.getString("ZIP_CODE");
-            zipcodeList.add(zip);
-        }
-        return zipcodeList;
-    }
-
     /**
      * Returns the list of distinct zip codes in the epd database.
      * @return List of distinct zip codes.
      * @throws SQLException
      */
-    public List<String> getZipcode() throws SQLException {
+    public List<String> getDistinctZipCodes() throws SQLException {
         List<String> zipcodeList = new ArrayList<>();
         String sql = "SELECT DISTINCT ZIP_CODE FROM CONCRETE_EPDS";
         s = conn.createStatement();

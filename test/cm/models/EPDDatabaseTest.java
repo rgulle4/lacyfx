@@ -1,5 +1,6 @@
 package cm.models;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -26,7 +27,7 @@ public class EPDDatabaseTest {
     @Test
     public void testGetZipcode() throws SQLException {
         // list should have at least 1 distinct zip code
-        List<String> result = (new EPDDatabase()).getZipcode();
+        List<String> result = (new EPDDatabase()).getDistinctZipCodes();
 
         Assert.assertTrue((result.size() > 0));
 
@@ -35,7 +36,7 @@ public class EPDDatabaseTest {
         for (String zip1 : result) {
             int count = 0;
             for (String zip2 : result) {
-                if (zip2.equals(zip1))
+                if ((zip2 != null) && zip2.equals(zip1))
                     count++;
             }
             if (count > 1)
