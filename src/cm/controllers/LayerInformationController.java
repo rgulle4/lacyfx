@@ -69,7 +69,7 @@ public final class LayerInformationController {
 
     @FXML
     private void initialize() {
-        projectLocationTextField.setText("94063");
+        projectLocationTextField.setText("95192");
 
         // set up first design tab -------------------------
         Design firstDesign = Model.addNewDesign();

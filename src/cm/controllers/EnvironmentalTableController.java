@@ -134,7 +134,14 @@ public class EnvironmentalTableController {
                 pmix.setTotalPrimaryEnergyConsumption(getSingleDataValue(amix));
             }
             if(impactCategory == "Impact Analysis Comparison of All Alternatives"){}
-            if(impactCategory == "Impact Analysis per Alternative"){}
+            if(impactCategory == "Impact Analysis per Alternative"){
+                List<Double> result = getDataValueArray(amix);
+                pmix.setGWP(result.get(0));
+                pmix.setODP(result.get(1));
+                pmix.setAP(result.get(2));
+                pmix.setEP(result.get(3));
+                pmix.setPOCP(result.get(4));
+            }
             data.add(pmix);
         }
         TableColumn<propertyMix,String> designColumn = new TableColumn("Design_ID");
@@ -148,13 +155,23 @@ public class EnvironmentalTableController {
 
         if(impactCategory == "Impact Analysis per Alternative"){
             dataTable.getColumns().add(designColumn);
+            designColumn.setCellValueFactory(new PropertyValueFactory<>("Design_ID"));
             dataTable.getColumns().add(layerColumn);
+            layerColumn.setCellValueFactory(new PropertyValueFactory<>("Layer_ID"));
             dataTable.getColumns().add(productIDColumn);
+            productIDColumn.setCellValueFactory(new PropertyValueFactory<>("Product_ID"));
             dataTable.getColumns().add(gwpColumn);
+            gwpColumn.setCellValueFactory(new PropertyValueFactory<>("GWP"));
             dataTable.getColumns().add(odpColumn);
+            odpColumn.setCellValueFactory(new PropertyValueFactory<>("ODP"));
             dataTable.getColumns().add(apColumn);
+            apColumn.setCellValueFactory(new PropertyValueFactory<>("AP"));
             dataTable.getColumns().add(epColumn);
+            epColumn.setCellValueFactory(new PropertyValueFactory<>("EP"));
             dataTable.getColumns().add(pocpColumn);
+            pocpColumn.setCellValueFactory(new PropertyValueFactory<>("POCP"));
+//            dataTable.getColumns().add(totEneryConsumptionEmissionColumn);
+//            pocpColumn.setCellValueFactory(new PropertyValueFactory<>("TotalEnergyConsumptionEmission"));
         }else{
             dataTable.getColumns().add(designColumn);
             designColumn.setCellValueFactory(new PropertyValueFactory<>("Design_ID"));
@@ -174,7 +191,6 @@ public class EnvironmentalTableController {
                 dataTable.getColumns().add(apColumn);
                 apColumn.setCellValueFactory(new PropertyValueFactory<>("AP"));
             }
-
             if(impactCategory == "EP"){
                 dataTable.getColumns().add(epColumn);
                 epColumn.setCellValueFactory(new PropertyValueFactory<>("EP"));
@@ -202,6 +218,30 @@ public class EnvironmentalTableController {
         NumberFormat numberFormat = new DecimalFormat("#0.000");
         Double formattedResult = Double.valueOf(numberFormat.format(result));
         return formattedResult;
+    }
+    public List<Double> getDataValueArray(Mix mix){
+        List<Double> results = new ArrayList<>();
+        //obtain key for CalcResult
+        List<String> impactList = new ArrayList<>();
+        impactList.add("GWP");
+        impactList.add("ODP");
+        impactList.add("AP");
+        impactList.add("EP");
+        impactList.add("POCP");
+        for (String s1:impactList){
+            String s2=getKey2(envImpactType);
+            String s3=getKey3(valueType);
+            String completed_Key = new StringBuilder().
+                    append(s1).append("_").
+                    append(s2).append("_").
+                    append(s3).toString();      //format should be like GWP_EPD_Ctb
+            Double result = mix.CalcResult.get(completed_Key);
+            //Double decimal formatting
+            NumberFormat numberFormat = new DecimalFormat("#0.000");
+            Double formattedResult = Double.valueOf(numberFormat.format(result));
+            results.add(formattedResult);
+        }
+        return results;
     }
     private String getKey1(String impactCategory){
         String s1=null;
@@ -355,6 +395,7 @@ public class EnvironmentalTableController {
         private Double RenewableMaterialResourcesUse;
         private Double NonRenewableMaterialResource;
         private String Product_ID;
+        private Double TotalEnergyConsumptionEmission;
 
         public Double getGWP() {
             return GWP;
@@ -394,6 +435,14 @@ public class EnvironmentalTableController {
 
         public void setPOCP(Double POCP) {
             this.POCP = POCP;
+        }
+
+        public Double getTotalEnergyConsumptionEmission() {
+            return TotalEnergyConsumptionEmission;
+        }
+
+        public void setTotalEnergyConsumptionEmission() {
+            TotalEnergyConsumptionEmission = getGWP() + getODP() + getAP() + getEP() + getPOCP();
         }
 
         public Double getConcreteHazardousWaste() {

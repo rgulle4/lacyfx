@@ -35,20 +35,6 @@ public final class EnvironmentalReportController {
     private StackedBarChart<String, Number> sbc = new StackedBarChart<>(xAxis, yAxis);
     @FXML
     private BarChart<String, Number> bc = new BarChart<>(xAxis,yAxis);
-//    @FXML
-//    private XYChart.Series<String, Number> serie_GWP = new XYChart.Series<>();
-//    @FXML
-//    private XYChart.Series<String, Number> serie_ODP = new XYChart.Series<>();
-//    @FXML
-//    private XYChart.Series<String, Number> serie_AP = new XYChart.Series<>();
-//    @FXML
-//    private XYChart.Series<String, Number> serie_EP = new XYChart.Series<>();
-//    @FXML
-//    private XYChart.Series<String, Number> serie_POCP = new XYChart.Series<>();
-//    @FXML
-//    private XYChart.Series<String, Number> serie_TotalPrimaryEnergyConsumption = new XYChart.Series<>();
-//    @FXML
-//    private XYChart.Series<String, Number> serie_allAlternatives = new XYChart.Series<>();
     @FXML
     private ComboBox performanceType_ComboBox;
     @FXML
@@ -63,10 +49,6 @@ public final class EnvironmentalReportController {
     private ComboBox mix_ComboBox;
     @FXML
     private ComboBox impactCategory_ComboBox;
-    @FXML
-    private RadioButton sumGraph_RadioButton;
-    @FXML
-    private  RadioButton sumTable_RadioButton;
 
     // Type of performance
     ObservableList<String> performanceType = FXCollections.
@@ -122,7 +104,6 @@ public final class EnvironmentalReportController {
         // get design key which is same as design
         String designID = design_ComboBox.getSelectionModel().getSelectedItem().toString();
         String layerID = layer_ComboBox.getSelectionModel().getSelectedItem().toString();
-        String mixID = mix_ComboBox.getSelectionModel().getSelectedItem().toString();
         Design designTemp = DESIGNS.get(designID);
         int layerIndex = layer_ComboBox.getSelectionModel().getSelectedIndex();
         Layer layerTemp = designTemp.getLayer(layerIndex);
