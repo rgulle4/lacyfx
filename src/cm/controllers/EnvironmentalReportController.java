@@ -12,6 +12,8 @@ import javafx.scene.control.RadioButton;
 import sun.java2d.pipe.AlphaPaintPipe;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,20 +35,20 @@ public final class EnvironmentalReportController {
     private StackedBarChart<String, Number> sbc = new StackedBarChart<>(xAxis, yAxis);
     @FXML
     private BarChart<String, Number> bc = new BarChart<>(xAxis,yAxis);
-    @FXML
-    private XYChart.Series<String, Number> serie_GWP = new XYChart.Series<>();
-    @FXML
-    private XYChart.Series<String, Number> serie_ODP = new XYChart.Series<>();
-    @FXML
-    private XYChart.Series<String, Number> serie_AP = new XYChart.Series<>();
-    @FXML
-    private XYChart.Series<String, Number> serie_EP = new XYChart.Series<>();
-    @FXML
-    private XYChart.Series<String, Number> serie_POCP = new XYChart.Series<>();
-    @FXML
-    private XYChart.Series<String, Number> serie_TotalPrimaryEnergyConsumption = new XYChart.Series<>();
-    @FXML
-    private XYChart.Series<String, Number> serie_allAlternatives = new XYChart.Series<>();
+//    @FXML
+//    private XYChart.Series<String, Number> serie_GWP = new XYChart.Series<>();
+//    @FXML
+//    private XYChart.Series<String, Number> serie_ODP = new XYChart.Series<>();
+//    @FXML
+//    private XYChart.Series<String, Number> serie_AP = new XYChart.Series<>();
+//    @FXML
+//    private XYChart.Series<String, Number> serie_EP = new XYChart.Series<>();
+//    @FXML
+//    private XYChart.Series<String, Number> serie_POCP = new XYChart.Series<>();
+//    @FXML
+//    private XYChart.Series<String, Number> serie_TotalPrimaryEnergyConsumption = new XYChart.Series<>();
+//    @FXML
+//    private XYChart.Series<String, Number> serie_allAlternatives = new XYChart.Series<>();
     @FXML
     private ComboBox performanceType_ComboBox;
     @FXML
@@ -150,6 +152,13 @@ public final class EnvironmentalReportController {
         bc.setTitle(chartTitle);
         xAxis.setLabel(xLabel);
         yAxis.setLabel(yLabel);
+         XYChart.Series<String, Number> serie_GWP = new XYChart.Series<>();
+         XYChart.Series<String, Number> serie_ODP = new XYChart.Series<>();
+         XYChart.Series<String, Number> serie_AP = new XYChart.Series<>();
+         XYChart.Series<String, Number> serie_EP = new XYChart.Series<>();
+         XYChart.Series<String, Number> serie_POCP = new XYChart.Series<>();
+         XYChart.Series<String, Number> serie_TotalPrimaryEnergyConsumption = new XYChart.Series<>();
+         XYChart.Series<String, Number> serie_allAlternatives = new XYChart.Series<>();
         serie_GWP.setName("GWP");
         serie_ODP.setName("ODP");
         serie_AP.setName("AP");
@@ -191,7 +200,8 @@ public final class EnvironmentalReportController {
                 serie_allAlternatives.getData().add(new XYChart.Data<>(alternative_ID,averageScore));
             }
             if (impactCategory == "Impact Analysis per Alternative"){
-                setupSerieForImpactAnalysisPerAlternative(alternative_ID,aMix);
+                setupSerieForImpactAnalysisPerAlternative(alternative_ID,aMix,
+                        serie_GWP,serie_ODP,serie_AP,serie_EP,serie_POCP,serie_TotalPrimaryEnergyConsumption);
             }
         }
         if(impactCategory == "GWP"){
@@ -219,7 +229,14 @@ public final class EnvironmentalReportController {
             bc.getData().addAll(serie_GWP,serie_ODP,serie_AP,serie_EP,serie_POCP,serie_TotalPrimaryEnergyConsumption);
         }
     }
-    public void setupSerieForImpactAnalysisPerAlternative(String alternative_ID, Mix aMix){
+    public void setupSerieForImpactAnalysisPerAlternative(String alternative_ID, Mix aMix,
+                              XYChart.Series<String, Number> serie_GWP,
+                              XYChart.Series<String, Number> serie_ODP,
+                              XYChart.Series<String, Number> serie_AP,
+                              XYChart.Series<String, Number> serie_EP,
+                              XYChart.Series<String, Number> serie_POCP,
+                              XYChart.Series<String, Number> serie_TotalPrimaryEnergyConsumption){
+
         if(envImpactType =="EPD"){
             if(valueType == "Raw impact per functional unit") {
                 serie_GWP.getData().add(new XYChart.Data<>(alternative_ID, aMix.getGWP_EPD_Ctb()));
@@ -695,12 +712,6 @@ public final class EnvironmentalReportController {
         sbc.layout();
         bc.getData().clear();
         bc.layout();
-        serie_GWP.getData().clear();
-        serie_ODP.getData().clear();
-        serie_AP.getData().clear();
-        serie_EP.getData().clear();
-        serie_POCP.getData().clear();
-        serie_TotalPrimaryEnergyConsumption.getData().clear();
     }
     App main;
     public void showTable() throws IOException {
