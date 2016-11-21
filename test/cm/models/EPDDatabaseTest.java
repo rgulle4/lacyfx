@@ -36,7 +36,7 @@ public class EPDDatabaseTest {
         for (String zip1 : result) {
             int count = 0;
             for (String zip2 : result) {
-                if ((zip2 != null) && zip2.equals(zip1))
+                if (zip2.equals(zip1))
                     count++;
             }
             if (count > 1)
