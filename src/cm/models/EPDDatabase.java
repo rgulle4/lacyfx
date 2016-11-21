@@ -106,7 +106,7 @@ public final class EPDDatabase {
             g.setLocation(rs.getString("LOCATION"));
             g.setMixNum(rs.getString("MIX_NUMBER"));
             g.setZipCode(rs.getString("ZIP_CODE"));
-            g.setGWP(rs.getDouble("GLOBAL_WARMING_POTENTIAL"));
+            g.setGWP(rs.getDouble("GWP"));
             g.setODP(rs.getDouble("ODP"));
             g.setAP(rs.getDouble("AP"));
             g.setEP(rs.getDouble("EP"));
@@ -118,10 +118,10 @@ public final class EPDDatabase {
             g.setConcreteBatchingWaterConsumption(rs.getDouble("CONCRETE_BATCHING_WATER_CONSUMPTION"));
             g.setConcreteBatchingWaterConsumption(rs.getDouble("CONCRETE_WASHING_WATER_CONSUMPTION"));
             g.setTotalPrimaryEnergyConsumption(rs.getString("TOTAL_PRIMARY_ENERGY_CONSUMPTION"));
-            g.setRenewablePrimaryEnergyUse(rs.getDouble("RENEWABLE_PRIMARY_ENERGY_USE"));
-            g.setNonRenewableEnergyUse(rs.getDouble("NON_RENWABLE_ENERGY_CONSUMPTION"));
-            g.setRenewableMaterialResourcesUse(rs.getDouble("RENEWABLE_MIX_RESOURCES_USE"));
-            g.setNonRenewableMaterialResource(rs.getDouble("NON_RENEWABLE_MIX_RESOURCES"));
+            g.setRenewablePrimaryEnergyUse(rs.getDouble("RENEWABLE_PRIMARY_ENERGY_CONSUMPTION"));
+            g.setNonRenewableEnergyUse(rs.getDouble("NON_RENEWABLE_ENERGY_CONSUMPTION"));
+            g.setRenewableMaterialResourcesUse(rs.getDouble("RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
+            g.setNonRenewableMaterialResource(rs.getDouble("NON_RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
             //get distance from filterzips map
             String zip = g.getZipCode();
             Double distance = filteredZipcodeMap.get(zip);//return distance in meter
