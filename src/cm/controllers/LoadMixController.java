@@ -45,6 +45,18 @@ public final class LoadMixController {
     @FXML
     private TableColumn<Mix,String> ZipCode_Column;
     @FXML
+    private TableColumn<Mix,Double> GWP_Column;
+    @FXML
+    private TableColumn<Mix,Double> ODP_Column;
+    @FXML
+    private TableColumn<Mix,Double> AP_Column;
+    @FXML
+    private TableColumn<Mix,Double> EP_Column;
+    @FXML
+    private TableColumn<Mix,Double> POCP_Column;
+    @FXML
+    private TableColumn<Mix,Double> Energy_Consumption_Column;
+    @FXML
     private TableColumn<Mix, String> CS_Column_selected;
     @FXML
     private TableColumn<Mix, String> CM_Name_Column_selected;
@@ -54,6 +66,18 @@ public final class LoadMixController {
     private TableColumn<Mix, String> Product_ID_Column_selected;
     @FXML
     private TableColumn<Mix,String> ZipCode_Column_selected;
+    @FXML
+    private TableColumn<Mix,Double> GWP_Column_selected;
+    @FXML
+    private TableColumn<Mix,Double> ODP_Column_selected;
+    @FXML
+    private TableColumn<Mix,Double> AP_Column_selected;
+    @FXML
+    private TableColumn<Mix,Double> EP_Column_selected;
+    @FXML
+    private TableColumn<Mix,Double> POCP_Column_selected;
+    @FXML
+    private TableColumn<Mix,Double> Energy_Consumption_Column_selected;
 
     // Constructor is called before the initialize method
 //    public LoadMaterialController() {
@@ -91,6 +115,12 @@ public final class LoadMixController {
         Location_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Location"));
         Product_ID_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Product_ID"));
         ZipCode_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("ZipCode"));
+        GWP_Column.setCellValueFactory(new PropertyValueFactory<Mix, Double>("GWP"));
+        ODP_Column.setCellValueFactory(new PropertyValueFactory<Mix, Double>("ODP"));
+        AP_Column.setCellValueFactory(new PropertyValueFactory<Mix, Double>("AP"));
+        EP_Column.setCellValueFactory(new PropertyValueFactory<Mix, Double>("EP"));
+        POCP_Column.setCellValueFactory(new PropertyValueFactory<Mix, Double>("POCP"));
+        Energy_Consumption_Column.setCellValueFactory(new PropertyValueFactory<Mix, Double>("TotalPrimaryEnergyConsumption"));
 
         //Selected materials
         CS_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("CS"));
@@ -98,6 +128,12 @@ public final class LoadMixController {
         Location_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("Location"));
         Product_ID_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("Product_ID"));
         ZipCode_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, String>("ZipCode"));
+        GWP_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, Double>("GWP"));
+        ODP_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, Double>("ODP"));
+        AP_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, Double>("AP"));
+        EP_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, Double>("EP"));
+        POCP_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, Double>("POCP"));
+        Energy_Consumption_Column_selected.setCellValueFactory(new PropertyValueFactory<Mix, Double>("TotalPrimaryEnergyConsumption"));
 
     }
 
@@ -176,8 +212,8 @@ public final class LoadMixController {
         }
     }
 
-    public void nextButton() throws ParseException {
-        System.out.println("Begin nextButton() method");
+    public void saveButton() throws ParseException {
+        System.out.println("Begin saveButton() method");
         // remove all the selectedMix first
         System.out.println("All mix in the SelectedMixesList are removed!!");
         // add all the selectedMix
@@ -187,7 +223,7 @@ public final class LoadMixController {
         }
         System.out.println(currentLayer.getNumberofMaterials()+ "  mix added!!");
         printMaterialInfo();
-        System.out.println("END nextButton() method");
+        System.out.println("END saveButton() method");
 
     }
 
