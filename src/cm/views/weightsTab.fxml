@@ -43,8 +43,8 @@
                         <Button layoutX="443.0" layoutY="256.0" mnemonicParsing="false" onAction="#SaveButton" text="Save" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
                   <Label layoutX="451.0" layoutY="185.0" text="Sum(%):" />
                   <TextField fx:id="SumWeightsTextField" layoutX="498.0" layoutY="184.0" prefWidth="50.0" />
-                  <ComboBox fx:id="predefinedweightComboBox" layoutX="232.0" layoutY="26.0" onAction="#predefineWeight" prefWidth="150.0" />
-                  <Label layoutX="101.0" layoutY="30.0" text="Predefined Weights:" />
+                  <ComboBox fx:id="predefinedweightComboBox" layoutX="190.0" layoutY="26.0" onAction="#predefineWeight" prefHeight="23.0" prefWidth="268.0" />
+                  <Label layoutX="65.0" layoutY="30.0" text="Predefined Weights:" />
                     </children>
                 </AnchorPane>
             </items>

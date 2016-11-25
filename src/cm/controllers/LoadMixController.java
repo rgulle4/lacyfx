@@ -172,7 +172,6 @@ public final class LoadMixController {
             alert.setTitle("Error Dialog");
             alert.setHeaderText("No alternative material selected");
             alert.setContentText("Please selected an alternative material first");
-
             alert.showAndWait();
         }
     }
