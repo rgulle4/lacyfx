@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.*;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import sun.java2d.pipe.AlphaPaintPipe;
 
@@ -49,6 +50,8 @@ public final class EnvironmentalReportController {
     private ComboBox mix_ComboBox;
     @FXML
     private ComboBox impactCategory_ComboBox;
+    @FXML
+    private Label noteLabel;
 
     // Type of performance
     ObservableList<String> performanceType = FXCollections.
@@ -94,6 +97,9 @@ public final class EnvironmentalReportController {
         //hide bar chart and stack chart
         bc.setVisible(false);
         sbc.setVisible(false);
+
+        //set up note label
+        noteLabel.setText("# primary energy\n is substituted by\n non-renewable\n energy use");
     }
     private String perfType;
     private String envImpactType;
@@ -121,7 +127,7 @@ public final class EnvironmentalReportController {
         envImpactType = environmentalImpact_ComboBox.getSelectionModel().getSelectedItem().toString();
         valueType = rawValue_ComboBox.getSelectionModel().getSelectedItem().toString();
         impactCategory = impactCategory_ComboBox.getSelectionModel().getSelectedItem().toString();
-        String alternative_ID = new StringBuilder(designID).append("/").append(layerID).toString();
+        String alternative_ID = new StringBuilder(designID).append("\n").append(layerID).toString();
         showBarChart("Alternatives","Value","Environmental Analysis",alternative_ID, mixsTemp);
     }
 
@@ -156,7 +162,10 @@ public final class EnvironmentalReportController {
         for (Mix aMix:mixs){
             String mix_ID = aMix.getZipCode();
             String product_ID =aMix.getProduct_ID();
-            StringBuilder sb = new StringBuilder(incompletedAlternative_ID).append("/").append(mix_ID).append("/").append(product_ID);
+            StringBuilder sb = new StringBuilder(incompletedAlternative_ID).append("\n").append(mix_ID).append("\n").append(product_ID);
+            if (aMix.getPrimaryEnergyConsumptionSpecial()){
+                sb.append(" #");
+            }
             String alternative_ID = sb.toString();
             if(impactCategory == "GWP"){
                 serie_GWP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(aMix)));
