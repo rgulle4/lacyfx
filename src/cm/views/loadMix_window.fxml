@@ -91,7 +91,7 @@
                         <Button mnemonicParsing="false" onAction="#selectButton" prefWidth="75.0" text="Select" />
                         <Button mnemonicParsing="false" onAction="#removeButton" prefWidth="75.0" text="Remove" />
                         <Button mnemonicParsing="false" onAction="#saveButton" prefWidth="75.0" text="Save" />
-                        <Button mnemonicParsing="false" onAction="#saveButton" prefWidth="75.0" text="Finish" />
+                        <Button fx:id="closeButton" cancelButton="true" mnemonicParsing="false" onAction="#handleCloseButtonAction" prefWidth="75.0" text="Finish" />
                      </children>
                      <opaqueInsets>
                         <Insets />

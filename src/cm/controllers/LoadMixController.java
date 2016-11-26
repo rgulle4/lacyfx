@@ -3,9 +3,11 @@ package cm.controllers;
 import cm.models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -78,6 +80,9 @@ public final class LoadMixController {
     private TableColumn<Mix,Double> POCP_Column_selected;
     @FXML
     private TableColumn<Mix,Double> Energy_Consumption_Column_selected;
+
+    @FXML
+    public Button closeButton;
 
     // Constructor is called before the initialize method
 //    public LoadMaterialController() {
@@ -268,5 +273,10 @@ public final class LoadMixController {
         return radius;
     }
 
+    @FXML
+    public void handleCloseButtonAction(ActionEvent event) {
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
+    }
 
 }
