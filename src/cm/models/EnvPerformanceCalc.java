@@ -151,9 +151,24 @@ public final class EnvPerformanceCalc {
                     AP_EPD = mix_temp.getAP();
                     EP_EPD = mix_temp.getEP();
                     POCP_EPD = mix_temp.getPOCP();
-                    TWC_EPD = mix_temp.getTotalWaterConsumption();
-                    TPEC_EPD = mix_temp.getTotalPrimaryEnergyConsumption();
-
+                    // store Total water consumption and its special flag
+                    if(mix_temp.getTotalWaterConsumption()== 0.0){
+                        TWC_EPD = mix_temp.getTotalWaterConsumption();
+                        mix_temp.setTotalWaterConsumptionSpecial(true);
+                        //Total water is only summation of washing and batching water
+                    }else{
+                        TWC_EPD = mix_temp.getTotalWaterConsumption();
+                        mix_temp.setTotalWaterConsumptionSpecial(false);
+                    }
+                    // store Total primary energy consumption and its special flag
+                    if(mix_temp.getNonRenewableEnergyUse()!=0.0){
+                        TPEC_EPD = mix_temp.getNonRenewableEnergyUse();
+                        mix_temp.setPrimaryEnergyConsumptionSpecial(true);
+                        //Total primary energy consumption is substituted by Non-RenewableEnergy
+                    }else{
+                        TPEC_EPD = mix_temp.getTotalPrimaryEnergyConsumption();
+                        mix_temp.setPrimaryEnergyConsumptionSpecial(false);
+                    }
                     /* get EPD raw values by multiplying Conversion Factor
                     / Conversion Factor = unitConvFactor* layer's Volume
                     */

@@ -1,5 +1,7 @@
 package cm.models;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -38,6 +40,8 @@ public final class Mix {
     private Double Price;
     private Double Distance;
     private Double unitConversion_Factor;
+    private Boolean isTotalWaterConsumptionSpecial;
+    private Boolean isPrimaryEnergyConsumptionSpecial;
     public Map<String,Double> CalcResult = new HashMap<>();
     //Scores
     private Double EnvPerfAnalysis_TotalScore_Material;
@@ -254,9 +258,12 @@ public final class Mix {
     }
 
     public void setTotalPrimaryEnergyConsumption(String totalPrimaryEnergyConsumption)throws ParseException {
-        NumberFormat format = NumberFormat.getInstance(Locale.US);
-        Number number = format.parse(totalPrimaryEnergyConsumption);
-        TotalPrimaryEnergyConsumption = number.doubleValue();
+        if(totalPrimaryEnergyConsumption.isEmpty()){TotalPrimaryEnergyConsumption = 0.0;}
+        else{
+            NumberFormat format = NumberFormat.getInstance(Locale.US);
+            Number number = format.parse(totalPrimaryEnergyConsumption);
+            TotalPrimaryEnergyConsumption = number.doubleValue();
+        }
     }
 
     public Double getRenewablePrimaryEnergyUse() {
@@ -271,8 +278,13 @@ public final class Mix {
         return NonRenewableEnergyUse;
     }
 
-    public void setNonRenewableEnergyUse(Double nonRenewableEnergyUse) {
-        NonRenewableEnergyUse = nonRenewableEnergyUse;
+    public void setNonRenewableEnergyUse(String nonRenewableEnergyUse) throws ParseException {
+        if (nonRenewableEnergyUse.isEmpty()){NonRenewableEnergyUse = 0.0;}
+        else{
+            NumberFormat format = NumberFormat.getInstance(Locale.US);
+            Number number = format.parse(nonRenewableEnergyUse);
+            NonRenewableEnergyUse = number.doubleValue();
+        }
     }
 
     public Double getRenewableMaterialResourcesUse() {
@@ -287,8 +299,13 @@ public final class Mix {
         return NonRenewableMaterialResource;
     }
 
-    public void setNonRenewableMaterialResource(Double nonRenewableMaterialResource) {
-        NonRenewableMaterialResource = nonRenewableMaterialResource;
+    public void setNonRenewableMaterialResource(String nonRenewableMaterialResource) throws ParseException {
+        if(nonRenewableMaterialResource.isEmpty()){NonRenewableMaterialResource = 0.0;}
+        else{
+            NumberFormat format = NumberFormat.getInstance(Locale.US);
+            Number number = format.parse(nonRenewableMaterialResource);
+            NonRenewableMaterialResource = number.doubleValue();
+        }
     }
 
     public Double getPrice() {
@@ -305,6 +322,22 @@ public final class Mix {
 
     public void setDistance(Double distance) {
         Distance = distance;
+    }
+
+    public Boolean getTotalWaterConsumptionSpecial() {
+        return isTotalWaterConsumptionSpecial;
+    }
+
+    public void setTotalWaterConsumptionSpecial(Boolean totalWaterConsumptionSpecial) {
+        isTotalWaterConsumptionSpecial = totalWaterConsumptionSpecial;
+    }
+
+    public Boolean getPrimaryEnergyConsumptionSpecial() {
+        return isPrimaryEnergyConsumptionSpecial;
+    }
+
+    public void setPrimaryEnergyConsumptionSpecial(Boolean primaryEnergyConsumptionSpecial) {
+        isPrimaryEnergyConsumptionSpecial = primaryEnergyConsumptionSpecial;
     }
 
     public Double getEnvPerfAnalysis_TotalScore_Material() {

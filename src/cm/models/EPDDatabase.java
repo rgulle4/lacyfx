@@ -116,12 +116,12 @@ public final class EPDDatabase {
             g.setConcreteNonHazardousWaste(rs.getDouble("CONCRETE_NON_HAZARDOUS_WASTE"));
             g.setTotalWaterConsumption(rs.getDouble("TOTAL_WATER_CONSUMPTION"));
             g.setConcreteBatchingWaterConsumption(rs.getDouble("CONCRETE_BATCHING_WATER_CONSUMPTION"));
-            g.setConcreteBatchingWaterConsumption(rs.getDouble("CONCRETE_WASHING_WATER_CONSUMPTION"));
+            g.setConcreteWashingWaterConsumption(rs.getDouble("CONCRETE_WASHING_WATER_CONSUMPTION"));
             g.setTotalPrimaryEnergyConsumption(rs.getString("TOTAL_PRIMARY_ENERGY_CONSUMPTION"));
             g.setRenewablePrimaryEnergyUse(rs.getDouble("RENEWABLE_PRIMARY_ENERGY_CONSUMPTION"));
-            g.setNonRenewableEnergyUse(rs.getDouble("NON_RENEWABLE_ENERGY_CONSUMPTION"));
+            g.setNonRenewableEnergyUse(rs.getString("NON_RENEWABLE_ENERGY_CONSUMPTION"));
             g.setRenewableMaterialResourcesUse(rs.getDouble("RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
-            g.setNonRenewableMaterialResource(rs.getDouble("NON_RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
+            g.setNonRenewableMaterialResource(rs.getString("NON_RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
             //get distance from filterzips map
             String zip = g.getZipCode();
             Double distance = filteredZipcodeMap.get(zip);//return distance in meter
@@ -181,9 +181,9 @@ public final class EPDDatabase {
             g.setConcreteBatchingWaterConsumption(rs.getDouble("CONCRETE_WASHING_WATER_CONSUMPTION"));
             g.setTotalPrimaryEnergyConsumption(rs.getString("TOTAL_PRIMARY_ENERGY_CONSUMPTION"));
             g.setRenewablePrimaryEnergyUse(rs.getDouble("RENEWABLE_PRIMARY_ENERGY_CONSUMPTION"));
-            g.setNonRenewableEnergyUse(rs.getDouble("NON_RENEWABLE_ENERGY_CONSUMPTION"));
+            g.setNonRenewableEnergyUse(rs.getString("NON_RENEWABLE_ENERGY_CONSUMPTION"));
             g.setRenewableMaterialResourcesUse(rs.getDouble("RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
-            g.setNonRenewableMaterialResource(rs.getDouble("NON_RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
+            g.setNonRenewableMaterialResource(rs.getString("NON_RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
             result.add(g);
         }
         return result;
@@ -296,9 +296,9 @@ public final class EPDDatabase {
             g.setTotalWaterConsumption(rs.getDouble("TW"));
             g.setTotalPrimaryEnergyConsumption(rs.getString("PEC"));
             g.setRenewablePrimaryEnergyUse(rs.getDouble("RE"));
-            g.setNonRenewableEnergyUse(rs.getDouble("NRE"));
+            g.setNonRenewableEnergyUse(rs.getString("NRE"));
             g.setRenewableMaterialResourcesUse(rs.getDouble("RM"));
-            g.setNonRenewableMaterialResource(rs.getDouble("NRM"));
+            g.setNonRenewableMaterialResource(rs.getString("NRM"));
 
             result.add(g);
         }

@@ -250,7 +250,7 @@ public class EnvironmentalTableController {
         else if (impactCategory.equals("AP")){s1 = "AP";}
         else if (impactCategory.equals("EP")){s1 = "EP";}
         else if (impactCategory.equals("POCP")){s1 = "POCP";}
-        else if(impactCategory.equals("TotalPrimaryEnergyConsumption")){s1 = "TPEC";}
+        else if(impactCategory.equals("PrimaryEnergyConsumption")){s1 = "TPEC";}
         else System.out.println("Can not identify an impact category");
         return s1;
     }
