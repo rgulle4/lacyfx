@@ -30,5 +30,6 @@
       <TableView fx:id="resourceConsumptionTable" layoutX="249.0" layoutY="506.0" prefHeight="200.0" prefWidth="775.0" />
       <Label fx:id="energyConsumptionLabel" layoutX="529.0" layoutY="212.0" text="Energy Consumption Emission Impact" />
       <Label fx:id="resourceConsumptionLabel" layoutX="564.0" layoutY="480.0" text="Resource Consumption" />
+      <Label fx:id="resourceConsumptionNoteLabel" layoutX="1032.0" layoutY="577.0" text="# 0.0 means no data" />
    </children>
 </AnchorPane>

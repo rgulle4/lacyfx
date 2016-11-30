@@ -45,6 +45,8 @@ public class EnvironmentalTableController {
     private Label energyConsumptionLabel;
     @FXML
     private Label resourceConsumptionLabel;
+    @FXML
+    private Label resourceConsumptionNoteLabel;
             
     // Type of performance
     ObservableList<String> performanceType = FXCollections.
@@ -88,6 +90,7 @@ public class EnvironmentalTableController {
         energyConsumptionLabel.setVisible(false);
         resourceConsumptionTable.setVisible(false);
         resourceConsumptionLabel.setVisible(false);
+        resourceConsumptionNoteLabel.setVisible(false);
     }
     private String perfType;
     private String envImpactType;
@@ -131,6 +134,7 @@ public class EnvironmentalTableController {
         resourceConsumptionTable.layout();
         resourceConsumptionTable.setVisible(false);
         resourceConsumptionLabel.setVisible(false);
+        resourceConsumptionNoteLabel.setVisible(false);
         //Obtain data from mixes
         ObservableList<propertyMix> data = FXCollections.observableArrayList();
         for(Mix amix:mixes){
@@ -139,26 +143,26 @@ public class EnvironmentalTableController {
             pmix.setLayer_ID(layer_ID);
             pmix.setProduct_ID(amix.getProduct_ID()+amix.getZipCode());
             if(impactCategory == "GWP") {
-                pmix.setGWP(getSingleDataValue(amix));
+                pmix.setGWP(getEnergyConsumptionResult(amix));
             }
             if(impactCategory == "ODP") {
-                pmix.setODP(getSingleDataValue(amix));
+                pmix.setODP(getEnergyConsumptionResult(amix));
             }
             if(impactCategory == "AP") {
-                pmix.setAP(getSingleDataValue(amix));
+                pmix.setAP(getEnergyConsumptionResult(amix));
             }
             if(impactCategory == "EP") {
-                pmix.setEP(getSingleDataValue(amix));
+                pmix.setEP(getEnergyConsumptionResult(amix));
             }
             if(impactCategory == "POCP") {
-                pmix.setPOCP(getSingleDataValue(amix));
+                pmix.setPOCP(getEnergyConsumptionResult(amix));
             }
             if(impactCategory == "PrimaryEnergyConsumption") {
-                pmix.setTotalPrimaryEnergyConsumption(getSingleDataValue(amix));
+                pmix.setTotalPrimaryEnergyConsumption(getEnergyConsumptionResult(amix));
             }
             if(impactCategory == "Impact Analysis Comparison of All Alternatives"){}
             if(impactCategory == "All Energy Consumption Impact"){
-                List<Double> result = getDataValueArray(amix);
+                List<Double> result = getEnergyConsumptionResults(amix);
                 pmix.setGWP(result.get(0));
                 pmix.setODP(result.get(1));
                 pmix.setAP(result.get(2));
@@ -254,9 +258,50 @@ public class EnvironmentalTableController {
         energyConsumptionTable.layout();
         energyConsumptionTable.setVisible(false);
         energyConsumptionLabel.setVisible(false);
+        resourceConsumptionNoteLabel.setVisible(false);
+        ObservableList<propertyMix> data = FXCollections.observableArrayList();
+        for (Mix amix:mixes){
+            propertyMix pmix = new propertyMix();
+            pmix.setDesign_ID(design_ID);
+            pmix.setLayer_ID(layer_ID);
+            pmix.setProduct_ID(amix.getProduct_ID()+amix.getZipCode());
+            pmix.setTotalWaterConsumption(amix.getTotalWaterConsumption());
+            if(amix.getRenewableMaterialResourcesUse() == 0.0
+                || amix.getNonRenewableMaterialResource() == 0.0){
+                resourceConsumptionNoteLabel.setVisible(true);
+            }
+            pmix.setRenewableMaterialResourcesUse(amix.getRenewableMaterialResourcesUse());
+            pmix.setNonRenewableMaterialResource(amix.getNonRenewableMaterialResource());
+            data.add(pmix);
+        }
+
+        TableColumn<propertyMix,String> designColumn = new TableColumn("Design_ID");
+        designColumn.setPrefWidth(75.0);
+        TableColumn<propertyMix,String> layerColumn = new TableColumn("Layer_ID");
+        layerColumn.setPrefWidth(75.0);
+        TableColumn<propertyMix,String> productIDColumn = new TableColumn("Product_ID");
+        productIDColumn.setPrefWidth(125.0);
+        TableColumn<propertyMix,Double> totWaterColumn = new TableColumn("TotalWater");
+        totWaterColumn.setPrefWidth(100.0);
+        TableColumn<propertyMix,Double> renewableMaterialResourceColumn = new TableColumn("RenewableMaterialResource");
+        renewableMaterialResourceColumn.setPrefWidth(150.0);
+        TableColumn<propertyMix,Double> nonrenewableMaterialResourceColumn = new TableColumn("NonrenewableMaterialResource");
+        nonrenewableMaterialResourceColumn.setPrefWidth(150.0);
+
+
+        designColumn.setCellValueFactory(new PropertyValueFactory<>("Design_ID"));
+        layerColumn.setCellValueFactory(new PropertyValueFactory<>("Layer_ID"));
+        productIDColumn.setCellValueFactory(new PropertyValueFactory<>("Product_ID"));
+        totWaterColumn.setCellValueFactory(new PropertyValueFactory<>("TotalWaterConsumption"));
+        renewableMaterialResourceColumn.setCellValueFactory(new PropertyValueFactory<>("RenewableMaterialResourcesUse"));
+        nonrenewableMaterialResourceColumn.setCellValueFactory(new PropertyValueFactory<>("NonRenewableMaterialResource"));
+        resourceConsumptionTable.getColumns().addAll(
+                designColumn,layerColumn,productIDColumn,totWaterColumn,
+                renewableMaterialResourceColumn,nonrenewableMaterialResourceColumn);
+        resourceConsumptionTable.setItems(data);
     }
 
-    public double getSingleDataValue(Mix mix){
+    public double getEnergyConsumptionResult(Mix mix){
         //obtain key for CalcResult
         String s1=getKey1(impactCategory);
         String s2=getKey2(envImpactType);
@@ -271,7 +316,8 @@ public class EnvironmentalTableController {
         Double formattedResult = Double.valueOf(numberFormat.format(result));
         return formattedResult;
     }
-    public List<Double> getDataValueArray(Mix mix){
+
+    public List<Double> getEnergyConsumptionResults(Mix mix){
         List<Double> results = new ArrayList<>();
         //obtain key for CalcResult
         List<String> impactList = new ArrayList<>();
