@@ -113,13 +113,24 @@ public class EnvironmentalTableController {
         envImpactType = environmentalImpact_ComboBox.getSelectionModel().getSelectedItem().toString();
         valueType = rawValue_ComboBox.getSelectionModel().getSelectedItem().toString();
         impactCategory = impactCategory_ComboBox.getSelectionModel().getSelectedItem().toString();
-        showEnergyConsumptionData(mixsTemp,designID,layerID);
+        showData(mixsTemp,designID,layerID);
+    }
+    public void showData(List<Mix> mixes, String design_ID, String layer_ID){
+        if(impactCategory != "All Resource Consumption Impact"){
+            showEnergyConsumptionData(mixes,design_ID,layer_ID);
+        }else {
+            showResourceConsumptionData(mixes,design_ID,layer_ID);
+        }
     }
     public void showEnergyConsumptionData(List<Mix> mixes, String design_ID, String layer_ID){
         energyConsumptionTable.getColumns().clear();
         energyConsumptionTable.layout();
         energyConsumptionTable.setVisible(true);
         energyConsumptionLabel.setVisible(true);
+        resourceConsumptionTable.getColumns().clear();
+        resourceConsumptionTable.layout();
+        resourceConsumptionTable.setVisible(false);
+        resourceConsumptionLabel.setVisible(false);
         //Obtain data from mixes
         ObservableList<propertyMix> data = FXCollections.observableArrayList();
         for(Mix amix:mixes){
@@ -146,7 +157,7 @@ public class EnvironmentalTableController {
                 pmix.setTotalPrimaryEnergyConsumption(getSingleDataValue(amix));
             }
             if(impactCategory == "Impact Analysis Comparison of All Alternatives"){}
-            if(impactCategory == "Impact Analysis per Alternative"){
+            if(impactCategory == "All Energy Consumption Impact"){
                 List<Double> result = getDataValueArray(amix);
                 pmix.setGWP(result.get(0));
                 pmix.setODP(result.get(1));
@@ -176,7 +187,7 @@ public class EnvironmentalTableController {
         TableColumn<propertyMix,Double> tpecColumn = new TableColumn("EnergyConsumption");
         tpecColumn.setPrefWidth(125.0);
 
-        if(impactCategory == "Impact Analysis per Alternative"){
+        if(impactCategory == "All Energy Consumption Impact"){
             energyConsumptionTable.getColumns().add(designColumn);
             designColumn.setCellValueFactory(new PropertyValueFactory<>("Design_ID"));
             energyConsumptionTable.getColumns().add(layerColumn);
@@ -235,7 +246,14 @@ public class EnvironmentalTableController {
     }
 
     public void showResourceConsumptionData(List<Mix> mixes, String design_ID, String layer_ID){
-
+        resourceConsumptionTable.getColumns().clear();
+        resourceConsumptionTable.layout();
+        resourceConsumptionTable.setVisible(true);
+        resourceConsumptionLabel.setVisible(true);
+        energyConsumptionTable.getColumns().clear();
+        energyConsumptionTable.layout();
+        energyConsumptionTable.setVisible(false);
+        energyConsumptionLabel.setVisible(false);
     }
 
     public double getSingleDataValue(Mix mix){
@@ -341,7 +359,6 @@ public class EnvironmentalTableController {
         }else{
             impactCategory_ComboBox.setItems(impactCategoryName);
         }
-        impactCategory_ComboBox.setValue(impactCategoryName.get(0));
     }
 
     private void setupDesignNumber_ComboBox(){
