@@ -1,6 +1,7 @@
 package cm;
 
 import cm.controllers.LoadMixController;
+import cm.controllers.LoadMixController_newVersion;
 import cm.models.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -34,7 +35,7 @@ public final class App extends Application {
 
     public static void showLoadMaterial(Layer currentLayer) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(App.class.getResource("views/loadMix_window.fxml"));
+        fxmlLoader.setLocation(App.class.getResource("views/loadMix_window_newVersion.fxml"));
         AnchorPane addNewMaterialAcnhorPane = fxmlLoader.load();
 
         Stage addDialogStage = new Stage();
@@ -43,10 +44,10 @@ public final class App extends Application {
         addDialogStage.initOwner(primaryStage);
 
         /* -- pass currentLayer --------- */
-        LoadMixController loadMixController
-              = fxmlLoader.<LoadMixController>getController();
+        LoadMixController_newVersion loadMixController_newVersion
+              = fxmlLoader.<LoadMixController_newVersion>getController();
 
-        loadMixController.setCurrentLayer(currentLayer);
+        loadMixController_newVersion.setCurrentLayer(currentLayer);
         /* ------------------------------ */
 
         Scene scene = new Scene(addNewMaterialAcnhorPane);
