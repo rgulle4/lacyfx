@@ -141,17 +141,28 @@ public class EnvironmentalTableController {
                 pmix.setAP(result.get(2));
                 pmix.setEP(result.get(3));
                 pmix.setPOCP(result.get(4));
+                pmix.setTotalPrimaryEnergyConsumption(result.get(5));
             }
             data.add(pmix);
         }
         TableColumn<propertyMix,String> designColumn = new TableColumn("Design_ID");
+        designColumn.setPrefWidth(75.0);
         TableColumn<propertyMix,String> layerColumn = new TableColumn("Layer_ID");
+        layerColumn.setPrefWidth(75.0);
         TableColumn<propertyMix,String> productIDColumn = new TableColumn("Product_ID");
+        productIDColumn.setPrefWidth(125.0);
         TableColumn<propertyMix,Double> gwpColumn = new TableColumn("GWP");
+        gwpColumn.setPrefWidth(75.0);
         TableColumn<propertyMix,Double> odpColumn = new TableColumn("ODP");
+        odpColumn.setPrefWidth(75.0);
         TableColumn<propertyMix,Double> apColumn = new TableColumn("AP");
+        apColumn.setPrefWidth(75.0);
         TableColumn<propertyMix,Double> epColumn = new TableColumn("EP");
+        epColumn.setPrefWidth(75.0);
         TableColumn<propertyMix,Double> pocpColumn = new TableColumn("POCP");
+        pocpColumn.setPrefWidth(75.0);
+        TableColumn<propertyMix,Double> tpecColumn = new TableColumn("EnergyConsumption");
+        tpecColumn.setPrefWidth(125.0);
 
         if(impactCategory == "Impact Analysis per Alternative"){
             dataTable.getColumns().add(designColumn);
@@ -170,6 +181,8 @@ public class EnvironmentalTableController {
             epColumn.setCellValueFactory(new PropertyValueFactory<>("EP"));
             dataTable.getColumns().add(pocpColumn);
             pocpColumn.setCellValueFactory(new PropertyValueFactory<>("POCP"));
+            dataTable.getColumns().add(tpecColumn);
+            tpecColumn.setCellValueFactory(new PropertyValueFactory<>("TotalPrimaryEnergyConsumption"));
 //            dataTable.getColumns().add(totEneryConsumptionEmissionColumn);
 //            pocpColumn.setCellValueFactory(new PropertyValueFactory<>("TotalEnergyConsumptionEmission"));
         }else{
@@ -198,6 +211,10 @@ public class EnvironmentalTableController {
             if(impactCategory == "POCP"){
                 dataTable.getColumns().add(pocpColumn);
                 pocpColumn.setCellValueFactory(new PropertyValueFactory<>("POCP"));
+            }
+            if(impactCategory == "PrimaryEnergyConsumption"){
+                dataTable.getColumns().add(tpecColumn);
+                tpecColumn.setCellValueFactory(new PropertyValueFactory<>("TotalPrimaryEnergyConsumption"));
             }
         }
         //Insert value to table
@@ -228,6 +245,7 @@ public class EnvironmentalTableController {
         impactList.add("AP");
         impactList.add("EP");
         impactList.add("POCP");
+        impactList.add("TPEC");
         for (String s1:impactList){
             String s2=getKey2(envImpactType);
             String s3=getKey3(valueType);

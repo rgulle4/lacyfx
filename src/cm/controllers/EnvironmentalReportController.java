@@ -97,7 +97,8 @@ public final class EnvironmentalReportController {
         //hide bar chart and stack chart
         bc.setVisible(false);
         sbc.setVisible(false);
-
+        //hide label note
+        noteLabel.setVisible(false);
         //set up note label
         noteLabel.setText("# primary energy\n is substituted by\n non-renewable\n energy use");
     }
@@ -135,6 +136,8 @@ public final class EnvironmentalReportController {
         bc.getData().clear();
         bc.layout();
         bc.setVisible(true);
+        //hide label note
+        noteLabel.setVisible(false);
         // set up bar chart
         bc.setTitle(chartTitle);
         xAxis.setLabel(xLabel);
@@ -163,7 +166,8 @@ public final class EnvironmentalReportController {
             String mix_ID = aMix.getZipCode();
             String product_ID =aMix.getProduct_ID();
             StringBuilder sb = new StringBuilder(incompletedAlternative_ID).append("\n").append(mix_ID).append("\n").append(product_ID);
-            if (aMix.getPrimaryEnergyConsumptionSpecial()){
+            if (aMix.getPrimaryEnergyConsumptionSpecial()&&envImpactType == "EPD"){
+                noteLabel.setVisible(true);
                 sb.append(" #");
             }
             String alternative_ID = sb.toString();
