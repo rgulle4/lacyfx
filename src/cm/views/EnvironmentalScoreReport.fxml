@@ -34,15 +34,15 @@
          <children>
             <ComboBox fx:id="performanceType_ComboBox" prefHeight="23.0" prefWidth="207.0" />
             <ComboBox fx:id="environmentalImpact_ComboBox" prefHeight="23.0" prefWidth="78.0" />
-            <ComboBox fx:id="rawValue_ComboBox" prefHeight="23.0" prefWidth="219.0" />
-            <ComboBox fx:id="impactCategory_ComboBox" onMouseClicked="#setupImpactCategory_ComboBox" prefHeight="23.0" prefWidth="179.0" />
+            <ComboBox fx:id="rawValue_ComboBox" onMouseExited="#setupImpactCategory_ComboBox" prefHeight="23.0" prefWidth="219.0" />
+            <ComboBox fx:id="impactCategory_ComboBox" prefHeight="23.0" prefWidth="179.0" />
          </children>
       </HBox>
       <HBox layoutX="249.0" layoutY="81.0" prefHeight="32.0" prefWidth="739.0" spacing="50.0">
          <children>
-            <ComboBox fx:id="design_ComboBox" prefWidth="150.0" />
-            <ComboBox fx:id="layer_ComboBox" onMouseClicked="#setupLayerNumber_ComboBox" prefWidth="150.0" />
-            <ComboBox fx:id="mix_ComboBox" onMouseClicked="#setupMixNum_ComboBox" prefWidth="150.0" />
+            <ComboBox fx:id="design_ComboBox" onMouseExited="#setupLayerNumber_ComboBox" prefWidth="150.0" />
+            <ComboBox fx:id="layer_ComboBox" onMouseExited="#setupMixNum_ComboBox"  prefWidth="150.0" />
+            <ComboBox fx:id="mix_ComboBox" prefWidth="150.0" />
          </children>
       </HBox>
       <Button fx:id="clean_Button" layoutX="1076.0" layoutY="136.0" mnemonicParsing="false" onAction="#cleanChart" text="Clean" />

@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -23,7 +24,7 @@ import static cm.models.Model.DESIGNS;
  */
 public class EnvironmentalTableController {
     @FXML
-    private TableView<propertyMix> dataTable;
+    private TableView<propertyMix> energyConsumptionTable;
     @FXML
     private ComboBox performanceType_ComboBox;
     @FXML
@@ -38,6 +39,13 @@ public class EnvironmentalTableController {
     private ComboBox mix_ComboBox;
     @FXML
     private ComboBox impactCategory_ComboBox;
+    @FXML
+    private TableView<propertyMix> resourceConsumptionTable;
+    @FXML
+    private Label energyConsumptionLabel;
+    @FXML
+    private Label resourceConsumptionLabel;
+            
     // Type of performance
     ObservableList<String> performanceType = FXCollections.
             observableArrayList(
@@ -76,7 +84,10 @@ public class EnvironmentalTableController {
         setupImpactCategory_ComboBox();
         //set up design number
         setupDesignNumber_ComboBox();
-        dataTable.setVisible(false);
+        energyConsumptionTable.setVisible(false);
+        energyConsumptionLabel.setVisible(false);
+        resourceConsumptionTable.setVisible(false);
+        resourceConsumptionLabel.setVisible(false);
     }
     private String perfType;
     private String envImpactType;
@@ -102,12 +113,13 @@ public class EnvironmentalTableController {
         envImpactType = environmentalImpact_ComboBox.getSelectionModel().getSelectedItem().toString();
         valueType = rawValue_ComboBox.getSelectionModel().getSelectedItem().toString();
         impactCategory = impactCategory_ComboBox.getSelectionModel().getSelectedItem().toString();
-        showData(mixsTemp,designID,layerID);
+        showEnergyConsumptionData(mixsTemp,designID,layerID);
     }
-    public void showData(List<Mix> mixes,String design_ID,String layer_ID){
-        dataTable.getColumns().clear();
-        dataTable.layout();
-        dataTable.setVisible(true);
+    public void showEnergyConsumptionData(List<Mix> mixes, String design_ID, String layer_ID){
+        energyConsumptionTable.getColumns().clear();
+        energyConsumptionTable.layout();
+        energyConsumptionTable.setVisible(true);
+        energyConsumptionLabel.setVisible(true);
         //Obtain data from mixes
         ObservableList<propertyMix> data = FXCollections.observableArrayList();
         for(Mix amix:mixes){
@@ -165,62 +177,67 @@ public class EnvironmentalTableController {
         tpecColumn.setPrefWidth(125.0);
 
         if(impactCategory == "Impact Analysis per Alternative"){
-            dataTable.getColumns().add(designColumn);
+            energyConsumptionTable.getColumns().add(designColumn);
             designColumn.setCellValueFactory(new PropertyValueFactory<>("Design_ID"));
-            dataTable.getColumns().add(layerColumn);
+            energyConsumptionTable.getColumns().add(layerColumn);
             layerColumn.setCellValueFactory(new PropertyValueFactory<>("Layer_ID"));
-            dataTable.getColumns().add(productIDColumn);
+            energyConsumptionTable.getColumns().add(productIDColumn);
             productIDColumn.setCellValueFactory(new PropertyValueFactory<>("Product_ID"));
-            dataTable.getColumns().add(gwpColumn);
+            energyConsumptionTable.getColumns().add(gwpColumn);
             gwpColumn.setCellValueFactory(new PropertyValueFactory<>("GWP"));
-            dataTable.getColumns().add(odpColumn);
+            energyConsumptionTable.getColumns().add(odpColumn);
             odpColumn.setCellValueFactory(new PropertyValueFactory<>("ODP"));
-            dataTable.getColumns().add(apColumn);
+            energyConsumptionTable.getColumns().add(apColumn);
             apColumn.setCellValueFactory(new PropertyValueFactory<>("AP"));
-            dataTable.getColumns().add(epColumn);
+            energyConsumptionTable.getColumns().add(epColumn);
             epColumn.setCellValueFactory(new PropertyValueFactory<>("EP"));
-            dataTable.getColumns().add(pocpColumn);
+            energyConsumptionTable.getColumns().add(pocpColumn);
             pocpColumn.setCellValueFactory(new PropertyValueFactory<>("POCP"));
-            dataTable.getColumns().add(tpecColumn);
+            energyConsumptionTable.getColumns().add(tpecColumn);
             tpecColumn.setCellValueFactory(new PropertyValueFactory<>("TotalPrimaryEnergyConsumption"));
-//            dataTable.getColumns().add(totEneryConsumptionEmissionColumn);
+//            energyConsumptionTable.getColumns().add(totEneryConsumptionEmissionColumn);
 //            pocpColumn.setCellValueFactory(new PropertyValueFactory<>("TotalEnergyConsumptionEmission"));
         }else{
-            dataTable.getColumns().add(designColumn);
+            energyConsumptionTable.getColumns().add(designColumn);
             designColumn.setCellValueFactory(new PropertyValueFactory<>("Design_ID"));
-            dataTable.getColumns().add(layerColumn);
+            energyConsumptionTable.getColumns().add(layerColumn);
             layerColumn.setCellValueFactory(new PropertyValueFactory<>("Layer_ID"));
-            dataTable.getColumns().add(productIDColumn);
+            energyConsumptionTable.getColumns().add(productIDColumn);
             productIDColumn.setCellValueFactory(new PropertyValueFactory<>("Product_ID"));
             if(impactCategory == "GWP"){
-                dataTable.getColumns().add(gwpColumn);
+                energyConsumptionTable.getColumns().add(gwpColumn);
                 gwpColumn.setCellValueFactory(new PropertyValueFactory<>("GWP"));
             }
             if(impactCategory == "ODP"){
-                dataTable.getColumns().add(odpColumn);
+                energyConsumptionTable.getColumns().add(odpColumn);
                 odpColumn.setCellValueFactory(new PropertyValueFactory<>("ODP"));
             }
             if(impactCategory == "AP"){
-                dataTable.getColumns().add(apColumn);
+                energyConsumptionTable.getColumns().add(apColumn);
                 apColumn.setCellValueFactory(new PropertyValueFactory<>("AP"));
             }
             if(impactCategory == "EP"){
-                dataTable.getColumns().add(epColumn);
+                energyConsumptionTable.getColumns().add(epColumn);
                 epColumn.setCellValueFactory(new PropertyValueFactory<>("EP"));
             }
             if(impactCategory == "POCP"){
-                dataTable.getColumns().add(pocpColumn);
+                energyConsumptionTable.getColumns().add(pocpColumn);
                 pocpColumn.setCellValueFactory(new PropertyValueFactory<>("POCP"));
             }
             if(impactCategory == "PrimaryEnergyConsumption"){
-                dataTable.getColumns().add(tpecColumn);
+                energyConsumptionTable.getColumns().add(tpecColumn);
                 tpecColumn.setCellValueFactory(new PropertyValueFactory<>("TotalPrimaryEnergyConsumption"));
             }
         }
         //Insert value to table
         System.out.println("propertyMix size is: "+data.size());
-        dataTable.setItems(data);
+        energyConsumptionTable.setItems(data);
     }
+
+    public void showResourceConsumptionData(List<Mix> mixes, String design_ID, String layer_ID){
+
+    }
+
     public double getSingleDataValue(Mix mix){
         //obtain key for CalcResult
         String s1=getKey1(impactCategory);
@@ -311,18 +328,20 @@ public class EnvironmentalTableController {
         // Impact Category
         ObservableList<String> impactCategoryName =FXCollections
                 .observableArrayList(
-                        "Impact Analysis Comparison of All Alternatives",
-                        "Impact Analysis per Alternative",
+                        "All Energy Consumption Impact",
                         "GWP","ODP","AP","EP", "POCP",
                         "PrimaryEnergyConsumption"
                 );
         if(valueType == "Weighted impact per functional unit"){
+            impactCategoryName.add(0,"Impact Analysis Comparison of All Alternatives");
+            impactCategory_ComboBox.setItems(impactCategoryName);
+        }else if(valueType == "Raw impact per functional unit"){
+            impactCategoryName.add(0,"All Resource Consumption Impact");
             impactCategory_ComboBox.setItems(impactCategoryName);
         }else{
-            impactCategoryName.remove(0);
             impactCategory_ComboBox.setItems(impactCategoryName);
         }
-
+        impactCategory_ComboBox.setValue(impactCategoryName.get(0));
     }
 
     private void setupDesignNumber_ComboBox(){
@@ -391,8 +410,8 @@ public class EnvironmentalTableController {
     }
     public void cleanChart(){
         // clear old data
-        dataTable.getColumns().clear();
-        dataTable.layout();
+        energyConsumptionTable.getColumns().clear();
+        energyConsumptionTable.layout();
     }
     public class propertyMix{
         private String Design_ID;
