@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.List;
 
@@ -99,12 +100,30 @@ public final class LayerInformationController {
         newTabButton.getStyleClass().add("tab-button");
         newTabButton.setOnAction(e -> { this.addDesign(); });
         newTabTab.setGraphic(newTabButton);
-
-        setUpDebugCheatSheet();
+    
+        // set up new autosave triggers -------------
+        setupAutosave();
+        saveProjectLocation();
     }
-
+    
     private void saveProjectLocation() {
+        printDebugMsg("------------");
+        printDebugMsg("saveProjectLocation()");
+        printDebugMsg(DESTINATION_ZIP_CODE_MUTABLE);
+        printDebugMsg("------------");
         DESTINATION_ZIP_CODE_MUTABLE = projectLocationTextField.getText();
+    }
+    
+    private void setupAutosave() {
+        autosaveOnFocus(designsTabPane);
+        autosaveOnFocus(projectLocationTextField);
+    }
+    
+    private void autosaveOnFocus(Control control) {
+        control.focusedProperty().addListener((
+              (observable, oldValue, newValue) -> {
+                  saveProjectLocation();
+              }));
     }
 
     /* -- aliases for dealing with javafx components ------ */
@@ -127,7 +146,6 @@ public final class LayerInformationController {
 
     /* -- helper methods for debugging -------------------- */
 
-    @FXML private Tooltip debugCheatSheet;
     private void println() { System.out.println(); }
     private void println(Object o) { System.out.println(o); }
 
@@ -137,21 +155,8 @@ public final class LayerInformationController {
     private void printDebugMsg(Object o) { if (DEBUG_MODE) println(o); }
 
     @FXML
-    private void debugButtonListener(ActionEvent actionEvent) {
-        printDebugStuff();
-        saveProjectLocation();
-    }
-
-    @FXML
     public void printDebugStuff() {
         printDebugMsg(GSON_PP.toJson(DESIGNS));
-    }
-
-    private void setUpDebugCheatSheet() {
-        if (DEBUG_MODE == false) { return; }
-        debugCheatSheet.activatedProperty().addListener(
-              (observable, oldValue, newValue) -> {
-                  debugCheatSheet.setText(GSON_PP.toJson(DESIGNS));
-              });
+        printDebugMsg(DESTINATION_ZIP_CODE_MUTABLE);
     }
 }
