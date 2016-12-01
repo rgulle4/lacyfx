@@ -288,7 +288,8 @@ public final class Mix {
     }
 
     public void setNonRenewableEnergyUse(String nonRenewableEnergyUse) throws ParseException {
-        if (nonRenewableEnergyUse.isEmpty()){NonRenewableEnergyUse = 0.0;}
+        if (nonRenewableEnergyUse == null){
+            NonRenewableEnergyUse = 0.0;}
         else{
             NumberFormat format = NumberFormat.getInstance(Locale.US);
             Number number = format.parse(nonRenewableEnergyUse);
@@ -309,7 +310,7 @@ public final class Mix {
     }
 
     public void setNonRenewableMaterialResource(String nonRenewableMaterialResource) throws ParseException {
-        if(nonRenewableMaterialResource.isEmpty()){NonRenewableMaterialResource = 0.0;}
+        if(nonRenewableMaterialResource == null){NonRenewableMaterialResource = 0.0;}
         else{
             NumberFormat format = NumberFormat.getInstance(Locale.US);
             Number number = format.parse(nonRenewableMaterialResource);

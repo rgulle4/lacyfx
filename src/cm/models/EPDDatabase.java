@@ -132,33 +132,20 @@ public final class EPDDatabase {
         return result;
     }
 
-    public List<Mix> getResultsFilteredBy_Test(String cs, String companyName) throws SQLException, ParseException {
+    public List<Mix> getResultsFilteredBy_newVersion
+            (Double cs, String region, String airEntrained,
+             String cement, String waterCement, String flyAsh,
+             String slag, String aggregate1, String aggregate2
+            )
+            throws SQLException, ParseException {
         List<Mix> result = new ArrayList<Mix>();
 
-        StringBuilder sb = new StringBuilder(DEFAULT_SQL_QUERY);
-        PreparedStatement ptmt = null;
-
-        if (companyName.isEmpty() && cs.isEmpty()) {
-            ptmt = conn.prepareStatement(sb.toString());
-        }
-        else {
-            if (!companyName.isEmpty() && !cs.isEmpty()) {
-                sql = sb.append(" AND Company_Name like ? AND Compressive_Strength >= ? ").toString();
-                ptmt = conn.prepareStatement(sql);
-                ptmt.setString(1, "%"+companyName+"%");
-                ptmt.setString(2, cs);
-            }
-            else if (!cs.isEmpty()) {
-                sql = sb.append(" AND Compressive_Strength >= ?").toString();
-                ptmt = conn.prepareStatement(sql);
-                ptmt.setString(1, cs);
-            }
-            else {sql = sb.append(" AND Company_Name like ?").toString();
-                ptmt = conn.prepareStatement(sql);
-                ptmt.setString(1, "%"+companyName+"%");}
-        }
-        rs = ptmt.executeQuery();
-
+        StringBuilder sb = new StringBuilder("SELECT * FROM concrete_epds_regions WHERE 1");
+        if (cs != 0.0) sb.append(" AND COMPRESSIVE_STRENGTH >= ").append("'").append(cs).append("'");
+        if (!region.isEmpty()) sb.append(" AND Region = ").append("'").append(region).append("'");
+        s = conn.createStatement();
+        String sql = sb.toString();
+        rs = s.executeQuery(sql);
         Mix g;
         while(rs.next()){
             g = new Mix();
@@ -184,8 +171,18 @@ public final class EPDDatabase {
             g.setNonRenewableEnergyUse(rs.getString("NON_RENEWABLE_ENERGY_CONSUMPTION"));
             g.setRenewableMaterialResourcesUse(rs.getDouble("RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
             g.setNonRenewableMaterialResource(rs.getString("NON_RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
+            g.setRegion(rs.getString("Region"));
+            g.setAir_Entrained(rs.getString("Air_Entrained"));
+            g.setCement(rs.getString("Cement_sack"));
+            g.setWaterCement(rs.getString("Water_cement_ratio"));
+            g.setFly_Ash(rs.getString("Fly_Ash_percent"));
+            g.setSlag(rs.getString("Slag_percent"));
+            g.setAggregate1(rs.getString("Aggregate1"));
+            g.setAggregate2(rs.getString("Aggregate2"));
+
             result.add(g);
         }
+        System.out.println("size: "+result.size());
         return result;
     }
     /**

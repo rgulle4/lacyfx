@@ -163,9 +163,9 @@ public final class LoadMixController {
 //         get qualified material after searching
         List<Mix> result = new EPDDatabase()
                 .getResultsFilteredBy(filteredZipcodeMap,CS,cmName);
-        // since Google API doesn't work, we use getResultsFilteredBy_Test to keep on coding
+        // since Google API doesn't work, we use getResultsFilteredBy_newVersion to keep on coding
 //        List<Mix> result = new EPDDatabase()
-//                .getResultsFilteredBy_Test(CS,cmName);
+//                .getResultsFilteredBy_newVersion(CS,cmName);
         data = FXCollections.observableArrayList();
 
         // get material properties from the column names.
