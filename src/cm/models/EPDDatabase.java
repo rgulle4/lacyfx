@@ -143,6 +143,11 @@ public final class EPDDatabase {
         StringBuilder sb = new StringBuilder("SELECT * FROM concrete_epds_regions WHERE 1");
         if (cs != 0.0) sb.append(" AND COMPRESSIVE_STRENGTH >= ").append("'").append(cs).append("'");
         if (!region.isEmpty()) sb.append(" AND Region = ").append("'").append(region).append("'");
+        if(!airEntrained.isEmpty()) sb.append(" AND Air_Entrained = ").append("'").append(airEntrained).append("'");
+        if (!cement.isEmpty()) sb.append(" AND Cement_sack = ").append("'").append(cement).append("'");
+        if (!waterCement.isEmpty()) sb.append(" AND Water_cement_ratio = ").append("'").append(waterCement).append("'");
+        if (!flyAsh.isEmpty()) sb.append(" AND Fly_Ash_percent = ").append("'").append(flyAsh).append("'");
+        if (!slag.isEmpty()) sb.append(" AND Slag_percent = ").append("'").append(slag).append("'");
         s = conn.createStatement();
         String sql = sb.toString();
         rs = s.executeQuery(sql);

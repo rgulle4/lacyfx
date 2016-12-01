@@ -7,6 +7,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Region;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -44,6 +46,8 @@ public class LoadMixController_newVersion {
     @FXML
     public TableColumn Aggregate2_Column;
     @FXML
+    public TableColumn Region_Column;
+    @FXML
     public TextField textField_CS;
     @FXML
     public TextField textField_Distance;
@@ -63,8 +67,10 @@ public class LoadMixController_newVersion {
     public ComboBox ComboBox_Aggregate1;
     @FXML
     public ComboBox ComboBox_Aggregate2;
+    @FXML
+    public Label Label_MixSize;
 
-    ObservableList<String> AirEntrainedList = FXCollections.observableArrayList("Yes","No");
+    ObservableList<String> AirEntrainedList = FXCollections.observableArrayList("Yes","No","NA");
     ObservableList<String> RegionList = FXCollections.observableArrayList(
             "West","South","Northeast","Midwest","Nationwide");
     @FXML
@@ -75,16 +81,24 @@ public class LoadMixController_newVersion {
         System.out.println("------------------------------------");
 
         textField_CS.setText("3000.0");
-        textField_Cement.setText("5.0");
-        textField_WaterCement.setText("0.60");
         textField_Distance.setText("15.0");
-        textField_FlyAsh.setText("25");
-        textField_Slag.setText("35");
 
         ComboBox_AirEntrained.setItems(AirEntrainedList);
         ComboBox_AirEntrained.setValue(AirEntrainedList.get(0));
         ComboBox_Region.setItems(RegionList);
         ComboBox_Region.setValue(RegionList.get(4));
+
+        //Alternative materials
+        CS_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("CS"));
+        Location_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Location"));
+        Region_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Region"));
+        Cement_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Cement"));
+        WaterCement_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("WaterCement"));
+        Fly_Ash_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Fly_Ash"));
+        Slag_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Slag"));
+        Air_Entrained_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Air_Entrained"));
+        Aggregate1_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Aggregate1"));
+        Aggregate2_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Aggregate2"));
     }
 
     @FXML
@@ -122,7 +136,9 @@ public class LoadMixController_newVersion {
             region = ComboBox_Region.getSelectionModel().getSelectedItem().toString();
         }
         if(!ComboBox_AirEntrained.getSelectionModel().isEmpty()){
-            air_Entrained = ComboBox_AirEntrained.getSelectionModel().getSelectedItem().toString();
+            if (ComboBox_AirEntrained.getSelectionModel().isSelected(0)) air_Entrained ="Y";
+            else if (ComboBox_AirEntrained.getSelectionModel().isSelected(1)) air_Entrained ="N";
+            else air_Entrained = "";
         }
         if(!ComboBox_Aggregate1.getSelectionModel().isEmpty()){
             aggregate1 = ComboBox_Aggregate1.getSelectionModel().getSelectedItem().toString();
@@ -132,8 +148,16 @@ public class LoadMixController_newVersion {
         }
         List<Mix> result = new EPDDatabase().getResultsFilteredBy_newVersion
                 (CS,region,air_Entrained,cement,water_cement,fly_ash,slag,aggregate1,aggregate2);
+        StringBuilder sb_MixSize = new StringBuilder(Integer.toString(result.size())).append(" Mixes");
+        Label_MixSize.setText(sb_MixSize.toString());
 
+        ObservableList<Mix> data = FXCollections.observableArrayList();
+
+        // get material properties from the column names.
+        for (int i = 0; i < result.size(); i++){
+            Mix m = result.get(i);
+            data.add(m);
+        }
+        MaterialTable.setItems(data);
     }
-
-
 }
