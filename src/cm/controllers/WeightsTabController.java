@@ -147,7 +147,7 @@ public final class WeightsTabController {
             // TO DO
             // A warning to information everyTextfield should be valued and there is a default value for everyTextfield
             //Weights W = new Weights(w_enp,w_ecp,w_gwp,w_odp,w_ap,w_ep,w_pocp,w_cw,w_cnhw,w_twc,w_ap,w_dner,w_mru,w_dnmr);
-            if(Double.parseDouble(SumWeightsTextField.getText())<100.0){
+            if(Double.parseDouble(SumWeightsTextField.getText())!=100.0){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Dialog");
                 alert.setHeaderText("The Sum of Weight is not 100%!");
