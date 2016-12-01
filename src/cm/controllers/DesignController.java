@@ -50,15 +50,9 @@ public final class DesignController {
     }
 
     @FXML
-    private void debugDesign() { }
-
-    @FXML
     public void initialize() {
         setDesignOptionsToDefaults();
-
-        // set up first layer tab
-//        setUpFirstLayerTab();
-
+        
         // set up new tab functionality
         newTabButton.getStyleClass().add("tab-button");
         newTabButton.setOnAction(e -> { this.addLayer(); } );
@@ -67,6 +61,20 @@ public final class DesignController {
         // set up tooltip debug info
         setUpDebugCheatSheet();
         saveDesignOptions();
+        
+        // set up autosave triggers
+        setupAutosave();
+    }
+    
+    private void setupAutosave() {
+        autosaveOnFocus(layersTabPane);
+    }
+    
+    private void autosaveOnFocus(Control control) {
+        control.focusedProperty().addListener((
+              (observable, oldValue, newValue) -> {
+                  saveDesignOptions();
+              }));
     }
 
     public void setUpFirstLayerTab() {
@@ -122,7 +130,6 @@ public final class DesignController {
         selectFirst(pavementTypeComboBox);
     }
 
-    @FXML
     public void saveDesignOptions() {
         if (design == null) { return ; }
         design.setDesignType(toString(designTypeComboBox));

@@ -101,8 +101,7 @@ public final class LayerController {
         selectFirst(thicknessUnitChoiceBox);
         thicknessTextField.setText("10.0");
     }
-
-    @FXML
+    
     public void saveLayerOptions() {
         if (layer == null) { return ; }
         saveLayerType();
@@ -126,12 +125,9 @@ public final class LayerController {
     @FXML Button loadMaterialBtn;
     @FXML
     private void loadMaterialBtnAction() throws IOException {
-//        saveProjectLocation();
         saveLayerType();
         saveThickness();
-//        printDebugMsg(currentLayer);
         App.showLoadMaterial(layer);
-//        App.showLoadMaterial(null);
     }
 
     /* -- aliases for dealing with javafx components ------ */

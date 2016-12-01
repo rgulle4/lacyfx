@@ -75,8 +75,8 @@ public class ZipCodeUtilTest {
               = zcu.getDistances(originsList, destinationZip1);
 
         assertEquals(originsList.size(), distances.size());
-        assertEquals(new Double(133917), distances.get("70115"));
-        assertEquals(new Double(434705), distances.get("77001"));
+        assertEquals(new Double(133917), distances.get("70115"), 133917.0 * 0.05);
+        assertEquals(new Double(434705), distances.get("77001"), 434705 * 0.05);
     }
 
     @Test
