@@ -43,6 +43,15 @@ public final class Mix {
     private Boolean isTotalWaterConsumptionSpecial;
     private Boolean isPrimaryEnergyConsumptionSpecial;
     public Map<String,Double> CalcResult = new HashMap<>();
+    //Mix description
+    public String Cement;
+    public String WaterCement;
+    public String Fly_Ash;
+    public String Slag;
+    public String Air_Entrained;
+    public String Aggregate1;
+    public String Aggregate2;
+    public String Region;
     //Scores
     private Double EnvPerfAnalysis_TotalScore_Material;
     private Double EnvPerfAnalysis_EPDScore_Material;
@@ -709,5 +718,69 @@ public final class Mix {
         return this.GWP_Transportation_SubScore+this.ODP_Transportation_SubScore
                 +this.AP_Transportation_SubScore+this.EP_Transportation_SubScore
                 +this.POCP_Transportation_SubScore+this.TPEC_Transportation_SubScore;
+    }
+
+    public String getCement() {
+        return Cement;
+    }
+
+    public void setCement(String cement) {
+        Cement = cement;
+    }
+
+    public String getWaterCement() {
+        return WaterCement;
+    }
+
+    public void setWaterCement(String waterCement) {
+        WaterCement = waterCement;
+    }
+
+    public String getFly_Ash() {
+        return Fly_Ash;
+    }
+
+    public void setFly_Ash(String fly_Ash) {
+        Fly_Ash = fly_Ash;
+    }
+
+    public String getSlag() {
+        return Slag;
+    }
+
+    public void setSlag(String slag) {
+        Slag = slag;
+    }
+
+    public String getAir_Entrained() {
+        return Air_Entrained;
+    }
+
+    public void setAir_Entrained(String air_Entrained) {
+        Air_Entrained = air_Entrained;
+    }
+
+    public String getAggregate1() {
+        return Aggregate1;
+    }
+
+    public void setAggregate1(String aggregate1) {
+        Aggregate1 = aggregate1;
+    }
+
+    public String getAggregate2() {
+        return Aggregate2;
+    }
+
+    public void setAggregate2(String aggregate2) {
+        Aggregate2 = aggregate2;
+    }
+
+    public String getRegion() {
+        return Region;
+    }
+
+    public void setRegion(String region) {
+        Region = region;
     }
 }

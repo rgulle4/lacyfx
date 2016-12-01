@@ -35,9 +35,9 @@
                         <Label text="Distance:" />
                         <Label text="Compressive Strength:" GridPane.rowIndex="1" />
                         <TextField fx:id="textField_CS" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField GridPane.columnIndex="1" />
+                        <TextField fx:id="textField_Distance" GridPane.columnIndex="1" />
                         <Label prefHeight="15.0" prefWidth="169.0" text="Analysis Geographic Region:" GridPane.rowIndex="2" />
-                        <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="ComboBox_Region" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                   <Button layoutX="900.0" layoutY="237.0" mnemonicParsing="false" prefWidth="75.0" text="Search" />
@@ -58,45 +58,41 @@
                      <children>
                         <Label text="Cement(sack):" />
                         <Label text="Water Cement:" GridPane.rowIndex="1" />
-                        <TextField fx:id="textField_companyName1" GridPane.columnIndex="1" />
-                        <TextField fx:id="textField_ZipCode1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="textField_Cement" GridPane.columnIndex="1" />
+                        <TextField fx:id="textField_WaterCement" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Fly Ash(%):" GridPane.rowIndex="2" />
                         <Label text="Slag (%):" GridPane.rowIndex="3" />
                         <Label text="Air Entrained:" GridPane.rowIndex="4" />
                         <Label text="Aggregate 1:" GridPane.rowIndex="5" />
-                        <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="ComboBox_AirEntrained" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <ComboBox fx:id="ComboBox_Aggregate1" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <TextField fx:id="textField_FlyAsh" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="textField_Slag" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Label text="Aggregate 2:" GridPane.rowIndex="6" />
-                        <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <ComboBox fx:id="ComboBox_Aggregate2" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                      </children>
                   </GridPane>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="998.0">
                <children>
-                  <TableView id="my-table" fx:id="MaterialTable" layoutX="-1.0" layoutY="41.0" prefHeight="320.0" prefWidth="1000.0">
+                  <TableView id="my-table" fx:id="MaterialTable" layoutX="-1.0" layoutY="41.0" prefHeight="182.0" prefWidth="1000.0">
                     <columns>
                       <TableColumn fx:id="CS_Column" prefWidth="135.0" text="Compressive Strength" />
-                      <TableColumn fx:id="CM_Name_Column" prefWidth="105.0" text="Company_Name" />
                         <TableColumn fx:id="Location_Column" prefWidth="70.0" text="Location" />
-                        <TableColumn fx:id="Product_ID_Column" prefWidth="83.0" text="Product_ID#" />
-                        <TableColumn fx:id="ZipCode_Column" prefWidth="65.0" text="Zip" />
-                        <TableColumn fx:id="GWP_Column" prefWidth="75.0" text="GWP" />
-                        <TableColumn fx:id="ODP_Column" prefWidth="75.0" text="ODP" />
-                        <TableColumn fx:id="AP_Column" prefWidth="75.0" text="AP" />
-                        <TableColumn fx:id="EP_Column" prefWidth="75.0" text="EP" />
-                        <TableColumn fx:id="POCP_Column" prefWidth="75.0" text="POCP" />
-                        <TableColumn fx:id="Energy_Consumption_Column" prefWidth="164.0" text="Energy_Consumption" />
+                        <TableColumn fx:id="Cement_Column" prefWidth="88.0" text="Cement(sack)" />
+                        <TableColumn fx:id="WaterCement_Column" prefWidth="96.0" text="WaterCement" />
+                        <TableColumn fx:id="Fly_Ash_Column" prefWidth="75.0" text="Fly Ash (%)" />
+                        <TableColumn fx:id="Slag_Column" prefWidth="75.0" text="Slag (%)" />
+                        <TableColumn fx:id="Air_Entrained_Column" prefWidth="90.0" text="Air Entrained" />
+                        <TableColumn fx:id="Aggregate1_Column" prefWidth="116.0" text="Aggregate 1" />
+                        <TableColumn fx:id="Aggregate2_Column" prefWidth="116.0" text="Aggregate 2" />
                     </columns>
                   </TableView>
-                  <HBox layoutX="291.0" layoutY="392.0" prefHeight="30.0" prefWidth="472.0" spacing="30.0">
+                  <HBox layoutX="383.0" layoutY="433.0" prefHeight="30.0" prefWidth="232.0" spacing="30.0">
                      <children>
-                        <Button mnemonicParsing="false"  prefWidth="75.0" text="Select" />
-                        <Button mnemonicParsing="false"  prefWidth="75.0" text="Remove" />
-                        <Button mnemonicParsing="false"  prefWidth="75.0" text="Save" />
-                        <Button fx:id="closeButton" cancelButton="true" mnemonicParsing="false"  prefWidth="75.0" text="Finish" />
+                        <Button mnemonicParsing="false" prefWidth="75.0" text="Save" />
+                        <Button fx:id="closeButton" cancelButton="true" mnemonicParsing="false" prefWidth="75.0" text="Finish" />
                      </children>
                      <opaqueInsets>
                         <Insets />
