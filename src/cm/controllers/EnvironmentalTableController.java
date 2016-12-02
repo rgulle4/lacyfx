@@ -142,27 +142,34 @@ public class EnvironmentalTableController {
             pmix.setDesign_ID(design_ID);
             pmix.setLayer_ID(layer_ID);
             pmix.setProduct_ID(amix.getProduct_ID()+amix.getZipCode());
+            List<Double> result = getEnergyConsumptionResults(amix);
+            int count =0;
             if(impactCategory == "GWP") {
-                pmix.setGWP(getEnergyConsumptionResult(amix));
+                pmix.setGWP(result.get(count));
+                count++;
             }
             if(impactCategory == "ODP") {
-                pmix.setODP(getEnergyConsumptionResult(amix));
+                pmix.setODP(result.get(count));
+                count++;
             }
             if(impactCategory == "AP") {
-                pmix.setAP(getEnergyConsumptionResult(amix));
+                pmix.setAP(result.get(count));
+                count++;
             }
             if(impactCategory == "EP") {
-                pmix.setEP(getEnergyConsumptionResult(amix));
+                pmix.setEP(result.get(count));
+                count++;
             }
             if(impactCategory == "POCP") {
-                pmix.setPOCP(getEnergyConsumptionResult(amix));
+                pmix.setPOCP(result.get(count));
+                count++;
             }
             if(impactCategory == "PrimaryEnergyConsumption") {
-                pmix.setTotalPrimaryEnergyConsumption(getEnergyConsumptionResult(amix));
+                pmix.setTotalPrimaryEnergyConsumption(result.get(count));
+                count=0;
             }
             if(impactCategory == "Impact Analysis Comparison of All Alternatives"){}
             if(impactCategory == "All Energy Consumption Impact"){
-                List<Double> result = getEnergyConsumptionResults(amix);
                 pmix.setGWP(result.get(0));
                 pmix.setODP(result.get(1));
                 pmix.setAP(result.get(2));
@@ -301,32 +308,22 @@ public class EnvironmentalTableController {
         resourceConsumptionTable.setItems(data);
     }
 
-    public double getEnergyConsumptionResult(Mix mix){
-        //obtain key for CalcResult
-        String s1=getKey1(impactCategory);
-        String s2=getKey2(envImpactType);
-        String s3=getKey3(valueType);
-        String tot_Key = new StringBuilder().
-                append(s1).append("_").
-                append(s2).append("_").
-                append(s3).toString();      //format should be like GWP_EPD_Ctb
-        Double result = mix.CalcResult.get(tot_Key);
-        //Double decimal formatting
-        NumberFormat numberFormat = new DecimalFormat("#0.000");
-        Double formattedResult = Double.valueOf(numberFormat.format(result));
-        return formattedResult;
-    }
-
     public List<Double> getEnergyConsumptionResults(Mix mix){
         List<Double> results = new ArrayList<>();
         //obtain key for CalcResult
         List<String> impactList = new ArrayList<>();
-        impactList.add("GWP");
-        impactList.add("ODP");
-        impactList.add("AP");
-        impactList.add("EP");
-        impactList.add("POCP");
-        impactList.add("TPEC");
+        if (impactCategory == "GWP"||impactCategory == "All Energy Consumption Impact")
+            impactList.add("GWP");
+        if (impactCategory == "ODP"||impactCategory == "All Energy Consumption Impact")
+            impactList.add("ODP");
+        if (impactCategory == "AP"||impactCategory == "All Energy Consumption Impact")
+            impactList.add("AP");
+        if (impactCategory == "EP"||impactCategory == "All Energy Consumption Impact")
+            impactList.add("EP");
+        if (impactCategory == "POCP"||impactCategory == "All Energy Consumption Impact")
+            impactList.add("POCP");
+        if (impactCategory == "PrimaryEnergyConsumption"||impactCategory == "All Energy Consumption Impact")
+            impactList.add("TPEC");
         for (String s1:impactList){
             String s2=getKey2(envImpactType);
             String s3=getKey3(valueType);
@@ -336,22 +333,11 @@ public class EnvironmentalTableController {
                     append(s3).toString();      //format should be like GWP_EPD_Ctb
             Double result = mix.CalcResult.get(completed_Key);
             //Double decimal formatting
-            NumberFormat numberFormat = new DecimalFormat("#0.000");
+            NumberFormat numberFormat = new DecimalFormat("#0.00");
             Double formattedResult = Double.valueOf(numberFormat.format(result));
             results.add(formattedResult);
         }
         return results;
-    }
-    private String getKey1(String impactCategory){
-        String s1=null;
-        if (impactCategory.equals("GWP")){s1 = "GWP";}
-        else if (impactCategory.equals("ODP")){s1 = "ODP";}
-        else if (impactCategory.equals("AP")){s1 = "AP";}
-        else if (impactCategory.equals("EP")){s1 = "EP";}
-        else if (impactCategory.equals("POCP")){s1 = "POCP";}
-        else if(impactCategory.equals("PrimaryEnergyConsumption")){s1 = "TPEC";}
-        else System.out.println("Can not identify an impact category");
-        return s1;
     }
     private String getKey2(String envImpactType){
         String s2=null;
@@ -471,11 +457,7 @@ public class EnvironmentalTableController {
             System.out.println("Select a certain design first!!");
         }
     }
-    public void cleanChart(){
-        // clear old data
-        energyConsumptionTable.getColumns().clear();
-        energyConsumptionTable.layout();
-    }
+
     public class propertyMix{
         private String Design_ID;
         private String Layer_ID;

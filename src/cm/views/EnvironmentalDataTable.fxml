@@ -25,7 +25,6 @@
             <ComboBox fx:id="mix_ComboBox" onMouseClicked="#setupMixNum_ComboBox" prefWidth="150.0" />
          </children>
       </HBox>
-      <Button fx:id="removeTable_Button" layoutX="1076.0" layoutY="136.0" mnemonicParsing="false" onAction="#cleanChart" text="Remove table" />
       <TableView fx:id="energyConsumptionTable" layoutX="249.0" layoutY="240.0" prefHeight="200.0" prefWidth="775.0" />
       <TableView fx:id="resourceConsumptionTable" layoutX="249.0" layoutY="506.0" prefHeight="200.0" prefWidth="775.0" />
       <Label fx:id="energyConsumptionLabel" layoutX="529.0" layoutY="212.0" text="Energy Consumption Emission Impact" />
