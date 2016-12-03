@@ -143,29 +143,36 @@ public class EnvironmentalTableController {
             pmix.setLayer_ID(layer_ID);
             pmix.setProduct_ID(amix.getProduct_ID()+amix.getZipCode());
             List<Double> result = getEnergyConsumptionResults(amix);
+            List<String> result_Units = getEPDUnits(amix);
             int count =0;
             if(impactCategory == "GWP") {
                 pmix.setGWP(result.get(count));
+                if (valueType == "Raw impact per functional unit") pmix.setGWP_Units(result_Units.get(count));
                 count++;
             }
             if(impactCategory == "ODP") {
                 pmix.setODP(result.get(count));
+                if (valueType == "Raw impact per functional unit") pmix.setODP_Units(result_Units.get(count));
                 count++;
             }
             if(impactCategory == "AP") {
                 pmix.setAP(result.get(count));
+                if (valueType == "Raw impact per functional unit") pmix.setAP_Units(result_Units.get(count));
                 count++;
             }
             if(impactCategory == "EP") {
                 pmix.setEP(result.get(count));
+                if (valueType == "Raw impact per functional unit") pmix.setEP_Units(result_Units.get(count));
                 count++;
             }
             if(impactCategory == "POCP") {
                 pmix.setPOCP(result.get(count));
+                if (valueType == "Raw impact per functional unit") pmix.setPOCP_Units(result_Units.get(count));
                 count++;
             }
             if(impactCategory == "PrimaryEnergyConsumption") {
                 pmix.setTotalPrimaryEnergyConsumption(result.get(count));
+                if (valueType == "Raw impact per functional unit") pmix.setTotalPrimaryEnergyConsumption_Units(result_Units.get(count));
                 count=0;
             }
             if(impactCategory == "Impact Analysis Comparison of All Alternatives"){}
@@ -175,7 +182,14 @@ public class EnvironmentalTableController {
                 pmix.setAP(result.get(2));
                 pmix.setEP(result.get(3));
                 pmix.setPOCP(result.get(4));
-                pmix.setTotalPrimaryEnergyConsumption(result.get(5));
+                if (valueType == "Raw impact per functional unit"){
+                    pmix.setGWP_Units(result_Units.get(0));
+                    pmix.setODP_Units(result_Units.get(1));
+                    pmix.setAP_Units(result_Units.get(2));
+                    pmix.setEP_Units(result_Units.get(3));
+                    pmix.setPOCP_Units(result_Units.get(4));
+                    pmix.setTotalPrimaryEnergyConsumption_Units(result_Units.get(5));
+                }
             }
             data.add(pmix);
         }
@@ -187,16 +201,28 @@ public class EnvironmentalTableController {
         productIDColumn.setPrefWidth(125.0);
         TableColumn<propertyMix,Double> gwpColumn = new TableColumn("GWP");
         gwpColumn.setPrefWidth(75.0);
+        TableColumn<propertyMix,String> gwpUnitsColumn = new TableColumn("Unit");
+        gwpUnitsColumn.setPrefWidth(100.0);
         TableColumn<propertyMix,Double> odpColumn = new TableColumn("ODP");
         odpColumn.setPrefWidth(75.0);
+        TableColumn<propertyMix,String> odpUnitsColumn = new TableColumn("Unit");
+        odpUnitsColumn.setPrefWidth(100.0);
         TableColumn<propertyMix,Double> apColumn = new TableColumn("AP");
         apColumn.setPrefWidth(75.0);
+        TableColumn<propertyMix,String> apUnitsColumn = new TableColumn("Unit");
+        apUnitsColumn.setPrefWidth(100.0);
         TableColumn<propertyMix,Double> epColumn = new TableColumn("EP");
         epColumn.setPrefWidth(75.0);
+        TableColumn<propertyMix,String> epUnitsColumn = new TableColumn("Unit");
+        epUnitsColumn.setPrefWidth(100.0);
         TableColumn<propertyMix,Double> pocpColumn = new TableColumn("POCP");
         pocpColumn.setPrefWidth(75.0);
+        TableColumn<propertyMix,String> pocpUnitsColumn = new TableColumn("Unit");
+        pocpUnitsColumn.setPrefWidth(100.0);
         TableColumn<propertyMix,Double> tpecColumn = new TableColumn("EnergyConsumption");
         tpecColumn.setPrefWidth(125.0);
+        TableColumn<propertyMix,String> tpecUnitsColumn = new TableColumn("Unit");
+        tpecUnitsColumn.setPrefWidth(100.0);
 
         if(impactCategory == "All Energy Consumption Impact"){
             energyConsumptionTable.getColumns().add(designColumn);
@@ -207,16 +233,28 @@ public class EnvironmentalTableController {
             productIDColumn.setCellValueFactory(new PropertyValueFactory<>("Product_ID"));
             energyConsumptionTable.getColumns().add(gwpColumn);
             gwpColumn.setCellValueFactory(new PropertyValueFactory<>("GWP"));
+            if (valueType == "Raw impact per functional unit") energyConsumptionTable.getColumns().add(gwpUnitsColumn);
+            gwpUnitsColumn.setCellValueFactory(new PropertyValueFactory<>("GWP_Units"));
             energyConsumptionTable.getColumns().add(odpColumn);
             odpColumn.setCellValueFactory(new PropertyValueFactory<>("ODP"));
+            if (valueType == "Raw impact per functional unit") energyConsumptionTable.getColumns().add(odpUnitsColumn);
+            odpUnitsColumn.setCellValueFactory(new PropertyValueFactory<>("ODP_Units"));
             energyConsumptionTable.getColumns().add(apColumn);
             apColumn.setCellValueFactory(new PropertyValueFactory<>("AP"));
+            if (valueType == "Raw impact per functional unit") energyConsumptionTable.getColumns().add(apUnitsColumn);
+            apUnitsColumn.setCellValueFactory(new PropertyValueFactory<>("AP_Units"));
             energyConsumptionTable.getColumns().add(epColumn);
             epColumn.setCellValueFactory(new PropertyValueFactory<>("EP"));
+            if (valueType == "Raw impact per functional unit") energyConsumptionTable.getColumns().add(epUnitsColumn);
+            epUnitsColumn.setCellValueFactory(new PropertyValueFactory<>("EP_Units"));
             energyConsumptionTable.getColumns().add(pocpColumn);
             pocpColumn.setCellValueFactory(new PropertyValueFactory<>("POCP"));
+            if (valueType == "Raw impact per functional unit") energyConsumptionTable.getColumns().add(pocpUnitsColumn);
+            pocpUnitsColumn.setCellValueFactory(new PropertyValueFactory<>("POCP_Units"));
             energyConsumptionTable.getColumns().add(tpecColumn);
             tpecColumn.setCellValueFactory(new PropertyValueFactory<>("TotalPrimaryEnergyConsumption"));
+            if (valueType == "Raw impact per functional unit") energyConsumptionTable.getColumns().add(tpecUnitsColumn);
+            tpecUnitsColumn.setCellValueFactory(new PropertyValueFactory<>("TotalPrimaryEnergyConsumption_Units"));
 //            energyConsumptionTable.getColumns().add(totEneryConsumptionEmissionColumn);
 //            pocpColumn.setCellValueFactory(new PropertyValueFactory<>("TotalEnergyConsumptionEmission"));
         }else{
@@ -229,26 +267,38 @@ public class EnvironmentalTableController {
             if(impactCategory == "GWP"){
                 energyConsumptionTable.getColumns().add(gwpColumn);
                 gwpColumn.setCellValueFactory(new PropertyValueFactory<>("GWP"));
+                energyConsumptionTable.getColumns().add(gwpUnitsColumn);
+                gwpUnitsColumn.setCellValueFactory(new PropertyValueFactory<>("GWP_Units"));
             }
             if(impactCategory == "ODP"){
                 energyConsumptionTable.getColumns().add(odpColumn);
                 odpColumn.setCellValueFactory(new PropertyValueFactory<>("ODP"));
+                energyConsumptionTable.getColumns().add(odpUnitsColumn);
+                odpUnitsColumn.setCellValueFactory(new PropertyValueFactory<>("ODP_Units"));
             }
             if(impactCategory == "AP"){
                 energyConsumptionTable.getColumns().add(apColumn);
                 apColumn.setCellValueFactory(new PropertyValueFactory<>("AP"));
+                energyConsumptionTable.getColumns().add(apUnitsColumn);
+                apUnitsColumn.setCellValueFactory(new PropertyValueFactory<>("AP_Units"));
             }
             if(impactCategory == "EP"){
                 energyConsumptionTable.getColumns().add(epColumn);
                 epColumn.setCellValueFactory(new PropertyValueFactory<>("EP"));
+                energyConsumptionTable.getColumns().add(epUnitsColumn);
+                epUnitsColumn.setCellValueFactory(new PropertyValueFactory<>("EP_Units"));
             }
             if(impactCategory == "POCP"){
                 energyConsumptionTable.getColumns().add(pocpColumn);
                 pocpColumn.setCellValueFactory(new PropertyValueFactory<>("POCP"));
+                energyConsumptionTable.getColumns().add(pocpUnitsColumn);
+                pocpUnitsColumn.setCellValueFactory(new PropertyValueFactory<>("POCP_Units"));
             }
             if(impactCategory == "PrimaryEnergyConsumption"){
                 energyConsumptionTable.getColumns().add(tpecColumn);
                 tpecColumn.setCellValueFactory(new PropertyValueFactory<>("TotalPrimaryEnergyConsumption"));
+                energyConsumptionTable.getColumns().add(tpecUnitsColumn);
+                tpecUnitsColumn.setCellValueFactory(new PropertyValueFactory<>("TotalPrimaryEnergyConsumption_Units"));
             }
         }
         //Insert value to table
@@ -339,6 +389,35 @@ public class EnvironmentalTableController {
         }
         return results;
     }
+    public List<String> getEPDUnits(Mix mix){
+        List<String> unit_Results = new ArrayList<>();
+        List<String> impactList = new ArrayList<>();
+        if (impactCategory == "GWP"||impactCategory == "All Energy Consumption Impact")
+            impactList.add("GWP");
+        if (impactCategory == "ODP"||impactCategory == "All Energy Consumption Impact")
+            impactList.add("ODP");
+        if (impactCategory == "AP"||impactCategory == "All Energy Consumption Impact")
+            impactList.add("AP");
+        if (impactCategory == "EP"||impactCategory == "All Energy Consumption Impact")
+            impactList.add("EP");
+        if (impactCategory == "POCP"||impactCategory == "All Energy Consumption Impact")
+            impactList.add("POCP");
+        if (impactCategory == "PrimaryEnergyConsumption"||impactCategory == "All Energy Consumption Impact")
+            impactList.add("TPEC");
+        if (impactCategory == "All Resource Consumption Impact") {
+            impactList.add("TWC");
+            impactList.add("RMRU");
+            impactList.add("NRMR");
+        }
+        for (String s1:impactList){
+            String completed_Key = new StringBuilder().
+                    append(s1).append("_Units").toString();
+            String result = mix.EPDUnits.get(completed_Key);
+            unit_Results.add(result);
+        }
+        return unit_Results;
+    }
+
     private String getKey2(String envImpactType){
         String s2=null;
         if (envImpactType.equals("EPD")){s2 = "EPD";}
@@ -478,6 +557,15 @@ public class EnvironmentalTableController {
         private Double NonRenewableMaterialResource;
         private String Product_ID;
         private Double TotalEnergyConsumptionEmission;
+        private String GWP_Units;
+        private String ODP_Units;
+        private String AP_Units;
+        private String EP_Units;
+        private String POCP_Units;
+        private String TotalPrimaryEnergyConsumption_Units;
+        private String TotalWaterConsumption_Units;
+        private String RenewableMaterialResourcesUse_Units;
+        private String NonRenewableMaterialResource_Unit;
 
         public Double getGWP() {
             return GWP;
@@ -629,6 +717,78 @@ public class EnvironmentalTableController {
 
         public void setLayer_ID(String layer_ID) {
             Layer_ID = layer_ID;
+        }
+
+        public String getGWP_Units() {
+            return GWP_Units;
+        }
+
+        public void setGWP_Units(String GWP_Units) {
+            this.GWP_Units = GWP_Units;
+        }
+
+        public String getODP_Units() {
+            return ODP_Units;
+        }
+
+        public void setODP_Units(String ODP_Units) {
+            this.ODP_Units = ODP_Units;
+        }
+
+        public String getAP_Units() {
+            return AP_Units;
+        }
+
+        public void setAP_Units(String AP_Units) {
+            this.AP_Units = AP_Units;
+        }
+
+        public String getEP_Units() {
+            return EP_Units;
+        }
+
+        public void setEP_Units(String EP_Units) {
+            this.EP_Units = EP_Units;
+        }
+
+        public String getPOCP_Units() {
+            return POCP_Units;
+        }
+
+        public void setPOCP_Units(String POCP_Units) {
+            this.POCP_Units = POCP_Units;
+        }
+
+        public String getTotalPrimaryEnergyConsumption_Units() {
+            return TotalPrimaryEnergyConsumption_Units;
+        }
+
+        public void setTotalPrimaryEnergyConsumption_Units(String totalPrimaryEnergyConsumption_Units) {
+            TotalPrimaryEnergyConsumption_Units = totalPrimaryEnergyConsumption_Units;
+        }
+
+        public String getTotalWaterConsumption_Units() {
+            return TotalWaterConsumption_Units;
+        }
+
+        public void setTotalWaterConsumption_Units(String totalWaterConsumption_Units) {
+            TotalWaterConsumption_Units = totalWaterConsumption_Units;
+        }
+
+        public String getRenewableMaterialResourcesUse_Units() {
+            return RenewableMaterialResourcesUse_Units;
+        }
+
+        public void setRenewableMaterialResourcesUse_Units(String renewableMaterialResourcesUse_Units) {
+            RenewableMaterialResourcesUse_Units = renewableMaterialResourcesUse_Units;
+        }
+
+        public String getNonRenewableMaterialResource_Unit() {
+            return NonRenewableMaterialResource_Unit;
+        }
+
+        public void setNonRenewableMaterialResource_Unit(String nonRenewableMaterialResource_Unit) {
+            NonRenewableMaterialResource_Unit = nonRenewableMaterialResource_Unit;
         }
     }
 }
