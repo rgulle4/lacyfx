@@ -1,7 +1,5 @@
 package cm.models;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -52,6 +50,16 @@ public final class Mix {
     public String Aggregate1;
     public String Aggregate2;
     public String Region;
+    //unit
+    public String GWP_Units;
+    public String ODP_Units;
+    public String AP_Units;
+    public String EP_Units;
+    public String POCP_Units;
+    public String TotalPrimaryEnergyConsumption_Units;
+    public String TotalWaterConsumption_Units;
+    public String RenewableMaterialResourcesUse_Units;
+    public String NonRenewableMaterialResource_Units;
     //Scores
     private Double EnvPerfAnalysis_TotalScore_Material;
     private Double EnvPerfAnalysis_EPDScore_Material;
@@ -316,6 +324,78 @@ public final class Mix {
             Number number = format.parse(nonRenewableMaterialResource);
             NonRenewableMaterialResource = number.doubleValue();
         }
+    }
+
+    public String getGWP_Units() {
+        return GWP_Units;
+    }
+
+    public void setGWP_Units(String GWP_Units) {
+        this.GWP_Units = GWP_Units;
+    }
+
+    public String getODP_Units() {
+        return ODP_Units;
+    }
+
+    public void setODP_Units(String ODP_Units) {
+        this.ODP_Units = ODP_Units;
+    }
+
+    public String getAP_Units() {
+        return AP_Units;
+    }
+
+    public void setAP_Units(String AP_Units) {
+        this.AP_Units = AP_Units;
+    }
+
+    public String getEP_Units() {
+        return EP_Units;
+    }
+
+    public void setEP_Units(String EP_Units) {
+        this.EP_Units = EP_Units;
+    }
+
+    public String getPOCP_Units() {
+        return POCP_Units;
+    }
+
+    public void setPOCP_Units(String POCP_Units) {
+        this.POCP_Units = POCP_Units;
+    }
+
+    public String getTotalPrimaryEnergyConsumption_Units() {
+        return TotalPrimaryEnergyConsumption_Units;
+    }
+
+    public void setTotalPrimaryEnergyConsumption_Units(String totalPrimaryEnergyConsumption_Units) {
+        TotalPrimaryEnergyConsumption_Units = totalPrimaryEnergyConsumption_Units;
+    }
+
+    public String getTotalWaterConsumption_Units() {
+        return TotalWaterConsumption_Units;
+    }
+
+    public void setTotalWaterConsumption_Units(String totalWaterConsumption_Units) {
+        TotalWaterConsumption_Units = totalWaterConsumption_Units;
+    }
+
+    public String getRenewableMaterialResourcesUse_Units() {
+        return RenewableMaterialResourcesUse_Units;
+    }
+
+    public void setRenewableMaterialResourcesUse_Units(String renewableMaterialResourcesUse_Units) {
+        RenewableMaterialResourcesUse_Units = renewableMaterialResourcesUse_Units;
+    }
+
+    public String getNonRenewableMaterialResource_Units() {
+        return NonRenewableMaterialResource_Units;
+    }
+
+    public void setNonRenewableMaterialResource_Units(String nonRenewableMaterialResource_Units) {
+        NonRenewableMaterialResource_Units = nonRenewableMaterialResource_Units;
     }
 
     public Double getPrice() {

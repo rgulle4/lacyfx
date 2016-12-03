@@ -122,6 +122,16 @@ public final class EPDDatabase {
             g.setNonRenewableEnergyUse(rs.getString("NON_RENEWABLE_ENERGY_CONSUMPTION"));
             g.setRenewableMaterialResourcesUse(rs.getDouble("RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
             g.setNonRenewableMaterialResource(rs.getString("NON_RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
+            //set unit
+            g.setGWP_Units(rs.getString("GWP_UNITS"));
+            g.setODP_Units(rs.getString("ODP_UNITS"));
+            g.setAP_Units(rs.getString("AP_UNITS"));
+            g.setEP_Units(rs.getString("EP_UNITS"));
+            g.setPOCP_Units(rs.getString("POCP_UNITS"));
+            g.setTotalPrimaryEnergyConsumption_Units(rs.getString("TOTAL_PRIMARY_ENERGY_CONSUMPTION_UNITS"));
+            g.setTotalWaterConsumption_Units(rs.getString("TOTAL_WATER_CONSUMPTION_UNITS"));
+            g.setNonRenewableMaterialResource_Units(rs.getString("RENEWABLE_MIX_RESOURCES_CONSUMPTION_UNITS"));
+            g.setRenewableMaterialResourcesUse_Units(rs.getString("NON_RENEWABLE_MIX_RESOURCES_CONSUMPTION_UNITS"));
             //get distance from filterzips map
             String zip = g.getZipCode();
             Double distance = filteredZipcodeMap.get(zip);//return distance in meter
