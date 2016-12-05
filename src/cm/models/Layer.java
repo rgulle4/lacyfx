@@ -52,6 +52,9 @@ public final class Layer {
         return mixes;
     }
 
+    public void setMixes(List<Mix> mixes){
+        this.mixes = mixes;
+    }
     public Layer addMaterial(Mix mix) {
         this.mixes.add(mix);
         return this;

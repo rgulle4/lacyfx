@@ -5,10 +5,12 @@ import cm.models.Layer;
 import cm.models.Mix;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
+import javafx.stage.Stage;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -69,6 +71,8 @@ public class LoadMixController_newVersion {
     public ComboBox ComboBox_Aggregate2;
     @FXML
     public Label Label_MixSize;
+    @FXML
+    public Button closeButton;
 
     ObservableList<String> AirEntrainedList = FXCollections.observableArrayList("Yes","No","NA");
     ObservableList<String> RegionList = FXCollections.observableArrayList(
@@ -159,5 +163,14 @@ public class LoadMixController_newVersion {
             data.add(m);
         }
         MaterialTable.setItems(data);
+    }
+
+    public void saveButton(){
+        currentLayer.setMixes(MaterialTable.getItems());
+    }
+    @FXML
+    public void handleCloseButtonAction(ActionEvent event) {
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
     }
 }

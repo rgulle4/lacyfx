@@ -245,8 +245,8 @@ public final class EnvPerformanceCalc {
                         / TSP_ctb = 2*Substance*distance
                         */
                     //get distance
-//                    distance = TRANSPORTATION_PARAMETERS.getDistance();
-                    distance = mix_temp.getDistance();
+                    distance = TRANSPORTATION_PARAMETERS.getDistance();
+//                    distance = mix_temp.getDistance();
                     //calculate TSP_ctb and save it
                     GWP_TSP_Ctb = GWP_TSP * distance * 2;
                     ODP_TSP_Ctb = ODP_TSP * distance * 2;
