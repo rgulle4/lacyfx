@@ -182,13 +182,26 @@ public class EnvironmentalTableController {
                 pmix.setAP(result.get(2));
                 pmix.setEP(result.get(3));
                 pmix.setPOCP(result.get(4));
+                pmix.setTotalPrimaryEnergyConsumption(result.get(5));
                 if (valueType == "Raw impact per functional unit"){
-                    pmix.setGWP_Units(result_Units.get(0));
-                    pmix.setODP_Units(result_Units.get(1));
-                    pmix.setAP_Units(result_Units.get(2));
-                    pmix.setEP_Units(result_Units.get(3));
-                    pmix.setPOCP_Units(result_Units.get(4));
-                    pmix.setTotalPrimaryEnergyConsumption_Units(result_Units.get(5));
+                    String gwp_units = result_Units.get(0);
+                    if (gwp_units.equals("kg CO2 eq/m3")) pmix.setGWP_Units("Kg CO2 eq");
+                    else System.out.println(gwp_units +" was not found");
+                    String odp_units = result_Units.get(1);
+                    if (odp_units.equals("kg CFC-11 eq/m3")) pmix.setODP_Units("Kg CFC -11 eq");
+                    else System.out.println(odp_units+" was not found");
+                    String ap_units = result_Units.get(2);
+                    if (ap_units.equals("kg SO2 eq/m3")) pmix.setAP_Units("Kg SO2 eq");
+                    else System.out.println(ap_units+" was not found");
+                    String ep_units = result_Units.get(3);
+                    if (ep_units.equals("kg N eq/m3")) pmix.setEP_Units("Kg N eq");
+                    else System.out.println(ep_units+" was not found");
+                    String pocp_units = result_Units.get(4);
+                    if (pocp_units.equals("kg O3 eq/m3")) pmix.setPOCP_Units("Kg O3 eq");
+                    else System.out.println(pocp_units+" was not found");
+                    String tpec_units = result_Units.get(5);
+                    if (tpec_units.equals("MJ/m3")) pmix.setTotalPrimaryEnergyConsumption_Units("MJ");
+                    else System.out.println(tpec_units+" was not found");
                 }
             }
             data.add(pmix);
@@ -406,8 +419,8 @@ public class EnvironmentalTableController {
             impactList.add("TPEC");
         if (impactCategory == "All Resource Consumption Impact") {
             impactList.add("TWC");
-            impactList.add("RMRU");
-            impactList.add("NRMR");
+//            impactList.add("RMRU");
+//            impactList.add("NRMR");
         }
         for (String s1:impactList){
             String completed_Key = new StringBuilder().
