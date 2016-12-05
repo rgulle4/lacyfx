@@ -2,6 +2,7 @@ package cm.controllers;
 
 import cm.App;
 import cm.models.EnvPerformanceCalc;
+import cm.models.EnvPerformanceCalc_newVersion;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 import static cm.models.Model.*;
 
@@ -47,7 +49,7 @@ public final class TranspEconTabController {
 
     }
 
-    public void computeButton(){
+    public void computeButton() throws ParseException {
         //update textField_distance
         double dst = Double.parseDouble(textField_distance.getText());       //convert miles to kilometers bc the unit of sun-content is kg/mile
         TRANSPORTATION_PARAMETERS.setDistance(dst);
@@ -125,7 +127,7 @@ public final class TranspEconTabController {
 
         }
         //Calculate
-        EnvPerformanceCalc envPerformanceCalc = new EnvPerformanceCalc();
+        EnvPerformanceCalc_newVersion envPerformanceCalc = new EnvPerformanceCalc_newVersion();
         envPerformanceCalc.EnvAnalysisCalc();
    }
 
