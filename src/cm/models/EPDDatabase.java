@@ -194,6 +194,16 @@ public final class EPDDatabase {
             g.setSlag(rs.getString("Slag_percent"));
             g.setAggregate1(rs.getString("Aggregate1"));
             g.setAggregate2(rs.getString("Aggregate2"));
+            //set unit
+            g.setGWP_Units(rs.getString("GWP_UNITS"));
+            g.setODP_Units(rs.getString("ODP_UNITS"));
+            g.setAP_Units(rs.getString("AP_UNITS"));
+            g.setEP_Units(rs.getString("EP_UNITS"));
+            g.setPOCP_Units(rs.getString("POCP_UNITS"));
+            g.setTotalPrimaryEnergyConsumption_Units(rs.getString("TOTAL_PRIMARY_ENERGY_CONSUMPTION_UNITS"));
+            g.setTotalWaterConsumption_Units(rs.getString("TOTAL_WATER_CONSUMPTION_UNITS"));
+            g.setNonRenewableMaterialResource_Units(rs.getString("RENEWABLE_MIX_RESOURCES_CONSUMPTION_UNITS"));
+            g.setRenewableMaterialResourcesUse_Units(rs.getString("NON_RENEWABLE_MIX_RESOURCES_CONSUMPTION_UNITS"));
 
             result.add(g);
         }

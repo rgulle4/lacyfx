@@ -323,6 +323,16 @@ public final class EnvPerformanceCalc_newVersion {
                 /**
                  * new code to solve if clause problem
                  */
+                //EPD unit
+                mix_temp.EPDUnits.put("GWP_Units",mix_temp.getGWP_Units());
+                mix_temp.EPDUnits.put("ODP_Units",mix_temp.getODP_Units());
+                mix_temp.EPDUnits.put("AP_Units",mix_temp.getAP_Units());
+                mix_temp.EPDUnits.put("EP_Units",mix_temp.getEP_Units());
+                mix_temp.EPDUnits.put("POCP_Units",mix_temp.getPOCP_Units());
+                mix_temp.EPDUnits.put("TPEC_Units",mix_temp.getTotalPrimaryEnergyConsumption_Units());
+                mix_temp.EPDUnits.put("TWC_Units",mix_temp.getTotalWaterConsumption_Units());
+                mix_temp.EPDUnits.put("RMRU_Units",mix_temp.getRenewableMaterialResourcesUse_Units());
+                mix_temp.EPDUnits.put("NRMR_Units",mix_temp.getNonRenewableMaterialResource_Units());
                 //Raw impact per functional unit
                 mix_temp.CalcResult.put("GWP_EPD_Ctb", GWP_EPD_Ctb);
                 mix_temp.CalcResult.put("ODP_EPD_Ctb", ODP_EPD_Ctb);
@@ -419,6 +429,14 @@ public final class EnvPerformanceCalc_newVersion {
              * To do: use Depletion of Non-renewable energy consumption instead of TPEC
              */
             sum_DNEC += mixList.get(i).getTotalPrimaryEnergyConsumption();
+            //set up units
+            averagedMix.setGWP_Units(mixList.get(i).getGWP_Units());
+            averagedMix.setODP_Units(mixList.get(i).getODP_Units());
+            averagedMix.setAP_Units(mixList.get(i).getAP_Units());
+            averagedMix.setEP_Units(mixList.get(i).getEP_Units());
+            averagedMix.setPOCP_Units(mixList.get(i).getPOCP_Units());
+            averagedMix.setTotalPrimaryEnergyConsumption_Units
+            (mixList.get(i).getTotalPrimaryEnergyConsumption_Units());
         }
         averagedMix.setGWP(sum_GWP/size);
         averagedMix.setODP(sum_ODP/size);

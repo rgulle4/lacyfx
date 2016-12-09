@@ -36,8 +36,6 @@ public class EnvironmentalTableController {
     @FXML
     private ComboBox layer_ComboBox;
     @FXML
-    private ComboBox mix_ComboBox;
-    @FXML
     private ComboBox impactCategory_ComboBox;
     @FXML
     private TableView<propertyMix> resourceConsumptionTable;
@@ -102,30 +100,23 @@ public class EnvironmentalTableController {
         Design designTemp = DESIGNS.get(designID);
         int layerIndex = layer_ComboBox.getSelectionModel().getSelectedIndex();
         Layer layerTemp = designTemp.getLayer(layerIndex);
-        int mixIndex = mix_ComboBox.getSelectionModel().getSelectedIndex();
         //Get the whole selected Mix lists
-        List<Mix> mixsTemp = new ArrayList<Mix>();
-        String selectedMixItem = mix_ComboBox.getValue().toString();
-        if(selectedMixItem == "All Mixes"){
-            mixsTemp = layerTemp.getMixes();
-        }else{
-            Mix selectedMix = layerTemp.getMaterial(mixIndex);
-            mixsTemp.add(selectedMix);
-        }
+        Mix mixTemp = layerTemp.getMix();
+
         perfType = performanceType_ComboBox.getSelectionModel().getSelectedItem().toString();
         envImpactType = environmentalImpact_ComboBox.getSelectionModel().getSelectedItem().toString();
         valueType = rawValue_ComboBox.getSelectionModel().getSelectedItem().toString();
         impactCategory = impactCategory_ComboBox.getSelectionModel().getSelectedItem().toString();
-        showData(mixsTemp,designID,layerID);
+        showData(mixTemp,designID,layerID);
     }
-    public void showData(List<Mix> mixes, String design_ID, String layer_ID){
+    public void showData(Mix aMix, String design_ID, String layer_ID){
         if(impactCategory != "All Resource Consumption Impact"){
-            showEnergyConsumptionData(mixes,design_ID,layer_ID);
+            showEnergyConsumptionData(aMix,design_ID,layer_ID);
         }else {
-            showResourceConsumptionData(mixes,design_ID,layer_ID);
+            showResourceConsumptionData(aMix,design_ID,layer_ID);
         }
     }
-    public void showEnergyConsumptionData(List<Mix> mixes, String design_ID, String layer_ID){
+    public void showEnergyConsumptionData(Mix amix, String design_ID, String layer_ID){
         energyConsumptionTable.getColumns().clear();
         energyConsumptionTable.layout();
         energyConsumptionTable.setVisible(true);
@@ -137,99 +128,96 @@ public class EnvironmentalTableController {
         resourceConsumptionNoteLabel.setVisible(false);
         //Obtain data from mixes
         ObservableList<propertyMix> data = FXCollections.observableArrayList();
-        for(Mix amix:mixes){
-            propertyMix pmix = new propertyMix();
-            pmix.setDesign_ID(design_ID);
-            pmix.setLayer_ID(layer_ID);
-            pmix.setProduct_ID(amix.getProduct_ID()+amix.getZipCode());
-            List<Double> result = getEnergyConsumptionResults(amix);
-            List<String> result_Units = getEPDUnits(amix);
-            int count =0;
-            if(impactCategory == "GWP") {
-                pmix.setGWP(result.get(count));
-                if (valueType == "Raw impact per functional unit") {
-                    String gwp_units = result_Units.get(0);
-                    if (gwp_units.equals("kg CO2 eq/m3")) pmix.setGWP_Units("Kg CO2 eq");
-                    else System.out.println(gwp_units +" was not found");
-                }count++;
-            }
-            if(impactCategory == "ODP") {
-                pmix.setODP(result.get(count));
-                if (valueType == "Raw impact per functional unit") {
-                    String odp_units = result_Units.get(0);
-                    if (odp_units.equals("kg CFC-11 eq/m3")) pmix.setODP_Units("Kg CFC -11 eq");
-                    else System.out.println(odp_units+" was not found");
-                }count++;
-            }
-            if(impactCategory == "AP") {
-                pmix.setAP(result.get(count));
-                if (valueType == "Raw impact per functional unit") {
-                    String ap_units = result_Units.get(0);
-                    if (ap_units.equals("kg SO2 eq/m3")) pmix.setAP_Units("Kg SO2 eq");
-                    else System.out.println(ap_units+" was not found");
-                }count++;
-            }
-            if(impactCategory == "EP") {
-                pmix.setEP(result.get(count));
-                if (valueType == "Raw impact per functional unit") {
-                    String ep_units = result_Units.get(0);
-                    if (ep_units.equals("kg N eq/m3")) pmix.setEP_Units("Kg N eq");
-                    else System.out.println(ep_units+" was not found");
-                }count++;
-            }
-            if(impactCategory == "POCP") {
-                pmix.setPOCP(result.get(count));
-                if (valueType == "Raw impact per functional unit") {
-                    String pocp_units = result_Units.get(0);
-                    if (pocp_units.equals("kg O3 eq/m3")) pmix.setPOCP_Units("Kg O3 eq");
-                    else System.out.println(pocp_units+" was not found");
-                }count++;
-            }
-            if(impactCategory == "PrimaryEnergyConsumption") {
-                pmix.setTotalPrimaryEnergyConsumption(result.get(count));
-                if (valueType == "Raw impact per functional unit") {
-                    String tpec_units = result_Units.get(0);
-                    if (tpec_units.equals("MJ/m3")) pmix.setTotalPrimaryEnergyConsumption_Units("MJ");
-                    else System.out.println(tpec_units+" was not found");
-                }count=0;
-            }
-            if(impactCategory == "Impact Analysis Comparison of All Alternatives"){}
-            if(impactCategory == "All Energy Consumption Impact"){
-                pmix.setGWP(result.get(0));
-                pmix.setODP(result.get(1));
-                pmix.setAP(result.get(2));
-                pmix.setEP(result.get(3));
-                pmix.setPOCP(result.get(4));
-                pmix.setTotalPrimaryEnergyConsumption(result.get(5));
-                if (valueType == "Raw impact per functional unit"){
-                    String gwp_units = result_Units.get(0);
-                    if (gwp_units.equals("kg CO2 eq/m3")) pmix.setGWP_Units("Kg CO2 eq");
-                    else System.out.println(gwp_units +" was not found");
-                    String odp_units = result_Units.get(1);
-                    if (odp_units.equals("kg CFC-11 eq/m3")) pmix.setODP_Units("Kg CFC -11 eq");
-                    else System.out.println(odp_units+" was not found");
-                    String ap_units = result_Units.get(2);
-                    if (ap_units.equals("kg SO2 eq/m3")) pmix.setAP_Units("Kg SO2 eq");
-                    else System.out.println(ap_units+" was not found");
-                    String ep_units = result_Units.get(3);
-                    if (ep_units.equals("kg N eq/m3")) pmix.setEP_Units("Kg N eq");
-                    else System.out.println(ep_units+" was not found");
-                    String pocp_units = result_Units.get(4);
-                    if (pocp_units.equals("kg O3 eq/m3")) pmix.setPOCP_Units("Kg O3 eq");
-                    else System.out.println(pocp_units+" was not found");
-                    String tpec_units = result_Units.get(5);
-                    if (tpec_units.equals("MJ/m3")) pmix.setTotalPrimaryEnergyConsumption_Units("MJ");
-                    else System.out.println(tpec_units+" was not found");
-                }
-            }
-            data.add(pmix);
+
+        propertyMix pmix = new propertyMix();
+        pmix.setDesign_ID(design_ID);
+        pmix.setLayer_ID(layer_ID);
+        pmix.setProduct_ID(amix.getProduct_ID()+amix.getZipCode());
+        List<Double> result = getEnergyConsumptionResults(amix);
+        List<String> result_Units = getEPDUnits(amix);
+        int count =0;
+        if(impactCategory == "GWP") {
+            pmix.setGWP(result.get(count));
+            if (valueType == "Raw impact per functional unit") {
+                String gwp_units = result_Units.get(0);
+                if (gwp_units.equals("kg CO2 eq/m3")) pmix.setGWP_Units("Kg CO2 eq");
+                else System.out.println(gwp_units +" was not found");
+            }count++;
         }
+        if(impactCategory == "ODP") {
+            pmix.setODP(result.get(count));
+            if (valueType == "Raw impact per functional unit") {
+                String odp_units = result_Units.get(0);
+                if (odp_units.equals("kg CFC-11 eq/m3")) pmix.setODP_Units("Kg CFC -11 eq");
+                else System.out.println(odp_units+" was not found");
+            }count++;
+        }
+        if(impactCategory == "AP") {
+            pmix.setAP(result.get(count));
+            if (valueType == "Raw impact per functional unit") {
+                String ap_units = result_Units.get(0);
+                if (ap_units.equals("kg SO2 eq/m3")) pmix.setAP_Units("Kg SO2 eq");
+                else System.out.println(ap_units+" was not found");
+            }count++;
+        }
+        if(impactCategory == "EP") {
+            pmix.setEP(result.get(count));
+            if (valueType == "Raw impact per functional unit") {
+                String ep_units = result_Units.get(0);
+                if (ep_units.equals("kg N eq/m3")) pmix.setEP_Units("Kg N eq");
+                else System.out.println(ep_units+" was not found");
+            }count++;
+        }
+        if(impactCategory == "POCP") {
+            pmix.setPOCP(result.get(count));
+            if (valueType == "Raw impact per functional unit") {
+                String pocp_units = result_Units.get(0);
+                if (pocp_units.equals("kg O3 eq/m3")) pmix.setPOCP_Units("Kg O3 eq");
+                else System.out.println(pocp_units+" was not found");
+            }count++;
+        }
+        if(impactCategory == "PrimaryEnergyConsumption") {
+            pmix.setTotalPrimaryEnergyConsumption(result.get(count));
+            if (valueType == "Raw impact per functional unit") {
+                String tpec_units = result_Units.get(0);
+                if (tpec_units.equals("MJ/m3")) pmix.setTotalPrimaryEnergyConsumption_Units("MJ");
+                else System.out.println(tpec_units+" was not found");
+            }count=0;
+        }
+        if(impactCategory == "Impact Analysis Comparison of All Alternatives"){}
+        if(impactCategory == "All Energy Consumption Impact"){
+            pmix.setGWP(result.get(0));
+            pmix.setODP(result.get(1));
+            pmix.setAP(result.get(2));
+            pmix.setEP(result.get(3));
+            pmix.setPOCP(result.get(4));
+            pmix.setTotalPrimaryEnergyConsumption(result.get(5));
+            if (valueType == "Raw impact per functional unit"){
+                String gwp_units = result_Units.get(0);
+                if (gwp_units.equals("kg CO2 eq/m3")) pmix.setGWP_Units("Kg CO2 eq");
+                else System.out.println(gwp_units +" was not found");
+                String odp_units = result_Units.get(1);
+                if (odp_units.equals("kg CFC-11 eq/m3")) pmix.setODP_Units("Kg CFC -11 eq");
+                else System.out.println(odp_units+" was not found");
+                String ap_units = result_Units.get(2);
+                if (ap_units.equals("kg SO2 eq/m3")) pmix.setAP_Units("Kg SO2 eq");
+                else System.out.println(ap_units+" was not found");
+                String ep_units = result_Units.get(3);
+                if (ep_units.equals("kg N eq/m3")) pmix.setEP_Units("Kg N eq");
+                else System.out.println(ep_units+" was not found");
+                String pocp_units = result_Units.get(4);
+                if (pocp_units.equals("kg O3 eq/m3")) pmix.setPOCP_Units("Kg O3 eq");
+                else System.out.println(pocp_units+" was not found");
+                String tpec_units = result_Units.get(5);
+                if (tpec_units.equals("MJ/m3")) pmix.setTotalPrimaryEnergyConsumption_Units("MJ");
+                else System.out.println(tpec_units+" was not found");
+            }
+        }
+        data.add(pmix);
         TableColumn<propertyMix,String> designColumn = new TableColumn("Design_ID");
         designColumn.setPrefWidth(75.0);
         TableColumn<propertyMix,String> layerColumn = new TableColumn("Layer_ID");
         layerColumn.setPrefWidth(75.0);
-        TableColumn<propertyMix,String> productIDColumn = new TableColumn("Product_ID");
-        productIDColumn.setPrefWidth(125.0);
         TableColumn<propertyMix,Double> gwpColumn = new TableColumn("GWP");
         gwpColumn.setPrefWidth(75.0);
         TableColumn<propertyMix,String> gwpUnitsColumn = new TableColumn("GWP_Unit");
@@ -260,8 +248,6 @@ public class EnvironmentalTableController {
             designColumn.setCellValueFactory(new PropertyValueFactory<>("Design_ID"));
             energyConsumptionTable.getColumns().add(layerColumn);
             layerColumn.setCellValueFactory(new PropertyValueFactory<>("Layer_ID"));
-            energyConsumptionTable.getColumns().add(productIDColumn);
-            productIDColumn.setCellValueFactory(new PropertyValueFactory<>("Product_ID"));
             energyConsumptionTable.getColumns().add(gwpColumn);
             gwpColumn.setCellValueFactory(new PropertyValueFactory<>("GWP"));
             if (valueType == "Raw impact per functional unit") energyConsumptionTable.getColumns().add(gwpUnitsColumn);
@@ -293,8 +279,6 @@ public class EnvironmentalTableController {
             designColumn.setCellValueFactory(new PropertyValueFactory<>("Design_ID"));
             energyConsumptionTable.getColumns().add(layerColumn);
             layerColumn.setCellValueFactory(new PropertyValueFactory<>("Layer_ID"));
-            energyConsumptionTable.getColumns().add(productIDColumn);
-            productIDColumn.setCellValueFactory(new PropertyValueFactory<>("Product_ID"));
             if(impactCategory == "GWP"){
                 energyConsumptionTable.getColumns().add(gwpColumn);
                 gwpColumn.setCellValueFactory(new PropertyValueFactory<>("GWP"));
@@ -337,7 +321,7 @@ public class EnvironmentalTableController {
         energyConsumptionTable.setItems(data);
     }
 
-    public void showResourceConsumptionData(List<Mix> mixes, String design_ID, String layer_ID){
+    public void showResourceConsumptionData(Mix amix, String design_ID, String layer_ID){
         resourceConsumptionTable.getColumns().clear();
         resourceConsumptionTable.layout();
         resourceConsumptionTable.setVisible(true);
@@ -348,43 +332,39 @@ public class EnvironmentalTableController {
         energyConsumptionLabel.setVisible(false);
         resourceConsumptionNoteLabel.setVisible(false);
         ObservableList<propertyMix> data = FXCollections.observableArrayList();
-        for (Mix amix:mixes){
-            propertyMix pmix = new propertyMix();
-            pmix.setDesign_ID(design_ID);
-            pmix.setLayer_ID(layer_ID);
-            pmix.setProduct_ID(amix.getProduct_ID()+amix.getZipCode());
-            List<String> result_Units = getEPDUnits(amix);
-            //set up Raw impact per functional unit for resource data
-            pmix.setTotalWaterConsumption(amix.getTotalWaterConsumption());
-            // show special flag
-            if(amix.getRenewableMaterialResourcesUse() == 0.0
-                || amix.getNonRenewableMaterialResource() == 0.0){
-                resourceConsumptionNoteLabel.setVisible(true);
-            }
-            pmix.setRenewableMaterialResourcesUse(amix.getRenewableMaterialResourcesUse());
-            pmix.setNonRenewableMaterialResource(amix.getNonRenewableMaterialResource());
-            if (valueType == "Raw impact per functional unit"){
-                if (valueType == "Raw impact per functional unit"){
-                    String twc_units = result_Units.get(0);
-                    String renewable_mix_source_units = result_Units.get(1);
-                    String non_renewable_mix_source_units = result_Units.get(2);
-                    if(twc_units.equals("m3/m3")) pmix.setTotalWaterConsumption_Units("m3");
-                    else System.out.println(twc_units+ " was not found");
-                    if(renewable_mix_source_units.equals("Kg/m3")) pmix.setRenewableMaterialResourcesUse_Units("kg");
-                    else System.out.println(renewable_mix_source_units+ " was not found");
-                    if (non_renewable_mix_source_units.equals("Kg/m3")) pmix.setNonRenewableMaterialResource_Unit("kg");
-                    else System.out.println(non_renewable_mix_source_units+ " was not found");
-                }
-            }
-            data.add(pmix);
+        propertyMix pmix = new propertyMix();
+        pmix.setDesign_ID(design_ID);
+        pmix.setLayer_ID(layer_ID);
+        pmix.setProduct_ID(amix.getProduct_ID()+amix.getZipCode());
+        List<String> result_Units = getEPDUnits(amix);
+        //set up Raw impact per functional unit for resource data
+        pmix.setTotalWaterConsumption(amix.getTotalWaterConsumption());
+        // show special flag
+        if(amix.getRenewableMaterialResourcesUse() == 0.0
+            || amix.getNonRenewableMaterialResource() == 0.0){
+            resourceConsumptionNoteLabel.setVisible(true);
         }
+        pmix.setRenewableMaterialResourcesUse(amix.getRenewableMaterialResourcesUse());
+        pmix.setNonRenewableMaterialResource(amix.getNonRenewableMaterialResource());
+        if (valueType == "Raw impact per functional unit"){
+            if (valueType == "Raw impact per functional unit"){
+                String twc_units = result_Units.get(0);
+                String renewable_mix_source_units = result_Units.get(1);
+                String non_renewable_mix_source_units = result_Units.get(2);
+                if(twc_units.equals("m3/m3")) pmix.setTotalWaterConsumption_Units("m3");
+                else System.out.println(twc_units+ " was not found");
+                if(renewable_mix_source_units.equals("Kg/m3")) pmix.setRenewableMaterialResourcesUse_Units("kg");
+                else System.out.println(renewable_mix_source_units+ " was not found");
+                if (non_renewable_mix_source_units.equals("Kg/m3")) pmix.setNonRenewableMaterialResource_Unit("kg");
+                else System.out.println(non_renewable_mix_source_units+ " was not found");
+            }
+        }
+        data.add(pmix);
 
         TableColumn<propertyMix,String> designColumn = new TableColumn("Design_ID");
         designColumn.setPrefWidth(75.0);
         TableColumn<propertyMix,String> layerColumn = new TableColumn("Layer_ID");
         layerColumn.setPrefWidth(75.0);
-        TableColumn<propertyMix,String> productIDColumn = new TableColumn("Product_ID");
-        productIDColumn.setPrefWidth(125.0);
         TableColumn<propertyMix,Double> totWaterColumn = new TableColumn("TotalWater");
         totWaterColumn.setPrefWidth(100.0);
         TableColumn<propertyMix,String> totWaterUnitsColumn = new TableColumn("TotalWater_Unit");
@@ -401,7 +381,6 @@ public class EnvironmentalTableController {
 
         designColumn.setCellValueFactory(new PropertyValueFactory<>("Design_ID"));
         layerColumn.setCellValueFactory(new PropertyValueFactory<>("Layer_ID"));
-        productIDColumn.setCellValueFactory(new PropertyValueFactory<>("Product_ID"));
         totWaterColumn.setCellValueFactory(new PropertyValueFactory<>("TotalWaterConsumption"));
         totWaterUnitsColumn.setCellValueFactory(new PropertyValueFactory<>("TotalWaterConsumption_Units"));
         renewableMaterialResourceColumn.setCellValueFactory(new PropertyValueFactory<>("RenewableMaterialResourcesUse"));
@@ -409,7 +388,7 @@ public class EnvironmentalTableController {
         nonrenewableMaterialResourceColumn.setCellValueFactory(new PropertyValueFactory<>("NonRenewableMaterialResource"));
         nonrenewableMaterialResourceUnitsColumn.setCellValueFactory(new PropertyValueFactory<>("NonRenewableMaterialResource_Unit"));
         resourceConsumptionTable.getColumns().addAll(
-                designColumn,layerColumn,productIDColumn,totWaterColumn,totWaterUnitsColumn,
+                designColumn,layerColumn,totWaterColumn,totWaterUnitsColumn,
                 renewableMaterialResourceColumn,renewableMaterialResourceUnitsColumn,
                 nonrenewableMaterialResourceColumn,nonrenewableMaterialResourceUnitsColumn);
         resourceConsumptionTable.setItems(data);
@@ -440,7 +419,7 @@ public class EnvironmentalTableController {
                     append(s3).toString();      //format should be like GWP_EPD_Ctb
             Double result = mix.CalcResult.get(completed_Key);
             //Double decimal formatting
-            NumberFormat numberFormat = new DecimalFormat("#0.00");
+            NumberFormat numberFormat = new DecimalFormat("#0.00E00");
             Double formattedResult = Double.valueOf(numberFormat.format(result));
             results.add(formattedResult);
         }
@@ -518,10 +497,7 @@ public class EnvironmentalTableController {
                         "GWP","ODP","AP","EP", "POCP",
                         "PrimaryEnergyConsumption"
                 );
-        if(valueType == "Weighted impact per functional unit"){
-            impactCategoryName.add(0,"Impact Analysis Comparison of All Alternatives");
-            impactCategory_ComboBox.setItems(impactCategoryName);
-        }else if(valueType == "Raw impact per functional unit"){
+        if(valueType == "Raw impact per functional unit"){
             impactCategoryName.add(0,"All Resource Consumption Impact");
             impactCategory_ComboBox.setItems(impactCategoryName);
         }else{
@@ -563,35 +539,6 @@ public class EnvironmentalTableController {
             System.out.println("Select a certain design first!!");
         }
 
-    }
-
-    public void setupMixNum_ComboBox(){
-        // clean MixNum_ComBox first
-        mixNum.clear();
-        if(!design_ComboBox.getSelectionModel().isEmpty()){
-            String selectedDeisgnKey = design_ComboBox.getValue().toString();
-            if(!layer_ComboBox.getSelectionModel().isEmpty()){
-                int layerOfIndex = layer_ComboBox.getSelectionModel().getSelectedIndex();
-                int mixNumber = DESIGNS.get(selectedDeisgnKey)
-                        .getLayer(layerOfIndex)
-                        .getNumberofMaterials();
-                if(mixNumber > 0){
-                    for (int i = 1; i <= mixNumber;i ++){
-                        StringBuilder sb = new StringBuilder("Mix ");
-                        String mixName = sb.append(i).toString();
-                        mixNum.add(mixName);
-                    }
-                    mixNum.addAll("All Mixes");
-                    mix_ComboBox.setItems(mixNum);
-                }else{
-                    System.out.println("No mix was added!!");
-                }
-            }else{
-                System.out.println("Select a certain layer first!!");
-            }
-        }else{
-            System.out.println("Select a certain design first!!");
-        }
     }
 
     public class propertyMix{

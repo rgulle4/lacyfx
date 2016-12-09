@@ -22,7 +22,6 @@
          <children>
             <ComboBox fx:id="design_ComboBox" prefWidth="150.0" />
             <ComboBox fx:id="layer_ComboBox" onMouseClicked="#setupLayerNumber_ComboBox" prefWidth="150.0" />
-            <ComboBox fx:id="mix_ComboBox" onMouseClicked="#setupMixNum_ComboBox" prefWidth="150.0" />
          </children>
       </HBox>
       <TableView fx:id="energyConsumptionTable" layoutX="249.0" layoutY="240.0" prefHeight="200.0" prefWidth="775.0" />
