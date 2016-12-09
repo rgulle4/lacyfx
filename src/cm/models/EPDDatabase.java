@@ -82,18 +82,6 @@ public final class EPDDatabase {
                 }
             }
 
-//            if (!companyName.isEmpty() && !cs.isEmpty()) {
-//                sql = sb.append(" AND COMPANY_NAME =? AND CS >= ? ").toString();
-//                ptmt = conn.prepareStatement(sql);
-//                ptmt.setString(1, companyName);
-//                ptmt.setString(2, cs);
-//            }else if (!cs.isEmpty()) {
-//                sql = sb.append(" AND COMPRESSIVE_STRENGTH >= ?").toString();
-//                ptmt = conn.prepareStatement(sql);
-//                ptmt.setString(1, cs);
-//            }else {sql = sb.append(" AND COMPANY_NAME =?").toString();
-//                ptmt = conn.prepareStatement(sql);
-//                ptmt.setString(1, companyName);}
         }
         rs = ptmt.executeQuery();
 
@@ -143,9 +131,8 @@ public final class EPDDatabase {
     }
 
     public List<Mix> getResultsFilteredBy_newVersion
-            (Double cs, String region, String airEntrained,
-             String cement, String waterCement, String flyAsh,
-             String slag, String aggregate1, String aggregate2
+            (Double cs, String region,Double cement_Min, Double cement_Max,
+             Double cementetiousMaterial_Min, Double cementetiousMaterial_Max
             )
             throws SQLException, ParseException {
         List<Mix> result = new ArrayList<Mix>();
@@ -153,11 +140,10 @@ public final class EPDDatabase {
         StringBuilder sb = new StringBuilder("SELECT * FROM concrete_epds_regions WHERE 1");
         if (cs != 0.0) sb.append(" AND COMPRESSIVE_STRENGTH >= ").append("'").append(cs).append("'");
         if (!region.isEmpty()) sb.append(" AND Region = ").append("'").append(region).append("'");
-        if(!airEntrained.isEmpty()) sb.append(" AND Air_Entrained = ").append("'").append(airEntrained).append("'");
-        if (!cement.isEmpty()) sb.append(" AND Cement_sack = ").append("'").append(cement).append("'");
-        if (!waterCement.isEmpty()) sb.append(" AND Water_cement_ratio = ").append("'").append(waterCement).append("'");
-        if (!flyAsh.isEmpty()) sb.append(" AND Fly_Ash_percent = ").append("'").append(flyAsh).append("'");
-        if (!slag.isEmpty()) sb.append(" AND Slag_percent = ").append("'").append(slag).append("'");
+        if (cement_Min != 0.0) sb.append(" AND Cement_sack >= ").append("'").append(cement_Min).append("'");
+        if (cement_Max != 0.0) sb.append(" AND Cement_sack <= ").append("'").append(cement_Max).append("'");
+        if (cementetiousMaterial_Min != 0.0) sb.append(" AND Cement_sack >= ").append("'").append(cementetiousMaterial_Min).append("'");
+        if (cementetiousMaterial_Max != 0.0) sb.append(" AND Cement_sack <= ").append("'").append(cementetiousMaterial_Max).append("'");
         s = conn.createStatement();
         String sql = sb.toString();
         rs = s.executeQuery(sql);

@@ -52,23 +52,15 @@ public class LoadMixController_newVersion {
     @FXML
     public TextField textField_CS;
     @FXML
-    public TextField textField_Distance;
+    public TextField textField_Cement_Min;
     @FXML
-    public TextField textField_Cement;
+    public TextField textField_Cement_Max;
     @FXML
-    public TextField textField_WaterCement;
+    public TextField textField_CementetiousMaterial_Min;
     @FXML
-    public TextField textField_FlyAsh;
-    @FXML
-    public TextField textField_Slag;
+    public TextField textField_CementetiousMaterial_Max;
     @FXML
     public ComboBox ComboBox_Region;
-    @FXML
-    public ComboBox ComboBox_AirEntrained;
-    @FXML
-    public ComboBox ComboBox_Aggregate1;
-    @FXML
-    public ComboBox ComboBox_Aggregate2;
     @FXML
     public Label Label_MixSize;
     @FXML
@@ -85,10 +77,6 @@ public class LoadMixController_newVersion {
         System.out.println("------------------------------------");
 
         textField_CS.setText("3000.0");
-        textField_Distance.setText("15.0");
-
-        ComboBox_AirEntrained.setItems(AirEntrainedList);
-        ComboBox_AirEntrained.setValue(AirEntrainedList.get(0));
         ComboBox_Region.setItems(RegionList);
         ComboBox_Region.setValue(RegionList.get(4));
 
@@ -107,51 +95,35 @@ public class LoadMixController_newVersion {
 
     @FXML
     public void searchbutton_newVersion() throws SQLException, ParseException {
-        Double distance = 0.0;
 
         Double CS = 0.0;
         String region = "";
-        String cement = "";
-        String water_cement = "";
-        String fly_ash = "";
-        String slag = "";
-        String air_Entrained = "";
-        String aggregate1 = "";
-        String aggregate2 = "";
-        if(!textField_Distance.getText().isEmpty()){
-            distance = Double.parseDouble(textField_Distance.getText());
-        }
+        Double cement_Min = 0.0;
+        Double cement_Max = Double.POSITIVE_INFINITY;
+        Double cementetiousMaterial_Min = 0.0;
+        Double cementetiousMaterial_Max = Double.POSITIVE_INFINITY;
+
         if(!textField_CS.getText().isEmpty()){
             CS = Double.parseDouble(textField_CS.getText());
         }
-        if(!textField_Cement.getText().isEmpty()){
-            cement = textField_Cement.getText();
+        if(!textField_Cement_Min.getText().isEmpty()){
+            cement_Min = Double.parseDouble(textField_Cement_Min.getText());
         }
-        if(!textField_WaterCement.getText().isEmpty()){
-            water_cement = textField_WaterCement.getText();
+        if(!textField_Cement_Max.getText().isEmpty()){
+            cement_Max = Double.parseDouble(textField_Cement_Max.getText());
         }
-        if(!textField_FlyAsh.getText().isEmpty()){
-            fly_ash = textField_FlyAsh.getText();
+        if(!textField_CementetiousMaterial_Min.getText().isEmpty()){
+            cementetiousMaterial_Min = Double.parseDouble(textField_CementetiousMaterial_Min.getText());
         }
-        if(!textField_Slag.getText().isEmpty()){
-            slag = textField_Slag.getText();
+        if(!textField_CementetiousMaterial_Max.getText().isEmpty()){
+            cementetiousMaterial_Max = Double.parseDouble(textField_CementetiousMaterial_Max.getText());
         }
         if(!ComboBox_Region.getSelectionModel().isEmpty()&&!ComboBox_Region.getSelectionModel().isSelected(4)){
             region = ComboBox_Region.getSelectionModel().getSelectedItem().toString();
         }
-        if(!ComboBox_AirEntrained.getSelectionModel().isEmpty()){
-            if (ComboBox_AirEntrained.getSelectionModel().isSelected(0)) air_Entrained ="Y";
-            else if (ComboBox_AirEntrained.getSelectionModel().isSelected(1)) air_Entrained ="N";
-            else air_Entrained = "";
-        }
-        if(!ComboBox_Aggregate1.getSelectionModel().isEmpty()){
-            aggregate1 = ComboBox_Aggregate1.getSelectionModel().getSelectedItem().toString();
-        }
-        if(!ComboBox_Aggregate2.getSelectionModel().isEmpty()){
-            aggregate2 = ComboBox_Aggregate2.getSelectionModel().getSelectedItem().toString();
-        }
+
         List<Mix> result = new EPDDatabase().getResultsFilteredBy_newVersion
-                (CS,region,air_Entrained,cement,water_cement,fly_ash,slag,aggregate1,aggregate2);
+                (CS,region,cement_Min,cement_Max,cementetiousMaterial_Min,cementetiousMaterial_Max);
         StringBuilder sb_MixSize = new StringBuilder(Integer.toString(result.size())).append(" Mixes");
         Label_MixSize.setText(sb_MixSize.toString());
 

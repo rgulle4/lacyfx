@@ -32,19 +32,17 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Distance:" />
-                        <Label text="Compressive Strength:" GridPane.rowIndex="1" />
-                        <TextField fx:id="textField_CS" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField fx:id="textField_Distance" GridPane.columnIndex="1" />
-                        <Label prefHeight="15.0" prefWidth="169.0" text="Analysis Geographic Region:" GridPane.rowIndex="2" />
-                        <ComboBox fx:id="ComboBox_Region" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Compressive Strength:" />
+                        <TextField fx:id="textField_CS" GridPane.columnIndex="1" />
+                        <Label prefHeight="15.0" prefWidth="169.0" text="Analysis Geographic Region:" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="ComboBox_Region" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                   <Button layoutX="900.0" layoutY="237.0" mnemonicParsing="false" onAction="#searchbutton_newVersion" prefWidth="75.0" text="Search" />
                   <GridPane hgap="10.0" layoutX="559.0" layoutY="28.0">
                      <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="165.0" minWidth="10.0" prefWidth="140.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="150.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.0" minWidth="10.0" prefWidth="191.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" />
                      </columnConstraints>
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -56,20 +54,12 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label text="Cement(sack):" />
-                        <Label text="Water Cement:" GridPane.rowIndex="1" />
-                        <TextField fx:id="textField_Cement" GridPane.columnIndex="1" />
-                        <TextField fx:id="textField_WaterCement" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label text="Fly Ash(%):" GridPane.rowIndex="2" />
-                        <Label text="Slag (%):" GridPane.rowIndex="3" />
-                        <Label text="Air Entrained:" GridPane.rowIndex="4" />
-                        <Label text="Aggregate 1:" GridPane.rowIndex="5" />
-                        <ComboBox fx:id="ComboBox_AirEntrained" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <ComboBox fx:id="ComboBox_Aggregate1" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <TextField fx:id="textField_FlyAsh" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="textField_Slag" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label text="Aggregate 2:" GridPane.rowIndex="6" />
-                        <ComboBox fx:id="ComboBox_Aggregate2" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label text="Cement (kg/m3):" />
+                        <TextField fx:id="textField_Cement_Min" GridPane.columnIndex="1" />
+                        <Label text="Cementetious material (kg/m3):" GridPane.rowIndex="2" />
+                        <TextField fx:id="textField_CementetiousMaterial_Min" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="textField_Cement_Max" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="textField_CementetiousMaterial_Max" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                </children>
@@ -92,8 +82,8 @@
                   </TableView>
                   <HBox layoutX="383.0" layoutY="433.0" prefHeight="30.0" prefWidth="232.0" spacing="30.0">
                      <children>
-                        <Button mnemonicParsing="false" prefWidth="75.0" onAction="#saveButton" text="Save" />
-                        <Button fx:id="closeButton" cancelButton="true" mnemonicParsing="false" prefWidth="75.0" onAction="#handleCloseButtonAction" text="Finish" />
+                        <Button mnemonicParsing="false" onAction="#saveButton" prefWidth="75.0" text="Save" />
+                        <Button fx:id="closeButton" cancelButton="true" mnemonicParsing="false" onAction="#handleCloseButtonAction" prefWidth="75.0" text="Finish" />
                      </children>
                      <opaqueInsets>
                         <Insets />
