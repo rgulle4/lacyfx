@@ -41,6 +41,7 @@ public final class Mix {
     private Boolean isTotalWaterConsumptionSpecial = false;
     private Boolean isPrimaryEnergyConsumptionSpecial = false;
     public Map<String,Double> CalcResult = new HashMap<>();
+    public Map<String,String> EPDUnits = new HashMap<>();
     //Mix description
     public String Cement;
     public String WaterCement;
