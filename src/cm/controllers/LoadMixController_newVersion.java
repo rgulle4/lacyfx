@@ -36,17 +36,7 @@ public class LoadMixController_newVersion {
     @FXML
     public TableColumn Cement_Column;
     @FXML
-    public TableColumn WaterCement_Column;
-    @FXML
-    public TableColumn Fly_Ash_Column;
-    @FXML
-    public TableColumn Slag_Column;
-    @FXML
-    public TableColumn Air_Entrained_Column;
-    @FXML
-    public TableColumn Aggregate1_Column;
-    @FXML
-    public TableColumn Aggregate2_Column;
+    public TableColumn CementetiousMaterial_Column;
     @FXML
     public TableColumn Region_Column;
     @FXML
@@ -85,12 +75,7 @@ public class LoadMixController_newVersion {
         Location_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Location"));
         Region_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Region"));
         Cement_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Cement"));
-        WaterCement_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("WaterCement"));
-        Fly_Ash_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Fly_Ash"));
-        Slag_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Slag"));
-        Air_Entrained_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Air_Entrained"));
-        Aggregate1_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Aggregate1"));
-        Aggregate2_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Aggregate2"));
+        CementetiousMaterial_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("CementetiousMaterial"));
     }
 
     @FXML

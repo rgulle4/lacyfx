@@ -39,7 +39,7 @@ public final class App extends Application {
         AnchorPane addNewMaterialAcnhorPane = fxmlLoader.load();
 
         Stage addDialogStage = new Stage();
-        addDialogStage.setTitle("Add New Mix");
+        addDialogStage.setTitle("Select alternatives to be analyzed!");
         addDialogStage.initModality(Modality.WINDOW_MODAL);
         addDialogStage.initOwner(primaryStage);
 
