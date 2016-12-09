@@ -44,6 +44,7 @@ public final class Mix {
     public Map<String,String> EPDUnits = new HashMap<>();
     //Mix description
     public String Cement;
+    public String CementetiousMaterial;
     public String WaterCement;
     public String Fly_Ash;
     public String Slag;
@@ -297,7 +298,8 @@ public final class Mix {
     }
 
     public void setNonRenewableEnergyUse(String nonRenewableEnergyUse) throws ParseException {
-        if (nonRenewableEnergyUse == null){
+        if (nonRenewableEnergyUse == null ||
+                nonRenewableEnergyUse.equals("N/A") ){
             NonRenewableEnergyUse = 0.0;}
         else{
             NumberFormat format = NumberFormat.getInstance(Locale.US);
@@ -319,7 +321,8 @@ public final class Mix {
     }
 
     public void setNonRenewableMaterialResource(String nonRenewableMaterialResource) throws ParseException {
-        if(nonRenewableMaterialResource == null){NonRenewableMaterialResource = 0.0;}
+        if(nonRenewableMaterialResource == null ||
+            nonRenewableMaterialResource.equals("N/A")){NonRenewableMaterialResource = 0.0;}
         else{
             NumberFormat format = NumberFormat.getInstance(Locale.US);
             Number number = format.parse(nonRenewableMaterialResource);
@@ -860,6 +863,14 @@ public final class Mix {
 
     public String getRegion() {
         return Region;
+    }
+
+    public String getCementetiousMaterial() {
+        return CementetiousMaterial;
+    }
+
+    public void setCementetiousMaterial(String cementetiousMaterial) {
+        CementetiousMaterial = cementetiousMaterial;
     }
 
     public void setRegion(String region) {

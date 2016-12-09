@@ -99,9 +99,9 @@ public class LoadMixController_newVersion {
         Double CS = 0.0;
         String region = "";
         Double cement_Min = 0.0;
-        Double cement_Max = Double.POSITIVE_INFINITY;
+        Double cement_Max = 0.0;
         Double cementetiousMaterial_Min = 0.0;
-        Double cementetiousMaterial_Max = Double.POSITIVE_INFINITY;
+        Double cementetiousMaterial_Max = 0.0;
 
         if(!textField_CS.getText().isEmpty()){
             CS = Double.parseDouble(textField_CS.getText());

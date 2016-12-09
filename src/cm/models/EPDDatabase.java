@@ -137,13 +137,13 @@ public final class EPDDatabase {
             throws SQLException, ParseException {
         List<Mix> result = new ArrayList<Mix>();
 
-        StringBuilder sb = new StringBuilder("SELECT * FROM concrete_epds_regions WHERE 1");
+        StringBuilder sb = new StringBuilder("SELECT * FROM concrete_epds_ranges WHERE 1");
         if (cs != 0.0) sb.append(" AND COMPRESSIVE_STRENGTH >= ").append("'").append(cs).append("'");
         if (!region.isEmpty()) sb.append(" AND Region = ").append("'").append(region).append("'");
-        if (cement_Min != 0.0) sb.append(" AND Cement_sack >= ").append("'").append(cement_Min).append("'");
-        if (cement_Max != 0.0) sb.append(" AND Cement_sack <= ").append("'").append(cement_Max).append("'");
-        if (cementetiousMaterial_Min != 0.0) sb.append(" AND Cement_sack >= ").append("'").append(cementetiousMaterial_Min).append("'");
-        if (cementetiousMaterial_Max != 0.0) sb.append(" AND Cement_sack <= ").append("'").append(cementetiousMaterial_Max).append("'");
+        if (cement_Min != 0.0) sb.append(" AND Cement_Weight >= ").append("'").append(cement_Min).append("'");
+//        if (cement_Max != 0.0) sb.append(" AND Cement_Weight(kg/m3) <= ").append("'").append(cement_Max).append("'");
+//        if (cementetiousMaterial_Min != 0.0) sb.append(" AND Cementetious_Material_Total_Weight(kg/m3) >= ").append("'").append(cementetiousMaterial_Min).append("'");
+//        if (cementetiousMaterial_Max != 0.0) sb.append(" AND Cementetious_Material_Total_Weight(kg/m3) <= ").append("'").append(cementetiousMaterial_Max).append("'");
         s = conn.createStatement();
         String sql = sb.toString();
         rs = s.executeQuery(sql);
@@ -173,13 +173,9 @@ public final class EPDDatabase {
             g.setRenewableMaterialResourcesUse(rs.getDouble("RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
             g.setNonRenewableMaterialResource(rs.getString("NON_RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
             g.setRegion(rs.getString("Region"));
-            g.setAir_Entrained(rs.getString("Air_Entrained"));
-            g.setCement(rs.getString("Cement_sack"));
-            g.setWaterCement(rs.getString("Water_cement_ratio"));
-            g.setFly_Ash(rs.getString("Fly_Ash_percent"));
-            g.setSlag(rs.getString("Slag_percent"));
-            g.setAggregate1(rs.getString("Aggregate1"));
-            g.setAggregate2(rs.getString("Aggregate2"));
+            g.setCement(rs.getString("Cement_Weight"));
+            g.setCementetiousMaterial(rs.getString("Cementetious_Material_Total_Weight"));
+
             //set unit
             g.setGWP_Units(rs.getString("GWP_UNITS"));
             g.setODP_Units(rs.getString("ODP_UNITS"));
