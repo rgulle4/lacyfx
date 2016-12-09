@@ -363,6 +363,7 @@ public final class EnvPerformanceCalc_newVersion {
                 mix_temp.CalcResult.put("POCP_TSP_SubScore",POCP_TSP_SubScore);
                 mix_temp.CalcResult.put("TPEC_TSP_SubScore",PrimaryTotalEnergyConsumption_TSP_SubScore);    //Total Primary Energy Consumption
 
+                layer_temp.setMix(mix_temp);
                 //accumulate Design_temp's score
                 //Calculate design_temp's score
                 envPerfScore_Design = envPerfScore_Design + envPerfScore_layer;

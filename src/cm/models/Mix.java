@@ -40,8 +40,8 @@ public final class Mix {
     private Double Price;
     private Double Distance;
     private Double unitConversion_Factor;
-    private Boolean isTotalWaterConsumptionSpecial;
-    private Boolean isPrimaryEnergyConsumptionSpecial;
+    private Boolean isTotalWaterConsumptionSpecial = false;
+    private Boolean isPrimaryEnergyConsumptionSpecial = false;
     public Map<String,Double> CalcResult = new HashMap<>();
     //Mix description
     public String Cement;

@@ -42,7 +42,6 @@
          <children>
              <ComboBox fx:id="design_ComboBox" prefWidth="150.0" />
              <ComboBox fx:id="layer_ComboBox" onMouseClicked="#setupLayerNumber_ComboBox" prefWidth="150.0" />
-             <ComboBox fx:id="mix_ComboBox" onMouseClicked="#setupMixNum_ComboBox" prefWidth="150.0" />
          </children>
       </HBox>
       <Button fx:id="clean_Button" layoutX="1076.0" layoutY="136.0" mnemonicParsing="false" onAction="#cleanChart" text="Clean" />
