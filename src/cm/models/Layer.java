@@ -14,7 +14,7 @@ public final class Layer {
 
     // A layer_temp has one material
     private List<Mix> mixes = new ArrayList<>();
-    private Mix mix = new Mix();
+    private Mix averaged_Mix = new Mix();
 
     // A layerId is probably "layer1", "layer2", etc.
     private String layerId;
@@ -53,12 +53,12 @@ public final class Layer {
         return mixes;
     }
 
-    public Mix getMix() {
-        return mix;
+    public Mix getAveraged_Mix() {
+        return averaged_Mix;
     }
 
-    public void setMix(Mix mix) {
-        this.mix = mix;
+    public void setAveraged_Mix(Mix averaged_Mix) {
+        this.averaged_Mix = averaged_Mix;
     }
 
     public void setMixes(List<Mix> mixes){

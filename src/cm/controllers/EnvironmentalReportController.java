@@ -9,12 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.*;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import sun.java2d.pipe.AlphaPaintPipe;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,19 +107,29 @@ public final class EnvironmentalReportController {
         String layerID = layer_ComboBox.getSelectionModel().getSelectedItem().toString();
         Design designTemp = DESIGNS.get(designID);
         int layerIndex = layer_ComboBox.getSelectionModel().getSelectedIndex();
-        Layer layerTemp = designTemp.getLayer(layerIndex);
         //Get the whole selected Mix lists
-        Mix mixTemp = layerTemp.getMix();
+        List<Mix> mixTemps = new ArrayList<>();
+        //Obtain a averaged_Mix list
+        int layersNum = designTemp.getNumberOfLayers();
+        if (layerIndex == layersNum){
+            //All Layers item is selected
+            System.out.println(layerNum.get(layersNum));
+            for (int i = 0; i < layersNum; i ++){
+                Layer layerTemp = designTemp.getLayer(i);
+                Mix mixTemp = layerTemp.getAveraged_Mix();
+                mixTemps.add(mixTemp);
+            }
+        }else {mixTemps.add(designTemp.getLayer(layerIndex).getAveraged_Mix());}
 
         perfType = performanceType_ComboBox.getSelectionModel().getSelectedItem().toString();
         envImpactType = environmentalImpact_ComboBox.getSelectionModel().getSelectedItem().toString();
         valueType = rawValue_ComboBox.getSelectionModel().getSelectedItem().toString();
         impactCategory = impactCategory_ComboBox.getSelectionModel().getSelectedItem().toString();
         String alternative_ID = new StringBuilder(designID).append("\n").append(layerID).toString();
-        showBarChart("Alternatives","Value","Environmental Analysis",alternative_ID, mixTemp);
+        showBarChart("Alternatives","Value","Environmental Analysis",alternative_ID, mixTemps,layerIndex);
     }
 
-    public void showBarChart(String xLabel, String yLabel, String chartTitle, String incompletedAlternative_ID, Mix aMix){
+    public void showBarChart(String xLabel, String yLabel, String chartTitle, String incompletedAlternative_ID, List<Mix> Mixes,int layerindex){
         bc.getData().clear();
         bc.layout();
         bc.setVisible(true);
@@ -147,44 +153,83 @@ public final class EnvironmentalReportController {
         serie_POCP.setName("POCP");
         serie_TotalPrimaryEnergyConsumption.setName("TotalPrimaryEnergyConsumption");
         serie_allAlternatives.setName("Impact Analysis of All Alternatives");
+        if (layerindex == Mixes.size()){
+            for (int i = 0 ; i < Mixes.size(); i ++){
+                StringBuilder sb = new StringBuilder(incompletedAlternative_ID);
+                if (Mixes.get(i).getPrimaryEnergyConsumptionSpecial()&&envImpactType == "EPD"){
+                    noteLabel.setVisible(true);
+                    sb.append(" #");
+                }
+                String alternative_ID = sb.toString();
+                if(impactCategory == "GWP"){
+                    serie_GWP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(Mixes.get(i))));
+                    bc.getData().add(serie_GWP);
+                }
+                if(impactCategory == "ODP"){
+                    serie_ODP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(Mixes.get(i))));
+                    bc.getData().add(serie_ODP);
+                }
+                if(impactCategory == "AP"){
+                    serie_AP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(Mixes.get(i))));
+                    bc.getData().add(serie_AP);
+                }
+                if(impactCategory == "EP"){
+                    serie_EP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(Mixes.get(i))));
+                    bc.getData().add(serie_EP);
+                }
+                if(impactCategory == "POCP"){
+                    serie_POCP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(Mixes.get(i))));
+                    bc.getData().add(serie_POCP);
+                }
+                if (impactCategory == "PrimaryEnergyConsumption"){
+                    serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(Mixes.get(i))));
+                    bc.getData().add(serie_TotalPrimaryEnergyConsumption);
+                }
+                if (impactCategory == "Impact Analysis per Alternative"){
+                    setupSerieForImpactAnalysisPerAlternative(alternative_ID,Mixes.get(i),
+                            serie_GWP,serie_ODP,serie_AP,serie_EP,serie_POCP,serie_TotalPrimaryEnergyConsumption);
+                    bc.getData().addAll(serie_GWP,serie_ODP,serie_AP,serie_EP,serie_POCP,serie_TotalPrimaryEnergyConsumption);
+                }
+            }
+        }else{
+            StringBuilder sb = new StringBuilder(incompletedAlternative_ID);
+            if (Mixes.get(layerindex).getPrimaryEnergyConsumptionSpecial()&&envImpactType == "EPD"){
+                noteLabel.setVisible(true);
+                sb.append(" #");
+            }
+            String alternative_ID = sb.toString();
+            if(impactCategory == "GWP"){
+                serie_GWP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(Mixes.get(layerindex))));
+                bc.getData().add(serie_GWP);
+            }
+            if(impactCategory == "ODP"){
+                serie_ODP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(Mixes.get(layerindex))));
+                bc.getData().add(serie_ODP);
+            }
+            if(impactCategory == "AP"){
+                serie_AP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(Mixes.get(layerindex))));
+                bc.getData().add(serie_AP);
+            }
+            if(impactCategory == "EP"){
+                serie_EP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(Mixes.get(layerindex))));
+                bc.getData().add(serie_EP);
+            }
+            if(impactCategory == "POCP"){
+                serie_POCP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(Mixes.get(layerindex))));
+                bc.getData().add(serie_POCP);
+            }
+            if (impactCategory == "PrimaryEnergyConsumption"){
+                serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(Mixes.get(layerindex))));
+                bc.getData().add(serie_TotalPrimaryEnergyConsumption);
+            }
+            if (impactCategory == "Impact Analysis per Alternative"){
+                setupSerieForImpactAnalysisPerAlternative(alternative_ID,Mixes.get(layerindex),
+                        serie_GWP,serie_ODP,serie_AP,serie_EP,serie_POCP,serie_TotalPrimaryEnergyConsumption);
+                bc.getData().addAll(serie_GWP,serie_ODP,serie_AP,serie_EP,serie_POCP,serie_TotalPrimaryEnergyConsumption);
+            }
+        }
 
-        String mix_ID = aMix.getZipCode();
-        String product_ID =aMix.getProduct_ID();
-        StringBuilder sb = new StringBuilder(incompletedAlternative_ID);
-        if (aMix.getPrimaryEnergyConsumptionSpecial()&&envImpactType == "EPD"){
-            noteLabel.setVisible(true);
-            sb.append(" #");
-        }
-        String alternative_ID = sb.toString();
-        if(impactCategory == "GWP"){
-            serie_GWP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(aMix)));
-            bc.getData().add(serie_GWP);
-        }
-        if(impactCategory == "ODP"){
-            serie_ODP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(aMix)));
-            bc.getData().add(serie_ODP);
-        }
-        if(impactCategory == "AP"){
-            serie_AP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(aMix)));
-            bc.getData().add(serie_AP);
-        }
-        if(impactCategory == "EP"){
-            serie_EP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(aMix)));
-            bc.getData().add(serie_EP);
-        }
-        if(impactCategory == "POCP"){
-            serie_POCP.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(aMix)));
-            bc.getData().add(serie_POCP);
-        }
-        if (impactCategory == "PrimaryEnergyConsumption"){
-            serie_TotalPrimaryEnergyConsumption.getData().add(new XYChart.Data<>(alternative_ID, getSingleDataValue(aMix)));
-            bc.getData().add(serie_TotalPrimaryEnergyConsumption);
-        }
-        if (impactCategory == "Impact Analysis per Alternative"){
-            setupSerieForImpactAnalysisPerAlternative(alternative_ID,aMix,
-                    serie_GWP,serie_ODP,serie_AP,serie_EP,serie_POCP,serie_TotalPrimaryEnergyConsumption);
-            bc.getData().addAll(serie_GWP,serie_ODP,serie_AP,serie_EP,serie_POCP,serie_TotalPrimaryEnergyConsumption);
-        }
+
     }
     public void setupSerieForImpactAnalysisPerAlternative(String alternative_ID, Mix aMix,
                               XYChart.Series<String, Number> serie_GWP,

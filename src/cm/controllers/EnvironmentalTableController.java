@@ -101,7 +101,7 @@ public class EnvironmentalTableController {
         int layerIndex = layer_ComboBox.getSelectionModel().getSelectedIndex();
         Layer layerTemp = designTemp.getLayer(layerIndex);
         //Get the whole selected Mix lists
-        Mix mixTemp = layerTemp.getMix();
+        Mix mixTemp = layerTemp.getAveraged_Mix();
 
         perfType = performanceType_ComboBox.getSelectionModel().getSelectedItem().toString();
         envImpactType = environmentalImpact_ComboBox.getSelectionModel().getSelectedItem().toString();

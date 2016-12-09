@@ -83,7 +83,7 @@ sustainability design tool that measures environmental and economic
 sustainability based on a cradle to gate analysis.  The tool will be
 linked with the Pavement MEPDG design software. It will use the
 MEPDG software design output as search criteria in the data base to
-select the most sustainable mix design based on environmental and
+select the most sustainable averaged_Mix design based on environmental and
 economic performance.
 
 Demonstration of the developed sustainable pavement design tool will
