@@ -180,7 +180,7 @@ public final class DesignController {
     private final ObservableList<String> newPavementTypes
           = FXCollections.observableArrayList(
           "Flexible pavement",
-          "Joint Reinforced concrete pavement");
+          "Rigid pavement");
 
     // Pavement types (when design is overlay)
     private final ObservableList<String> overlayPavementTypes
