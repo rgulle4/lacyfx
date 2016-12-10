@@ -141,9 +141,9 @@ public final class EPDDatabase {
         if (cs != 0.0) sb.append(" AND COMPRESSIVE_STRENGTH >= ").append("'").append(cs).append("'");
         if (!region.isEmpty()) sb.append(" AND Region = ").append("'").append(region).append("'");
         if (cement_Min != 0.0) sb.append(" AND Cement_Weight >= ").append("'").append(cement_Min).append("'");
-//        if (cement_Max != 0.0) sb.append(" AND Cement_Weight(kg/m3) <= ").append("'").append(cement_Max).append("'");
-//        if (cementetiousMaterial_Min != 0.0) sb.append(" AND Cementetious_Material_Total_Weight(kg/m3) >= ").append("'").append(cementetiousMaterial_Min).append("'");
-//        if (cementetiousMaterial_Max != 0.0) sb.append(" AND Cementetious_Material_Total_Weight(kg/m3) <= ").append("'").append(cementetiousMaterial_Max).append("'");
+        if (cement_Max != 0.0) sb.append(" AND Cement_Weight <= ").append("'").append(cement_Max).append("'");
+        if (cementetiousMaterial_Min != 0.0) sb.append(" AND Cementetious_Material_Total_Weight >= ").append("'").append(cementetiousMaterial_Min).append("'");
+        if (cementetiousMaterial_Max != 0.0) sb.append(" AND Cementetious_Material_Total_Weight <= ").append("'").append(cementetiousMaterial_Max).append("'");
         s = conn.createStatement();
         String sql = sb.toString();
         rs = s.executeQuery(sql);
