@@ -196,7 +196,7 @@ public final class EnvPerformanceCalc_newVersion {
                 ODP_EPD_NORM = ODP_EPD_Ctb / Norm_ODP;
                 AP_EPD_NORM = AP_EPD_Ctb / Norm_AP;
                 EP_EPD_NORM = EP_EPD_Ctb / Norm_EP;
-                POCP_EPD_NORM = EP_EPD_Ctb / Norm_POCP;
+                POCP_EPD_NORM = POCP_EPD_Ctb / Norm_POCP;
                 TotalWater_EPD_NORM = TotalWater_EPD_Ctb / Norm_TW;
                 PrimaryTotalEnergyConsumption_EPD_NORM
                         = PrimaryTotalEnergyConsumption_EPD_Ctb / Norm_TPEC;
