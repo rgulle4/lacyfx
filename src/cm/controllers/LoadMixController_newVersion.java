@@ -36,7 +36,9 @@ public class LoadMixController_newVersion {
     @FXML
     public TableColumn Cement_Column;
     @FXML
-    public TableColumn CementetiousMaterial_Column;
+    public TableColumn CementReplacementMin_Column;
+    @FXML
+    public TableColumn CementReplacementMax_Column;
     @FXML
     public TableColumn Region_Column;
     @FXML
@@ -68,14 +70,15 @@ public class LoadMixController_newVersion {
 
         textField_CS.setText("3000.0");
         ComboBox_Region.setItems(RegionList);
-        ComboBox_Region.setValue(RegionList.get(4));
+        ComboBox_Region.setValue(RegionList.get(4));        //Default selection is "Nationwide"
 
         //Alternative materials
         CS_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("CS"));
         Location_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Location"));
         Region_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Region"));
         Cement_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Cement"));
-        CementetiousMaterial_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("CementetiousMaterial"));
+        CementReplacementMin_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("CementReplacement_Min"));
+        CementReplacementMax_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("CementReplacement_Max"));
     }
 
     @FXML
@@ -85,30 +88,32 @@ public class LoadMixController_newVersion {
         String region = "";
         Double cement_Min = 0.0;
         Double cement_Max = 0.0;
-        Double cementetiousMaterial_Min = 0.0;
-        Double cementetiousMaterial_Max = 0.0;
+        Double cementReplacement_Min = 0.0;
+        Double cementReplacement_Max = 0.0;
 
         if(!textField_CS.getText().isEmpty()){
             CS = Double.parseDouble(textField_CS.getText());
         }
         if(!textField_Cement_Min.getText().isEmpty()){
-            cement_Min = Double.parseDouble(textField_Cement_Min.getText());
+            // -5.0 Kg error is allowed
+            cement_Min = Double.parseDouble(textField_Cement_Min.getText())-5.0;
         }
         if(!textField_Cement_Max.getText().isEmpty()){
-            cement_Max = Double.parseDouble(textField_Cement_Max.getText());
+            // +5.0 Kg error is allowed
+            cement_Max = Double.parseDouble(textField_Cement_Max.getText())+5.0;
         }
         if(!textField_CementetiousMaterial_Min.getText().isEmpty()){
-            cementetiousMaterial_Min = Double.parseDouble(textField_CementetiousMaterial_Min.getText());
+            cementReplacement_Min = Double.parseDouble(textField_CementetiousMaterial_Min.getText());
         }
         if(!textField_CementetiousMaterial_Max.getText().isEmpty()){
-            cementetiousMaterial_Max = Double.parseDouble(textField_CementetiousMaterial_Max.getText());
+            cementReplacement_Max = Double.parseDouble(textField_CementetiousMaterial_Max.getText());
         }
         if(!ComboBox_Region.getSelectionModel().isEmpty()&&!ComboBox_Region.getSelectionModel().isSelected(4)){
             region = ComboBox_Region.getSelectionModel().getSelectedItem().toString();
         }
 
         List<Mix> result = new EPDDatabase().getResultsFilteredBy_newVersion
-                (CS,region,cement_Min,cement_Max,cementetiousMaterial_Min,cementetiousMaterial_Max);
+                (CS,region,cement_Min,cement_Max,cementReplacement_Min,cementReplacement_Max);
         StringBuilder sb_MixSize = new StringBuilder(Integer.toString(result.size())).append(" Mixes");
         Label_MixSize.setText(sb_MixSize.toString());
 

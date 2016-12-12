@@ -85,7 +85,8 @@
                         <TableColumn fx:id="Location_Column" prefWidth="112.0" text="Location" />
                         <TableColumn fx:id="Region_Column" prefWidth="75.0" text="Region" />
                         <TableColumn fx:id="Cement_Column" prefWidth="111.0" text="Cement(kg/m3)" />
-                        <TableColumn fx:id="CementetiousMaterial_Column" prefWidth="209.0" text="Cementetious Material (kg/m3)" />
+                        <TableColumn fx:id="CementReplacementMin_Column" prefWidth="200.0" text="Cement Replacement Min (%)" />
+                        <TableColumn fx:id="CementReplacementMax_Column" prefWidth="200.0" text="Cement Replace Max (%)" />
                     </columns>
                   </TableView>
                   <HBox layoutX="383.0" layoutY="433.0" prefHeight="30.0" prefWidth="232.0" spacing="30.0">

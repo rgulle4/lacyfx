@@ -44,7 +44,8 @@ public final class Mix {
     public Map<String,String> EPDUnits = new HashMap<>();
     //Mix description
     public String Cement;
-    public String CementetiousMaterial;
+    public String CementReplacement_Min;
+    public String CementReplacement_Max;
     public String WaterCement;
     public String Fly_Ash;
     public String Slag;
@@ -813,6 +814,14 @@ public final class Mix {
         Cement = cement;
     }
 
+    public String getCementReplacement_Max() {
+        return CementReplacement_Max;
+    }
+
+    public void setCementReplacement_Max(String cementReplacement_Max) {
+        CementReplacement_Max = cementReplacement_Max;
+    }
+
     public String getWaterCement() {
         return WaterCement;
     }
@@ -865,12 +874,12 @@ public final class Mix {
         return Region;
     }
 
-    public String getCementetiousMaterial() {
-        return CementetiousMaterial;
+    public String getCementReplacement_Min() {
+        return CementReplacement_Min;
     }
 
-    public void setCementetiousMaterial(String cementetiousMaterial) {
-        CementetiousMaterial = cementetiousMaterial;
+    public void setCementReplacement_Min(String cementReplacement_Min) {
+        CementReplacement_Min = cementReplacement_Min;
     }
 
     public void setRegion(String region) {

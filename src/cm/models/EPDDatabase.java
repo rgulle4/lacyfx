@@ -142,8 +142,8 @@ public final class EPDDatabase {
         if (!region.isEmpty()) sb.append(" AND Region = ").append("'").append(region).append("'");
         if (cement_Min != 0.0) sb.append(" AND Cement_Weight >= ").append("'").append(cement_Min).append("'");
         if (cement_Max != 0.0) sb.append(" AND Cement_Weight <= ").append("'").append(cement_Max).append("'");
-        if (cementetiousMaterial_Min != 0.0) sb.append(" AND Cementetious_Material_Total_Weight >= ").append("'").append(cementetiousMaterial_Min).append("'");
-        if (cementetiousMaterial_Max != 0.0) sb.append(" AND Cementetious_Material_Total_Weight <= ").append("'").append(cementetiousMaterial_Max).append("'");
+        if (cementetiousMaterial_Min != 0.0) sb.append(" AND CementReplacement_Percent_Min >= ").append("'").append(cementetiousMaterial_Min).append("'");
+        if (cementetiousMaterial_Max != 0.0) sb.append(" AND CementReplacement_Percent_Max <= ").append("'").append(cementetiousMaterial_Max).append("'");
         s = conn.createStatement();
         String sql = sb.toString();
         rs = s.executeQuery(sql);
@@ -174,7 +174,8 @@ public final class EPDDatabase {
             g.setNonRenewableMaterialResource(rs.getString("NON_RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
             g.setRegion(rs.getString("Region"));
             g.setCement(rs.getString("Cement_Weight"));
-            g.setCementetiousMaterial(rs.getString("Cementetious_Material_Total_Weight"));
+            g.setCementReplacement_Min(rs.getString("CementReplacement_Percent_Min"));
+            g.setCementReplacement_Max(rs.getString("CementReplacement_Percent_Max"));
 
             //set unit
             g.setGWP_Units(rs.getString("GWP_UNITS"));
