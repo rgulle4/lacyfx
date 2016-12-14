@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.util.List;
@@ -48,7 +49,7 @@ public final class DesignController {
             printDebugMsg("Couldn't set current design with key = " + designKey);
         }
     }
-
+    
     @FXML
     public void initialize() {
         setDesignOptionsToDefaults();
@@ -64,14 +65,36 @@ public final class DesignController {
         
         // set up autosave triggers
         setupAutosave();
+        
+        // wait and save
+        Thread saveWhenReady = new Thread() {
+            public void run() {
+                while (design == null)
+                    try { Thread.sleep(250); }
+                    catch (InterruptedException e) { }
+                saveDesignOptions();
+            }
+        };
+        
+        saveWhenReady.start();
     }
     
     private void setupAutosave() {
+        autosaveOnFocus(designTypeComboBox);
+        autosaveOnFocus(pavementTypeComboBox);
         autosaveOnFocus(layersTabPane);
     }
     
-    private void autosaveOnFocus(Control control) {
-        control.focusedProperty().addListener((
+    private void autosaveOnFocus(Node n) {
+        if (n instanceof ComboBox) {
+            ComboBox cb = (ComboBox) n;
+            cb.getSelectionModel().selectedIndexProperty().addListener((
+                  (observable, oldValue, newValue) -> {
+                      saveDesignOptions();
+            }));
+        }
+            
+        n.focusedProperty().addListener((
               (observable, oldValue, newValue) -> {
                   saveDesignOptions();
               }));
