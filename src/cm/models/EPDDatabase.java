@@ -174,8 +174,8 @@ public final class EPDDatabase {
             g.setNonRenewableMaterialResource(rs.getString("NON_RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
             g.setRegion(rs.getString("Region"));
             g.setCement(rs.getString("Cement_Weight"));
-            g.setCementReplacement_Min(rs.getString("CementReplacement_Percent_Min"));
-            g.setCementReplacement_Max(rs.getString("CementReplacement_Percent_Max"));
+            g.setMixing_Water(rs.getString("CementReplacement_Percent_Min"));
+            g.setAir_Percent(rs.getString("CementReplacement_Percent_Max"));
 
             //set unit
             g.setGWP_Units(rs.getString("GWP_UNITS"));
@@ -187,6 +187,74 @@ public final class EPDDatabase {
             g.setTotalWaterConsumption_Units(rs.getString("TOTAL_WATER_CONSUMPTION_UNITS"));
             g.setNonRenewableMaterialResource_Units(rs.getString("RENEWABLE_MIX_RESOURCES_CONSUMPTION_UNITS"));
             g.setRenewableMaterialResourcesUse_Units(rs.getString("NON_RENEWABLE_MIX_RESOURCES_CONSUMPTION_UNITS"));
+
+            result.add(g);
+        }
+        System.out.println("size: "+result.size());
+        return result;
+    }
+
+    public List<Mix> getResultsFilteredBy_epds_NRMCA
+            (Double cs, String region,Double cement_Min, Double cement_Max
+            )
+            throws SQLException, ParseException {
+        List<Mix> result = new ArrayList<Mix>();
+
+        StringBuilder sb = new StringBuilder("SELECT * FROM concrete_epds_NRMCA WHERE 1");
+        if (cs != 0.0) sb.append(" AND COMPRESSIVE_STRENGTH >= ").append("'").append(cs).append("'");
+        if (!region.isEmpty()) sb.append(" AND Region = ").append("'").append(region).append("'");
+        if (cement_Min != 0.0) sb.append(" AND Cement_Weight >= ").append("'").append(cement_Min).append("'");
+        if (cement_Max != 0.0) sb.append(" AND Cement_Weight <= ").append("'").append(cement_Max).append("'");
+        s = conn.createStatement();
+        String sql = sb.toString();
+        rs = s.executeQuery(sql);
+        Mix g;
+        while(rs.next()){
+            g = new Mix();
+            g.setCS(rs.getString("COMPRESSIVE_STRENGTH"));
+            g.setGWP(rs.getDouble("GWP"));
+            g.setODP(rs.getDouble("ODP"));
+            g.setAP(rs.getDouble("AP"));
+            g.setEP(rs.getDouble("EP"));
+            g.setPOCP(rs.getDouble("POCP"));
+            g.setUnit(rs.getString("UNITS_OF_VOLUME"));
+            g.setConcreteHazardousWaste(rs.getDouble("CONCRETE_HAZARDOUS_WASTE"));
+            g.setConcreteNonHazardousWaste(rs.getDouble("CONCRETE_NON_HAZARDOUS_WASTE"));
+            g.setTotalWaterConsumption(rs.getDouble("TOTAL_WATER_CONSUMPTION"));
+            g.setConcreteBatchingWaterConsumption(rs.getDouble("CONCRETE_BATCHING_WATER_CONSUMPTION"));
+            g.setConcreteBatchingWaterConsumption(rs.getDouble("CONCRETE_WASHING_WATER_CONSUMPTION"));
+            g.setTotalPrimaryEnergyConsumption(rs.getString("TOTAL_PRIMARY_ENERGY_CONSUMPTION"));
+            g.setRenewablePrimaryEnergyUse(rs.getDouble("RENEWABLE_PRIMARY_ENERGY_CONSUMPTION"));
+            g.setNonRenewableEnergyUse(rs.getString("NON_RENEWABLE_ENERGY_CONSUMPTION"));
+            g.setRenewableMaterialResourcesUse(rs.getDouble("RENEWABLE_MATERIAL_RESOURCES_CONSUMPTION"));
+            g.setNonRenewableMaterialResource(rs.getString("NON_RENEWABLE_MATERIAL_RESOURCES_CONSUMPTION"));
+            g.setRegion(rs.getString("Region"));
+            g.setCement(rs.getString("Cement_Weight"));
+            g.setFly_Ash(rs.getString("Fly_Ash_weight"));
+            g.setSlag(rs.getString("Slag_weight"));
+            g.setMixing_Water(rs.getString("Mixing_Water"));
+            g.setCrushed_Coarse_Aggregate(rs.getString("Crushed_Coarse_Aggregate"));
+            g.setNatural_Coarse_Aggregate(rs.getString("Natural_Coarse_Aggregate"));
+            g.setCrushed_Fine_Aggregate(rs.getString("Crushed_Fine_Aggregate"));
+            g.setNatrual_Fine_Aggregate(rs.getString("Natural_Fine_Aggregate"));
+            g.setLightWeight_Aggregate(rs.getString("Lightweight_Aggregate"));
+            g.setAir_Percent(rs.getString("Air_Percent"));
+            g.setAir_Entrained(rs.getString("Air_Entraining_Admixture"));
+            g.setWater_Reducer(rs.getString("Water_Reducer"));
+            g.setHigh_Range_Water_Reducer(rs.getString("High_Range_Water_Reducer"));
+            g.setAccelerator(rs.getString("Accelerator"));
+            g.setIsLightWeight(rs.getString("Light_Weight"));
+
+            //set unit
+            g.setGWP_Units(rs.getString("GWP_UNITS"));
+            g.setODP_Units(rs.getString("ODP_UNITS"));
+            g.setAP_Units(rs.getString("AP_UNITS"));
+            g.setEP_Units(rs.getString("EP_UNITS"));
+            g.setPOCP_Units(rs.getString("POCP_UNITS"));
+            g.setTotalPrimaryEnergyConsumption_Units(rs.getString("TOTAL_PRIMARY_ENERGY_CONSUMPTION_UNITS"));
+            g.setTotalWaterConsumption_Units(rs.getString("TOTAL_WATER_CONSUMPTION_UNITS"));
+            g.setNonRenewableMaterialResource_Units(rs.getString("RENEWABLE_MATERIAL_RESOURCES_CONSUMPTION_UNITS"));
+            g.setRenewableMaterialResourcesUse_Units(rs.getString("NON_RENEWABLE_MMATERIAL_RESOURCES_CONSUMPTION_UNITS"));
 
             result.add(g);
         }

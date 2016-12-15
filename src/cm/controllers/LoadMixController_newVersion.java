@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
@@ -32,13 +31,13 @@ public class LoadMixController_newVersion {
     @FXML
     public TableColumn CS_Column;
     @FXML
-    public TableColumn Location_Column;
+    public TableColumn LightWeight_Column;
     @FXML
     public TableColumn Cement_Column;
     @FXML
-    public TableColumn CementReplacementMin_Column;
+    public TableColumn MixingWater_Column;
     @FXML
-    public TableColumn CementReplacementMax_Column;
+    public TableColumn Air_Percent;
     @FXML
     public TableColumn Region_Column;
     @FXML
@@ -48,19 +47,16 @@ public class LoadMixController_newVersion {
     @FXML
     public TextField textField_Cement_Max;
     @FXML
-    public TextField textField_CementetiousMaterial_Min;
-    @FXML
-    public TextField textField_CementetiousMaterial_Max;
-    @FXML
     public ComboBox ComboBox_Region;
     @FXML
     public Label Label_MixSize;
     @FXML
     public Button closeButton;
 
-    ObservableList<String> AirEntrainedList = FXCollections.observableArrayList("Yes","No","NA");
     ObservableList<String> RegionList = FXCollections.observableArrayList(
-            "West","South","Northeast","Midwest","Nationwide");
+            "North Central","Pacific Northwest","Pacific Southwest",
+            "Rocky Mountains","South Central","South Eastern",
+            "Eastern","Great Lakes Midwest","National");
     @FXML
     public void initialize(){
         System.out.println("------------------------------------");
@@ -74,11 +70,8 @@ public class LoadMixController_newVersion {
 
         //Alternative materials
         CS_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("CS"));
-        Location_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Location"));
         Region_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Region"));
         Cement_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Cement"));
-        CementReplacementMin_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("CementReplacement_Min"));
-        CementReplacementMax_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("CementReplacement_Max"));
     }
 
     @FXML
@@ -88,8 +81,6 @@ public class LoadMixController_newVersion {
         String region = "";
         Double cement_Min = 0.0;
         Double cement_Max = 0.0;
-        Double cementReplacement_Min = 0.0;
-        Double cementReplacement_Max = 0.0;
 
         if(!textField_CS.getText().isEmpty()){
             CS = Double.parseDouble(textField_CS.getText());
@@ -102,18 +93,12 @@ public class LoadMixController_newVersion {
             // +5.0 Kg error is allowed
             cement_Max = Double.parseDouble(textField_Cement_Max.getText())+5.0;
         }
-        if(!textField_CementetiousMaterial_Min.getText().isEmpty()){
-            cementReplacement_Min = Double.parseDouble(textField_CementetiousMaterial_Min.getText());
-        }
-        if(!textField_CementetiousMaterial_Max.getText().isEmpty()){
-            cementReplacement_Max = Double.parseDouble(textField_CementetiousMaterial_Max.getText());
-        }
-        if(!ComboBox_Region.getSelectionModel().isEmpty()&&!ComboBox_Region.getSelectionModel().isSelected(4)){
+        if(!ComboBox_Region.getSelectionModel().isEmpty()){
             region = ComboBox_Region.getSelectionModel().getSelectedItem().toString();
         }
 
-        List<Mix> result = new EPDDatabase().getResultsFilteredBy_newVersion
-                (CS,region,cement_Min,cement_Max,cementReplacement_Min,cementReplacement_Max);
+        List<Mix> result = new EPDDatabase().getResultsFilteredBy_epds_NRMCA
+                (CS,region,cement_Min,cement_Max);
         StringBuilder sb_MixSize = new StringBuilder(Integer.toString(result.size())).append(" Mixes");
         Label_MixSize.setText(sb_MixSize.toString());
 

@@ -44,15 +44,21 @@ public final class Mix {
     public Map<String,String> EPDUnits = new HashMap<>();
     //Mix description
     public String Cement;
-    public String CementReplacement_Min;
-    public String CementReplacement_Max;
-    public String WaterCement;
+    public String Mixing_Water;
+    public String Air_Percent;
+    public String Water_Reducer;
+    public String High_Range_Water_Reducer;
     public String Fly_Ash;
     public String Slag;
     public String Air_Entrained;
-    public String Aggregate1;
-    public String Aggregate2;
+    public String Crushed_Coarse_Aggregate;
+    public String Crushed_Fine_Aggregate;
+    public String Natural_Coarse_Aggregate;
+    public String Natrual_Fine_Aggregate;
+    public String LightWeight_Aggregate;
+    public String Accelerator;
     public String Region;
+    public String IsLightWeight;
     //unit
     public String GWP_Units;
     public String ODP_Units;
@@ -814,20 +820,20 @@ public final class Mix {
         Cement = cement;
     }
 
-    public String getCementReplacement_Max() {
-        return CementReplacement_Max;
+    public String getAir_Percent() {
+        return Air_Percent;
     }
 
-    public void setCementReplacement_Max(String cementReplacement_Max) {
-        CementReplacement_Max = cementReplacement_Max;
+    public void setAir_Percent(String air_Percent) {
+        Air_Percent = air_Percent;
     }
 
-    public String getWaterCement() {
-        return WaterCement;
+    public String getWater_Reducer() {
+        return Water_Reducer;
     }
 
-    public void setWaterCement(String waterCement) {
-        WaterCement = waterCement;
+    public void setWater_Reducer(String water_Reducer) {
+        Water_Reducer = water_Reducer;
     }
 
     public String getFly_Ash() {
@@ -854,35 +860,83 @@ public final class Mix {
         Air_Entrained = air_Entrained;
     }
 
-    public String getAggregate1() {
-        return Aggregate1;
+    public String getCrushed_Coarse_Aggregate() {
+        return Crushed_Coarse_Aggregate;
     }
 
-    public void setAggregate1(String aggregate1) {
-        Aggregate1 = aggregate1;
+    public void setCrushed_Coarse_Aggregate(String crushed_Coarse_Aggregate) {
+        Crushed_Coarse_Aggregate = crushed_Coarse_Aggregate;
     }
 
-    public String getAggregate2() {
-        return Aggregate2;
+    public String getCrushed_Fine_Aggregate() {
+        return Crushed_Fine_Aggregate;
     }
 
-    public void setAggregate2(String aggregate2) {
-        Aggregate2 = aggregate2;
+    public String getHigh_Range_Water_Reducer() {
+        return High_Range_Water_Reducer;
+    }
+
+    public void setHigh_Range_Water_Reducer(String high_Range_Water_Reducer) {
+        High_Range_Water_Reducer = high_Range_Water_Reducer;
+    }
+
+    public String getNatural_Coarse_Aggregate() {
+        return Natural_Coarse_Aggregate;
+    }
+
+    public void setNatural_Coarse_Aggregate(String natural_Coarse_Aggregate) {
+        Natural_Coarse_Aggregate = natural_Coarse_Aggregate;
+    }
+
+    public String getNatrual_Fine_Aggregate() {
+        return Natrual_Fine_Aggregate;
+    }
+
+    public void setNatrual_Fine_Aggregate(String natrual_Fine_Aggregate) {
+        Natrual_Fine_Aggregate = natrual_Fine_Aggregate;
+    }
+
+    public String getLightWeight_Aggregate() {
+        return LightWeight_Aggregate;
+    }
+
+    public void setLightWeight_Aggregate(String lightWeight_Aggregate) {
+        LightWeight_Aggregate = lightWeight_Aggregate;
+    }
+
+    public String getAccelerator() {
+        return Accelerator;
+    }
+
+    public void setAccelerator(String accelerator) {
+        Accelerator = accelerator;
+    }
+
+    public void setCrushed_Fine_Aggregate(String crushed_Fine_Aggregate) {
+        Crushed_Fine_Aggregate = crushed_Fine_Aggregate;
     }
 
     public String getRegion() {
         return Region;
     }
 
-    public String getCementReplacement_Min() {
-        return CementReplacement_Min;
+    public String getMixing_Water() {
+        return Mixing_Water;
     }
 
-    public void setCementReplacement_Min(String cementReplacement_Min) {
-        CementReplacement_Min = cementReplacement_Min;
+    public void setMixing_Water(String mixing_Water) {
+        Mixing_Water = mixing_Water;
     }
 
     public void setRegion(String region) {
         Region = region;
+    }
+
+    public String getIsLightWeight() {
+        return IsLightWeight;
+    }
+
+    public void setIsLightWeight(String isLightWeight) {
+        IsLightWeight = isLightWeight;
     }
 }
