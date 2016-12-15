@@ -144,22 +144,22 @@ public class LoadMixController_newVersion {
         ComboBox_Region.setValue(RegionList.get(4));        //Default selection is "South Central"
         //Alternative materials
         CS_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("CS"));
-        Light_Weight_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("IsLightWeight"));
+//        Light_Weight_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("IsLightWeight"));
         Region_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Region"));
         Cement_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Cement"));
         Fly_Ash_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Fly_Ash"));
         Slag_Cement_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Slag"));
         Mixing_Water_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Mixing_Water"));
-        Crushed_Coarse_Aggregate_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Crushed_Coarse_Aggregate"));
-        Crushed_Fine_Aggregate_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Crushed_Fine_Aggregate"));
-        Natural_Coarse_Aggregate_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Natural_Coarse_Aggregate"));
-        Natural_Fine_Aggregate_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Natural_Fine_Aggregate"));
-        Light_Weight_Aggregate_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("LightWeight_Aggregate"));
+//        Crushed_Coarse_Aggregate_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Crushed_Coarse_Aggregate"));
+//        Crushed_Fine_Aggregate_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Crushed_Fine_Aggregate"));
+//        Natural_Coarse_Aggregate_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Natural_Coarse_Aggregate"));
+//        Natural_Fine_Aggregate_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Natural_Fine_Aggregate"));
+//        Light_Weight_Aggregate_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("LightWeight_Aggregate"));
         Air_Percent_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Air_Percent"));
-        Air_Entraining_Admixture_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Air_Entrained"));
-        Water_Reducer_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Water_Reducer"));
-        High_Range_Water_Reducer_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("High_Range_Water_Reducer"));
-        Accelerator_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Accelerator"));
+//        Air_Entraining_Admixture_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Air_Entrained"));
+//        Water_Reducer_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Water_Reducer"));
+//        High_Range_Water_Reducer_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("High_Range_Water_Reducer"));
+//        Accelerator_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Accelerator"));
     }
 
     @FXML
@@ -194,118 +194,22 @@ public class LoadMixController_newVersion {
             // -5.0 lbs error is allowed
             cement_Min = Double.parseDouble(textField_Cement_Min.getText())-5.0;
         }
-        if(!textField_Cement_Max.getText().isEmpty()){
-            // +5.0 lbs error is allowed
-            cement_Max = Double.parseDouble(textField_Cement_Max.getText())+5.0;
-        }
         //Fly Ash
         if(!textField_FlyAsh_Min.getText().isEmpty()){
             // -5.0 lbs error is allowed
             flyAsh_Min = Double.parseDouble(textField_FlyAsh_Min.getText())-5.0;
-        }
-        if(!textField_FlyAsh_Max.getText().isEmpty()){
-            // +5.0 lbs error is allowed
-            flyAsh_Max = Double.parseDouble(textField_FlyAsh_Max.getText())+5.0;
         }
         //Slag Cement
         if(!textField_SlagCement_Min.getText().isEmpty()){
             // -0.5 lbs error is allowed
             slag_Cement_Min = Double.parseDouble(textField_SlagCement_Min.getText())-0.5;
         }
-        if(!textField_SlagCement_Max.getText().isEmpty()){
-            // +0.5 lbs error is allowed
-            slag_Cement_Max = Double.parseDouble(textField_SlagCement_Max.getText())+0.5;
-        }
-        //Crushed_Coarse Aggregate
-        if(!textField_CCAggregate_Min.getText().isEmpty()){
-            // -5.0 lbs error is allowed
-            CC_Aggregate_Min = Double.parseDouble(textField_CCAggregate_Min.getText())-5.0;
-        }
-        if(!textField_CCAggregate_Max.getText().isEmpty()){
-            // +5.0 lbs error is allowed
-            CC_Aggregate_Max = Double.parseDouble(textField_CCAggregate_Max.getText())+5.0;
-        }
-        //Natural_Coarse Aggregate
-        if(!textField_NCAggregate_Min.getText().isEmpty()){
-            // -5.0 lbs error is allowed
-            NC_Aggregate_Min = Double.parseDouble(textField_NCAggregate_Min.getText())-5.0;
-        }
-        if(!textField_NCAggregate_Max.getText().isEmpty()){
-            // +5.0 lbs error is allowed
-            NC_Aggregate_Max = Double.parseDouble(textField_NCAggregate_Max.getText())+5.0;
-        }
-        //Crushed_Fine Aggregate
-        if(!textField_CFAggregate_Min.getText().isEmpty()){
-            // -5.0 lbs error is allowed
-            CF_Aggregate_Min = Double.parseDouble(textField_CFAggregate_Min.getText())-0.5;
-        }
-        if(!textField_CFAggregate_Max.getText().isEmpty()){
-            // +5.0 lbs error is allowed
-            CF_Aggregate_Max = Double.parseDouble(textField_CFAggregate_Max.getText())+0.5;
-        }
-        //Natural_Fine Aggregate
-        if(!textField_NFAggregate_Min.getText().isEmpty()){
-            // -5.0 lbs error is allowed
-            NF_Aggregate_Min = Double.parseDouble(textField_NFAggregate_Min.getText())-5.0;
-        }
-        if(!textField_NFAggregate_Max.getText().isEmpty()){
-            // +5.0 lbs error is allowed
-            NF_Aggregate_Max = Double.parseDouble(textField_NFAggregate_Max.getText())+5.0;
-        }
-        //LightWeightAggregate
-        if(!textField_LWAggregate_Min.getText().isEmpty()){
-            // -5.0 lbs error is allowed
-            LW_Aggregate_Min = Double.parseDouble(textField_LWAggregate_Min.getText());
-        }
-        if(!textField_LWAggregate_Max.getText().isEmpty()){
-            // +5.0 lbs error is allowed
-            LW_Aggregate_Max = Double.parseDouble(textField_LWAggregate_Max.getText());
-        }
         //Air_Percent
         if(!textField_Air_Min.getText().isEmpty()){
             // -5.0 lbs error is allowed
             air_percent_Min = Double.parseDouble(textField_Air_Min.getText());
         }
-        if(!textField_Air_Max.getText().isEmpty()){
-            // +5.0 lbs error is allowed
-            air_percent_Max = Double.parseDouble(textField_Air_Max.getText());
-        }
-        //Air_Entraining_Admixture
-        if(!textField_EntrainingAdmixture_Min.getText().isEmpty()){
-            // -5.0 lbs error is allowed
-            airEntrainingAdmix_Min = Double.parseDouble(textField_EntrainingAdmixture_Min.getText());
-        }
-        if(!textField_EntrainingAdmixture_Max.getText().isEmpty()){
-            // +5.0 lbs error is allowed
-            airEntrainingAdmix_Max = Double.parseDouble(textField_EntrainingAdmixture_Max.getText());
-        }
-        //Water_Reducer
-        if(!textField_WaterReducer_Min.getText().isEmpty()){
-            // -5.0 lbs error is allowed
-            waterReducer_Min = Double.parseDouble(textField_WaterReducer_Min.getText());
-        }
-        if(!textField_WaterReducer_Max.getText().isEmpty()){
-            // +5.0 lbs error is allowed
-            waterReducer_Max = Double.parseDouble(textField_WaterReducer_Max.getText());
-        }
-        //High_Range_Water_Reducer
-        if(!textField_HighWaterReducer_Min.getText().isEmpty()){
-            // -5.0 lbs error is allowed
-            highRange_WaterReducer_Min = Double.parseDouble(textField_HighWaterReducer_Min.getText());
-        }
-        if(!textField_HighWaterReducer_Max.getText().isEmpty()){
-            // +5.0 lbs error is allowed
-            highRange_WaterReducer_Max = Double.parseDouble(textField_HighWaterReducer_Max.getText());
-        }
-        //Accelerator
-        if(!textField_Accelerator_Min.getText().isEmpty()){
-            // -5.0 lbs error is allowed
-            accelerator_Min = Double.parseDouble(textField_Accelerator_Min.getText());
-        }
-        if(!textField_Accelerator_Max.getText().isEmpty()){
-            // +5.0 lbs error is allowed
-            accelerator_Max = Double.parseDouble(textField_Accelerator_Max.getText());
-        }
+
         List<Mix> result = new EPDDatabase().getResultsFilteredBy_epds_NRMCA
                 (       CS,region,cement_Min,cement_Max,
                         flyAsh_Min,flyAsh_Max,slag_Cement_Min,slag_Cement_Max,
