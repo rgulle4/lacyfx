@@ -168,6 +168,16 @@ public final class EPDDatabase {
         if (NF_Aggregate_Max != 0.0) sb.append(" AND Natural_Fine_Aggregate <= ").append("'").append(NF_Aggregate_Max).append("'");
         if (LW_Aggregate_Min != 0.0) sb.append(" AND Lightweight_Aggregate >= ").append("'").append(LW_Aggregate_Min).append("'");
         if (LW_Aggregate_Max != 0.0) sb.append(" AND Lightweight_Aggregate <= ").append("'").append(LW_Aggregate_Max).append("'");
+        if (air_percent_Min != 0.0) sb.append(" AND Air_Percent >= ").append("'").append(air_percent_Min).append("'");
+        if (air_percent_Max != 0.0) sb.append(" AND Air_Percent <= ").append("'").append(air_percent_Max).append("'");
+        if (airEntrainingAdmix_Min != 0.0) sb.append(" AND Air_Entraining_Admixture >= ").append("'").append(airEntrainingAdmix_Min).append("'");
+        if (airEntrainingAdmix_Max != 0.0) sb.append(" AND Air_Entraining_Admixture <= ").append("'").append(airEntrainingAdmix_Max).append("'");
+        if (waterReducer_Min != 0.0) sb.append(" AND Water_Reducer >= ").append("'").append(waterReducer_Min).append("'");
+        if (waterReducer_Max != 0.0) sb.append(" AND Water_Reducer <= ").append("'").append(waterReducer_Max).append("'");
+        if (highRange_WaterReducer_Min != 0.0) sb.append(" AND High_Range_Water_Reducer >= ").append("'").append(highRange_WaterReducer_Min).append("'");
+        if (highRange_WaterReducer_Max != 0.0) sb.append(" AND High_Range_Water_Reducer <= ").append("'").append(highRange_WaterReducer_Max).append("'");
+        if (accelerator_Min != 0.0) sb.append(" AND Accelerator >= ").append("'").append(accelerator_Min).append("'");
+        if (accelerator_Max != 0.0) sb.append(" AND Accelerator <= ").append("'").append(accelerator_Max).append("'");
 
         s = conn.createStatement();
         String sql = sb.toString();

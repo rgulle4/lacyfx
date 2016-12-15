@@ -261,6 +261,51 @@ public class LoadMixController_newVersion {
             // +5.0 lbs error is allowed
             LW_Aggregate_Max = Double.parseDouble(textField_LWAggregate_Max.getText());
         }
+        //Air_Percent
+        if(!textField_Air_Min.getText().isEmpty()){
+            // -5.0 lbs error is allowed
+            air_percent_Min = Double.parseDouble(textField_Air_Min.getText());
+        }
+        if(!textField_Air_Max.getText().isEmpty()){
+            // +5.0 lbs error is allowed
+            air_percent_Max = Double.parseDouble(textField_Air_Max.getText());
+        }
+        //Air_Entraining_Admixture
+        if(!textField_EntrainingAdmixture_Min.getText().isEmpty()){
+            // -5.0 lbs error is allowed
+            airEntrainingAdmix_Min = Double.parseDouble(textField_EntrainingAdmixture_Min.getText());
+        }
+        if(!textField_EntrainingAdmixture_Max.getText().isEmpty()){
+            // +5.0 lbs error is allowed
+            airEntrainingAdmix_Max = Double.parseDouble(textField_EntrainingAdmixture_Max.getText());
+        }
+        //Water_Reducer
+        if(!textField_WaterReducer_Min.getText().isEmpty()){
+            // -5.0 lbs error is allowed
+            waterReducer_Min = Double.parseDouble(textField_WaterReducer_Min.getText());
+        }
+        if(!textField_WaterReducer_Max.getText().isEmpty()){
+            // +5.0 lbs error is allowed
+            waterReducer_Max = Double.parseDouble(textField_WaterReducer_Max.getText());
+        }
+        //High_Range_Water_Reducer
+        if(!textField_HighWaterReducer_Min.getText().isEmpty()){
+            // -5.0 lbs error is allowed
+            highRange_WaterReducer_Min = Double.parseDouble(textField_HighWaterReducer_Min.getText());
+        }
+        if(!textField_HighWaterReducer_Max.getText().isEmpty()){
+            // +5.0 lbs error is allowed
+            highRange_WaterReducer_Max = Double.parseDouble(textField_HighWaterReducer_Max.getText());
+        }
+        //Accelerator
+        if(!textField_Accelerator_Min.getText().isEmpty()){
+            // -5.0 lbs error is allowed
+            accelerator_Min = Double.parseDouble(textField_Accelerator_Min.getText());
+        }
+        if(!textField_Accelerator_Max.getText().isEmpty()){
+            // +5.0 lbs error is allowed
+            accelerator_Max = Double.parseDouble(textField_Accelerator_Max.getText());
+        }
         List<Mix> result = new EPDDatabase().getResultsFilteredBy_epds_NRMCA
                 (       CS,region,cement_Min,cement_Max,
                         flyAsh_Min,flyAsh_Max,slag_Cement_Min,slag_Cement_Max,
