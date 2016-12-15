@@ -17,9 +17,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.controllers.LoadMixController_newVersion">
    <children>
-      <SplitPane dividerPositions="0.7205513784461153" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.6516290726817042" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="598.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="537.0" prefWidth="998.0">
                <children>
                   <GridPane hgap="10.0" layoutX="80.0" layoutY="28.0" prefHeight="90.0" prefWidth="401.0">
                     <columnConstraints>
@@ -38,7 +38,6 @@
                         <ComboBox fx:id="ComboBox_Region" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
-                  <Button layoutX="474.0" layoutY="503.0" mnemonicParsing="false" onAction="#searchbutton_newVersion" prefWidth="75.0" text="Search" />
                   <GridPane hgap="10.0" layoutX="559.0" layoutY="28.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="326.0" minWidth="10.0" prefWidth="200.0" />
@@ -64,8 +63,7 @@
                      </rowConstraints>
                      <children>
                         <Label text="Cement (lbs)" GridPane.rowIndex="1" />
-                        <TextField fx:id="textField_Cement_Min" prefHeight="23.0" prefWidth="43.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <TextField fx:id="textField_Cement_Max" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="textField_Cement_Min" prefHeight="23.0" prefWidth="43.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Min value" textFill="#ff0101" GridPane.columnIndex="1">
                            <font>
                               <Font size="14.0" />
@@ -121,9 +119,10 @@
                         <Label text="Accelerator (oz)" GridPane.rowIndex="14" />
                         <TextField fx:id="textField_Accelerator_Min" GridPane.columnIndex="1" GridPane.rowIndex="14" />
                         <TextField fx:id="textField_Accelerator_Max" GridPane.columnIndex="2" GridPane.rowIndex="14" />
+                        <TextField fx:id="textField_Cement_Max" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
-                  <Label fx:id="Label_MixSize" layoutX="474.0" layoutY="260.0">
+                  <Label fx:id="Label_MixSize" layoutX="491.0" layoutY="485.0" text="Mixes">
                      <font>
                         <Font size="18.0" />
                      </font></Label>
@@ -131,15 +130,30 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="998.0">
                <children>
-                  <TableView id="my-table" fx:id="MaterialTable" layoutX="-1.0" prefHeight="147.0" prefWidth="1000.0">
+                  <TableView id="my-table" fx:id="MaterialTable" layoutX="-1.0" prefHeight="192.0" prefWidth="1000.0">
                     <columns>
                       <TableColumn fx:id="CS_Column" prefWidth="135.0" text="Compressive Strength" />
-                        <TableColumn fx:id="Region_Column" prefWidth="75.0" text="Region" />
-                        <TableColumn fx:id="Cement_Column" prefWidth="111.0" text="Cement (lbs)" />
+                        <TableColumn fx:id="Light_Weight_Column" prefWidth="75.0" text="LW(Y/N)" />
+                        <TableColumn fx:id="Region_Column" prefWidth="128.0" text="Region" />
+                        <TableColumn fx:id="Cement_Column" prefWidth="75.0" text="Cement (lbs)" />
+                        <TableColumn fx:id="Fly_Ash_Column" prefWidth="75.0" text="Fly Ash (lbs)" />
+                        <TableColumn fx:id="Slag_Cement_Column" prefWidth="75.0" text="Slag Cement (lbs)" />
+                        <TableColumn fx:id="Mixing_Water_Column" prefWidth="75.0" text="Mixing Water (lbs)" />
+                        <TableColumn fx:id="Crushed_Coarse_Aggregate_Column" prefWidth="75.0" text="CC_Aggregate (lbs)" />
+                        <TableColumn fx:id="Crushed_Fine_Aggregate_Column" prefWidth="75.0" text="CF_Aggregate (lbs)" />
+                        <TableColumn fx:id="Natural_Coarse_Aggregate_Column" prefWidth="75.0" text="NC_Aggregate (lbs)" />
+                        <TableColumn fx:id="Natural_Fine_Aggregate_Column" prefWidth="75.0" text="NF_Aggregate (lbs)" />
+                        <TableColumn fx:id="Light_Weight_Aggregate_Column" prefWidth="75.0" text="LW_Aggregate (lbs)" />
+                        <TableColumn fx:id="Air_Percent_Column" prefWidth="75.0" text="Air (%)" />
+                        <TableColumn fx:id="Air_Entraining_Admixture_Column" prefWidth="75.0" text="Air Entraining Admixture (oz)" />
+                        <TableColumn fx:id="Water_Reducer_Column" prefWidth="75.0" text="Water Reducer (oz)" />
+                        <TableColumn fx:id="High_Range_Water_Reducer_Column" prefWidth="75.0" text="HR_Water Reducer (oz)" />
+                        <TableColumn fx:id="Accelerator_Column" prefWidth="75.0" text="Accelerator (oz)" />
                     </columns>
                   </TableView>
-                  <HBox layoutX="383.0" layoutY="171.0" prefHeight="30.0" prefWidth="232.0" spacing="30.0">
+                  <HBox layoutX="354.0" layoutY="211.0" prefHeight="30.0" prefWidth="400.0" spacing="30.0">
                      <children>
+                        <Button mnemonicParsing="false" onAction="#searchbutton_newVersion" prefWidth="75.0" text="Search" />
                         <Button mnemonicParsing="false" onAction="#saveButton" prefWidth="75.0" text="Save" />
                         <Button fx:id="closeButton" cancelButton="true" mnemonicParsing="false" onAction="#handleCloseButtonAction" prefWidth="75.0" text="Finish" />
                      </children>

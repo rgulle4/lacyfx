@@ -212,6 +212,7 @@ public final class EPDDatabase {
         while(rs.next()){
             g = new Mix();
             g.setCS(rs.getString("COMPRESSIVE_STRENGTH"));
+            g.setIsLightWeight(rs.getString("Light_Weight"));
             g.setGWP(rs.getDouble("GWP"));
             g.setODP(rs.getDouble("ODP"));
             g.setAP(rs.getDouble("AP"));
@@ -236,7 +237,7 @@ public final class EPDDatabase {
             g.setCrushed_Coarse_Aggregate(rs.getString("Crushed_Coarse_Aggregate"));
             g.setNatural_Coarse_Aggregate(rs.getString("Natural_Coarse_Aggregate"));
             g.setCrushed_Fine_Aggregate(rs.getString("Crushed_Fine_Aggregate"));
-            g.setNatrual_Fine_Aggregate(rs.getString("Natural_Fine_Aggregate"));
+            g.setNatural_Fine_Aggregate(rs.getString("Natural_Fine_Aggregate"));
             g.setLightWeight_Aggregate(rs.getString("Lightweight_Aggregate"));
             g.setAir_Percent(rs.getString("Air_Percent"));
             g.setAir_Entrained(rs.getString("Air_Entraining_Admixture"));

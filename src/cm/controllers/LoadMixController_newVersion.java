@@ -31,13 +31,35 @@ public class LoadMixController_newVersion {
     @FXML
     public TableColumn CS_Column;
     @FXML
-    public TableColumn LightWeight_Column;
+    public TableColumn Light_Weight_Column;
     @FXML
     public TableColumn Cement_Column;
     @FXML
-    public TableColumn MixingWater_Column;
+    public TableColumn Fly_Ash_Column;
     @FXML
-    public TableColumn Air_Percent;
+    public TableColumn Slag_Cement_Column;
+    @FXML
+    public TableColumn Mixing_Water_Column;
+    @FXML
+    public TableColumn Crushed_Coarse_Aggregate_Column;
+    @FXML
+    public TableColumn Crushed_Fine_Aggregate_Column;
+    @FXML
+    public TableColumn Natural_Coarse_Aggregate_Column;
+    @FXML
+    public TableColumn Natural_Fine_Aggregate_Column;
+    @FXML
+    public TableColumn Light_Weight_Aggregate_Column;
+    @FXML
+    public TableColumn Air_Percent_Column;
+    @FXML
+    public TableColumn Air_Entraining_Admixture_Column;
+    @FXML
+    public TableColumn Water_Reducer_Column;
+    @FXML
+    public TableColumn High_Range_Water_Reducer_Column;
+    @FXML
+    public TableColumn Accelerator_Column;
     @FXML
     public TableColumn Region_Column;
     @FXML
@@ -66,12 +88,25 @@ public class LoadMixController_newVersion {
 
         textField_CS.setText("3000.0");
         ComboBox_Region.setItems(RegionList);
-        ComboBox_Region.setValue(RegionList.get(4));        //Default selection is "Nationwide"
-
+        ComboBox_Region.setValue(RegionList.get(4));        //Default selection is "South Central"
         //Alternative materials
         CS_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("CS"));
+        Light_Weight_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("IsLightWeight"));
         Region_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Region"));
         Cement_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Cement"));
+        Fly_Ash_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Fly_Ash"));
+        Slag_Cement_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Slag"));
+        Mixing_Water_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Mixing_Water"));
+        Crushed_Coarse_Aggregate_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Crushed_Coarse_Aggregate"));
+        Crushed_Fine_Aggregate_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Crushed_Fine_Aggregate"));
+        Natural_Coarse_Aggregate_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Natural_Coarse_Aggregate"));
+        Natural_Fine_Aggregate_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Natural_Fine_Aggregate"));
+        Light_Weight_Aggregate_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("LightWeight_Aggregate"));
+        Air_Percent_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Air_Percent"));
+        Air_Entraining_Admixture_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Air_Entrained"));
+        Water_Reducer_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Water_Reducer"));
+        High_Range_Water_Reducer_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("High_Range_Water_Reducer"));
+        Accelerator_Column.setCellValueFactory(new PropertyValueFactory<Mix, String>("Accelerator"));
     }
 
     @FXML

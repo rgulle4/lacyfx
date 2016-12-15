@@ -43,22 +43,22 @@ public final class Mix {
     public Map<String,Double> CalcResult = new HashMap<>();
     public Map<String,String> EPDUnits = new HashMap<>();
     //Mix description
+    public String Region;
+    public String IsLightWeight;
     public String Cement;
-    public String Mixing_Water;
-    public String Air_Percent;
-    public String Water_Reducer;
-    public String High_Range_Water_Reducer;
     public String Fly_Ash;
     public String Slag;
-    public String Air_Entrained;
+    public String Mixing_Water;
     public String Crushed_Coarse_Aggregate;
     public String Crushed_Fine_Aggregate;
     public String Natural_Coarse_Aggregate;
-    public String Natrual_Fine_Aggregate;
+    public String Natural_Fine_Aggregate;
     public String LightWeight_Aggregate;
+    public String Air_Percent;
+    public String Air_Entrained;
+    public String Water_Reducer;
+    public String High_Range_Water_Reducer;
     public String Accelerator;
-    public String Region;
-    public String IsLightWeight;
     //unit
     public String GWP_Units;
     public String ODP_Units;
@@ -888,12 +888,12 @@ public final class Mix {
         Natural_Coarse_Aggregate = natural_Coarse_Aggregate;
     }
 
-    public String getNatrual_Fine_Aggregate() {
-        return Natrual_Fine_Aggregate;
+    public String getNatural_Fine_Aggregate() {
+        return Natural_Fine_Aggregate;
     }
 
-    public void setNatrual_Fine_Aggregate(String natrual_Fine_Aggregate) {
-        Natrual_Fine_Aggregate = natrual_Fine_Aggregate;
+    public void setNatural_Fine_Aggregate(String natural_Fine_Aggregate) {
+        Natural_Fine_Aggregate = natural_Fine_Aggregate;
     }
 
     public String getLightWeight_Aggregate() {
