@@ -62,24 +62,25 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
+                         <Label text="Min value" textFill="#ff0101" GridPane.columnIndex="1">
+                             <font>
+                                 <Font size="14.0" />
+                             </font></Label>
+                         <Label text="Max value" textFill="RED" GridPane.columnIndex="2">
+                             <font>
+                                 <Font size="14.0" />
+                             </font></Label>
+                         <Label text="Mix description" textFill="#2f00ff">
+                             <GridPane.margin>
+                                 <Insets left="25.0" />
+                             </GridPane.margin>
+                             <font>
+                                 <Font size="18.0" />
+                             </font>
+                         </Label>
                         <Label text="Cement (lbs)" GridPane.rowIndex="1" />
                         <TextField fx:id="textField_Cement_Min" prefHeight="23.0" prefWidth="43.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label text="Min value" textFill="#ff0101" GridPane.columnIndex="1">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label text="Max value" textFill="RED" GridPane.columnIndex="2">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label text="Mix description" textFill="#2f00ff">
-                           <GridPane.margin>
-                              <Insets left="25.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
+                         <TextField fx:id="textField_Cement_Max" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                         <Label text="Fly Ash (lbs)" GridPane.rowIndex="2" />
                         <TextField fx:id="textField_FlyAsh_Min" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="textField_FlyAsh_Max" GridPane.columnIndex="2" GridPane.rowIndex="2" />
@@ -119,7 +120,6 @@
                         <Label text="Accelerator (oz)" GridPane.rowIndex="14" />
                         <TextField fx:id="textField_Accelerator_Min" GridPane.columnIndex="1" GridPane.rowIndex="14" />
                         <TextField fx:id="textField_Accelerator_Max" GridPane.columnIndex="2" GridPane.rowIndex="14" />
-                        <TextField fx:id="textField_Cement_Max" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                   <Label fx:id="Label_MixSize" layoutX="491.0" layoutY="485.0" text="Mixes">

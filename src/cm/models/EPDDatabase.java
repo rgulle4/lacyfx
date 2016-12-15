@@ -130,72 +130,21 @@ public final class EPDDatabase {
         return result;
     }
 
-    public List<Mix> getResultsFilteredBy_newVersion
-            (Double cs, String region,Double cement_Min, Double cement_Max,
-             Double cementetiousMaterial_Min, Double cementetiousMaterial_Max
-            )
-            throws SQLException, ParseException {
-        List<Mix> result = new ArrayList<Mix>();
-
-        StringBuilder sb = new StringBuilder("SELECT * FROM concrete_epds_ranges WHERE 1");
-        if (cs != 0.0) sb.append(" AND COMPRESSIVE_STRENGTH >= ").append("'").append(cs).append("'");
-        if (!region.isEmpty()) sb.append(" AND Region = ").append("'").append(region).append("'");
-        if (cement_Min != 0.0) sb.append(" AND Cement_Weight >= ").append("'").append(cement_Min).append("'");
-        if (cement_Max != 0.0) sb.append(" AND Cement_Weight <= ").append("'").append(cement_Max).append("'");
-        if (cementetiousMaterial_Min != 0.0) sb.append(" AND CementReplacement_Percent_Min >= ").append("'").append(cementetiousMaterial_Min).append("'");
-        if (cementetiousMaterial_Max != 0.0) sb.append(" AND CementReplacement_Percent_Max <= ").append("'").append(cementetiousMaterial_Max).append("'");
-        s = conn.createStatement();
-        String sql = sb.toString();
-        rs = s.executeQuery(sql);
-        Mix g;
-        while(rs.next()){
-            g = new Mix();
-            g.setProduct_ID(rs.getString("Product_ID"));
-            g.setCS(rs.getString("COMPRESSIVE_STRENGTH"));
-            g.setCompany_Name(rs.getString("COMPANY_NAME"));
-            g.setLocation(rs.getString("LOCATION"));
-            g.setMixNum(rs.getString("MIX_NUMBER"));
-            g.setZipCode(rs.getString("ZIP_CODE"));
-            g.setGWP(rs.getDouble("GWP"));
-            g.setODP(rs.getDouble("ODP"));
-            g.setAP(rs.getDouble("AP"));
-            g.setEP(rs.getDouble("EP"));
-            g.setPOCP(rs.getDouble("POCP"));
-            g.setUnit(rs.getString("UNITS_OF_VOLUME"));
-            g.setConcreteHazardousWaste(rs.getDouble("CONCRETE_HAZARDOUS_WASTE"));
-            g.setConcreteNonHazardousWaste(rs.getDouble("CONCRETE_NON_HAZARDOUS_WASTE"));
-            g.setTotalWaterConsumption(rs.getDouble("TOTAL_WATER_CONSUMPTION"));
-            g.setConcreteBatchingWaterConsumption(rs.getDouble("CONCRETE_BATCHING_WATER_CONSUMPTION"));
-            g.setConcreteBatchingWaterConsumption(rs.getDouble("CONCRETE_WASHING_WATER_CONSUMPTION"));
-            g.setTotalPrimaryEnergyConsumption(rs.getString("TOTAL_PRIMARY_ENERGY_CONSUMPTION"));
-            g.setRenewablePrimaryEnergyUse(rs.getDouble("RENEWABLE_PRIMARY_ENERGY_CONSUMPTION"));
-            g.setNonRenewableEnergyUse(rs.getString("NON_RENEWABLE_ENERGY_CONSUMPTION"));
-            g.setRenewableMaterialResourcesUse(rs.getDouble("RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
-            g.setNonRenewableMaterialResource(rs.getString("NON_RENEWABLE_MIX_RESOURCES_CONSUMPTION"));
-            g.setRegion(rs.getString("Region"));
-            g.setCement(rs.getString("Cement_Weight"));
-            g.setMixing_Water(rs.getString("CementReplacement_Percent_Min"));
-            g.setAir_Percent(rs.getString("CementReplacement_Percent_Max"));
-
-            //set unit
-            g.setGWP_Units(rs.getString("GWP_UNITS"));
-            g.setODP_Units(rs.getString("ODP_UNITS"));
-            g.setAP_Units(rs.getString("AP_UNITS"));
-            g.setEP_Units(rs.getString("EP_UNITS"));
-            g.setPOCP_Units(rs.getString("POCP_UNITS"));
-            g.setTotalPrimaryEnergyConsumption_Units(rs.getString("TOTAL_PRIMARY_ENERGY_CONSUMPTION_UNITS"));
-            g.setTotalWaterConsumption_Units(rs.getString("TOTAL_WATER_CONSUMPTION_UNITS"));
-            g.setNonRenewableMaterialResource_Units(rs.getString("RENEWABLE_MIX_RESOURCES_CONSUMPTION_UNITS"));
-            g.setRenewableMaterialResourcesUse_Units(rs.getString("NON_RENEWABLE_MIX_RESOURCES_CONSUMPTION_UNITS"));
-
-            result.add(g);
-        }
-        System.out.println("size: "+result.size());
-        return result;
-    }
-
     public List<Mix> getResultsFilteredBy_epds_NRMCA
-            (Double cs, String region,Double cement_Min, Double cement_Max
+            (Double cs, String region,Double cement_Min, Double cement_Max,
+             Double flyAsh_Min, Double flyAsh_Max,
+             Double slag_Cement_Min, Double slag_Cement_Max,
+             Double mixing_Water_Min, Double mixing_Water_Max,
+             Double CC_Aggregate_Min, Double CC_Aggregate_Max,
+             Double CF_Aggregate_Min, Double CF_Aggregate_Max,
+             Double NC_Aggregate_Min, Double NC_Aggregate_Max,
+             Double NF_Aggregate_Min, Double NF_Aggregate_Max,
+             Double LW_Aggregate_Min, Double LW_Aggregate_Max,
+             Double air_percent_Min, Double air_percent_Max,
+             Double airEntrainingAdmix_Min, Double airEntrainingAdmix_Max,
+             Double waterReducer_Min, Double waterReducer_Max,
+             Double highRange_WaterReducer_Min, Double highRange_WaterReducer_Max,
+             Double accelerator_Min, Double accelerator_Max
             )
             throws SQLException, ParseException {
         List<Mix> result = new ArrayList<Mix>();
@@ -205,6 +154,21 @@ public final class EPDDatabase {
         if (!region.isEmpty()) sb.append(" AND Region = ").append("'").append(region).append("'");
         if (cement_Min != 0.0) sb.append(" AND Cement_Weight >= ").append("'").append(cement_Min).append("'");
         if (cement_Max != 0.0) sb.append(" AND Cement_Weight <= ").append("'").append(cement_Max).append("'");
+        if (flyAsh_Min != 0.0) sb.append(" AND Fly_Ash_weight >= ").append("'").append(flyAsh_Min).append("'");
+        if (flyAsh_Max != 0.0) sb.append(" AND Fly_Ash_weight <= ").append("'").append(flyAsh_Max).append("'");
+        if (slag_Cement_Min != 0.0) sb.append(" AND Slag_weight >= ").append("'").append(slag_Cement_Min).append("'");
+        if (slag_Cement_Max != 0.0) sb.append(" AND Slag_weight <= ").append("'").append(slag_Cement_Max).append("'");
+        if (CC_Aggregate_Min != 0.0) sb.append(" AND Crushed_Coarse_Aggregate >= ").append("'").append(CC_Aggregate_Min).append("'");
+        if (CC_Aggregate_Max != 0.0) sb.append(" AND Crushed_Coarse_Aggregate <= ").append("'").append(CC_Aggregate_Max).append("'");
+        if (NC_Aggregate_Min != 0.0) sb.append(" AND Natural_Coarse_Aggregate >= ").append("'").append(NC_Aggregate_Min).append("'");
+        if (NC_Aggregate_Max != 0.0) sb.append(" AND Natural_Coarse_Aggregate <= ").append("'").append(NC_Aggregate_Max).append("'");
+        if (CF_Aggregate_Min != 0.0) sb.append(" AND Crushed_Fine_Aggregate >= ").append("'").append(CF_Aggregate_Min).append("'");
+        if (CF_Aggregate_Max != 0.0) sb.append(" AND Crushed_Fine_Aggregate <= ").append("'").append(CF_Aggregate_Max).append("'");
+        if (NF_Aggregate_Min != 0.0) sb.append(" AND Natural_Fine_Aggregate >= ").append("'").append(NF_Aggregate_Min).append("'");
+        if (NF_Aggregate_Max != 0.0) sb.append(" AND Natural_Fine_Aggregate <= ").append("'").append(NF_Aggregate_Max).append("'");
+        if (LW_Aggregate_Min != 0.0) sb.append(" AND Lightweight_Aggregate >= ").append("'").append(LW_Aggregate_Min).append("'");
+        if (LW_Aggregate_Max != 0.0) sb.append(" AND Lightweight_Aggregate <= ").append("'").append(LW_Aggregate_Max).append("'");
+
         s = conn.createStatement();
         String sql = sb.toString();
         rs = s.executeQuery(sql);
