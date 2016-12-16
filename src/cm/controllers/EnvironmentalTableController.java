@@ -140,7 +140,7 @@ public class EnvironmentalTableController {
             pmix.setGWP(result.get(count));
             if (valueType == "Raw impact per functional unit") {
                 String gwp_units = result_Units.get(0);
-                if (gwp_units.equals("kg CO2 eq/m3")) pmix.setGWP_Units("Kg CO2 eq");
+                if (gwp_units.equals("Kg CO2 eq/y3")) pmix.setGWP_Units("Kg CO2 eq");
                 else System.out.println(gwp_units +" was not found");
             }count++;
         }
@@ -148,7 +148,7 @@ public class EnvironmentalTableController {
             pmix.setODP(result.get(count));
             if (valueType == "Raw impact per functional unit") {
                 String odp_units = result_Units.get(0);
-                if (odp_units.equals("kg CFC-11 eq/m3")) pmix.setODP_Units("Kg CFC -11 eq");
+                if (odp_units.equals("Kg CFC-11 eq/y3")) pmix.setODP_Units("Kg CFC -11 eq");
                 else System.out.println(odp_units+" was not found");
             }count++;
         }
@@ -156,7 +156,7 @@ public class EnvironmentalTableController {
             pmix.setAP(result.get(count));
             if (valueType == "Raw impact per functional unit") {
                 String ap_units = result_Units.get(0);
-                if (ap_units.equals("kg SO2 eq/m3")) pmix.setAP_Units("Kg SO2 eq");
+                if (ap_units.equals("Kg SO2 eq/y3")) pmix.setAP_Units("Kg SO2 eq");
                 else System.out.println(ap_units+" was not found");
             }count++;
         }
@@ -164,7 +164,7 @@ public class EnvironmentalTableController {
             pmix.setEP(result.get(count));
             if (valueType == "Raw impact per functional unit") {
                 String ep_units = result_Units.get(0);
-                if (ep_units.equals("kg N eq/m3")) pmix.setEP_Units("Kg N eq");
+                if (ep_units.equals("Kg N eq/y3")) pmix.setEP_Units("Kg N eq");
                 else System.out.println(ep_units+" was not found");
             }count++;
         }
@@ -172,7 +172,7 @@ public class EnvironmentalTableController {
             pmix.setPOCP(result.get(count));
             if (valueType == "Raw impact per functional unit") {
                 String pocp_units = result_Units.get(0);
-                if (pocp_units.equals("kg O3 eq/m3")) pmix.setPOCP_Units("Kg O3 eq");
+                if (pocp_units.equals("Kg O3 eq/y3")) pmix.setPOCP_Units("Kg O3 eq");
                 else System.out.println(pocp_units+" was not found");
             }count++;
         }
@@ -180,7 +180,7 @@ public class EnvironmentalTableController {
             pmix.setTotalPrimaryEnergyConsumption(result.get(count));
             if (valueType == "Raw impact per functional unit") {
                 String tpec_units = result_Units.get(0);
-                if (tpec_units.equals("MJ/m3")) pmix.setTotalPrimaryEnergyConsumption_Units("MJ");
+                if (tpec_units.equals("MJ/y3")) pmix.setTotalPrimaryEnergyConsumption_Units("MJ");
                 else System.out.println(tpec_units+" was not found");
             }count=0;
         }
@@ -194,22 +194,22 @@ public class EnvironmentalTableController {
             pmix.setTotalPrimaryEnergyConsumption(result.get(5));
             if (valueType == "Raw impact per functional unit"){
                 String gwp_units = result_Units.get(0);
-                if (gwp_units.equals("kg CO2 eq/m3")) pmix.setGWP_Units("Kg CO2 eq");
+                if (gwp_units.equals("Kg CO2 eq/y3")) pmix.setGWP_Units("Kg CO2 eq");
                 else System.out.println(gwp_units +" was not found");
                 String odp_units = result_Units.get(1);
-                if (odp_units.equals("kg CFC-11 eq/m3")) pmix.setODP_Units("Kg CFC -11 eq");
+                if (odp_units.equals("Kg CFC-11 eq/y3")) pmix.setODP_Units("Kg CFC -11 eq");
                 else System.out.println(odp_units+" was not found");
                 String ap_units = result_Units.get(2);
-                if (ap_units.equals("kg SO2 eq/m3")) pmix.setAP_Units("Kg SO2 eq");
+                if (ap_units.equals("Kg SO2 eq/y3")) pmix.setAP_Units("Kg SO2 eq");
                 else System.out.println(ap_units+" was not found");
                 String ep_units = result_Units.get(3);
-                if (ep_units.equals("kg N eq/m3")) pmix.setEP_Units("Kg N eq");
+                if (ep_units.equals("Kg N eq/y3")) pmix.setEP_Units("Kg N eq");
                 else System.out.println(ep_units+" was not found");
                 String pocp_units = result_Units.get(4);
-                if (pocp_units.equals("kg O3 eq/m3")) pmix.setPOCP_Units("Kg O3 eq");
+                if (pocp_units.equals("Kg O3 eq/y3")) pmix.setPOCP_Units("Kg O3 eq");
                 else System.out.println(pocp_units+" was not found");
                 String tpec_units = result_Units.get(5);
-                if (tpec_units.equals("MJ/m3")) pmix.setTotalPrimaryEnergyConsumption_Units("MJ");
+                if (tpec_units.equals("MJ/y3")) pmix.setTotalPrimaryEnergyConsumption_Units("MJ");
                 else System.out.println(tpec_units+" was not found");
             }
         }
