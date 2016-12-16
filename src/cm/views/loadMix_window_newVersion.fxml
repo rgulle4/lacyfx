@@ -98,8 +98,8 @@
                         <TableColumn fx:id="Fly_Ash_Column" prefWidth="100.0" text="Fly Ash (lbs)" />
                         <TableColumn fx:id="Slag_Cement_Column" prefWidth="100.0" text="Slag Cement (lbs)" />
                         <TableColumn fx:id="Mixing_Water_Column" prefWidth="100.0" text="Mixing Water (lbs)" />
-                        <TableColumn prefWidth="125.0" text="Coarse Aggregate (lbs)" />
-                        <TableColumn prefWidth="125.0" text="Fine Aggregate (lbs)" />
+                        <TableColumn fx:id="Coarse_Aggregate_Column" prefWidth="125.0" text="Coarse Aggregate (lbs)" />
+                        <TableColumn fx:id="Fine_Aggregate_Column" prefWidth="125.0" text="Fine Aggregate (lbs)" />
                         <TableColumn fx:id="Air_Percent_Column" prefWidth="100.0" text="Air (%)" />
                     </columns>
                   </TableView>

@@ -131,31 +131,50 @@ public final class EPDDatabase {
     }
 
     public List<Mix> getResultsFilteredBy_epds_NRMCA
-            (Double cs, String region,Double cement_Min, Double cement_Max,
-             Double flyAsh_Min, Double flyAsh_Max,
-             Double slag_Cement_Min, Double slag_Cement_Max,
-             Double mixing_Water_Min, Double mixing_Water_Max,
-             Double CC_Aggregate_Min, Double CC_Aggregate_Max,
-             Double CF_Aggregate_Min, Double CF_Aggregate_Max,
-             Double NC_Aggregate_Min, Double NC_Aggregate_Max,
-             Double NF_Aggregate_Min, Double NF_Aggregate_Max,
-             Double LW_Aggregate_Min, Double LW_Aggregate_Max,
-             Double air_percent_Min, Double air_percent_Max,
-             Double airEntrainingAdmix_Min, Double airEntrainingAdmix_Max,
-             Double waterReducer_Min, Double waterReducer_Max,
-             Double highRange_WaterReducer_Min, Double highRange_WaterReducer_Max,
-             Double accelerator_Min, Double accelerator_Max
+            (Double cs, String region,Double cement, Double flyAsh,
+             Double slag_Cement, Double mixing_Water,Double coarse_Aggregate,
+             Double fine_Aggregate,Double air_percent
             )
             throws SQLException, ParseException {
         List<Mix> result = new ArrayList<Mix>();
 
-        StringBuilder sb = new StringBuilder("SELECT * FROM concrete_epds_NRMCA WHERE 1");
-        if (cs != 0.0) sb.append(" AND COMPRESSIVE_STRENGTH >= ").append("'").append(cs).append("'");
+        StringBuilder sb = new StringBuilder(
+                //Light_Weight = 'N' means only select regular concrete
+                "SELECT * FROM concrete_epds_NRMCA WHERE 1 AND Light_Weight = 'N'");
+        if (cs != 0.0){
+            sb.append(" AND COMPRESSIVE_STRENGTH <= ").append("'").append(cs+500).append("'");
+            sb.append(" AND COMPRESSIVE_STRENGTH >= ").append("'").append(cs-500).append("'");
+        }
         if (!region.isEmpty()) sb.append(" AND Region = ").append("'").append(region).append("'");
-        if (cement_Min != 0.0) sb.append(" AND Cement_Weight >= ").append("'").append(cement_Min).append("'");
-        if (flyAsh_Min != 0.0) sb.append(" AND Fly_Ash_weight >= ").append("'").append(flyAsh_Min).append("'");
-        if (slag_Cement_Min != 0.0) sb.append(" AND Slag_weight >= ").append("'").append(slag_Cement_Min).append("'");
-        if (air_percent_Min != 0.0) sb.append(" AND Air_Percent >= ").append("'").append(air_percent_Min).append("'");
+        if (cement != 0.0){
+            sb.append(" AND Cement_Weight <= ").append("'").append(cement*1.1).append("'");
+            sb.append(" AND Cement_Weight >= ").append("'").append(cement*0.9).append("'");
+        }
+        if (flyAsh != 0.0) {
+            sb.append(" AND Fly_Ash_weight <= ").append("'").append(flyAsh*1.1).append("'");
+            sb.append(" AND Fly_Ash_weight >= ").append("'").append(flyAsh*0.9).append("'");
+        }
+        if (slag_Cement != 0.0) {
+            sb.append(" AND Slag_weight <= ").append("'").append(slag_Cement*1.1).append("'");
+            sb.append(" AND Slag_weight >= ").append("'").append(slag_Cement*0.9).append("'");
+        }
+        if (mixing_Water != 0.0){
+            sb.append(" AND Mixing_Water <= ").append("'").append(mixing_Water*1.1).append("'");
+            sb.append(" AND Mixing_Water >= ").append("'").append(mixing_Water*0.9).append("'");
+        }
+        if (coarse_Aggregate != 0.0){
+            sb.append(" AND Coarse_Aggregate <= ").append("'").append(coarse_Aggregate*1.1).append("'");
+            sb.append(" AND Coarse_Aggregate >= ").append("'").append(coarse_Aggregate*0.9).append("'");
+        }
+        if (fine_Aggregate != 0.0){
+            sb.append(" AND Fine_Aggregate <= ").append("'").append(fine_Aggregate*1.1).append("'");
+            sb.append(" AND Fine_Aggregate >= ").append("'").append(fine_Aggregate*0.9).append("'");
+        }
+        if (air_percent != 0.0) {
+            sb.append(" AND Air_Percent <= ").append("'").append(air_percent*1.1).append("'");
+            sb.append(" AND Air_Percent >= ").append("'").append(air_percent*0.9).append("'");
+        }
+
 
         s = conn.createStatement();
         String sql = sb.toString();
@@ -197,6 +216,8 @@ public final class EPDDatabase {
             g.setHigh_Range_Water_Reducer(rs.getString("High_Range_Water_Reducer"));
             g.setAccelerator(rs.getString("Accelerator"));
             g.setIsLightWeight(rs.getString("Light_Weight"));
+            g.setCoarseAggregate(rs.getString("Coarse_Aggregate"));
+            g.setFineAggregate(rs.getString("Fine_Aggregate"));
 
             //set unit
             g.setGWP_Units(rs.getString("GWP_UNITS"));
@@ -207,7 +228,7 @@ public final class EPDDatabase {
             g.setTotalPrimaryEnergyConsumption_Units(rs.getString("TOTAL_PRIMARY_ENERGY_CONSUMPTION_UNITS"));
             g.setTotalWaterConsumption_Units(rs.getString("TOTAL_WATER_CONSUMPTION_UNITS"));
             g.setNonRenewableMaterialResource_Units(rs.getString("RENEWABLE_MATERIAL_RESOURCES_CONSUMPTION_UNITS"));
-            g.setRenewableMaterialResourcesUse_Units(rs.getString("NON_RENEWABLE_MMATERIAL_RESOURCES_CONSUMPTION_UNITS"));
+            g.setRenewableMaterialResourcesUse_Units(rs.getString("NON_RENEWABLE_MATERIAL_RESOURCES_CONSUMPTION_UNITS"));
 
             result.add(g);
         }

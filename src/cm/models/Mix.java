@@ -59,6 +59,8 @@ public final class Mix {
     public String Water_Reducer;
     public String High_Range_Water_Reducer;
     public String Accelerator;
+    public String CoarseAggregate;
+    public String FineAggregate;
     //unit
     public String GWP_Units;
     public String ODP_Units;
@@ -938,5 +940,21 @@ public final class Mix {
 
     public void setIsLightWeight(String isLightWeight) {
         IsLightWeight = isLightWeight;
+    }
+
+    public String getCoarseAggregate() {
+        return CoarseAggregate;
+    }
+
+    public void setCoarseAggregate(String coarseAggregate) {
+        CoarseAggregate = coarseAggregate;
+    }
+
+    public String getFineAggregate() {
+        return FineAggregate;
+    }
+
+    public void setFineAggregate(String fineAggregate) {
+        FineAggregate = fineAggregate;
     }
 }
