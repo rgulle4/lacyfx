@@ -11,10 +11,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.controllers.EnvironmentalReportController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.controllers.EnvironmentalReportController">
    <children>
       <Button fx:id="show_Button" layoutX="1012.0" layoutY="136.0" mnemonicParsing="false" onAction="#showOutputChart" text="Show" />
-      <StackedBarChart fx:id="sbc" layoutX="15.0" layoutY="180.0" prefHeight="500.0" prefWidth="1000.0">
+      <StackedBarChart fx:id="sbc" layoutX="15.0" layoutY="120.0" prefHeight="400.0" prefWidth="800.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" fx:id="xAxis" />
         </xAxis>
@@ -22,7 +22,7 @@
           <NumberAxis fx:id="yAxis" side="LEFT" />
         </yAxis>
       </StackedBarChart>
-      <BarChart fx:id="bc" categoryGap="25.0" layoutX="15.0" layoutY="180.0" prefHeight="500.0" prefWidth="1000.0">
+      <BarChart fx:id="bc" categoryGap="25.0" layoutX="15.0" layoutY="120.0" prefHeight="400.0" prefWidth="800.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
@@ -45,7 +45,7 @@
          </children>
       </HBox>
       <Button fx:id="clean_Button" layoutX="1076.0" layoutY="136.0" mnemonicParsing="false" onAction="#cleanChart" text="Clean" />
-      <Button fx:id="showTable_Button" layoutX="1035.0" layoutY="680.0" mnemonicParsing="false" onAction="#showTable" text="Show Table" />
+      <Button fx:id="showTable_Button" layoutX="1018.0" layoutY="530.0" mnemonicParsing="false" onAction="#showTable" text="Show Table" />
       <Label fx:id="noteLabel" layoutX="1036.0" layoutY="366.0" prefHeight="109.0" prefWidth="133.0">
          <font>
             <Font size="14.0" />

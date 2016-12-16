@@ -15,9 +15,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.controllers.LoadMixController_newVersion">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.controllers.LoadMixController_newVersion">
    <children>
-      <SplitPane dividerPositions="0.48120300751879697" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.5769230769230769" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="537.0" prefWidth="998.0">
                <children>
@@ -54,10 +54,13 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                         <Label text="Min value" textFill="#ff0101" GridPane.columnIndex="1">
+                         <Label text="Value" textFill="#ff0101" GridPane.columnIndex="1">
                              <font>
                                  <Font size="14.0" />
-                             </font></Label>
+                             </font>
+                           <GridPane.margin>
+                              <Insets left="15.0" />
+                           </GridPane.margin></Label>
                          <Label text="Mix description" textFill="#2f00ff">
                              <GridPane.margin>
                                  <Insets left="25.0" />
@@ -82,10 +85,11 @@
                          <TextField fx:id="textField_Air_Min" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                      </children>
                   </GridPane>
-                  <Label fx:id="Label_MixSize" layoutX="491.0" layoutY="349.0" text="Mixes">
+                  <Label fx:id="Label_MixSize" layoutX="469.0" layoutY="305.0" prefHeight="30.0" prefWidth="75.0" text="Mixes">
                      <font>
                         <Font size="18.0" />
                      </font></Label>
+                  <Label layoutX="702.0" layoutY="298.0" text="* Leave blank if it is not part of this design" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="998.0">
