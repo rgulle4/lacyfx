@@ -147,32 +147,32 @@ public final class EPDDatabase {
         }
         if (!region.isEmpty()) sb.append(" AND Region = ").append("'").append(region).append("'");
         if (cement != 0.0){
-            sb.append(" AND Cement_Weight <= ").append("'").append(cement*1.1).append("'");
-            sb.append(" AND Cement_Weight >= ").append("'").append(cement*0.9).append("'");
+            sb.append(" AND Cement_Weight <= ").append("'").append(cement*1.3).append("'");
+            sb.append(" AND Cement_Weight >= ").append("'").append(cement*0.7).append("'");
         }
         if (flyAsh != 0.0) {
-            sb.append(" AND Fly_Ash_weight <= ").append("'").append(flyAsh*1.1).append("'");
-            sb.append(" AND Fly_Ash_weight >= ").append("'").append(flyAsh*0.9).append("'");
+            sb.append(" AND Fly_Ash_weight <= ").append("'").append(flyAsh*1.3).append("'");
+            sb.append(" AND Fly_Ash_weight >= ").append("'").append(flyAsh*0.7).append("'");
         }
         if (slag_Cement != 0.0) {
-            sb.append(" AND Slag_weight <= ").append("'").append(slag_Cement*1.1).append("'");
-            sb.append(" AND Slag_weight >= ").append("'").append(slag_Cement*0.9).append("'");
+            sb.append(" AND Slag_weight <= ").append("'").append(slag_Cement*1.3).append("'");
+            sb.append(" AND Slag_weight >= ").append("'").append(slag_Cement*0.7).append("'");
         }
         if (mixing_Water != 0.0){
-            sb.append(" AND Mixing_Water <= ").append("'").append(mixing_Water*1.1).append("'");
-            sb.append(" AND Mixing_Water >= ").append("'").append(mixing_Water*0.9).append("'");
+            sb.append(" AND Mixing_Water <= ").append("'").append(mixing_Water*1.3).append("'");
+            sb.append(" AND Mixing_Water >= ").append("'").append(mixing_Water*0.7).append("'");
         }
         if (coarse_Aggregate != 0.0){
-            sb.append(" AND Coarse_Aggregate <= ").append("'").append(coarse_Aggregate*1.1).append("'");
-            sb.append(" AND Coarse_Aggregate >= ").append("'").append(coarse_Aggregate*0.9).append("'");
+            sb.append(" AND Coarse_Aggregate <= ").append("'").append(coarse_Aggregate*1.3).append("'");
+            sb.append(" AND Coarse_Aggregate >= ").append("'").append(coarse_Aggregate*0.7).append("'");
         }
         if (fine_Aggregate != 0.0){
-            sb.append(" AND Fine_Aggregate <= ").append("'").append(fine_Aggregate*1.1).append("'");
-            sb.append(" AND Fine_Aggregate >= ").append("'").append(fine_Aggregate*0.9).append("'");
+            sb.append(" AND Fine_Aggregate <= ").append("'").append(fine_Aggregate*1.3).append("'");
+            sb.append(" AND Fine_Aggregate >= ").append("'").append(fine_Aggregate*0.7).append("'");
         }
         if (air_percent != 0.0) {
-            sb.append(" AND Air_Percent <= ").append("'").append(air_percent*1.1).append("'");
-            sb.append(" AND Air_Percent >= ").append("'").append(air_percent*0.9).append("'");
+            sb.append(" AND Air_Percent <= ").append("'").append(air_percent*1.3).append("'");
+            sb.append(" AND Air_Percent >= ").append("'").append(air_percent*0.7).append("'");
         }
 
 
