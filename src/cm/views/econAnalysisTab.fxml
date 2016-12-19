@@ -16,15 +16,14 @@
       <Label layoutX="142.0" layoutY="136.0" text="Discount rate:" />
       <Label layoutX="142.0" layoutY="173.0" text="Initial items:" />
       <Label layoutX="142.0" layoutY="333.0" text="Maintainance &amp; Rehabilitation items:" />
-      <Label layoutX="641.0" layoutY="332.0" text="Incurred year:" />
       <TextField fx:id="Discount_Rate_Textfield" layoutX="238.0" layoutY="132.0" prefHeight="23.0" prefWidth="75.0" text="2.0" />
-      <Button layoutX="641.0" layoutY="514.0" mnemonicParsing="false" text="Cost analysis" />
-      <Button layoutX="569.0" layoutY="514.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="60.0" text="Save" />
+      <Button layoutX="354.0" layoutY="501.0" mnemonicParsing="false" text="Cost analysis" />
+      <Button layoutX="641.0" layoutY="447.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="60.0" text="Save" />
       <Button layoutX="345.0" layoutY="132.0" mnemonicParsing="false" text="Get current value" />
       <ListView fx:id="Initial_Item_ListView" layoutX="138.0" layoutY="193.0" prefHeight="120.0" prefWidth="484.0" />
       <ListView fx:id="MR_Item_ListView" layoutX="138.0" layoutY="350.0" prefHeight="120.0" prefWidth="484.0" />
-      <ListView fx:id="Incurred_Year_ListView" layoutX="641.0" layoutY="350.0" prefHeight="120.0" prefWidth="144.0" />
-      <RadioButton fx:id="CRCP_Rbutton" layoutX="523.0" layoutY="136.0" mnemonicParsing="false" selected="true" text="CRCP" />
-      <RadioButton fx:id="JRCP_Rbutton" layoutX="583.0" layoutY="136.0" mnemonicParsing="false" text="JRCP" />
+      <RadioButton fx:id="CRCP_Rbutton" layoutX="523.0" layoutY="136.0" mnemonicParsing="false" onAction="#presentItems" text="CRCP" />
+      <RadioButton fx:id="JPCP_Rbutton" layoutX="583.0" layoutY="136.0" mnemonicParsing="false" onAction="#presentItems" text="JRCP" />
+      <Button layoutX="641.0" layoutY="289.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="60.0" text="Save" />
    </children>
 </AnchorPane>
