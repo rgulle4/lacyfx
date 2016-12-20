@@ -17,8 +17,6 @@ import java.util.List;
  * Created by royg59 on 9/21/16.
  */
 public class EconAnalysisController {
-    ObservableList<String> initialItems_ObsList = FXCollections.observableArrayList();
-    ObservableList<String> MRItems_ObsList = FXCollections.observableArrayList();
     @FXML
     private ListView<String> Initial_Item_ListView;
     @FXML
@@ -35,20 +33,18 @@ public class EconAnalysisController {
     private void initialize(){
     CRCP_Rbutton.setOnAction((event) -> {
         try {
-            presentItems(event);
-            if(CRCP_Rbutton.isSelected())
-            JPCP_Rbutton.setSelected(false);
+            if(CRCP_Rbutton.isSelected()) JPCP_Rbutton.setSelected(false);
             else JPCP_Rbutton.setSelected(true);
+            presentItems(event);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     });
     JPCP_Rbutton.setOnAction((event) -> {
         try {
-            presentItems(event);
-            if (JPCP_Rbutton.isSelected())
-                CRCP_Rbutton.setSelected(false);
+            if (JPCP_Rbutton.isSelected()) CRCP_Rbutton.setSelected(false);
             else CRCP_Rbutton.setSelected(true);
+            presentItems(event);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -57,6 +53,8 @@ public class EconAnalysisController {
 
     @FXML
     public void presentItems(ActionEvent event) throws SQLException {
+        ObservableList<String> initialItems_ObsList = FXCollections.observableArrayList();
+        ObservableList<String> MRItems_ObsList = FXCollections.observableArrayList();
         Initial_Item_ListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         MR_Item_ListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         if (CRCP_Rbutton.isSelected()){
