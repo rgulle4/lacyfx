@@ -54,7 +54,17 @@ public final class LayerController {
         setDefaultOptions();
         setUpAutoSaves();
         setUpDebugCheatSheet();
-        saveLayerOptions();
+        
+        Thread saveWhenReady = new Thread() {
+            public void run() {
+                while (layer == null)
+                    try { Thread.sleep(250); }
+                    catch (InterruptedException e) { }
+                saveLayerOptions();
+            }
+        };
+    
+        saveWhenReady.start();
     }
 
     private void setUpAutoSaves() {
