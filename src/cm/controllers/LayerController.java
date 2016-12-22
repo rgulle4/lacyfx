@@ -58,40 +58,29 @@ public final class LayerController {
     }
 
     private void setUpAutoSaves() {
-
         // listens for changes
-        layerTypeComboBox.setOnAction((event) -> {
-            saveLayerType();
-        });
-
-        /* for "more graceful" handling" */
-//        layerTypeComboBox.onActionProperty().addListener(
-//              (observable1, oldValue1, newValue1) -> {
-//                  saveLayerType();
-//              });
-
-        // listens for any changes to the text
-        thicknessTextField.textProperty().addListener(
-              (observable, oldValue, newValue) -> {
-                  saveThickness();
-              });
+        layerTypeComboBox.getSelectionModel().selectedIndexProperty().addListener(
+              ((observable, oldValue, newValue) -> {
+                  saveLayerType();
+              }));
 
         // listens for when user hits ENTER within the text field
         thicknessTextField.setOnAction(
               (event) -> {
                   saveThickness();
               });
+        
+        // listens for when entering/exiting focus
+        thicknessTextField.focusedProperty().addListener((
+              (observable, oldValue, newValue) -> {
+                  saveThickness();
+              }));
 
         // listens for changes
-        thicknessUnitChoiceBox.setOnAction((event -> {
-            saveThickness();
-        }));
-
-        /* for "more graceful" handling" */
-//        thicknessUnitChoiceBox.onActionProperty().addListener(
-//              (observable, oldValue, newValue) -> {
-//                  saveThickness();
-//              });
+            thicknessUnitChoiceBox.getSelectionModel().selectedIndexProperty().addListener(
+              (((observable, oldValue, newValue) -> {
+                  saveThickness();
+              })));
     }
 
     private void setDefaultOptions() {
