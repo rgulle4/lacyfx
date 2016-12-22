@@ -2,13 +2,14 @@ package cm.controllers;
 
 import cm.App;
 import cm.models.Layer;
-import static cm.models.Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.io.IOException;
+
+import static cm.models.Model.GSON_PP;
 
 public final class LayerController {
 

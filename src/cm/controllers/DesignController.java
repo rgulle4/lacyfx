@@ -1,7 +1,5 @@
 package cm.controllers;
 
-import static cm.models.Model.*;
-
 import cm.App;
 import cm.models.Design;
 import cm.models.Layer;
@@ -11,10 +9,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.util.List;
+
+import static cm.models.Model.DESIGNS;
+import static cm.models.Model.GSON_PP;
 
 public final class DesignController {
 
