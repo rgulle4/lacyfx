@@ -1,20 +1,19 @@
 package cm.controllers;
 
 import cm.App;
-import static cm.models.Model.*;
 import cm.models.Design;
 import cm.models.Layer;
 import cm.models.Model;
 import cm.models.ZipCodeUtil;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.List;
+
+import static cm.models.Model.*;
 
 public final class LayerInformationController {
 
