@@ -5,12 +5,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import cm.models.CostDatabase;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.SelectionMode;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,61 +17,59 @@ import java.util.List;
  */
 public class EconAnalysisController {
     @FXML
-    private ListView<String> Initial_Item_ListView;
-    @FXML
-    private ListView<String> MR_Item_ListView;
-    @FXML
-    private ListView<String> Incurred_Year_ListView;
-    @FXML
-    private RadioButton CRCP_Rbutton;
-    @FXML
-    private RadioButton JPCP_Rbutton;
-
+    public TreeView treeView = new TreeView();
 
     @FXML
-    private void initialize(){
-    CRCP_Rbutton.setOnAction((event) -> {
-        try {
-            if(CRCP_Rbutton.isSelected()) JPCP_Rbutton.setSelected(false);
-            else JPCP_Rbutton.setSelected(true);
-            presentItems(event);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    });
-    JPCP_Rbutton.setOnAction((event) -> {
-        try {
-            if (JPCP_Rbutton.isSelected()) CRCP_Rbutton.setSelected(false);
-            else CRCP_Rbutton.setSelected(true);
-            presentItems(event);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    });
+    public void initialize(){
+        // create a treeView Helper
+        TreeViewHelper helper = new TreeViewHelper();
+        ArrayList<TreeItem> items = helper.getItems();
+        TreeItem rootItem = new TreeItem("Pavement");
+        rootItem.getChildren().addAll(items);
+        treeView.setRoot(rootItem);
     }
 
-    @FXML
-    public void presentItems(ActionEvent event) throws SQLException {
-        ObservableList<String> initialItems_ObsList = FXCollections.observableArrayList();
-        ObservableList<String> MRItems_ObsList = FXCollections.observableArrayList();
-        Initial_Item_ListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        MR_Item_ListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        if (CRCP_Rbutton.isSelected()){
-            List<String> initialItems_List = new CostDatabase().getInitialItems("CRCP","Initial");
-            List<String> mrItems_List = new CostDatabase().getInitialItems("CRCP","M&R");
-            for (String initialItem:initialItems_List){initialItems_ObsList.add(initialItem);}
-            for (String mrItem:mrItems_List){MRItems_ObsList.add(mrItem);}
-            Initial_Item_ListView.setItems(initialItems_ObsList);
-            MR_Item_ListView.setItems(MRItems_ObsList);
-        }else {
-            List<String> initialItems_List = new CostDatabase().getInitialItems("JPCP","Initial");
-            List<String> mrItems_List = new CostDatabase().getInitialItems("JPCP","M&R");
-            for (String initialItem:initialItems_List){initialItems_ObsList.add(initialItem);}
-            for (String mrItem:mrItems_List){MRItems_ObsList.add(mrItem);}
-            Initial_Item_ListView.setItems(initialItems_ObsList);
-            MR_Item_ListView.setItems(MRItems_ObsList);
+    public class TreeViewHelper{
+
+        public TreeViewHelper(){}
+
+        public ArrayList<TreeItem> getItems(){
+            ArrayList<TreeItem> items = new ArrayList<>();
+            TreeItem rigidPavement = new TreeItem("Rigid Pavement");
+            rigidPavement.getChildren().addAll(getRigidPavement());
+            TreeItem flexiblePavement = new TreeItem("Flexible Pavement");
+            flexiblePavement.getChildren().addAll(getFlexiblePavement());
+            items.add(rigidPavement);
+            items.add(flexiblePavement);
+            return items;
         }
-
+        //this method create an arrayList of treeItems (Rigid pavement)
+        private ArrayList<TreeItem> getRigidPavement(){
+            ArrayList<TreeItem> rigidPavementItems = new ArrayList<>();
+            TreeItem CRCP = new TreeItem("CRCP");
+            TreeItem JPCP = new TreeItem("JPCP");
+            TreeItem PCC = new TreeItem("PCC");
+            TreeItem RUBB = new TreeItem("RUBB");
+            rigidPavementItems.add(CRCP);
+            rigidPavementItems.add(JPCP);
+            rigidPavementItems.add(PCC);
+            rigidPavementItems.add(RUBB);
+            return rigidPavementItems;
+        }
+        //this method create an arrayList of treeItems (flexible pavement)
+        private ArrayList<TreeItem> getFlexiblePavement(){
+            ArrayList<TreeItem> flexiblePavementItems = new ArrayList<>();
+            TreeItem AC = new TreeItem("AC");
+            TreeItem HMA = new TreeItem("HMA");
+            TreeItem SMA = new TreeItem("SMA");
+            TreeItem Emulsion = new TreeItem("Emulsion");
+            TreeItem SuperPave = new TreeItem("SuperPave");
+            flexiblePavementItems.add(AC);
+            flexiblePavementItems.add(HMA);
+            flexiblePavementItems.add(SMA);
+            flexiblePavementItems.add(Emulsion);
+            flexiblePavementItems.add(SuperPave);
+            return flexiblePavementItems;
+        }
     }
-
 }

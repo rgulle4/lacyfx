@@ -2,28 +2,19 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.controllers.EconAnalysisController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cm.controllers.EconAnalysisController">
    <children>
-      <TextField fx:id="Start_Year_Textfield" layoutX="238.0" layoutY="60.0" prefHeight="23.0" prefWidth="75.0" text="2016" />
-      <TextField fx:id="Total_Year_Textfield" layoutX="238.0" layoutY="94.0" prefHeight="23.0" prefWidth="75.0" text="50" />
-      <Label layoutX="142.0" layoutY="64.0" text="Start year:" />
-      <Label layoutX="141.0" layoutY="98.0" text="Total year:" />
-      <Label layoutX="142.0" layoutY="136.0" text="Discount rate:" />
-      <Label layoutX="142.0" layoutY="173.0" text="Initial items:" />
-      <Label layoutX="142.0" layoutY="333.0" text="Maintainance &amp; Rehabilitation items:" />
-      <TextField fx:id="Discount_Rate_Textfield" layoutX="238.0" layoutY="132.0" prefHeight="23.0" prefWidth="75.0" text="2.0" />
-      <Button layoutX="354.0" layoutY="501.0" mnemonicParsing="false" text="Cost analysis" />
-      <Button layoutX="641.0" layoutY="447.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="60.0" text="Save" />
-      <Button layoutX="345.0" layoutY="132.0" mnemonicParsing="false" text="Get current value" />
-      <ListView fx:id="Initial_Item_ListView" layoutX="138.0" layoutY="193.0" prefHeight="120.0" prefWidth="484.0" />
-      <ListView fx:id="MR_Item_ListView" layoutX="138.0" layoutY="350.0" prefHeight="120.0" prefWidth="484.0" />
-      <RadioButton fx:id="CRCP_Rbutton" layoutX="523.0" layoutY="136.0" mnemonicParsing="false" onAction="#presentItems" text="CRCP" />
-      <RadioButton fx:id="JPCP_Rbutton" layoutX="583.0" layoutY="136.0" mnemonicParsing="false" onAction="#presentItems" text="JRCP" />
-      <Button layoutX="641.0" layoutY="289.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="60.0" text="Save" />
+      <TextField fx:id="Start_Year_Textfield" layoutX="148.0" layoutY="31.0" prefHeight="23.0" prefWidth="75.0" text="2016" />
+      <TextField fx:id="Total_Year_Textfield" layoutX="341.0" layoutY="31.0" prefHeight="23.0" prefWidth="75.0" text="50" />
+      <Label layoutX="52.0" layoutY="35.0" text="Start year:" />
+      <Label layoutX="244.0" layoutY="35.0" text="Total year:" />
+      <Label layoutX="52.0" layoutY="71.0" text="Discount rate:" />
+      <TextField fx:id="Discount_Rate_Textfield" layoutX="148.0" layoutY="67.0" prefHeight="23.0" prefWidth="75.0" text="2.0" />
+      <Button layoutX="255.0" layoutY="67.0" mnemonicParsing="false" text="Get current value" />
+      <TreeView fx:id="treeView" layoutX="48.0" layoutY="119.0" prefHeight="351.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

@@ -15,7 +15,7 @@ import java.util.List;
 
 import static cm.models.Model.*;
 
-public final class LayerInformationController {
+public final class  LayerInformationController {
 
     private final ZipCodeUtil ZCU = new ZipCodeUtil();
 
