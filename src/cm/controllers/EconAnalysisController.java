@@ -3,6 +3,10 @@ package cm.controllers;
 
 import cm.models.Design;
 import cm.models.Layer;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -16,10 +20,26 @@ import static cm.models.Model.DESIGNS;
 public class EconAnalysisController {
     @FXML
     public TreeView treeView = new TreeView();
+    @FXML
+    public ComboBox ComboBox_PType;
 
     @FXML
     public void initialize(){
+        treeView.getSelectionModel().selectedItemProperty().addListener( new ChangeListener() {
 
+            @Override
+            public void changed(ObservableValue observable, Object oldValue,
+                                Object newValue) {
+
+                TreeItem<String> selectedItem = (TreeItem<String>) newValue;
+                if (selectedItem.getValue().contains("Rigid"))
+                    showRigidPavementType();
+                else if (selectedItem.getValue().contains("Flexible"))
+                    showFlexiblePavementType();
+                else {ComboBox_PType.setItems(null);}
+            }
+
+        });
     }
 
     public void loadTreeList(){
@@ -43,6 +63,8 @@ public class EconAnalysisController {
                 String design_type = design_temp.getDesignType();
                 String pavement_type = design_temp.getPavementType();
                 StringBuilder sb_Item_Name = new StringBuilder(key);
+                sb_Item_Name.append(": ").append(pavement_type)
+                        .append("(").append(design_type).append(")");
                 String item_Name = sb_Item_Name.toString();
                 TreeItem designs = new TreeItem(item_Name);
                 designs.getChildren().addAll(getLayers(design_temp));
@@ -67,5 +89,19 @@ public class EconAnalysisController {
             }
             return layerItems;
         }
+    }
+
+    private void showRigidPavementType(){
+        ObservableList<String> PT = FXCollections.observableArrayList
+                ("CRCP","JPCP","PCC","RUBB","Latex Modified Concrete");
+        ComboBox_PType.setItems(PT);
+        ComboBox_PType.getSelectionModel().selectFirst();
+    }
+
+    private void showFlexiblePavementType(){
+        ObservableList<String> PT = FXCollections.observableArrayList
+                ("AC","HMA","SMA","SuperPave");
+        ComboBox_PType.setItems(PT);
+        ComboBox_PType.getSelectionModel().selectFirst();
     }
 }
