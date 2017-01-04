@@ -19,13 +19,13 @@
       <TextField fx:id="Discount_Rate_Textfield" layoutX="549.0" layoutY="31.0" prefHeight="23.0" prefWidth="75.0" text="2.0" />
       <Button layoutX="663.0" layoutY="30.0" mnemonicParsing="false" text="Current value" />
       <TreeView fx:id="treeView" layoutX="48.0" layoutY="180.0" prefHeight="351.0" prefWidth="200.0" />
-      <Button layoutX="77.0" layoutY="535.0" mnemonicParsing="false" onAction="#loadTreeList" text="Show all alternatives" />
-      <TableView layoutX="277.0" layoutY="180.0" prefHeight="351.0" prefWidth="496.0">
+      <Button layoutX="59.0" layoutY="119.0" mnemonicParsing="false" onAction="#loadTreeList" text="Show all alternatives" />
+      <TableView fx:id="tableView" layoutX="277.0" layoutY="180.0" prefHeight="351.0" prefWidth="496.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Check" />
-          <TableColumn prefWidth="75.0" text="Item type" />
-            <TableColumn prefWidth="250.0" text="Item description" />
-            <TableColumn prefWidth="95.0" text="Occur year" />
+          <TableColumn fx:id="column_Selected" prefWidth="75.0" text="Check" />
+          <TableColumn fx:id="column_Dtype" prefWidth="75.0" text="Item type" />
+            <TableColumn fx:id="column_ItemDescription" prefWidth="250.0" text="Item description" />
+            <TableColumn fx:id="column_OccurYear" prefWidth="95.0" text="Occur year" />
         </columns>
       </TableView>
       <ComboBox fx:id="ComboBox_PType" layoutX="453.0" layoutY="119.0" prefHeight="27.0" prefWidth="163.0" />

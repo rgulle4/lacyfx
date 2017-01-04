@@ -1,5 +1,6 @@
 package cm.models;
 
+import cm.controllers.EconAnalysisController.*;
 import com.sun.org.apache.xpath.internal.SourceTree;
 import org.junit.Assert;
 import org.junit.Test;
@@ -46,6 +47,13 @@ public class EPDDatabaseTest {
         Assert.assertTrue(allAreUnique);
     }
 
+    @Test
+    public void testGetCostItem() throws SQLException {
+        //
+        List<costItems> result = (new CostDatabase().getCostItems("CRCP"));
+
+
+    }
 //    @Test
 //    public void testGetResultsFilteredBy() throws Exception {
 //        EPDDatabase epds = new EPDDatabase("rt.db");

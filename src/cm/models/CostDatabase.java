@@ -1,5 +1,7 @@
 package cm.models;
 
+import cm.controllers.EconAnalysisController.*;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +13,7 @@ public final class CostDatabase {
     /* -- Fields ----------------------------------------------------- */
 
     private String DEFAULT_DB_FILE_NAME = "costAnalysis.db";
-    private String DEFAULT_SQL_QUERY = "SELECT DISTINCT Item_Description FROM Rigid_Pavement WHERE 1";
+    private String DEFAULT_SQL_QUERY = "SELECT * FROM Pavements WHERE 1";
 
     private String dbFileName;
     private Connection conn;
@@ -50,6 +52,23 @@ public final class CostDatabase {
             initialItems.add(initial_Item);
         }
         return initialItems;
+    }
+
+    public List<costItems> getCostItems(String dtype) throws SQLException {
+        List<costItems> items = new ArrayList<>();
+        StringBuilder sb = new StringBuilder(DEFAULT_SQL_QUERY);
+        if (dtype != "") sb.append(" AND DesignType = ").append("'").append(dtype).append("'");
+        String sql = sb.toString();
+        s = conn.createStatement();
+        rs = s.executeQuery(sql);
+        costItems g;
+        while(rs.next()){
+            g = new costItems();
+            g.setItemDescription(rs.getString("Item_Description"));
+            g.setItemType(rs.getString("item_Type"));
+            items.add(g);
+        }
+        return items;
     }
 
     public static void main(String[] args) throws SQLException {
