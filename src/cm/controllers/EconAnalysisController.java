@@ -1,16 +1,14 @@
 package cm.controllers;
 
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import cm.models.Design;
+import cm.models.Layer;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import cm.models.CostDatabase;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+
+import static cm.models.Model.DESIGNS;
 
 /**
  * Created by royg59 on 9/21/16.
@@ -21,55 +19,53 @@ public class EconAnalysisController {
 
     @FXML
     public void initialize(){
+
+    }
+
+    public void loadTreeList(){
         // create a treeView Helper
         TreeViewHelper helper = new TreeViewHelper();
         ArrayList<TreeItem> items = helper.getItems();
-        TreeItem rootItem = new TreeItem("Pavement");
+        TreeItem rootItem = new TreeItem("Alternates");
         rootItem.getChildren().addAll(items);
         treeView.setRoot(rootItem);
     }
-
     public class TreeViewHelper{
 
         public TreeViewHelper(){}
 
         public ArrayList<TreeItem> getItems(){
             ArrayList<TreeItem> items = new ArrayList<>();
-            TreeItem rigidPavement = new TreeItem("Rigid Pavement");
-            rigidPavement.getChildren().addAll(getRigidPavement());
-            TreeItem flexiblePavement = new TreeItem("Flexible Pavement");
-            flexiblePavement.getChildren().addAll(getFlexiblePavement());
-            items.add(rigidPavement);
-            items.add(flexiblePavement);
+            for (int i = 1 ; i <= DESIGNS.size();i ++){
+                StringBuilder sb = new StringBuilder("Design "+i);
+                String key = sb.toString();
+                Design design_temp = DESIGNS.get(key);
+                String design_type = design_temp.getDesignType();
+                String pavement_type = design_temp.getPavementType();
+                StringBuilder sb_Item_Name = new StringBuilder(key);
+                String item_Name = sb_Item_Name.toString();
+                TreeItem designs = new TreeItem(item_Name);
+                designs.getChildren().addAll(getLayers(design_temp));
+                items.add(designs);
+            }
             return items;
         }
         //this method create an arrayList of treeItems (Rigid pavement)
-        private ArrayList<TreeItem> getRigidPavement(){
-            ArrayList<TreeItem> rigidPavementItems = new ArrayList<>();
-            TreeItem CRCP = new TreeItem("CRCP");
-            TreeItem JPCP = new TreeItem("JPCP");
-            TreeItem PCC = new TreeItem("PCC");
-            TreeItem RUBB = new TreeItem("RUBB");
-            rigidPavementItems.add(CRCP);
-            rigidPavementItems.add(JPCP);
-            rigidPavementItems.add(PCC);
-            rigidPavementItems.add(RUBB);
-            return rigidPavementItems;
-        }
-        //this method create an arrayList of treeItems (flexible pavement)
-        private ArrayList<TreeItem> getFlexiblePavement(){
-            ArrayList<TreeItem> flexiblePavementItems = new ArrayList<>();
-            TreeItem AC = new TreeItem("AC");
-            TreeItem HMA = new TreeItem("HMA");
-            TreeItem SMA = new TreeItem("SMA");
-            TreeItem Emulsion = new TreeItem("Emulsion");
-            TreeItem SuperPave = new TreeItem("SuperPave");
-            flexiblePavementItems.add(AC);
-            flexiblePavementItems.add(HMA);
-            flexiblePavementItems.add(SMA);
-            flexiblePavementItems.add(Emulsion);
-            flexiblePavementItems.add(SuperPave);
-            return flexiblePavementItems;
+        private ArrayList<TreeItem> getLayers(Design design){
+            ArrayList<TreeItem> layerItems = new ArrayList<>();
+            int layerNum = 1;
+            for (Layer layer_temp: design.getLayers()){
+                StringBuilder layerID_sb = new StringBuilder("Layer "+layerNum);
+                String layer_ID = layerID_sb.toString();
+                layerNum ++;
+                String layer_Type = layer_temp.getLayerType();
+                StringBuilder sb = new StringBuilder(
+                        layer_ID+ ": "+layer_Type);
+                String item_Name = sb.toString();
+                TreeItem layer = new TreeItem(item_Name);
+                layerItems.add(layer);
+            }
+            return layerItems;
         }
     }
 }
