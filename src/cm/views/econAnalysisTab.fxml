@@ -30,5 +30,6 @@
       </TableView>
       <ComboBox fx:id="ComboBox_PType" layoutX="453.0" layoutY="119.0" prefHeight="27.0" prefWidth="163.0" />
       <Label layoutX="312.0" layoutY="124.0" text="Pavement type:" />
+      <Button layoutX="719.0" layoutY="535.0" mnemonicParsing="false" onAction="#saveButton" text="Save" />
    </children>
 </AnchorPane>

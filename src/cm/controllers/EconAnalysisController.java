@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
@@ -29,7 +30,7 @@ public class EconAnalysisController {
     @FXML
     public ComboBox ComboBox_PType;
     @FXML
-    public TableView tableView;
+    public TableView<costItems> tableView;
     @FXML
     public TableColumn<costItems,Boolean> column_Selected;
     @FXML
@@ -134,16 +135,29 @@ public class EconAnalysisController {
     }
 
     public void showTableData(String dType) throws SQLException {
+        tableView.setEditable(true);
+        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         ObservableList<costItems> data = FXCollections.observableArrayList();
         List<costItems> costItemsList = new CostDatabase().getCostItems(dType);
         column_Selected.setCellValueFactory(new PropertyValueFactory<costItems, Boolean>("isSelected"));
         column_Dtype.setCellValueFactory(new PropertyValueFactory<costItems, String>("itemType"));
         column_ItemDescription.setCellValueFactory(new PropertyValueFactory<costItems, String>("itemDescription"));
         column_OccurYear.setCellFactory(TextFieldTableCell.<costItems>forTableColumn());
+        column_OccurYear.setOnEditCommit(
+                (TableColumn.CellEditEvent<costItems,String> t) -> {
+                    ((costItems) t.getTableView().getItems()
+                    .get(t.getTablePosition().getRow()))
+                    .setOccurYear(t.getNewValue());
+        });
         for (costItems item: costItemsList){
             data.add(item);
         }
         tableView.setItems(data);
+    }
+
+    public void saveButton(){
+        costItems temp = tableView.getSelectionModel().getSelectedItem();
+        System.out.println(temp.getOccurYear());
     }
 
     public static final class costItems{
@@ -151,7 +165,7 @@ public class EconAnalysisController {
         private Boolean isSelected;
         private String itemType;
         private String itemDescription;
-        private int occurYear;
+        private String occurYear;
 
         //methods
 
@@ -179,11 +193,11 @@ public class EconAnalysisController {
             this.itemDescription = itemDescription;
         }
 
-        public int getOccurYear() {
+        public String getOccurYear() {
             return occurYear;
         }
 
-        public void setOccurYear(int occurYear) {
+        public void setOccurYear(String occurYear) {
             this.occurYear = occurYear;
         }
     }
