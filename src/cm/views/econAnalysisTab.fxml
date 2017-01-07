@@ -22,14 +22,16 @@
       <Button layoutX="59.0" layoutY="119.0" mnemonicParsing="false" onAction="#loadTreeList" text="Show all alternatives" />
       <TableView fx:id="tableView" layoutX="277.0" layoutY="180.0" prefHeight="351.0" prefWidth="496.0">
         <columns>
-          <TableColumn fx:id="column_Selected" prefWidth="75.0" text="Check" />
+          <TableColumn fx:id="column_Selected" prefWidth="75.0" text="Selected" />
           <TableColumn fx:id="column_Dtype" prefWidth="75.0" text="Item type" />
-            <TableColumn fx:id="column_ItemDescription" prefWidth="250.0" text="Item description" />
-            <TableColumn fx:id="column_OccurYear" prefWidth="95.0" text="Occur year" />
+            <TableColumn fx:id="column_ItemDescription" prefWidth="198.0" text="Item description" />
+            <TableColumn fx:id="column_Quantity" prefWidth="68.0" text="Quantity" />
+            <TableColumn fx:id="column_OccurYear" prefWidth="79.0" text="Occur year" />
         </columns>
       </TableView>
       <ComboBox fx:id="ComboBox_PType" layoutX="453.0" layoutY="119.0" prefHeight="27.0" prefWidth="163.0" />
       <Label layoutX="312.0" layoutY="124.0" text="Pavement type:" />
-      <Button layoutX="719.0" layoutY="535.0" mnemonicParsing="false" onAction="#saveButton" text="Save" />
+      <Button layoutX="576.0" layoutY="535.0" mnemonicParsing="false" onAction="#saveButton" text="Save" />
+      <Button fx:id="Button_CostAnalysis" layoutX="642.0" layoutY="535.0" mnemonicParsing="false" onAction="#showTable" text="Economic analysis" />
    </children>
 </AnchorPane>

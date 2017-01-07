@@ -1,6 +1,7 @@
 package cm.controllers;
 
 
+import cm.App;
 import cm.models.CostDatabase;
 import cm.models.Design;
 import cm.models.Layer;
@@ -14,6 +15,7 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +41,10 @@ public class EconAnalysisController {
     public TableColumn<costItems,String> column_ItemDescription;
     @FXML
     public TableColumn<costItems, String> column_OccurYear;
+    @FXML
+    public TableColumn<costItems, String> column_Quantity;
+    @FXML
+    public Button Button_CostAnalysis;
 
     @FXML
     public void initialize(){
@@ -142,6 +148,7 @@ public class EconAnalysisController {
         column_Selected.setCellValueFactory(new PropertyValueFactory<costItems, Boolean>("isSelected"));
         column_Dtype.setCellValueFactory(new PropertyValueFactory<costItems, String>("itemType"));
         column_ItemDescription.setCellValueFactory(new PropertyValueFactory<costItems, String>("itemDescription"));
+        column_OccurYear.setCellValueFactory(new PropertyValueFactory<costItems, String>("occurYear"));
         column_OccurYear.setCellFactory(TextFieldTableCell.<costItems>forTableColumn());
         column_OccurYear.setOnEditCommit(
                 (TableColumn.CellEditEvent<costItems,String> t) -> {
@@ -149,6 +156,14 @@ public class EconAnalysisController {
                     .get(t.getTablePosition().getRow()))
                     .setOccurYear(t.getNewValue());
         });
+        column_Quantity.setCellValueFactory(new PropertyValueFactory<costItems, String>("quantity"));
+        column_Quantity.setCellFactory(TextFieldTableCell.<costItems>forTableColumn());
+        column_Quantity.setOnEditCommit(
+                (TableColumn.CellEditEvent<costItems,String> t) -> {
+                    ((costItems) t.getTableView().getItems()
+                            .get(t.getTablePosition().getRow()))
+                            .setQuantity(t.getNewValue());
+                });
         for (costItems item: costItemsList){
             data.add(item);
         }
@@ -156,8 +171,15 @@ public class EconAnalysisController {
     }
 
     public void saveButton(){
-        costItems temp = tableView.getSelectionModel().getSelectedItem();
-        System.out.println(temp.getOccurYear());
+        List<costItems> costItemsList = tableView.getSelectionModel().getSelectedItems();
+        Double totCost = 0.0;
+        for (costItems temp: costItemsList){
+            Double itemCost = temp.getPrice()*Double.parseDouble(temp.getQuantity());
+            Double PresentValue;
+            System.out.println(temp.getItemDescription()+" "+temp.getPrice());
+            totCost +=itemCost;
+        }
+        System.out.println("Total cost for this design is: "+totCost+"USD");
     }
 
     public static final class costItems{
@@ -165,7 +187,9 @@ public class EconAnalysisController {
         private Boolean isSelected;
         private String itemType;
         private String itemDescription;
-        private String occurYear;
+        private String occurYear = Integer.toString(0);
+        private String quantity = Integer.toString(1);
+        private Double price;
 
         //methods
 
@@ -200,5 +224,26 @@ public class EconAnalysisController {
         public void setOccurYear(String occurYear) {
             this.occurYear = occurYear;
         }
+
+        public String getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(String quantity) {
+            this.quantity = quantity;
+        }
+
+        public Double getPrice() {
+            return price;
+        }
+
+        public void setPrice(Double price) {
+            this.price = price;
+        }
+    }
+
+    App main;
+    public void showTable() throws IOException {
+        main.showCostAnalysis();
     }
 }

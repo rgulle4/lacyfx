@@ -66,6 +66,7 @@ public final class CostDatabase {
             g = new costItems();
             g.setItemDescription(rs.getString("Item_Description"));
             g.setItemType(rs.getString("item_Type"));
+            g.setPrice(rs.getDouble("Weighted_average_unit_price"));
             items.add(g);
         }
         return items;

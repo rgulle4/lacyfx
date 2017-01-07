@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import static cm.models.Model.GSON_PP;
 
-public final class LayerController {
+public class LayerController {
 
     private Layer layer;
 
@@ -32,7 +32,7 @@ public final class LayerController {
 
     /* -- Gui control ------------------------------------------ */
 
-    @FXML private ComboBox<String> layerTypeComboBox;
+    @FXML public ComboBox<String> layerTypeComboBox;
     @FXML private TextField thicknessTextField;
     @FXML private ChoiceBox<String> thicknessUnitChoiceBox;
 
@@ -93,11 +93,13 @@ public final class LayerController {
               })));
     }
 
+    private Controller main;
+
     private void setDefaultOptions() {
         layerTypeComboBox.setItems(layerTypes);
         thicknessUnitChoiceBox.setItems(thicknessUnits);
+        select(layerTypeComboBox,2);
 
-        select(layerTypeComboBox, 1);
         selectFirst(thicknessUnitChoiceBox);
         thicknessTextField.setText("10.0");
     }
@@ -170,5 +172,10 @@ public final class LayerController {
               (observable, oldValue, newValue) -> {
                   debugCheatSheet.setText(GSON_PP.toJson(layer));
               });
+    }
+
+
+    public void init(Controller controller) {
+        main = controller;
     }
 }

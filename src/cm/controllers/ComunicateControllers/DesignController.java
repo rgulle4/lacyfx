@@ -5,6 +5,7 @@ import cm.models.Design;
 import cm.models.Layer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,11 +17,13 @@ import java.util.List;
 import static cm.models.Model.DESIGNS;
 import static cm.models.Model.GSON_PP;
 
-public final class DesignController {
+public class DesignController {
+    private Controller main;
+
 
     /* -- Constructor(s) and init ----------------------------- */
 
-    private Design design;
+    public Design design;
 
     public DesignController() {
         super();
@@ -161,8 +164,8 @@ public final class DesignController {
 
     /* -- Gui control ------------------------------------------ */
 
-    @FXML private ComboBox designTypeComboBox;
-    @FXML private ComboBox pavementTypeComboBox;
+    @FXML public ComboBox designTypeComboBox;
+    @FXML public ComboBox pavementTypeComboBox;
 
     @FXML private TabPane layersTabPane;
     @FXML private Tab newTabTab;
@@ -222,6 +225,14 @@ public final class DesignController {
         selectFirst(pavementTypeComboBox);
     }
 
+    @FXML
+    public void PavementTypeComboBoxClicked(ActionEvent event){
+        //change pavement type
+        System.out.println("ComboBox Action");
+        main.selectLayerType();
+
+    }
+
     private boolean selectedDesignTypeIsNewPavement() {
         return (designTypeComboBox.getSelectionModel().isSelected(0));
     }
@@ -264,5 +275,9 @@ public final class DesignController {
               (observable, oldValue, newValue) -> {
                   debugCheatSheet.setText(GSON_PP.toJson(design));
               });
+    }
+
+    public void init(Controller controller) {
+        main = controller;
     }
 }
