@@ -21,7 +21,7 @@
             <tabs>
                 <Tab text="Design 1">
                     <content>
-                        <fx:include source="designView.fxml" />
+                        <fx:include fx:id="designView" source="designView.fxml" />
                     </content>
                 </Tab>
             <Tab fx:id="newTabTab" disable="true">

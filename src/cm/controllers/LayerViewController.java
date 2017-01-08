@@ -11,13 +11,13 @@ import java.io.IOException;
 
 import static cm.models.Model.GSON_PP;
 
-public class LayerController {
+public class LayerViewController {
 
     private Layer layer;
 
-    public LayerController() { super(); }
+    public LayerViewController() { super(); }
 
-    public LayerController(Layer layer) {
+    public LayerViewController(Layer layer) {
         this();
         setCurrentLayer(layer);
     }
@@ -93,18 +93,18 @@ public class LayerController {
               })));
     }
 
-    private Controller main;
+    private DesignViewController main;
 
-    private void setDefaultOptions() {
+    public void setDefaultOptions() {
         layerTypeComboBox.setItems(layerTypes);
         thicknessUnitChoiceBox.setItems(thicknessUnits);
-        select(layerTypeComboBox,2);
+        select(layerTypeComboBox,0);
 
         selectFirst(thicknessUnitChoiceBox);
         thicknessTextField.setText("10.0");
     }
     
-    public void saveLayerOptions() {
+    private void saveLayerOptions() {
         if (layer == null) { return ; }
         saveLayerType();
         saveThickness();
@@ -175,7 +175,7 @@ public class LayerController {
     }
 
 
-    public void init(Controller controller) {
-        main = controller;
+    public void init(DesignViewController designViewController) {
+        main = designViewController;
     }
 }

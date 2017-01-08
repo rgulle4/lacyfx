@@ -3,6 +3,8 @@ package cm.controllers;
 import cm.App;
 import cm.models.Design;
 import cm.models.Layer;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,19 +19,21 @@ import java.util.List;
 import static cm.models.Model.DESIGNS;
 import static cm.models.Model.GSON_PP;
 
-public class DesignController {
-    private Controller main;
+public class DesignViewController {
+    private LayerInformationController main;
+    @FXML
+    LayerViewController layerViewController;
 
 
     /* -- Constructor(s) and init ----------------------------- */
 
     public Design design;
 
-    public DesignController() {
+    public DesignViewController() {
         super();
     }
 
-    public DesignController(Design design) {
+    public DesignViewController(Design design) {
         this();
         setCurrentDesign(design);
     }
@@ -80,8 +84,18 @@ public class DesignController {
         };
         
         saveWhenReady.start();
+
+        //pass this controller to LayerViewController
+        layerViewController.init(this);
+        pavementTypeComboBox.valueProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+
+            }
+        });
     }
-    
+
+
     private void setupAutosave() {
         autosaveOnFocus(designTypeComboBox);
         autosaveOnFocus(pavementTypeComboBox);
@@ -115,8 +129,8 @@ public class DesignController {
         Node node = null;
         try { node = loader.load(); }
         catch (IOException e) { e.printStackTrace(); }
-        LayerController firstTabController
-              = loader.<LayerController>getController();
+        LayerViewController firstTabController
+              = loader.<LayerViewController>getController();
 
         firstTab.setContent(node);
         firstTabController.setCurrentLayer(firstLayer);
@@ -188,8 +202,8 @@ public class DesignController {
         Node node = null;
         try { node = loader.load(); }
         catch (IOException e) { e.printStackTrace(); }
-        LayerController newLayerTabController
-              = loader.<LayerController>getController();
+        LayerViewController newLayerTabController
+              = loader.<LayerViewController>getController();
         newLayerTabController.setCurrentLayer(newLayer);
         newLayerTab.setContent(node);
 
@@ -228,8 +242,16 @@ public class DesignController {
     @FXML
     public void PavementTypeComboBoxClicked(ActionEvent event){
         //change pavement type
+        //set layerType
+        if (pavementTypeComboBox.getSelectionModel()
+                .getSelectedItem().toString().contains("Rigid")) {
+            layerViewController.layerTypeComboBox.getSelectionModel()
+                    .select(1);//Portland concrete
+        }else {
+            layerViewController.layerTypeComboBox.getSelectionModel()
+                    .select(0);//AC
+        }
         System.out.println("ComboBox Action");
-        main.selectLayerType();
 
     }
 
@@ -277,7 +299,7 @@ public class DesignController {
               });
     }
 
-    public void init(Controller controller) {
-        main = controller;
+    public void init(LayerInformationController layerInformationController) {
+        main = layerInformationController;
     }
 }

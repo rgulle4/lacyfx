@@ -15,7 +15,10 @@ import java.util.List;
 
 import static cm.models.Model.*;
 
-public final class  LayerInformationController {
+public class  LayerInformationController {
+
+    //get designViewController
+    @FXML DesignViewController designViewController;
 
     private final ZipCodeUtil ZCU = new ZipCodeUtil();
 
@@ -57,8 +60,8 @@ public final class  LayerInformationController {
         Node node = null;
         try { node = loader.load(); }
         catch (IOException e) { e.printStackTrace(); }
-        DesignController newDesignTabController
-              = loader.<DesignController>getController();
+        DesignViewController newDesignTabController
+              = loader.<DesignViewController>getController();
         newDesignTabController.setCurrentDesign(newDesign);
         newDesignTab.setContent(node);
 
@@ -69,6 +72,8 @@ public final class  LayerInformationController {
 
     @FXML
     private void initialize() {
+        designViewController.init(this);
+
         projectLocationTextField.setText("95192");
 
         // set up first design tab -------------------------
@@ -87,8 +92,8 @@ public final class  LayerInformationController {
         Node node = null;
         try { node = loader.load(); }
         catch (IOException e) { e.printStackTrace(); }
-        DesignController firstDesignTabController
-              = loader.<DesignController>getController();
+        DesignViewController firstDesignTabController
+              = loader.<DesignViewController>getController();
         firstDesignTab.setContent(node);
         firstDesignTabController.setCurrentDesign(firstDesign);
 
@@ -157,5 +162,9 @@ public final class  LayerInformationController {
     public void printDebugStuff() {
         printDebugMsg(GSON_PP.toJson(DESIGNS));
         printDebugMsg(DESTINATION_ZIP_CODE_MUTABLE);
+    }
+    private Controller main;
+    public void init(Controller controller) {
+        main = controller;
     }
 }

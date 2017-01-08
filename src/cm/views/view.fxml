@@ -11,7 +11,7 @@
             <tabs>
                 <Tab fx:id="layerInformation" text="Layer Information">
                     <content>
-                        <fx:include source="layerInformationTab.fxml" />
+                        <fx:include fx:id="layerInformationTab" source="layerInformationTab.fxml" />
                     </content>
                 </Tab>
                 <Tab fx:id="weightsTab" text="Weights">

@@ -244,6 +244,6 @@ public class EconAnalysisController {
 
     App main;
     public void showTable() throws IOException {
-        main.showCostAnalysis();
+
     }
 }
