@@ -56,11 +56,19 @@ public class EconAnalysisController {
                                 Object newValue) {
 
                 TreeItem<String> selectedItem = (TreeItem<String>) newValue;
-                if (selectedItem.getValue().contains("Rigid"))
-                    showRigidPavementType();
-                else if (selectedItem.getValue().contains("Flexible"))
-                    showFlexiblePavementType();
-                else {ComboBox_PType.setItems(null);}
+                String pavementType;
+                if (selectedItem.getValue().contains("Rigid")){
+                    pavementType = "Rigid";
+                }
+                else if ((selectedItem.getValue().contains("Flexible"))) {
+                    pavementType = "Flexible";
+                }
+                else {pavementType = "";}
+                try {
+                    showPavementType(pavementType);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
 
         });
@@ -127,16 +135,8 @@ public class EconAnalysisController {
         }
     }
 
-    private void showRigidPavementType(){
-        ObservableList<String> PT = FXCollections.observableArrayList
-                ("CRCP","JPCP","PCC","RUBB","Latex Modified Concrete");
-        ComboBox_PType.setItems(PT);
-        ComboBox_PType.getSelectionModel().selectFirst();
-    }
-
-    private void showFlexiblePavementType(){
-        ObservableList<String> PT = FXCollections.observableArrayList
-                ("AC","HMA","SMA","Superpave");
+    private void showPavementType(String pavementType) throws SQLException {
+        ObservableList<String> PT = new CostDatabase().getDesignType(pavementType);
         ComboBox_PType.setItems(PT);
         ComboBox_PType.getSelectionModel().selectFirst();
     }

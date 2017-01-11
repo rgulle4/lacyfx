@@ -1,6 +1,8 @@
 package cm.models;
 
 import cm.controllers.EconAnalysisController.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -72,6 +74,20 @@ public final class CostDatabase {
         return items;
     }
 
+    public ObservableList<String> getDesignType(String pavementType) throws SQLException {
+        ObservableList<String> types = FXCollections.observableArrayList();
+        String sql = "SELECT DISTINCT DESIGNTYPE FROM Pavements WHERE 1";
+        StringBuilder sb = new StringBuilder(sql);
+        sb.append(" AND").append(" Pavement_Type = ")
+                .append("'").append(pavementType).append("'");
+        s = conn.createStatement();
+        rs = s.executeQuery(sb.toString());
+        while(rs.next()){
+            types.add(rs.getString("DesignType"));
+        }
+        return types;
+    }
+
     public static void main(String[] args) throws SQLException {
         CostDatabase costDatabase = new CostDatabase();
         String designType = "CRCP";
@@ -82,4 +98,5 @@ public final class CostDatabase {
         }
         System.out.println(result.size());
     }
+
 }
