@@ -5,15 +5,16 @@ import cm.App;
 import cm.models.CostDatabase;
 import cm.models.Design;
 import cm.models.Layer;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -34,7 +35,7 @@ public class EconAnalysisController {
     @FXML
     public TableView<costItems> tableView;
     @FXML
-    public TableColumn<costItems,Boolean> column_Selected;
+    public TableColumn<costItems, CheckBox> column_Selected;
     @FXML
     public TableColumn<costItems,String> column_Dtype;
     @FXML
@@ -145,7 +146,32 @@ public class EconAnalysisController {
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         ObservableList<costItems> data = FXCollections.observableArrayList();
         List<costItems> costItemsList = new CostDatabase().getCostItems(dType);
-        column_Selected.setCellValueFactory(new PropertyValueFactory<costItems, Boolean>("isSelected"));
+
+        column_Selected.setCellValueFactory(new PropertyValueFactory<costItems, CheckBox>("isSelected"));
+        column_Selected.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<costItems, CheckBox>, ObservableValue<CheckBox>>() {
+            @Override
+            public ObservableValue<CheckBox> call(
+                    TableColumn.CellDataFeatures<costItems, CheckBox> arg0) {
+                costItems user = arg0.getValue();
+
+                CheckBox checkBox = new CheckBox();
+
+                checkBox.selectedProperty().setValue(user.getSelected());
+
+                checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                    public void changed(ObservableValue<? extends Boolean> ov,
+                                        Boolean old_val, Boolean new_val) {
+
+                        user.setSelected(new_val);
+                        updateSelection();
+                    }
+                });
+
+                return new SimpleObjectProperty<CheckBox>(checkBox);
+
+            }
+
+        });
         column_Dtype.setCellValueFactory(new PropertyValueFactory<costItems, String>("itemType"));
         column_ItemDescription.setCellValueFactory(new PropertyValueFactory<costItems, String>("itemDescription"));
         column_OccurYear.setCellValueFactory(new PropertyValueFactory<costItems, String>("occurYear"));
@@ -170,6 +196,19 @@ public class EconAnalysisController {
         tableView.setItems(data);
     }
 
+    private void updateSelection() {
+        List<costItems> costItemsList = tableView.getItems();
+        int index = 0;
+        for (costItems costItems:costItemsList){
+            if (costItems.isSelected){
+                tableView.getSelectionModel().select(index);
+            }else{
+                tableView.getSelectionModel().clearSelection(index);
+            }
+            index ++;
+        }
+    }
+
     public void saveButton(){
         List<costItems> costItemsList = tableView.getSelectionModel().getSelectedItems();
         Double totCost = 0.0;
@@ -184,7 +223,7 @@ public class EconAnalysisController {
 
     public static final class costItems{
         //fields
-        private Boolean isSelected;
+        private Boolean isSelected = false;
         private String itemType;
         private String itemDescription;
         private String occurYear = Integer.toString(0);
