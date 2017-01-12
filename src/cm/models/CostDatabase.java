@@ -56,10 +56,13 @@ public final class CostDatabase {
         return initialItems;
     }
 
-    public List<costItems> getCostItems(String dtype) throws SQLException {
+    public List<costItems> getCostItems(String dtype,String f1, String f2) throws SQLException {
         List<costItems> items = new ArrayList<>();
         StringBuilder sb = new StringBuilder(DEFAULT_SQL_QUERY);
         if (dtype != "") sb.append(" AND DesignType = ").append("'").append(dtype).append("'");
+        if (f1 != "") sb.append(" AND Filter1 = ").append("'").append(f1).append("'");
+        if (f2 != "") sb.append(" AND Filter2 = ").append("'").append(f2).append("'");
+
         String sql = sb.toString();
         s = conn.createStatement();
         rs = s.executeQuery(sql);
@@ -99,4 +102,36 @@ public final class CostDatabase {
         System.out.println(result.size());
     }
 
+    public ObservableList<String> getInitFilter1Item(String designType) throws SQLException {
+        ObservableList<String> initFilter1 = FXCollections.observableArrayList();
+
+        String sql = "SELECT DISTINCT Filter1 FROM Pavements WHERE 1";
+        StringBuilder sb = new StringBuilder(sql);
+        sb.append(" AND").append(" DesignType = ")
+                .append("'").append(designType).append("'");
+        s = conn.createStatement();
+        rs = s.executeQuery(sb.toString());
+        while(rs.next()){
+            initFilter1.add(rs.getString("Filter1"));
+        }
+        return initFilter1;
+    }
+
+    public ObservableList<String> getInitFilter2Item(String designType, String filter1) throws SQLException {
+        ObservableList<String> initFilter2 = FXCollections.observableArrayList();
+
+        String sql = "SELECT DISTINCT Filter2 FROM Pavements WHERE 1";
+        StringBuilder sb = new StringBuilder(sql);
+        sb.append(" AND").append(" DesignType = ")
+                .append("'").append(designType).append("'");
+        sb.append(" AND").append(" Filter1 = ")
+                .append("'").append(filter1).append("'");
+
+        s = conn.createStatement();
+        rs = s.executeQuery(sb.toString());
+        while(rs.next()){
+            initFilter2.add(rs.getString("Filter2"));
+        }
+        return initFilter2;
+    }
 }

@@ -50,8 +50,6 @@ public class EPDDatabaseTest {
     @Test
     public void testGetCostItem() throws SQLException {
         //
-        List<costItems> result = (new CostDatabase().getCostItems("CRCP"));
-
 
     }
 //    @Test
