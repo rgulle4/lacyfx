@@ -31,17 +31,34 @@ public class EconAnalysisController {
     @FXML
     public TreeView treeView = new TreeView();
     @FXML
-    public ComboBox ComboBox_PType;
+    public ComboBox ComboBox_DType;
+
+    //elements for TableView(initial)
+    @FXML
+    public ComboBox ComboBox_MR_Filter1;
+    @FXML
+    public TableView<CostItems> tableView_MR;
+    @FXML
+    public TableColumn<CostItems, CheckBox> column_Selected_MR;
+    @FXML
+    public TableColumn<CostItems,String> column_Unit_MR;
+    @FXML
+    public TableColumn<CostItems,String> column_ItemDescription_MR;
+    @FXML
+    public TableColumn<CostItems, String> column_OccurYear_MR;
+    @FXML
+    public TableColumn<CostItems, String> column_Quantity_MR;
+    @FXML
+    public TableColumn<CostItems, String> column_Price_MR;
+    //elements for TableView(M&R)
     @FXML
     public ComboBox ComboBox_Init_Filter1;
-    @FXML
-    public ComboBox ComboBox_Init_Filter2;
     @FXML
     public TableView<CostItems> tableView;
     @FXML
     public TableColumn<CostItems, CheckBox> column_Selected;
     @FXML
-    public TableColumn<CostItems,String> column_Dtype;
+    public TableColumn<CostItems,String> column_Unit;
     @FXML
     public TableColumn<CostItems,String> column_ItemDescription;
     @FXML
@@ -49,9 +66,13 @@ public class EconAnalysisController {
     @FXML
     public TableColumn<CostItems, String> column_Quantity;
     @FXML
+    public TableColumn<CostItems, String> column_Price;
+    @FXML
     public Button Button_CostAnalysis;
 
     private List<CostItems> initCostItems;
+
+    private List<CostItems> maintainanceCostItems;
 
     @FXML
     public void initialize(){
@@ -80,16 +101,25 @@ public class EconAnalysisController {
 
         });
 
-        ComboBox_PType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+        ComboBox_DType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 Object selectedItem = (Object)newValue;
                 try {
+                    String designType = ComboBox_DType.getValue().toString();
+
                     ComboBox_Init_Filter1.getSelectionModel().clearSelection();
-                    ComboBox_Init_Filter2.getSelectionModel().clearSelection();
-                    showInitFilter1(ComboBox_PType.getValue().toString());
-                    initCostItems = new CostDatabase().getInitialItems(ComboBox_PType.getValue().toString());
-                    showTableData(initCostItems);
+                    ObservableList<String> filter1Item_Init = new CostDatabase().getInitFilter1Item(designType);
+                    ComboBox_Init_Filter1.setItems(filter1Item_Init);
+
+                    ComboBox_MR_Filter1.getSelectionModel().clearSelection();
+                    ObservableList<String> filter1Item_MR = new CostDatabase().getMaintFilter1Item(designType);
+                    ComboBox_MR_Filter1.setItems(filter1Item_MR);
+
+                    initCostItems = new CostDatabase().getInitialItems(ComboBox_DType.getValue().toString());
+                    maintainanceCostItems = new CostDatabase().getMaintItems(ComboBox_DType.getValue().toString());
+                    showTableData(initCostItems,tableView);
+                    showMRTableData(maintainanceCostItems,tableView_MR);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -100,40 +130,29 @@ public class EconAnalysisController {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 Object selectedItem = (Object)newValue;
-                try {
-                    ComboBox_Init_Filter2.getSelectionModel().clearSelection();
-                    showInitFilter2(
-                            ComboBox_PType.getValue().toString(),
-                            ComboBox_Init_Filter1.getValue().toString());
-                    List<CostItems> costItems_Filter1 = getInitCostItems_Filter1(initCostItems);
-                    showTableData(costItems_Filter1);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                    List<CostItems> costItems_Filter1 = getCostItems_ByFilter1(initCostItems,ComboBox_Init_Filter1);
+                    showTableData(costItems_Filter1,tableView);
             }
         });
 
-        ComboBox_Init_Filter2.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+        ComboBox_MR_Filter1.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 Object selectedItem = (Object)newValue;
-                try {
-                    showTableData();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                List<CostItems> costItems_Filter1 = getCostItems_ByFilter1(maintainanceCostItems,ComboBox_MR_Filter1);
+                showTableData(costItems_Filter1,tableView_MR);
             }
         });
     }
 
-    private List<CostItems> getInitCostItems_Filter1(List<CostItems> initCostItems) {
+    private List<CostItems> getCostItems_ByFilter1(List<CostItems> initCostItems, ComboBox comboBox) {
         List<CostItems> result = new ArrayList<>();
         if (initCostItems == null){
             return null;
         }
         for (CostItems temp: initCostItems){
             String a = temp.getFilter1();
-            String b = ComboBox_Init_Filter1.getValue().toString();
+            String b = comboBox.getValue().toString();
             if (a.equals(b)){
                 result.add(temp);
             }
@@ -141,11 +160,10 @@ public class EconAnalysisController {
         return result;
     }
 
-    private void showTableData(List<CostItems> initCostItems) {
+    private void showTableData(List<CostItems> initCostItems,TableView tableView) {
         if (initCostItems == null){
             return;
         }
-        tableView.setEditable(true);
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         column_Selected.setCellValueFactory(new PropertyValueFactory<CostItems, CheckBox>("isSelected"));
         column_Selected.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CostItems, CheckBox>, ObservableValue<CheckBox>>() {
@@ -172,16 +190,9 @@ public class EconAnalysisController {
             }
 
         });
-        column_Dtype.setCellValueFactory(new PropertyValueFactory<CostItems, String>("itemType"));
-        column_ItemDescription.setCellValueFactory(new PropertyValueFactory<CostItems, String>("itemDescription"));
-        column_OccurYear.setCellValueFactory(new PropertyValueFactory<CostItems, String>("occurYear"));
-        column_OccurYear.setCellFactory(TextFieldTableCell.<CostItems>forTableColumn());
-        column_OccurYear.setOnEditCommit(
-                (TableColumn.CellEditEvent<CostItems,String> t) -> {
-                    ((CostItems) t.getTableView().getItems()
-                            .get(t.getTablePosition().getRow()))
-                            .setOccurYear(t.getNewValue());
-                });
+        column_Unit.setCellValueFactory(new PropertyValueFactory<CostItems, String>("unit"));
+        column_Price.setCellValueFactory(new PropertyValueFactory<CostItems, String>("price"));
+        column_ItemDescription.setCellValueFactory(new PropertyValueFactory<CostItems, String>("filter2"));
         column_Quantity.setCellValueFactory(new PropertyValueFactory<CostItems, String>("quantity"));
         column_Quantity.setCellFactory(TextFieldTableCell.<CostItems>forTableColumn());
         column_Quantity.setOnEditCommit(
@@ -197,14 +208,62 @@ public class EconAnalysisController {
         tableView.setItems(items);
     }
 
-    private void showInitFilter1(String designType) throws SQLException {
-        ObservableList<String> filter1Item = new CostDatabase().getInitFilter1Item(designType);
-        ComboBox_Init_Filter1.setItems(filter1Item);
-    }
+    private void showMRTableData(List<CostItems> initCostItems,TableView tableView) {
+        if (initCostItems == null){
+            return;
+        }
 
-    private void showInitFilter2(String dType, String filter1) throws SQLException {
-        ObservableList<String> filter1Item = new CostDatabase().getInitFilter2Item(dType,filter1);
-        ComboBox_Init_Filter2.setItems(filter1Item);
+        tableView.setEditable(true);
+        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        column_Selected_MR.setCellValueFactory(new PropertyValueFactory<CostItems, CheckBox>("isSelected"));
+        column_Selected_MR.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CostItems, CheckBox>, ObservableValue<CheckBox>>() {
+            @Override
+            public ObservableValue<CheckBox> call(
+                    TableColumn.CellDataFeatures<CostItems, CheckBox> arg0) {
+                CostItems user = arg0.getValue();
+
+                CheckBox checkBox = new CheckBox();
+
+                checkBox.selectedProperty().setValue(user.getSelected());
+
+                checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+                    public void changed(ObservableValue<? extends Boolean> ov,
+                                        Boolean old_val, Boolean new_val) {
+
+                        user.setSelected(new_val);
+                        updateSelection();
+                    }
+                });
+
+                return new SimpleObjectProperty<CheckBox>(checkBox);
+
+            }
+
+        });
+        column_Unit_MR.setCellValueFactory(new PropertyValueFactory<CostItems, String>("unit"));
+        column_Price_MR.setCellValueFactory(new PropertyValueFactory<CostItems, String>("price"));
+        column_ItemDescription_MR.setCellValueFactory(new PropertyValueFactory<CostItems, String>("filter2"));
+        column_OccurYear_MR.setCellValueFactory(new PropertyValueFactory<CostItems, String>("occurYear"));
+        column_OccurYear_MR.setCellFactory(TextFieldTableCell.<CostItems>forTableColumn());
+        column_OccurYear_MR.setOnEditCommit(
+                (TableColumn.CellEditEvent<CostItems,String> t) -> {
+                    ((CostItems) t.getTableView().getItems()
+                            .get(t.getTablePosition().getRow()))
+                            .setOccurYear(t.getNewValue());
+                });
+        column_Quantity_MR.setCellValueFactory(new PropertyValueFactory<CostItems, String>("quantity"));
+        column_Quantity_MR.setCellFactory(TextFieldTableCell.<CostItems>forTableColumn());
+        column_Quantity_MR.setOnEditCommit(
+                (TableColumn.CellEditEvent<CostItems,String> t) -> {
+                    ((CostItems) t.getTableView().getItems()
+                            .get(t.getTablePosition().getRow()))
+                            .setQuantity(t.getNewValue());
+                });
+        ObservableList<CostItems> items = FXCollections.observableArrayList();
+        for (CostItems temp: initCostItems){
+            items.add(temp);
+        }
+        tableView.setItems(items);
     }
 
     public void loadTreeList(){
@@ -258,77 +317,77 @@ public class EconAnalysisController {
 
     private void showPavementType(String pavementType) throws SQLException {
         ObservableList<String> PT = new CostDatabase().getDesignType(pavementType);
-        ComboBox_PType.setItems(PT);
-        ComboBox_PType.getSelectionModel().selectFirst();
+        ComboBox_DType.setItems(PT);
+        ComboBox_DType.getSelectionModel().selectFirst();
     }
-
-    public void showTableData() throws SQLException {
-        String pType="";
-        String filter1="";
-        String filter2="";
-        if (ComboBox_PType.getValue() != null) {
-            pType = ComboBox_PType.getValue().toString();
-        }
-        if (ComboBox_Init_Filter1.getValue() != null){
-            filter1 = ComboBox_Init_Filter1.getValue().toString();
-        }
-        if (ComboBox_Init_Filter2.getValue() != null){
-            filter2 = ComboBox_Init_Filter2.getValue().toString();
-        }
-
-        tableView.setEditable(true);
-        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        ObservableList<CostItems> data = FXCollections.observableArrayList();
-//        List<CostItems> costItemsList = new CostDatabase().getCostItems(pType,filter1,filter2);
-        List<CostItems> costItemsList = new CostDatabase().getInitialItems(pType);
-        column_Selected.setCellValueFactory(new PropertyValueFactory<CostItems, CheckBox>("isSelected"));
-        column_Selected.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CostItems, CheckBox>, ObservableValue<CheckBox>>() {
-            @Override
-            public ObservableValue<CheckBox> call(
-                    TableColumn.CellDataFeatures<CostItems, CheckBox> arg0) {
-                CostItems user = arg0.getValue();
-
-                CheckBox checkBox = new CheckBox();
-
-                checkBox.selectedProperty().setValue(user.getSelected());
-
-                checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
-                    public void changed(ObservableValue<? extends Boolean> ov,
-                                        Boolean old_val, Boolean new_val) {
-
-                        user.setSelected(new_val);
-                        updateSelection();
-                    }
-                });
-
-                return new SimpleObjectProperty<CheckBox>(checkBox);
-
-            }
-
-        });
-        column_Dtype.setCellValueFactory(new PropertyValueFactory<CostItems, String>("itemType"));
-        column_ItemDescription.setCellValueFactory(new PropertyValueFactory<CostItems, String>("itemDescription"));
-        column_OccurYear.setCellValueFactory(new PropertyValueFactory<CostItems, String>("occurYear"));
-        column_OccurYear.setCellFactory(TextFieldTableCell.<CostItems>forTableColumn());
-        column_OccurYear.setOnEditCommit(
-                (TableColumn.CellEditEvent<CostItems,String> t) -> {
-                    ((CostItems) t.getTableView().getItems()
-                    .get(t.getTablePosition().getRow()))
-                    .setOccurYear(t.getNewValue());
-        });
-        column_Quantity.setCellValueFactory(new PropertyValueFactory<CostItems, String>("quantity"));
-        column_Quantity.setCellFactory(TextFieldTableCell.<CostItems>forTableColumn());
-        column_Quantity.setOnEditCommit(
-                (TableColumn.CellEditEvent<CostItems,String> t) -> {
-                    ((CostItems) t.getTableView().getItems()
-                            .get(t.getTablePosition().getRow()))
-                            .setQuantity(t.getNewValue());
-                });
-        for (CostItems item: costItemsList){
-            data.add(item);
-        }
-        tableView.setItems(data);
-    }
+//
+//    public void showTableData() throws SQLException {
+//        String pType="";
+//        String filter1="";
+//        String filter2="";
+//        if (ComboBox_DType.getValue() != null) {
+//            pType = ComboBox_DType.getValue().toString();
+//        }
+//        if (ComboBox_Init_Filter1.getValue() != null){
+//            filter1 = ComboBox_Init_Filter1.getValue().toString();
+//        }
+//        if (ComboBox_Init_Filter2.getValue() != null){
+//            filter2 = ComboBox_Init_Filter2.getValue().toString();
+//        }
+//
+//        tableView.setEditable(true);
+//        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+//        ObservableList<CostItems> data = FXCollections.observableArrayList();
+////        List<CostItems> costItemsList = new CostDatabase().getCostItems(pType,filter1,filter2);
+//        List<CostItems> costItemsList = new CostDatabase().getInitialItems(pType);
+//        column_Selected.setCellValueFactory(new PropertyValueFactory<CostItems, CheckBox>("isSelected"));
+//        column_Selected.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CostItems, CheckBox>, ObservableValue<CheckBox>>() {
+//            @Override
+//            public ObservableValue<CheckBox> call(
+//                    TableColumn.CellDataFeatures<CostItems, CheckBox> arg0) {
+//                CostItems user = arg0.getValue();
+//
+//                CheckBox checkBox = new CheckBox();
+//
+//                checkBox.selectedProperty().setValue(user.getSelected());
+//
+//                checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+//                    public void changed(ObservableValue<? extends Boolean> ov,
+//                                        Boolean old_val, Boolean new_val) {
+//
+//                        user.setSelected(new_val);
+//                        updateSelection();
+//                    }
+//                });
+//
+//                return new SimpleObjectProperty<CheckBox>(checkBox);
+//
+//            }
+//
+//        });
+//        column_Unit.setCellValueFactory(new PropertyValueFactory<CostItems, String>("itemType"));
+//        column_ItemDescription.setCellValueFactory(new PropertyValueFactory<CostItems, String>("itemDescription"));
+//        column_OccurYear.setCellValueFactory(new PropertyValueFactory<CostItems, String>("occurYear"));
+//        column_OccurYear.setCellFactory(TextFieldTableCell.<CostItems>forTableColumn());
+//        column_OccurYear.setOnEditCommit(
+//                (TableColumn.CellEditEvent<CostItems,String> t) -> {
+//                    ((CostItems) t.getTableView().getItems()
+//                    .get(t.getTablePosition().getRow()))
+//                    .setOccurYear(t.getNewValue());
+//        });
+//        column_Quantity.setCellValueFactory(new PropertyValueFactory<CostItems, String>("quantity"));
+//        column_Quantity.setCellFactory(TextFieldTableCell.<CostItems>forTableColumn());
+//        column_Quantity.setOnEditCommit(
+//                (TableColumn.CellEditEvent<CostItems,String> t) -> {
+//                    ((CostItems) t.getTableView().getItems()
+//                            .get(t.getTablePosition().getRow()))
+//                            .setQuantity(t.getNewValue());
+//                });
+//        for (CostItems item: costItemsList){
+//            data.add(item);
+//        }
+//        tableView.setItems(data);
+//    }
 
     private void updateSelection() {
         List<CostItems> costItemsList = tableView.getItems();
@@ -367,6 +426,7 @@ public class EconAnalysisController {
         private Double price;
         private String filter1;
         private String filter2;
+        private String unit;
 
         //methods
 
@@ -432,6 +492,14 @@ public class EconAnalysisController {
 
         public void setFilter2(String filter2) {
             this.filter2 = filter2;
+        }
+
+        public String getUnit() {
+            return unit;
+        }
+
+        public void setUnit(String unit) {
+            this.unit = unit;
         }
     }
 

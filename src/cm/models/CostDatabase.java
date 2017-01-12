@@ -55,6 +55,7 @@ public final class CostDatabase {
             temp.setPrice(rs.getDouble("Weighted_average_unit_price"));
             temp.setFilter1(rs.getString("Filter1"));
             temp.setFilter2(rs.getString("Filter2"));
+            temp.setUnit(rs.getString("Unit"));
             initialItems.add(temp);
         }
         return initialItems;
@@ -137,6 +138,21 @@ public final class CostDatabase {
         return initFilter1;
     }
 
+    public ObservableList<String> getMaintFilter1Item(String designType) throws SQLException {
+        ObservableList<String> initFilter1 = FXCollections.observableArrayList();
+
+        String sql = "SELECT DISTINCT Filter1 FROM Pavements WHERE Item_Type = 'M&R'";
+        StringBuilder sb = new StringBuilder(sql);
+        sb.append(" AND").append(" DesignType = ")
+                .append("'").append(designType).append("'");
+        s = conn.createStatement();
+        rs = s.executeQuery(sb.toString());
+        while(rs.next()){
+            initFilter1.add(rs.getString("Filter1"));
+        }
+        return initFilter1;
+    }
+
     public ObservableList<String> getInitFilter2Item(String designType, String filter1) throws SQLException {
         ObservableList<String> initFilter2 = FXCollections.observableArrayList();
 
@@ -153,5 +169,26 @@ public final class CostDatabase {
             initFilter2.add(rs.getString("Filter2"));
         }
         return initFilter2;
+    }
+
+    public List<CostItems> getMaintItems(String designType) throws SQLException {
+        List<CostItems> maintItems = new ArrayList<>();
+        StringBuilder sb = new StringBuilder("SELECT * FROM Pavements WHERE Item_Type = 'M&R'");
+        if (designType != "") sb.append(" AND DesignType = ").append("'").append(designType).append("'");
+        String sql = sb.toString();
+        s = conn.createStatement();
+        rs = s.executeQuery(sql);
+
+        while(rs.next()){
+            CostItems temp = new CostItems();
+            temp.setItemDescription(rs.getString("Item_Description"));
+            temp.setItemType(rs.getString("item_Type"));
+            temp.setPrice(rs.getDouble("Weighted_average_unit_price"));
+            temp.setFilter1(rs.getString("Filter1"));
+            temp.setFilter2(rs.getString("Filter2"));
+            temp.setUnit(rs.getString("Unit"));
+            maintItems.add(temp);
+        }
+        return maintItems;
     }
 }
