@@ -40,6 +40,26 @@ public final class CostDatabase {
         this("");
     }
     /* -- Methods ---------------------------------------------------- */
+    public List<CostItems> getInitialItems(String designType) throws SQLException {
+        List<CostItems> initialItems = new ArrayList<>();
+        StringBuilder sb = new StringBuilder("SELECT * FROM Pavements WHERE Item_Type = 'Initial'");
+        if (designType != "") sb.append(" AND DesignType = ").append("'").append(designType).append("'");
+        String sql = sb.toString();
+        s = conn.createStatement();
+        rs = s.executeQuery(sql);
+
+        while(rs.next()){
+            CostItems temp = new CostItems();
+            temp.setItemDescription(rs.getString("Item_Description"));
+            temp.setItemType(rs.getString("item_Type"));
+            temp.setPrice(rs.getDouble("Weighted_average_unit_price"));
+            temp.setFilter1(rs.getString("Filter1"));
+            temp.setFilter2(rs.getString("Filter2"));
+            initialItems.add(temp);
+        }
+        return initialItems;
+    }
+
     public List<String> getInitialItems(String dtype,String itemType) throws SQLException {
         List<String> initialItems = new ArrayList<>();
         StringBuilder sb = new StringBuilder(DEFAULT_SQL_QUERY);
@@ -56,8 +76,8 @@ public final class CostDatabase {
         return initialItems;
     }
 
-    public List<costItems> getCostItems(String dtype,String f1, String f2) throws SQLException {
-        List<costItems> items = new ArrayList<>();
+    public List<CostItems> getCostItems(String dtype, String f1, String f2) throws SQLException {
+        List<CostItems> items = new ArrayList<>();
         StringBuilder sb = new StringBuilder(DEFAULT_SQL_QUERY);
         if (dtype != "") sb.append(" AND DesignType = ").append("'").append(dtype).append("'");
         if (f1 != "") sb.append(" AND Filter1 = ").append("'").append(f1).append("'");
@@ -66,9 +86,9 @@ public final class CostDatabase {
         String sql = sb.toString();
         s = conn.createStatement();
         rs = s.executeQuery(sql);
-        costItems g;
+        CostItems g;
         while(rs.next()){
-            g = new costItems();
+            g = new CostItems();
             g.setItemDescription(rs.getString("Item_Description"));
             g.setItemType(rs.getString("item_Type"));
             g.setPrice(rs.getDouble("Weighted_average_unit_price"));
@@ -95,7 +115,7 @@ public final class CostDatabase {
         CostDatabase costDatabase = new CostDatabase();
         String designType = "CRCP";
         String itemType = "M&R";
-        List<String> result =costDatabase.getInitialItems(designType,itemType);
+        List<CostItems> result =costDatabase.getInitialItems(designType);
         for (int i =0; i < result.size(); i++){
             System.out.println(result.get(i));
         }
@@ -105,7 +125,7 @@ public final class CostDatabase {
     public ObservableList<String> getInitFilter1Item(String designType) throws SQLException {
         ObservableList<String> initFilter1 = FXCollections.observableArrayList();
 
-        String sql = "SELECT DISTINCT Filter1 FROM Pavements WHERE 1";
+        String sql = "SELECT DISTINCT Filter1 FROM Pavements WHERE Item_Type = 'Initial'";
         StringBuilder sb = new StringBuilder(sql);
         sb.append(" AND").append(" DesignType = ")
                 .append("'").append(designType).append("'");
