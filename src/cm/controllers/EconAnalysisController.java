@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static cm.models.Model.DESIGNS;
 
@@ -67,6 +68,12 @@ public class EconAnalysisController {
     public TableColumn<CostItems, String> column_Price;
     @FXML
     public Button Button_CostAnalysis;
+    @FXML
+    public TextField Start_Year_Textfield;
+    @FXML
+    public TextField Total_Year_Textfield;
+    @FXML
+    public TextField Discount_Rate_Textfield;
 
     private List<CostItems> initCostItems;
 
@@ -357,20 +364,32 @@ public class EconAnalysisController {
     public void saveButton(){
         List<CostItems> initCostItemsList = new ArrayList<>();
         List<CostItems> maintainCostItemsList = new ArrayList<>();
+
         Double totCost = 0.0;
+        if (allTextfieldEmptyStatus()){
+            //To DO List: pop up a dialog
+            System.out.println("Make sure all the textfiled is filled!!");
+            //To Do List: check all the TextField's content
+            return;
+        }
+
         if (initCostItems !=null && maintainanceCostItems != null){
             for (CostItems temp: initCostItems){
                 if (temp.getSelected()){
                     initCostItemsList.add(temp);
                     Double itemCost = temp.getPrice()*Double.parseDouble(temp.getQuantity());
-                    totCost +=itemCost;
+                    int occurYear = Integer.parseInt(temp.getOccurYear());
+                    Double itemCost_PV = getPresentValue(itemCost,occurYear);
+                    totCost +=itemCost_PV;
                 }
             }
             for (CostItems temp: maintainanceCostItems){
                 if (temp.getSelected()){
                     maintainCostItemsList.add(temp);
                     Double itemCost = temp.getPrice()*Double.parseDouble(temp.getQuantity());
-                    totCost +=itemCost;
+                    int occurYear = Integer.parseInt(temp.getOccurYear());
+                    Double itemCost_PV = getPresentValue(itemCost,occurYear);
+                    totCost +=itemCost_PV;
                 }
             }
         }
@@ -385,6 +404,26 @@ public class EconAnalysisController {
             System.out.println("Total cost for this design is: "+DESIGNS.get(key).getTotalCost()+" USD");
         }
 
+    }
+
+    private Double getPresentValue(Double itemCost, int occurYear) {
+        int startYear = Integer.parseInt(Start_Year_Textfield.getText());
+        int totYear = Integer.parseInt(Total_Year_Textfield.getText());
+        Double discRate = Double.valueOf(Discount_Rate_Textfield.getText());
+        Double cost = itemCost
+                // The equation below shows how to calculate present value with a discount rate
+                //2.5% is avg inflation rate from 2008 to start Year
+                // 2008 is the year of our costItem database
+                * Math.pow((double)(1+0.025),(double)(startYear-2008))
+                / Math.pow((double)(1+discRate/100),(double)(occurYear))
+                ;
+        return cost;
+    }
+
+    private boolean allTextfieldEmptyStatus() {
+        return Total_Year_Textfield.getText().isEmpty()
+                ||Start_Year_Textfield.getText().isEmpty()
+                ||Discount_Rate_Textfield.getText().isEmpty();
     }
 
     public static final class CostItems {

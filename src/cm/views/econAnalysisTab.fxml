@@ -15,11 +15,10 @@
       <TextField fx:id="Total_Year_Textfield" layoutX="320.0" layoutY="6.0" prefHeight="27.0" prefWidth="41.0" text="50" />
       <Label layoutX="52.0" layoutY="10.0" text="Start year:" />
       <Label layoutX="210.0" layoutY="10.0" text="Analysis period:" />
-      <Label layoutX="503.0" layoutY="10.0" text="Discount rate:" />
-      <TextField fx:id="Discount_Rate_Textfield" layoutX="599.0" layoutY="6.0" prefHeight="27.0" prefWidth="41.0" text="2.0" />
-      <Button layoutX="657.0" layoutY="6.0" mnemonicParsing="false" text="Current value" />
+      <Label layoutX="382.0" layoutY="10.0" text="Discount rate:" />
+      <TextField fx:id="Discount_Rate_Textfield" layoutX="478.0" layoutY="6.0" prefHeight="27.0" prefWidth="41.0" text="2.0" />
       <TreeView fx:id="treeView" layoutX="52.0" layoutY="41.0" prefHeight="114.0" prefWidth="499.0" />
-      <Button layoutX="594.0" layoutY="71.0" mnemonicParsing="false" onAction="#loadTreeList" text="Show all alternatives" />
+      <Button layoutX="635.0" layoutY="41.0" mnemonicParsing="false" onAction="#loadTreeList" text="Show all alternatives" />
       <TableView fx:id="tableView" layoutX="52.0" layoutY="201.0" prefHeight="129.0" prefWidth="729.0">
         <columns>
           <TableColumn fx:id="column_Selected" prefWidth="52.0" text="Check" />
