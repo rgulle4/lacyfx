@@ -1,11 +1,11 @@
 package cm.models;
 
+import cm.controllers.EconAnalysisController.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * A design is a pavement design, consisting of a number of layers. Each layer
  * has a thickness, and a material.
@@ -20,6 +20,9 @@ public final class Design {
 
     // A design has a bunch of layers, added from top to bottom.
     private List<Layer> layers = new ArrayList<>();
+    // A design has a bunch of cost Items
+    private List<CostItems> costItemsList = new ArrayList<>();
+    private Double totalCost;
 
     private Double EnvPerfAnalysis_TotalScore_Design;
     private Double EnvPerfAnalysis_EPDScore_Design;
@@ -185,6 +188,22 @@ public final class Design {
     public Design setEnvPerfAnalysis_TransportationScore_Design(double envPerfAnalysis_TransportationScore_Design) {
         EnvPerfAnalysis_TransportationScore_Design = envPerfAnalysis_TransportationScore_Design;
         return this;
+    }
+
+    public List<CostItems> getCostItemsList() {
+        return costItemsList;
+    }
+
+    public void setCostItemsList(List<CostItems> costItemsList) {
+        this.costItemsList = costItemsList;
+    }
+
+    public Double getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(Double totalCost) {
+        this.totalCost = totalCost;
     }
 
     /* -- debugging -------------------------------------------- */
