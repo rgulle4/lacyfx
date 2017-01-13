@@ -23,7 +23,8 @@ public class DesignViewController {
     private LayerInformationController main;
     @FXML
     LayerViewController layerViewController;
-
+    @FXML
+    private Button Button_Test;
 
     /* -- Constructor(s) and init ----------------------------- */
 
@@ -90,7 +91,8 @@ public class DesignViewController {
         pavementTypeComboBox.valueProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-
+                System.out.println(layerViewController.textField.getText());
+                layerViewController.layerTypeComboBox.getSelectionModel().clearSelection();
             }
         });
     }
@@ -240,18 +242,24 @@ public class DesignViewController {
     }
 
     @FXML
+    public void button_click(){
+        layerViewController.init(this);
+        layerViewController.textField.setText("Change!!");
+    }
+
+    @FXML
     public void PavementTypeComboBoxClicked(ActionEvent event){
         //change pavement type
         //set layerType
-        if (pavementTypeComboBox.getSelectionModel()
-                .getSelectedItem().toString().contains("Rigid")) {
-            layerViewController.layerTypeComboBox.getSelectionModel()
-                    .select(1);//Portland concrete
-        }else {
-            layerViewController.layerTypeComboBox.getSelectionModel()
-                    .select(0);//AC
-        }
-        System.out.println("ComboBox Action");
+//        layerViewController.layerTypeComboBox.setEditable(false);
+//        if (pavementTypeComboBox.getSelectionModel()
+//                .getSelectedItem().toString().contains("Rigid")) {
+//            layerViewController.layerTypeComboBox.getSelectionModel().select(1);//Portland concrete
+//        }else {
+//            layerViewController.layerTypeComboBox.getSelectionModel()
+//                    .select(0);//AC
+//        }
+//        System.out.println("ComboBox Action");
 
     }
 

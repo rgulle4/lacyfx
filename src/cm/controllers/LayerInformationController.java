@@ -17,6 +17,7 @@ import static cm.models.Model.*;
 
 public class  LayerInformationController {
 
+    private Controller main;
     //get designViewController
     @FXML DesignViewController designViewController;
 
@@ -163,7 +164,7 @@ public class  LayerInformationController {
         printDebugMsg(GSON_PP.toJson(DESIGNS));
         printDebugMsg(DESTINATION_ZIP_CODE_MUTABLE);
     }
-    private Controller main;
+
     public void init(Controller controller) {
         main = controller;
     }

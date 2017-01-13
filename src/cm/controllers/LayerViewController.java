@@ -13,6 +13,11 @@ import static cm.models.Model.GSON_PP;
 
 public class LayerViewController {
 
+    private DesignViewController main;
+
+    @FXML public TextField textField;
+    @FXML private Button Button_Test;
+
     private Layer layer;
 
     public LayerViewController() { super(); }
@@ -93,8 +98,6 @@ public class LayerViewController {
               })));
     }
 
-    private DesignViewController main;
-
     public void setDefaultOptions() {
         layerTypeComboBox.setItems(layerTypes);
         thicknessUnitChoiceBox.setItems(thicknessUnits);
@@ -174,6 +177,9 @@ public class LayerViewController {
               });
     }
 
+    @FXML
+    public void Button_Click(){
+    }
 
     public void init(DesignViewController designViewController) {
         main = designViewController;
