@@ -21,7 +21,9 @@ public final class Design {
     // A design has a bunch of layers, added from top to bottom.
     private List<Layer> layers = new ArrayList<>();
     // A design has a bunch of cost Items
-    private List<CostItems> costItemsList = new ArrayList<>();
+    private List<CostItems> initCostItemsList = new ArrayList<>();
+    private List<CostItems> maintainCostItemsList = new ArrayList<>();
+
     private Double totalCost;
 
     private Double EnvPerfAnalysis_TotalScore_Design;
@@ -190,12 +192,20 @@ public final class Design {
         return this;
     }
 
-    public List<CostItems> getCostItemsList() {
-        return costItemsList;
+    public List<CostItems> getInitCostItemsList() {
+        return initCostItemsList;
     }
 
-    public void setCostItemsList(List<CostItems> costItemsList) {
-        this.costItemsList = costItemsList;
+    public void setInitCostItemsList(List<CostItems> initCostItemsList) {
+        this.initCostItemsList = initCostItemsList;
+    }
+
+    public List<CostItems> getMaintainCostItemsList() {
+        return maintainCostItemsList;
+    }
+
+    public void setMaintainCostItemsList(List<CostItems> maintainCostItemsList) {
+        this.maintainCostItemsList = maintainCostItemsList;
     }
 
     public Double getTotalCost() {

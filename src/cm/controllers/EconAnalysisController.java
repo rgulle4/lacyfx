@@ -93,11 +93,7 @@ public class EconAnalysisController {
                 else {designType = "";}
                 try {
                     //initialize
-                    ComboBox_DType.getItems().clear();
-                    ComboBox_Init_Filter1.getItems().clear();
-                    ComboBox_MR_Filter1.getItems().clear();
-                    tableView.getItems().clear();
-                    tableView_MR.getItems().clear();
+                    clearfields();
                     //set up ComboBox_DType;
                     showDesignType(designType);
                 } catch (SQLException e) {
@@ -152,6 +148,16 @@ public class EconAnalysisController {
                 showMRTableData(costItems_Filter1,tableView_MR);
             }
         });
+    }
+
+    private void clearfields() {
+        ComboBox_DType.getItems().clear();
+        ComboBox_Init_Filter1.getItems().clear();
+        ComboBox_MR_Filter1.getItems().clear();
+        tableView.getItems().clear();
+        tableView_MR.getItems().clear();
+        if (initCostItems!=null)initCostItems.clear();
+        if (maintainanceCostItems!=null)maintainanceCostItems.clear();
     }
 
     private List<CostItems> getCostItems_ByFilter1(List<CostItems> initCostItems, ComboBox comboBox) {
@@ -349,18 +355,36 @@ public class EconAnalysisController {
     }
 
     public void saveButton(){
-//        List<CostItems> costItemsList = tableView.getSelectionModel().getSelectedItems();
-        List<CostItems> costItemsList = new ArrayList<>();
+        List<CostItems> initCostItemsList = new ArrayList<>();
+        List<CostItems> maintainCostItemsList = new ArrayList<>();
         Double totCost = 0.0;
-        for (CostItems temp: initCostItems){
-            if (temp.getSelected()){
-                costItemsList.add(temp);
-                Double itemCost = temp.getPrice()*Double.parseDouble(temp.getQuantity());
-                System.out.println(temp.getItemDescription()+" "+temp.getPrice());
-                totCost +=itemCost;
+        if (initCostItems !=null && maintainanceCostItems != null){
+            for (CostItems temp: initCostItems){
+                if (temp.getSelected()){
+                    initCostItemsList.add(temp);
+                    Double itemCost = temp.getPrice()*Double.parseDouble(temp.getQuantity());
+                    totCost +=itemCost;
+                }
+            }
+            for (CostItems temp: maintainanceCostItems){
+                if (temp.getSelected()){
+                    maintainCostItemsList.add(temp);
+                    Double itemCost = temp.getPrice()*Double.parseDouble(temp.getQuantity());
+                    totCost +=itemCost;
+                }
             }
         }
-        System.out.println("Total cost for this design is: "+totCost+"USD");
+        if (treeView.getRoot()==null) return;
+        int index = treeView.getSelectionModel().getSelectedIndex();
+        if (index > 0){
+            String key = new StringBuilder("Design ").append(index).toString();
+            //save costItem information to current design
+            DESIGNS.get(key).setTotalCost(totCost);
+            DESIGNS.get(key).setInitCostItemsList(initCostItemsList);
+            DESIGNS.get(key).setMaintainCostItemsList(maintainCostItemsList);
+            System.out.println("Total cost for this design is: "+DESIGNS.get(key).getTotalCost()+" USD");
+        }
+
     }
 
     public static final class CostItems {
