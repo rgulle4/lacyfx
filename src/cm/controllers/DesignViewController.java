@@ -131,13 +131,13 @@ public class DesignViewController {
         Node node = null;
         try { node = loader.load(); }
         catch (IOException e) { e.printStackTrace(); }
-        LayerViewController firstTabController
+        layerViewController
               = loader.<LayerViewController>getController();
 
         firstTab.setContent(node);
-        firstTabController.setCurrentLayer(firstLayer);
-        printDebugMsg("firstTabController.getCurrentLayer() = ");
-        printDebugMsg(firstTabController.getCurrentLayer());
+        layerViewController.setCurrentLayer(firstLayer);
+        printDebugMsg("layerViewController.getCurrentLayer() = ");
+        printDebugMsg(layerViewController.getCurrentLayer());
     }
 
     private Layer addInitialLayer() {
