@@ -123,7 +123,10 @@ public class DesignViewController {
         setUpFirstLayerTab(addInitialLayer());
     }
 
+    private boolean firstTabAlreadySetUp = false;
     public void setUpFirstLayerTab(Layer firstLayer) {
+        if (firstTabAlreadySetUp)
+            return;
         layersTabsList = layersTabPane.getTabs();
         Tab firstTab = layersTabsList.get(0);
         FXMLLoader loader = new FXMLLoader();
@@ -138,6 +141,7 @@ public class DesignViewController {
         layerViewController.setCurrentLayer(firstLayer);
         printDebugMsg("layerViewController.getCurrentLayer() = ");
         printDebugMsg(layerViewController.getCurrentLayer());
+        firstTabAlreadySetUp = true;
     }
 
     private Layer addInitialLayer() {
