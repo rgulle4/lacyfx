@@ -1,5 +1,6 @@
 package cm;
 
+import cm.controllers.Controller;
 import cm.controllers.LoadMixController;
 import cm.controllers.LoadMixController_newVersion;
 import cm.models.*;
@@ -20,7 +21,20 @@ import java.util.Map;
 public final class App extends Application {
     private static Stage primaryStage;
     private ObservableList<Mix> mixData = FXCollections.observableArrayList();
-
+    
+    // initialize this in start somewhere
+    private static Controller CONTROLLER;
+    
+    public static Controller GET_CONTROLLER() {
+        return CONTROLLER;
+    }
+    
+    private static void SET_CONTROLLER(Parent root) {
+        // TODO: do that FXMLLoader stuff
+        // see showLoadMaterial()
+        // starts with
+        // eventually... CONTROLLER = loader<~>getController
+    }
 
 
     @Override
@@ -30,6 +44,7 @@ public final class App extends Application {
         Scene scene = new Scene(root, 800, 600);
         scene.getStylesheets().add(String.valueOf(getClass().getResource("views/css/application.css")));
         primaryStage.setScene(scene);
+        SET_CONTROLLER(root);
         primaryStage.show();
     }
 
